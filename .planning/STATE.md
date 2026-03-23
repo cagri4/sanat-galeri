@@ -1,3 +1,19 @@
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: planning
+stopped_at: Completed 01-01-PLAN.md — Next.js scaffold, Drizzle schema, i18n routing, auth, Jest
+last_updated: "2026-03-23T19:09:03.749Z"
+last_activity: 2026-03-23 — Roadmap created, traceability mapped
+progress:
+  total_phases: 5
+  completed_phases: 0
+  total_plans: 3
+  completed_plans: 1
+  percent: 33
+---
+
 # Project State
 
 ## Project Reference
@@ -14,7 +30,7 @@ Plan: 0 of TBD in current phase
 Status: Ready to plan
 Last activity: 2026-03-23 — Roadmap created, traceability mapped
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [███░░░░░░░] 33%
 
 ## Performance Metrics
 
@@ -34,6 +50,7 @@ Progress: [░░░░░░░░░░] 0%
 - Trend: —
 
 *Updated after each plan completion*
+| Phase 01-foundation P01 | 16 | 3 tasks | 20 files |
 
 ## Accumulated Context
 
@@ -46,6 +63,8 @@ Recent decisions affecting current work:
 - [Foundation]: Multi-domain Next.js — tek codebase, middleware ile domain routing
 - [Foundation]: Vercel-native DB — Neon Postgres + Drizzle ORM (Prisma cold-start sorunu nedeniyle dışlandı)
 - [Foundation]: next-intl 4.x i18n, next-auth v5 admin auth, Vercel Blob görsel depolama
+- [Phase 01-foundation]: Two DB URLs: DATABASE_URL (pooled, port 6543) for app queries; DATABASE_URL_DIRECT (port 5432) for drizzle-kit migrations to avoid PgBouncer prepared-statement errors
+- [Phase 01-foundation]: next.config.ts omits search key in remotePatterns so Vercel Blob URLs with query params are accepted by next/image
 
 ### Pending Todos
 
@@ -59,6 +78,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-23
-Stopped at: Roadmap oluşturuldu, STATE.md ve REQUIREMENTS.md traceability güncellendi
+Last session: 2026-03-23T19:09:03.729Z
+Stopped at: Completed 01-01-PLAN.md — Next.js scaffold, Drizzle schema, i18n routing, auth, Jest
 Resume file: None
