@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-01-PLAN.md — Next.js scaffold, Drizzle schema, i18n routing, auth, Jest
-last_updated: "2026-03-23T19:09:03.749Z"
+stopped_at: Completed 01-02-PLAN.md — Middleware domain routing, placeholder pages, middleware tests
+last_updated: "2026-03-23T19:28:46.618Z"
 last_activity: 2026-03-23 — Roadmap created, traceability mapped
 progress:
   total_phases: 5
   completed_phases: 0
   total_plans: 3
-  completed_plans: 1
+  completed_plans: 2
   percent: 33
 ---
 
@@ -51,6 +51,7 @@ Progress: [███░░░░░░░] 33%
 
 *Updated after each plan completion*
 | Phase 01-foundation P01 | 16 | 3 tasks | 20 files |
+| Phase 01-foundation P02 | 17 | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -65,6 +66,8 @@ Recent decisions affecting current work:
 - [Foundation]: next-intl 4.x i18n, next-auth v5 admin auth, Vercel Blob görsel depolama
 - [Phase 01-foundation]: Two DB URLs: DATABASE_URL (pooled, port 6543) for app queries; DATABASE_URL_DIRECT (port 5432) for drizzle-kit migrations to avoid PgBouncer prepared-statement errors
 - [Phase 01-foundation]: next.config.ts omits search key in remotePatterns so Vercel Blob URLs with query params are accepted by next/image
+- [Phase 01-foundation]: middleware.ts retained despite Next.js 16 proxy.ts deprecation warning — plan specifies this filename and it still works
+- [Phase 01-foundation]: VALID_ARTISTS hardcoded in artist layout for Phase 1 slug validation — no DB call needed at this stage
 
 ### Pending Todos
 
@@ -78,6 +81,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-23T19:09:03.729Z
-Stopped at: Completed 01-01-PLAN.md — Next.js scaffold, Drizzle schema, i18n routing, auth, Jest
+Last session: 2026-03-23T19:28:46.602Z
+Stopped at: Completed 01-02-PLAN.md — Middleware domain routing, placeholder pages, middleware tests
 Resume file: None
