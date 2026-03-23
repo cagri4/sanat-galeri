@@ -76,34 +76,34 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| GAL-01 | — | Pending |
-| GAL-02 | — | Pending |
-| GAL-03 | — | Pending |
-| GAL-04 | — | Pending |
-| GAL-05 | — | Pending |
-| CV-01 | — | Pending |
-| CV-02 | — | Pending |
-| CV-03 | — | Pending |
-| CV-04 | — | Pending |
-| CV-05 | — | Pending |
-| CV-06 | — | Pending |
-| CV-07 | — | Pending |
-| CV-08 | — | Pending |
-| PLT-01 | — | Pending |
-| PLT-02 | — | Pending |
-| PLT-03 | — | Pending |
-| PLT-04 | — | Pending |
-| PLT-05 | — | Pending |
-| ADM-01 | — | Pending |
-| ADM-02 | — | Pending |
-| ADM-03 | — | Pending |
-| ADM-04 | — | Pending |
+| GAL-01 | Phase 2 | Pending |
+| GAL-02 | Phase 2 | Pending |
+| GAL-03 | Phase 2 | Pending |
+| GAL-04 | Phase 2 | Pending |
+| GAL-05 | Phase 2 | Pending |
+| CV-01 | Phase 4 | Pending |
+| CV-02 | Phase 4 | Pending |
+| CV-03 | Phase 4 | Pending |
+| CV-04 | Phase 4 | Pending |
+| CV-05 | Phase 4 | Pending |
+| CV-06 | Phase 4 | Pending |
+| CV-07 | Phase 4 | Pending |
+| CV-08 | Phase 4 | Pending |
+| PLT-01 | Phase 1 | Pending |
+| PLT-02 | Phase 3 | Pending |
+| PLT-03 | Phase 1 | Pending |
+| PLT-04 | Phase 3 | Pending |
+| PLT-05 | Phase 3 | Pending |
+| ADM-01 | Phase 5 | Pending |
+| ADM-02 | Phase 5 | Pending |
+| ADM-03 | Phase 5 | Pending |
+| ADM-04 | Phase 1 | Pending |
 
 **Coverage:**
 - v1 requirements: 22 total
-- Mapped to phases: 0
-- Unmapped: 22 ⚠️
+- Mapped to phases: 22
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-23*
-*Last updated: 2026-03-23 after initial definition*
+*Last updated: 2026-03-23 after roadmap creation — traceability mapped*
