@@ -37,7 +37,7 @@
 - [ ] **ADM-01**: Admin eser ekleyebilir, düzenleyebilir ve silebilir (fotoğraf yükleme dahil)
 - [ ] **ADM-02**: Admin sanatçı CV içeriklerini düzenleyebilir
 - [ ] **ADM-03**: Admin gelen mesajları görüntüleyebilir
-- [ ] **ADM-04**: Admin paneline güvenli giriş yapılabilir
+- [x] **ADM-04**: Admin paneline güvenli giriş yapılabilir
 
 ## v2 Requirements
 
@@ -97,7 +97,7 @@
 | ADM-01 | Phase 5 | Pending |
 | ADM-02 | Phase 5 | Pending |
 | ADM-03 | Phase 5 | Pending |
-| ADM-04 | Phase 1 | Pending |
+| ADM-04 | Phase 1 | Complete |
 
 **Coverage:**
 - v1 requirements: 22 total

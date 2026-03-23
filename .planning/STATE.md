@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-02-PLAN.md — Middleware domain routing, placeholder pages, middleware tests
-last_updated: "2026-03-23T19:28:46.618Z"
+stopped_at: "Completed 01-03-PLAN.md — Admin auth layer: (protected) layout with await auth(), login page, dashboard placeholder, auth tests"
+last_updated: "2026-03-23T19:30:36.619Z"
 last_activity: 2026-03-23 — Roadmap created, traceability mapped
 progress:
   total_phases: 5
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 3
-  completed_plans: 2
+  completed_plans: 3
   percent: 33
 ---
 
@@ -52,6 +52,7 @@ Progress: [███░░░░░░░] 33%
 *Updated after each plan completion*
 | Phase 01-foundation P01 | 16 | 3 tasks | 20 files |
 | Phase 01-foundation P02 | 17 | 2 tasks | 8 files |
+| Phase 01-foundation P03 | 15 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -68,6 +69,8 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: next.config.ts omits search key in remotePatterns so Vercel Blob URLs with query params are accepted by next/image
 - [Phase 01-foundation]: middleware.ts retained despite Next.js 16 proxy.ts deprecation warning — plan specifies this filename and it still works
 - [Phase 01-foundation]: VALID_ARTISTS hardcoded in artist layout for Phase 1 slug validation — no DB call needed at this stage
+- [Phase 01-foundation]: await auth() in (protected) layout is mandatory second auth layer (CVE-2025-29927 defense) — must never be removed even when middleware guards admin routes
+- [Phase 01-foundation]: Login page lives under (admin)/ not (admin)/(protected)/ to remain accessible without session and avoid redirect loop
 
 ### Pending Todos
 
@@ -81,6 +84,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-23T19:28:46.602Z
-Stopped at: Completed 01-02-PLAN.md — Middleware domain routing, placeholder pages, middleware tests
+Last session: 2026-03-23T19:30:36.600Z
+Stopped at: Completed 01-03-PLAN.md — Admin auth layer: (protected) layout with await auth(), login page, dashboard placeholder, auth tests
 Resume file: None
