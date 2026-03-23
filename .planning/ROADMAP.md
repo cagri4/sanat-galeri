@@ -30,7 +30,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Admin `/admin` rotasına giriş yapmadan erişmeye çalışmak login sayfasına yönlendirir ve server-side session kontrolü her admin Server Component'inde çalışır
   4. Tüm sayfalar 320px–1440px ekran genişliğinde bozulmadan görüntülenir
   5. Veritabanı şeması ve migration pipeline çalışır; Vercel Blob'a test görseli yüklenip `next/image` ile görüntülenebilir
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 01-01-PLAN.md — Project scaffold, dependencies, DB schema, test framework, i18n routing
+- [ ] 01-02-PLAN.md — Middleware domain routing, responsive placeholder pages, routing tests
+- [ ] 01-03-PLAN.md — Admin auth (next-auth v5), login page, server-side session check
 
 ### Phase 2: Ana Galeri
 **Goal**: Ziyaretçiler eserleri kategoriye göre filtreleyerek inceleyebilir, detay sayfasında tüm bilgileri görebilir ve satın alma için iletişim kurabilir
@@ -83,7 +87,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
+| 1. Foundation | 0/3 | Planning complete | - |
 | 2. Ana Galeri | 0/TBD | Not started | - |
 | 3. Platform (i18n + Nav + SEO) | 0/TBD | Not started | - |
 | 4. Sanatçı CV Subdomainleri | 0/TBD | Not started | - |
