@@ -46,7 +46,11 @@ Plans:
   3. Kullanıcı görsele tıklandığında lightbox açılır ve pinch-zoom ile tam ekran inceleyebilir
   4. "WhatsApp ile Sor" bağlantısı, eser adı ve sayfa URL'si ön doldurulmuş mesajla WhatsApp'ı açar
   5. Eser sayfasındaki iletişim formu gönderildiğinde mesaj veritabanına kaydedilir ve kullanıcı onay alır
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 02-01-PLAN.md — Schema migration (new product columns), Drizzle relations, seed data, gallery queries, contact action, WhatsApp utility
+- [ ] 02-02-PLAN.md — Gallery listing page with category filter and artwork grid
+- [ ] 02-03-PLAN.md — Artwork detail page with lightbox, WhatsApp CTA, and contact form
 
 ### Phase 3: Platform (i18n + Nav + SEO)
 **Goal**: Her sayfa Türkçe ve İngilizce olarak erişilebilir, üç domain arasında tutarlı navigasyon vardır ve temel SEO metadata her sayfada mevcuttur
@@ -88,7 +92,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete    | 2026-03-24 |
-| 2. Ana Galeri | 0/TBD | Not started | - |
+| 2. Ana Galeri | 0/3 | Not started | - |
 | 3. Platform (i18n + Nav + SEO) | 0/TBD | Not started | - |
 | 4. Sanatçı CV Subdomainleri | 0/TBD | Not started | - |
 | 5. Admin Paneli | 0/TBD | Not started | - |
