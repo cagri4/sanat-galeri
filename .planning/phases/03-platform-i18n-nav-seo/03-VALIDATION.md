@@ -38,10 +38,10 @@ created: 2026-03-24
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 03-01-01 | 01 | 1 | PLT-02 | unit | `pnpm test -- --testPathPattern=i18n-keys` | ❌ W0 | ⬜ pending |
-| 03-01-02 | 01 | 1 | PLT-02 | unit | `pnpm test -- --testPathPattern=language-switcher` | ❌ W0 | ⬜ pending |
-| 03-02-01 | 02 | 1 | PLT-04 | unit | `pnpm test -- --testPathPattern=navbar` | ❌ W0 | ⬜ pending |
-| 03-02-02 | 02 | 1 | PLT-05 | unit | `pnpm test -- --testPathPattern=gallery-metadata` | ❌ W0 | ⬜ pending |
+| 03-01-01 | 01 | 1 | PLT-02 | unit | `pnpm test -- --testPathPattern=i18n-keys` | created in task | ⬜ pending |
+| 03-01-02 | 01 | 1 | PLT-02 | build | `pnpm build` | n/a | ⬜ pending |
+| 03-02-01 | 02 | 2 | PLT-04 | build | `pnpm build` | n/a | ⬜ pending |
+| 03-02-02 | 02 | 2 | PLT-05 | unit+build | `pnpm test && pnpm build` | created in task | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -49,10 +49,10 @@ created: 2026-03-24
 
 ## Wave 0 Requirements
 
-- [ ] `src/__tests__/i18n-keys.test.ts` — verifies TR and EN JSON have identical key structures
-- [ ] `src/__tests__/language-switcher.test.ts` — contract test for locale link generation
-- [ ] `src/__tests__/navbar.test.ts` — contract test for cross-domain link rendering
-- [ ] `src/__tests__/gallery-metadata.test.ts` — contract test for locale-aware generateMetadata
+- [ ] `src/__tests__/i18n-keys.test.ts` — verifies TR and EN JSON have identical key structures (created in 03-01 Task 1)
+- [ ] `src/__tests__/language-switcher.test.ts` — contract test for locale link generation (created in 03-02 Task 2)
+- [ ] `src/__tests__/navbar.test.ts` — contract test for cross-domain link rendering (created in 03-02 Task 2)
+- [ ] `src/__tests__/gallery-metadata.test.ts` — contract test for locale-aware generateMetadata (created in 03-02 Task 2)
 
 ---
 
