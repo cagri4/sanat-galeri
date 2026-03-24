@@ -9,7 +9,7 @@ export async function getProducts(category?: string) {
       category ? eq(products.category, category) : undefined,
     ),
     with: {
-      images: { limit: 1, orderBy: (img: { sortOrder: unknown }, { asc }: { asc: (col: unknown) => unknown[] }) => [asc(img.sortOrder)] },
+      images: { limit: 1, orderBy: (img, { asc }) => [asc(img.sortOrder)] },
     },
     orderBy: [desc(products.createdAt)],
   })
@@ -19,7 +19,7 @@ export async function getProductBySlug(slug: string) {
   return db.query.products.findFirst({
     where: and(eq(products.slug, slug), eq(products.isVisible, true)),
     with: {
-      images: { orderBy: (img: { sortOrder: unknown }, { asc }: { asc: (col: unknown) => unknown[] }) => [asc(img.sortOrder)] },
+      images: { orderBy: (img, { asc }) => [asc(img.sortOrder)] },
       artist: true,
     },
   })
