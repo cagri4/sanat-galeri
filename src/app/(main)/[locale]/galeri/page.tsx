@@ -1,0 +1,39 @@
+import { Suspense } from 'react'
+import { getProducts, getCategories } from '@/lib/queries/gallery'
+import CategoryFilter from '@/components/gallery/category-filter'
+import ArtworkGrid from '@/components/gallery/artwork-grid'
+
+export function generateMetadata() {
+  return { title: 'Galeri | U-Art Tasarım' }
+}
+
+interface GaleriPageProps {
+  params: Promise<{ locale: string }>
+  searchParams: Promise<{ category?: string }>
+}
+
+export default async function GaleriPage({ params, searchParams }: GaleriPageProps) {
+  const { locale } = await params
+  const { category } = await searchParams
+
+  const [categories, products] = await Promise.all([
+    getCategories(),
+    getProducts(category),
+  ])
+
+  return (
+    <main className="py-8">
+      <h1 className="text-3xl font-bold text-neutral-900 mb-6">
+        {locale === 'tr' ? 'Galeri' : 'Gallery'}
+      </h1>
+
+      <Suspense fallback={<div className="h-12" />}>
+        <CategoryFilter categories={categories} active={category ?? null} />
+      </Suspense>
+
+      <div className="mt-6">
+        <ArtworkGrid products={products} locale={locale} />
+      </div>
+    </main>
+  )
+}
