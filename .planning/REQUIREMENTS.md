@@ -8,8 +8,8 @@
 ### Galeri (Ana Site)
 
 - [x] **GAL-01**: Kullanıcı eserleri kategoriye göre filtreleyerek grid'de görüntüleyebilir
-- [ ] **GAL-02**: Kullanıcı eser detay sayfasında başlık, teknik, boyut, yıl ve fiyat bilgilerini görebilir
-- [ ] **GAL-03**: Kullanıcı eserleri lightbox ile tam ekran zoom yaparak inceleyebilir
+- [x] **GAL-02**: Kullanıcı eser detay sayfasında başlık, teknik, boyut, yıl ve fiyat bilgilerini görebilir
+- [x] **GAL-03**: Kullanıcı eserleri lightbox ile tam ekran zoom yaparak inceleyebilir
 - [x] **GAL-04**: Kullanıcı eser sayfasından WhatsApp ile ön doldurulmuş mesajla iletişim kurabilir
 - [x] **GAL-05**: Kullanıcı eser sayfasından iletişim formu ile soru gönderebilir
 
@@ -77,8 +77,8 @@
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | GAL-01 | Phase 2 | Complete |
-| GAL-02 | Phase 2 | Pending |
-| GAL-03 | Phase 2 | Pending |
+| GAL-02 | Phase 2 | Complete |
+| GAL-03 | Phase 2 | Complete |
 | GAL-04 | Phase 2 | Complete |
 | GAL-05 | Phase 2 | Complete |
 | CV-01 | Phase 4 | Pending |
