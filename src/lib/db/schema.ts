@@ -7,6 +7,7 @@ import {
   timestamp,
   numeric,
 } from 'drizzle-orm/pg-core'
+import { relations } from 'drizzle-orm'
 
 export const artists = pgTable('artists', {
   id: serial('id').primaryKey(),
@@ -32,6 +33,11 @@ export const products = pgTable('products', {
   category: text('category').notNull(),
   price: numeric('price', { precision: 10, scale: 2 }),
   currency: text('currency').default('TRY'),
+  year: integer('year'),
+  mediumTr: text('medium_tr'),
+  mediumEn: text('medium_en'),
+  dimensionsTr: text('dimensions_tr'),
+  dimensionsEn: text('dimensions_en'),
   isSold: boolean('is_sold').default(false),
   isVisible: boolean('is_visible').default(true),
   createdAt: timestamp('created_at').defaultNow(),
@@ -80,3 +86,17 @@ export const messages = pgTable('messages', {
   isRead: boolean('is_read').default(false),
   createdAt: timestamp('created_at').defaultNow(),
 })
+
+// Drizzle relations — required for db.query.* with `with:` option
+export const artistsRelations = relations(artists, ({ many }) => ({
+  products: many(products),
+}))
+
+export const productsRelations = relations(products, ({ many, one }) => ({
+  images: many(productImages),
+  artist: one(artists, { fields: [products.artistId], references: [artists.id] }),
+}))
+
+export const productImagesRelations = relations(productImages, ({ one }) => ({
+  product: one(products, { fields: [productImages.productId], references: [products.id] }),
+}))
