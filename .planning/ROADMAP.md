@@ -60,7 +60,10 @@ Plans:
   1. Dil değiştirici ile `/tr/` ve `/en/` yolları arasında geçiş yapılır; seçilen dil korunur
   2. Ana siteden sanatçı subdomain'lerine ve geri ana siteye geçiş linkleri her sayfada çalışır
   3. Her sayfanın benzersiz `<title>` ve meta açıklaması vardır; görsel `alt` metinleri doldurulmuştur
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 03-01-PLAN.md — Translation JSON expansion, inline ternary replacement with t() calls across all components
+- [ ] 03-02-PLAN.md — LanguageSwitcher + Navbar components, layout injection, SEO metadata on all pages
 
 ### Phase 4: Sanatçı CV Subdomainleri
 **Goal**: Melike ve Şeref'in her biri kendi subdomain'inde profesyonel düzeyde biyografi, portfolyo ve CV bilgilerini sunar ve ziyaretçiler sanatçıyla doğrudan iletişim kurabilir
@@ -93,6 +96,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete    | 2026-03-24 |
 | 2. Ana Galeri | 3/3 | Complete    | 2026-03-24 |
-| 3. Platform (i18n + Nav + SEO) | 0/TBD | Not started | - |
+| 3. Platform (i18n + Nav + SEO) | 0/2 | Not started | - |
 | 4. Sanatçı CV Subdomainleri | 0/TBD | Not started | - |
 | 5. Admin Paneli | 0/TBD | Not started | - |
