@@ -13,7 +13,7 @@ Tek bir Next.js kod tabanından üç domain'e hizmet eden sanat galerisi ve sana
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Multi-domain routing, veritabanı şeması, görsel depolama ve admin auth altyapısı (completed 2026-03-23)
-- [ ] **Phase 2: Ana Galeri** - Kategori filtreli ürün vitrini, eser detay sayfası, lightbox, WhatsApp ve iletişim formu
+- [x] **Phase 2: Ana Galeri** - Kategori filtreli ürün vitrini, eser detay sayfası, lightbox, WhatsApp ve iletişim formu (completed 2026-03-24)
 - [ ] **Phase 3: Platform (i18n + Nav + SEO)** - TR/EN dil desteği, domain arası tutarlı navigasyon ve SEO temelleri
 - [ ] **Phase 4: Sanatçı CV Subdomainleri** - İki sanatçıya ait biyografi, portfolyo, sergi/ödül/eğitim, artist statement ve iletişim formu
 - [ ] **Phase 5: Admin Paneli** - Eser CRUD, CV içerik düzenleme ve mesaj gelen kutusu
@@ -92,7 +92,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete    | 2026-03-24 |
-| 2. Ana Galeri | 1/3 | In Progress|  |
+| 2. Ana Galeri | 3/3 | Complete   | 2026-03-24 |
 | 3. Platform (i18n + Nav + SEO) | 0/TBD | Not started | - |
 | 4. Sanatçı CV Subdomainleri | 0/TBD | Not started | - |
 | 5. Admin Paneli | 0/TBD | Not started | - |

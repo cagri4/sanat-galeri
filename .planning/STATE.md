@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: "Completed 02-01-PLAN.md — Data layer: schema migration, Drizzle relations, seed script, gallery queries, contact Server Action, WhatsApp utility, 6 test files"
-last_updated: "2026-03-24T20:06:35.663Z"
+stopped_at: "Completed 02-02-PLAN.md — Gallery listing page: ArtworkCard, ArtworkGrid, CategoryFilter, /[locale]/galeri page"
+last_updated: "2026-03-24T20:17:29.538Z"
 last_activity: 2026-03-23 — Roadmap created, traceability mapped
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 6
-  completed_plans: 4
+  completed_plans: 6
   percent: 33
 ---
 
@@ -54,6 +54,8 @@ Progress: [███░░░░░░░] 33%
 | Phase 01-foundation P02 | 17 | 2 tasks | 8 files |
 | Phase 01-foundation P03 | 15 | 2 tasks | 5 files |
 | Phase 02-ana-galeri P01 | 35 | 2 tasks | 13 files |
+| Phase 02-ana-galeri P03 | 7 | 2 tasks | 7 files |
+| Phase 02-ana-galeri P02 | 12 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -75,6 +77,11 @@ Recent decisions affecting current work:
 - [Phase 02-ana-galeri]: Drizzle relations (artistsRelations, productsRelations, productImagesRelations) required for db.query.* with: option — FK columns alone insufficient
 - [Phase 02-ana-galeri]: yet-another-react-lightbox installed in plan 02-01 (RESEARCH.md incorrectly listed as present)
 - [Phase 02-ana-galeri]: Wave 0 UI test stubs use contract testing pattern (mock db.query, next/navigation) without jsdom rendering
+- [Phase 02-ana-galeri]: react-hook-form installed as missing blocking dependency for contact form
+- [Phase 02-ana-galeri]: NextImageSlide uses fill + rect-based container sizing for next/image CDN optimization inside lightbox
+- [Phase 02-ana-galeri]: ContactForm calls submitContact() directly (not useActionState) for simpler async/await pattern
+- [Phase 02-ana-galeri]: ProductWithImage type inferred via Awaited<ReturnType<typeof getProducts>>[number] — avoids manual type duplication
+- [Phase 02-ana-galeri]: CategoryFilter wrapped in Suspense in gallery page — required for useSearchParams to prevent static generation bail-out
 
 ### Pending Todos
 
@@ -88,6 +95,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-24T20:06:35.647Z
-Stopped at: Completed 02-01-PLAN.md — Data layer: schema migration, Drizzle relations, seed script, gallery queries, contact Server Action, WhatsApp utility, 6 test files
+Last session: 2026-03-24T20:17:29.520Z
+Stopped at: Completed 02-02-PLAN.md — Gallery listing page: ArtworkCard, ArtworkGrid, CategoryFilter, /[locale]/galeri page
 Resume file: None
