@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: "Completed 01-03-PLAN.md — Admin auth layer: (protected) layout with await auth(), login page, dashboard placeholder, auth tests"
-last_updated: "2026-03-24T09:01:08.618Z"
+stopped_at: "Completed 02-01-PLAN.md — Data layer: schema migration, Drizzle relations, seed script, gallery queries, contact Server Action, WhatsApp utility, 6 test files"
+last_updated: "2026-03-24T20:06:35.663Z"
 last_activity: 2026-03-23 — Roadmap created, traceability mapped
 progress:
   total_phases: 5
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  total_plans: 6
+  completed_plans: 4
   percent: 33
 ---
 
@@ -53,6 +53,7 @@ Progress: [███░░░░░░░] 33%
 | Phase 01-foundation P01 | 16 | 3 tasks | 20 files |
 | Phase 01-foundation P02 | 17 | 2 tasks | 8 files |
 | Phase 01-foundation P03 | 15 | 2 tasks | 5 files |
+| Phase 02-ana-galeri P01 | 35 | 2 tasks | 13 files |
 
 ## Accumulated Context
 
@@ -71,6 +72,9 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: VALID_ARTISTS hardcoded in artist layout for Phase 1 slug validation — no DB call needed at this stage
 - [Phase 01-foundation]: await auth() in (protected) layout is mandatory second auth layer (CVE-2025-29927 defense) — must never be removed even when middleware guards admin routes
 - [Phase 01-foundation]: Login page lives under (admin)/ not (admin)/(protected)/ to remain accessible without session and avoid redirect loop
+- [Phase 02-ana-galeri]: Drizzle relations (artistsRelations, productsRelations, productImagesRelations) required for db.query.* with: option — FK columns alone insufficient
+- [Phase 02-ana-galeri]: yet-another-react-lightbox installed in plan 02-01 (RESEARCH.md incorrectly listed as present)
+- [Phase 02-ana-galeri]: Wave 0 UI test stubs use contract testing pattern (mock db.query, next/navigation) without jsdom rendering
 
 ### Pending Todos
 
@@ -84,6 +88,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-23T19:30:36.600Z
-Stopped at: Completed 01-03-PLAN.md — Admin auth layer: (protected) layout with await auth(), login page, dashboard placeholder, auth tests
+Last session: 2026-03-24T20:06:35.647Z
+Stopped at: Completed 02-01-PLAN.md — Data layer: schema migration, Drizzle relations, seed script, gallery queries, contact Server Action, WhatsApp utility, 6 test files
 Resume file: None

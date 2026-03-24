@@ -92,7 +92,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete    | 2026-03-24 |
-| 2. Ana Galeri | 0/3 | Not started | - |
+| 2. Ana Galeri | 1/3 | In Progress|  |
 | 3. Platform (i18n + Nav + SEO) | 0/TBD | Not started | - |
 | 4. Sanatçı CV Subdomainleri | 0/TBD | Not started | - |
 | 5. Admin Paneli | 0/TBD | Not started | - |
