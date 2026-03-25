@@ -27,7 +27,7 @@
 ### Platform
 
 - [x] **PLT-01**: Site 3 domain üzerinden çalışır (ana + 2 subdomain)
-- [ ] **PLT-02**: Tüm sayfalar Türkçe ve İngilizce olarak görüntülenebilir
+- [x] **PLT-02**: Tüm sayfalar Türkçe ve İngilizce olarak görüntülenebilir
 - [x] **PLT-03**: Tüm sayfalar mobil cihazlarda düzgün çalışır
 - [ ] **PLT-04**: 3 domain arasında tutarlı navigasyon vardır
 - [ ] **PLT-05**: SEO temelleri: sayfa başlıkları, meta açıklamalar, görsel alt text
@@ -90,7 +90,7 @@
 | CV-07 | Phase 4 | Pending |
 | CV-08 | Phase 4 | Pending |
 | PLT-01 | Phase 1 | Complete |
-| PLT-02 | Phase 3 | Pending |
+| PLT-02 | Phase 3 | Complete |
 | PLT-03 | Phase 1 | Complete |
 | PLT-04 | Phase 3 | Pending |
 | PLT-05 | Phase 3 | Pending |

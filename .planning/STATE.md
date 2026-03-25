@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: "Completed 02-03-PLAN.md — Artwork detail page: LightboxViewer, WhatsApp CTA, ContactForm, artwork detail route"
-last_updated: "2026-03-24T21:19:31.164Z"
+stopped_at: Completed 03-01-PLAN.md — i18n translation JSON expansion and component conversion
+last_updated: "2026-03-25T03:34:46.995Z"
 last_activity: 2026-03-23 — Roadmap created, traceability mapped
 progress:
   total_phases: 5
   completed_phases: 2
-  total_plans: 6
-  completed_plans: 6
+  total_plans: 8
+  completed_plans: 7
   percent: 33
 ---
 
@@ -56,6 +56,7 @@ Progress: [███░░░░░░░] 33%
 | Phase 02-ana-galeri P01 | 35 | 2 tasks | 13 files |
 | Phase 02-ana-galeri P03 | 7 | 2 tasks | 7 files |
 | Phase 02-ana-galeri P02 | 12 | 2 tasks | 5 files |
+| Phase 03-platform-i18n-nav-seo P01 | 20 | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -82,6 +83,9 @@ Recent decisions affecting current work:
 - [Phase 02-ana-galeri]: ContactForm calls submitContact() directly (not useActionState) for simpler async/await pattern
 - [Phase 02-ana-galeri]: ProductWithImage type inferred via Awaited<ReturnType<typeof getProducts>>[number] — avoids manual type duplication
 - [Phase 02-ana-galeri]: CategoryFilter wrapped in Suspense in gallery page — required for useSearchParams to prevent static generation bail-out
+- [Phase 03-platform-i18n-nav-seo]: Key parity test uses recursive dot-notation key extraction to catch missing key bugs at commit time
+- [Phase 03-platform-i18n-nav-seo]: artwork-card and artwork-grid made async Server Components to support getTranslations pattern
+- [Phase 03-platform-i18n-nav-seo]: WhatsAppButton gained locale prop for getTranslations — call site updated to pass locale={locale}
 
 ### Pending Todos
 
@@ -95,6 +99,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-24T21:15:46.362Z
-Stopped at: Completed 02-03-PLAN.md — Artwork detail page: LightboxViewer, WhatsApp CTA, ContactForm, artwork detail route
+Last session: 2026-03-25T03:34:46.981Z
+Stopped at: Completed 03-01-PLAN.md — i18n translation JSON expansion and component conversion
 Resume file: None
