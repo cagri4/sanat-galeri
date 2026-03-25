@@ -1,7 +1,23 @@
-import { useTranslations } from 'next-intl'
+import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 
-export default function HomePage() {
-  const t = useTranslations('common')
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'meta' })
+  return { title: t('homeTitle'), description: t('homeDesc') }
+}
+
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'common' })
   return (
     <main className="py-8 sm:py-12 lg:py-16">
       <h1 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-tight">

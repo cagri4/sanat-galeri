@@ -1,11 +1,18 @@
+import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { getTranslations } from 'next-intl/server'
 import { getProducts, getCategories } from '@/lib/queries/gallery'
 import CategoryFilter from '@/components/gallery/category-filter'
 import ArtworkGrid from '@/components/gallery/artwork-grid'
 
-export function generateMetadata() {
-  return { title: 'Galeri | U-Art Tasarım' }
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'meta' })
+  return { title: t('galleryTitle'), description: t('galleryDesc') }
 }
 
 interface GaleriPageProps {
