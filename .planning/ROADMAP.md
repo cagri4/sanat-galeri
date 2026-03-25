@@ -89,7 +89,11 @@ Plans:
   1. Admin yeni eser oluşturabilir, fotoğraf yükleyebilir, bilgileri düzenleyebilir ve eseri silebilir; değişiklikler anında galeride yansır
   2. Admin her sanatçı için biyografi, sergi, ödül, eğitim ve artist statement alanlarını düzenleyebilir; değişiklikler CV sayfasına yansır
   3. Gelen mesajlar listesinde hangi esere veya sanatçıya ait olduğu ve gönderim tarihi görünür; admin mesajı okundu olarak işaretleyebilir
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 05-01-PLAN.md — Server Actions (product CRUD, artist update, message management), admin query layer, Wave 0 tests
+- [ ] 05-02-PLAN.md — Artwork CRUD UI: product list, create/edit forms, image uploader, admin navigation
+- [ ] 05-03-PLAN.md — Artist CV editor, exhibition CRUD, message inbox with context parsing
 
 ## Progress
 
@@ -102,4 +106,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 2. Ana Galeri | 3/3 | Complete    | 2026-03-24 |
 | 3. Platform (i18n + Nav + SEO) | 2/2 | Complete    | 2026-03-25 |
 | 4. Sanatçı CV Subdomainleri | 3/3 | Complete    | 2026-03-25 |
-| 5. Admin Paneli | 0/TBD | Not started | - |
+| 5. Admin Paneli | 0/3 | Not started | - |
