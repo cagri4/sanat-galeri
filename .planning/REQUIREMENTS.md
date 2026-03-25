@@ -29,8 +29,8 @@
 - [x] **PLT-01**: Site 3 domain üzerinden çalışır (ana + 2 subdomain)
 - [x] **PLT-02**: Tüm sayfalar Türkçe ve İngilizce olarak görüntülenebilir
 - [x] **PLT-03**: Tüm sayfalar mobil cihazlarda düzgün çalışır
-- [ ] **PLT-04**: 3 domain arasında tutarlı navigasyon vardır
-- [ ] **PLT-05**: SEO temelleri: sayfa başlıkları, meta açıklamalar, görsel alt text
+- [x] **PLT-04**: 3 domain arasında tutarlı navigasyon vardır
+- [x] **PLT-05**: SEO temelleri: sayfa başlıkları, meta açıklamalar, görsel alt text
 
 ### Admin
 
@@ -92,8 +92,8 @@
 | PLT-01 | Phase 1 | Complete |
 | PLT-02 | Phase 3 | Complete |
 | PLT-03 | Phase 1 | Complete |
-| PLT-04 | Phase 3 | Pending |
-| PLT-05 | Phase 3 | Pending |
+| PLT-04 | Phase 3 | Complete |
+| PLT-05 | Phase 3 | Complete |
 | ADM-01 | Phase 5 | Pending |
 | ADM-02 | Phase 5 | Pending |
 | ADM-03 | Phase 5 | Pending |

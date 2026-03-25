@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 03-01-PLAN.md — i18n translation JSON expansion and component conversion
-last_updated: "2026-03-25T03:34:46.995Z"
+stopped_at: Completed 03-02-PLAN.md — LanguageSwitcher, Navbar, and locale-aware SEO metadata
+last_updated: "2026-03-25T03:46:32.918Z"
 last_activity: 2026-03-23 — Roadmap created, traceability mapped
 progress:
   total_phases: 5
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 8
-  completed_plans: 7
+  completed_plans: 8
   percent: 33
 ---
 
@@ -57,6 +57,7 @@ Progress: [███░░░░░░░] 33%
 | Phase 02-ana-galeri P03 | 7 | 2 tasks | 7 files |
 | Phase 02-ana-galeri P02 | 12 | 2 tasks | 5 files |
 | Phase 03-platform-i18n-nav-seo P01 | 20 | 2 tasks | 9 files |
+| Phase 03-platform-i18n-nav-seo P02 | 9 | 2 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -86,6 +87,9 @@ Recent decisions affecting current work:
 - [Phase 03-platform-i18n-nav-seo]: Key parity test uses recursive dot-notation key extraction to catch missing key bugs at commit time
 - [Phase 03-platform-i18n-nav-seo]: artwork-card and artwork-grid made async Server Components to support getTranslations pattern
 - [Phase 03-platform-i18n-nav-seo]: WhatsAppButton gained locale prop for getTranslations — call site updated to pass locale={locale}
+- [Phase 03-platform-i18n-nav-seo]: createNavigation from next-intl/navigation is the correct next-intl 4.x API for locale-aware usePathname/Link — usePathname is not directly exported; navigation.ts wrapper created at src/lib/i18n/navigation.ts
+- [Phase 03-platform-i18n-nav-seo]: Pure helper functions exported from components (getLanguageLinks, getCrossDomainLinks) enable contract testing without DOM or framework dependencies
+- [Phase 03-platform-i18n-nav-seo]: jest.mock must be called before imports when testing components with next-intl ESM dependencies to avoid SyntaxError on unexpected token export
 
 ### Pending Todos
 
@@ -99,6 +103,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-25T03:34:46.981Z
-Stopped at: Completed 03-01-PLAN.md — i18n translation JSON expansion and component conversion
+Last session: 2026-03-25T03:46:32.906Z
+Stopped at: Completed 03-02-PLAN.md — LanguageSwitcher, Navbar, and locale-aware SEO metadata
 Resume file: None
