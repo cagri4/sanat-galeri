@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { headers } from 'next/headers'
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { getProductBySlug } from '@/lib/queries/gallery'
 import LightboxViewer from '@/components/gallery/lightbox-viewer'
 import WhatsAppButton from '@/components/gallery/whatsapp-button'
@@ -34,6 +35,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
     notFound()
   }
 
+  const t = await getTranslations({ locale, namespace: 'gallery' })
   const isTr = locale === 'tr'
 
   const title = isTr ? eser.titleTr : eser.titleEn
@@ -73,7 +75,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
       maximumFractionDigits: 0,
     }).format(amount)
   } else {
-    priceDisplay = isTr ? 'Fiyat icin iletisime gecin' : 'Contact for price'
+    priceDisplay = t('contactForPrice')
   }
 
   return (
@@ -95,7 +97,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
             {artistName && (
               <div className="py-3 grid grid-cols-2 gap-4">
                 <dt className="text-sm font-medium text-gray-500">
-                  {isTr ? 'Sanatci' : 'Artist'}
+                  {t('artist')}
                 </dt>
                 <dd className="text-sm text-gray-900">
                   {eser.artist?.slug ? (
@@ -115,7 +117,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
             {medium && (
               <div className="py-3 grid grid-cols-2 gap-4">
                 <dt className="text-sm font-medium text-gray-500">
-                  {isTr ? 'Teknik' : 'Medium'}
+                  {t('medium')}
                 </dt>
                 <dd className="text-sm text-gray-900">{medium}</dd>
               </div>
@@ -124,7 +126,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
             {dimensions && (
               <div className="py-3 grid grid-cols-2 gap-4">
                 <dt className="text-sm font-medium text-gray-500">
-                  {isTr ? 'Boyut' : 'Dimensions'}
+                  {t('dimensions')}
                 </dt>
                 <dd className="text-sm text-gray-900">{dimensions}</dd>
               </div>
@@ -133,7 +135,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
             {eser.year && (
               <div className="py-3 grid grid-cols-2 gap-4">
                 <dt className="text-sm font-medium text-gray-500">
-                  {isTr ? 'Yil' : 'Year'}
+                  {t('year')}
                 </dt>
                 <dd className="text-sm text-gray-900">{eser.year}</dd>
               </div>
@@ -141,11 +143,11 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
 
             <div className="py-3 grid grid-cols-2 gap-4">
               <dt className="text-sm font-medium text-gray-500">
-                {isTr ? 'Fiyat' : 'Price'}
+                {t('price')}
               </dt>
               <dd className="text-sm font-semibold text-gray-900">
                 {eser.isSold ? (
-                  <span className="text-red-600">{isTr ? 'Satildi' : 'Sold'}</span>
+                  <span className="text-red-600">{t('sold')}</span>
                 ) : (
                   priceDisplay
                 )}
@@ -166,13 +168,14 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
               phone={eser.artist.whatsapp}
               artworkTitle={title}
               pageUrl={pageUrl}
+              locale={locale}
             />
           )}
 
           {/* Contact Form */}
           <div className="pt-4 border-t border-gray-100">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">
-              {isTr ? 'Bilgi Al' : 'Get in Touch'}
+              {t('contactTitle')}
             </h2>
             <ContactForm productSlug={slug} />
           </div>

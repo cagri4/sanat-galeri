@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 import { getProducts } from '@/lib/queries/gallery'
 
 type ProductWithImage = Awaited<ReturnType<typeof getProducts>>[number]
@@ -9,7 +10,8 @@ interface ArtworkCardProps {
   locale: string
 }
 
-export default function ArtworkCard({ product, locale }: ArtworkCardProps) {
+export default async function ArtworkCard({ product, locale }: ArtworkCardProps) {
+  const t = await getTranslations({ locale, namespace: 'gallery' })
   const title = locale === 'tr' ? product.titleTr : product.titleEn
   const image = product.images[0]
 
@@ -52,7 +54,7 @@ export default function ArtworkCard({ product, locale }: ArtworkCardProps) {
         )}
         {product.isSold && (
           <div className="absolute top-2 right-2 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded">
-            {locale === 'tr' ? 'Satıldı' : 'Sold'}
+            {t('sold')}
           </div>
         )}
       </div>

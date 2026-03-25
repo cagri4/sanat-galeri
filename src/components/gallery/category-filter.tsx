@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter, usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 interface CategoryFilterProps {
   categories: string[]
@@ -10,6 +11,7 @@ interface CategoryFilterProps {
 export default function CategoryFilter({ categories, active }: CategoryFilterProps) {
   const router = useRouter()
   const pathname = usePathname()
+  const t = useTranslations('gallery')
 
   const handleAll = () => {
     router.replace(pathname)
@@ -31,7 +33,7 @@ export default function CategoryFilter({ categories, active }: CategoryFilterPro
             : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
         }`}
       >
-        Tümünü Göster
+        {t('filterAll')}
       </button>
       {categories.map((cat) => (
         <button

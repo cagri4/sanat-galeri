@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useTranslations } from 'next-intl'
 import { contactSchema, submitContact } from '@/lib/actions/contact'
 
 type ContactFormData = z.infer<typeof contactSchema>
@@ -15,6 +16,7 @@ interface ContactFormProps {
 export default function ContactForm({ productSlug }: ContactFormProps) {
   const [isSuccess, setIsSuccess] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const t = useTranslations('contact')
 
   const {
     register,
@@ -42,7 +44,7 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
   if (isSuccess) {
     return (
       <div className="rounded-lg bg-green-50 border border-green-200 p-6 text-green-800">
-        <p className="font-medium">Mesajiniz gonderildi. En kisa surede donus yapacagiz.</p>
+        <p className="font-medium">{t('successMessage')}</p>
       </div>
     )
   }
@@ -51,14 +53,14 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div>
         <label htmlFor="senderName" className="block text-sm font-medium text-gray-700 mb-1">
-          Adiniz
+          {t('nameLabel')}
         </label>
         <input
           id="senderName"
           type="text"
           {...register('senderName')}
           className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
-          placeholder="Adinizi giriniz"
+          placeholder={t('namePlaceholder')}
         />
         {errors.senderName && (
           <p className="mt-1 text-sm text-red-600">{errors.senderName.message}</p>
@@ -67,14 +69,14 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
 
       <div>
         <label htmlFor="senderEmail" className="block text-sm font-medium text-gray-700 mb-1">
-          E-posta
+          {t('emailLabel')}
         </label>
         <input
           id="senderEmail"
           type="email"
           {...register('senderEmail')}
           className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
-          placeholder="ornek@eposta.com"
+          placeholder={t('emailPlaceholder')}
         />
         {errors.senderEmail && (
           <p className="mt-1 text-sm text-red-600">{errors.senderEmail.message}</p>
@@ -83,14 +85,14 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
 
       <div>
         <label htmlFor="body" className="block text-sm font-medium text-gray-700 mb-1">
-          Mesajiniz
+          {t('messageLabel')}
         </label>
         <textarea
           id="body"
           rows={5}
           {...register('body')}
           className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent resize-none"
-          placeholder="Eser hakkinda sormak istediklerinizi yaziniz..."
+          placeholder={t('messagePlaceholder')}
         />
         {errors.body && (
           <p className="mt-1 text-sm text-red-600">{errors.body.message}</p>
@@ -120,10 +122,10 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
               />
             </svg>
-            Gonderiliyor...
+            {t('submitting')}
           </>
         ) : (
-          'Mesaj Gonder'
+          t('submit')
         )}
       </button>
     </form>

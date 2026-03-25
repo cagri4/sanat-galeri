@@ -1,4 +1,5 @@
 import { Suspense } from 'react'
+import { getTranslations } from 'next-intl/server'
 import { getProducts, getCategories } from '@/lib/queries/gallery'
 import CategoryFilter from '@/components/gallery/category-filter'
 import ArtworkGrid from '@/components/gallery/artwork-grid'
@@ -15,6 +16,7 @@ interface GaleriPageProps {
 export default async function GaleriPage({ params, searchParams }: GaleriPageProps) {
   const { locale } = await params
   const { category } = await searchParams
+  const t = await getTranslations({ locale, namespace: 'gallery' })
 
   const [categories, products] = await Promise.all([
     getCategories(),
@@ -24,7 +26,7 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
   return (
     <main className="py-8">
       <h1 className="text-3xl font-bold text-neutral-900 mb-6">
-        {locale === 'tr' ? 'Galeri' : 'Gallery'}
+        {t('title')}
       </h1>
 
       <Suspense fallback={<div className="h-12" />}>

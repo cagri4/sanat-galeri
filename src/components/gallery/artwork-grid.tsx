@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server'
 import { getProducts } from '@/lib/queries/gallery'
 import ArtworkCard from './artwork-card'
 
@@ -8,12 +9,14 @@ interface ArtworkGridProps {
   locale: string
 }
 
-export default function ArtworkGrid({ products, locale }: ArtworkGridProps) {
+export default async function ArtworkGrid({ products, locale }: ArtworkGridProps) {
+  const t = await getTranslations({ locale, namespace: 'gallery' })
+
   if (products.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
         <p className="text-neutral-500 text-lg">
-          {locale === 'tr' ? 'Henüz eser eklenmedi' : 'No artworks yet'}
+          {t('emptyState')}
         </p>
       </div>
     )
