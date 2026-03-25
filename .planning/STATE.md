@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 05-01-PLAN.md — Admin Server Actions and query layer
-last_updated: "2026-03-25T08:11:34.031Z"
+stopped_at: Completed 05-03-PLAN.md — Artist CV editor and message inbox UI
+last_updated: "2026-03-25T08:24:44.420Z"
 last_activity: 2026-03-23 — Roadmap created, traceability mapped
 progress:
   total_phases: 5
   completed_phases: 4
   total_plans: 14
-  completed_plans: 12
+  completed_plans: 13
   percent: 33
 ---
 
@@ -62,6 +62,7 @@ Progress: [███░░░░░░░] 33%
 | Phase 04-sanatci-cv-subdomainleri P02 | 7 | 2 tasks | 5 files |
 | Phase 04-sanatci-cv-subdomainleri P03 | 18 | 2 tasks | 5 files |
 | Phase 05-admin-paneli P01 | 15 | 2 tasks | 10 files |
+| Phase 05-admin-paneli P03 | 20 | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -105,6 +106,8 @@ Recent decisions affecting current work:
 - [Phase 05-admin-paneli]: messagesRelations added to schema.ts — required for db.query.messages with: { artist: true } in getAllMessages()
 - [Phase 05-admin-paneli]: Admin query layer (admin.ts) separate from gallery.ts — gallery.ts has isVisible=true filter, admin.ts has none
 - [Phase 05-admin-paneli]: parseProductContext exported as plain function (not async server action) — simpler testing without async mocks
+- [Phase 05-admin-paneli]: parseProductContext must live in lib/utils/message-utils.ts (not actions/message.ts) — non-async functions cannot be exported from 'use server' modules for client component imports in Turbopack
+- [Phase 05-admin-paneli]: Exhibition form uses delete + re-create pattern (no in-place edit) — sufficient for admin panel and reduces form complexity
 
 ### Pending Todos
 
@@ -118,6 +121,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-25T08:11:34.012Z
-Stopped at: Completed 05-01-PLAN.md — Admin Server Actions and query layer
+Last session: 2026-03-25T08:24:44.399Z
+Stopped at: Completed 05-03-PLAN.md — Artist CV editor and message inbox UI
 Resume file: None
