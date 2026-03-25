@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 04-01-PLAN.md — Schema migration, query layer, CV translations, and contract tests
-last_updated: "2026-03-25T05:14:10.865Z"
+stopped_at: Completed 04-02-PLAN.md — Artist bio/statement landing page and portfolio gallery
+last_updated: "2026-03-25T05:24:31.458Z"
 last_activity: 2026-03-23 — Roadmap created, traceability mapped
 progress:
   total_phases: 5
   completed_phases: 3
   total_plans: 11
-  completed_plans: 9
+  completed_plans: 10
   percent: 33
 ---
 
@@ -59,6 +59,7 @@ Progress: [███░░░░░░░] 33%
 | Phase 03-platform-i18n-nav-seo P01 | 20 | 2 tasks | 9 files |
 | Phase 03-platform-i18n-nav-seo P02 | 9 | 2 tasks | 11 files |
 | Phase 04-sanatci-cv-subdomainleri P01 | 35 | 2 tasks | 9 files |
+| Phase 04-sanatci-cv-subdomainleri P02 | 7 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -94,6 +95,9 @@ Recent decisions affecting current work:
 - [Phase 04-sanatci-cv-subdomainleri]: getArtistPortfolio/Exhibitions/PressItems use raw db.select() chains — consistent with gallery.ts pattern
 - [Phase 04-sanatci-cv-subdomainleri]: submitArtistContact in contact.ts: resolves artistSlug to artistId before inserting message with correct FK
 - [Phase 04-sanatci-cv-subdomainleri]: drizzle-kit push incompatible with Supabase pooler via neon-http — migration SQL generated as 0002_clever_mimic.sql for manual application
+- [Phase 04-sanatci-cv-subdomainleri]: BioSection and StatementSection are Server Components using getTranslations directly — no translation prop drilling from page
+- [Phase 04-sanatci-cv-subdomainleri]: PortfolioGallery is 'use client' to wrap LightboxViewer; data fetching stays in Server Component page
+- [Phase 04-sanatci-cv-subdomainleri]: StatementSection returns null early if no statement for current locale to avoid empty section rendering
 
 ### Pending Todos
 
@@ -107,6 +111,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-25T05:14:10.852Z
-Stopped at: Completed 04-01-PLAN.md — Schema migration, query layer, CV translations, and contract tests
+Last session: 2026-03-25T05:24:31.444Z
+Stopped at: Completed 04-02-PLAN.md — Artist bio/statement landing page and portfolio gallery
 Resume file: None
