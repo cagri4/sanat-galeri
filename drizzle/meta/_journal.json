@@ -15,6 +15,13 @@
       "when": 1774382322667,
       "tag": "0001_rainy_omega_flight",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1774415118514,
+      "tag": "0002_clever_mimic",
+      "breakpoints": true
     }
   ]
 }

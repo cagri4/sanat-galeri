@@ -38,6 +38,25 @@
     "homeTitle": "U-Art Design",
     "homeDesc": "Simple, gallery-quality art showcase.",
     "galleryTitle": "Gallery | U-Art Design",
-    "galleryDesc": "Original paintings, sculptures, and prints."
+    "galleryDesc": "Original paintings, sculptures, and prints.",
+    "artistTitle": "{name} | U-Art Design",
+    "artistDesc": "{name} - artist portfolio and CV",
+    "portfolioTitle": "Portfolio | {name}",
+    "exhibitionsTitle": "Exhibitions | {name}",
+    "contactTitle": "Contact | {name}"
+  },
+  "cv": {
+    "bioTitle": "About",
+    "statementTitle": "Artist Statement",
+    "portfolioTitle": "Portfolio",
+    "exhibitionsTitle": "Exhibitions",
+    "awardsTitle": "Awards",
+    "educationTitle": "Education",
+    "pressTitle": "Press / Publications",
+    "contactTitle": "Contact",
+    "soloExhibition": "Solo Exhibition",
+    "groupExhibition": "Group Exhibition",
+    "contactPlaceholder": "Write your exhibition or collaboration proposal...",
+    "noPortfolio": "No portfolio items yet"
   }
 }

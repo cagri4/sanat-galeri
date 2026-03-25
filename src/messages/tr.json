@@ -38,6 +38,25 @@
     "homeTitle": "U-Art Tasarim",
     "homeDesc": "Sade, galeri kalitesinde sanat vitrini.",
     "galleryTitle": "Galeri | U-Art Tasarim",
-    "galleryDesc": "Ozgun tablolar, heykeller ve baski resimler."
+    "galleryDesc": "Ozgun tablolar, heykeller ve baski resimler.",
+    "artistTitle": "{name} | U-Art Tasarim",
+    "artistDesc": "{name} - sanatci portfolyosu ve CV",
+    "portfolioTitle": "Portfolyo | {name}",
+    "exhibitionsTitle": "Sergiler | {name}",
+    "contactTitle": "Iletisim | {name}"
+  },
+  "cv": {
+    "bioTitle": "Hakkinda",
+    "statementTitle": "Sanatci Beyani",
+    "portfolioTitle": "Portfolyo",
+    "exhibitionsTitle": "Sergiler",
+    "awardsTitle": "Oduller",
+    "educationTitle": "Egitim",
+    "pressTitle": "Basin / Yayin",
+    "contactTitle": "Iletisim",
+    "soloExhibition": "Solo Sergi",
+    "groupExhibition": "Grup Sergisi",
+    "contactPlaceholder": "Sergi veya is birligi teklifinizi yaziniz...",
+    "noPortfolio": "Henuz portfolyo eklenmedi"
   }
 }

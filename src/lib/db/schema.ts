@@ -16,6 +16,8 @@ export const artists = pgTable('artists', {
   nameEn: text('name_en').notNull(),
   bioTr: text('bio_tr'),
   bioEn: text('bio_en'),
+  statementTr: text('statement_tr'),
+  statementEn: text('statement_en'),
   photoUrl: text('photo_url'),
   email: text('email'),
   whatsapp: text('whatsapp'),
@@ -69,7 +71,7 @@ export const portfolioItems = pgTable('portfolio_items', {
 export const exhibitions = pgTable('exhibitions', {
   id: serial('id').primaryKey(),
   artistId: integer('artist_id').references(() => artists.id),
-  type: text('type').notNull(),               // "sergi" | "odul" | "etkinlik"
+  type: text('type').notNull(),               // "solo_sergi" | "grup_sergi" | "odul" | "egitim"
   titleTr: text('title_tr').notNull(),
   titleEn: text('title_en').notNull(),
   location: text('location'),
@@ -87,9 +89,22 @@ export const messages = pgTable('messages', {
   createdAt: timestamp('created_at').defaultNow(),
 })
 
+export const pressItems = pgTable('press_items', {
+  id: serial('id').primaryKey(),
+  artistId: integer('artist_id').references(() => artists.id),
+  title: text('title').notNull(),
+  publication: text('publication'),
+  url: text('url'),
+  year: integer('year'),
+  sortOrder: integer('sort_order').default(0),
+})
+
 // Drizzle relations — required for db.query.* with `with:` option
 export const artistsRelations = relations(artists, ({ many }) => ({
   products: many(products),
+  portfolioItems: many(portfolioItems),
+  exhibitions: many(exhibitions),
+  pressItems: many(pressItems),
 }))
 
 export const productsRelations = relations(products, ({ many, one }) => ({
@@ -99,4 +114,16 @@ export const productsRelations = relations(products, ({ many, one }) => ({
 
 export const productImagesRelations = relations(productImages, ({ one }) => ({
   product: one(products, { fields: [productImages.productId], references: [products.id] }),
+}))
+
+export const portfolioItemsRelations = relations(portfolioItems, ({ one }) => ({
+  artist: one(artists, { fields: [portfolioItems.artistId], references: [artists.id] }),
+}))
+
+export const exhibitionsRelations = relations(exhibitions, ({ one }) => ({
+  artist: one(artists, { fields: [exhibitions.artistId], references: [artists.id] }),
+}))
+
+export const pressItemsRelations = relations(pressItems, ({ one }) => ({
+  artist: one(artists, { fields: [pressItems.artistId], references: [artists.id] }),
 }))
