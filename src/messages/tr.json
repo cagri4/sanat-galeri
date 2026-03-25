@@ -1,1 +1,43 @@
-{ "common": { "siteTitle": "U-Art Tasarim", "loading": "Yukleniyor..." } }
+{
+  "common": {
+    "siteTitle": "U-Art Tasarim",
+    "loading": "Yukleniyor..."
+  },
+  "nav": {
+    "siteTitle": "U-Art Tasarim",
+    "gallery": "Galeri",
+    "artists": "Sanatcilar",
+    "backToMain": "Ana Sayfa"
+  },
+  "gallery": {
+    "title": "Galeri",
+    "filterAll": "Tumunu Goster",
+    "emptyState": "Henuz eser eklenmedi",
+    "artist": "Sanatci",
+    "medium": "Teknik",
+    "dimensions": "Boyut",
+    "year": "Yil",
+    "price": "Fiyat",
+    "contactForPrice": "Fiyat icin iletisime gecin",
+    "sold": "Satildi",
+    "contactTitle": "Bilgi Al",
+    "whatsappCta": "WhatsApp ile Sor"
+  },
+  "contact": {
+    "nameLabel": "Adiniz",
+    "namePlaceholder": "Adinizi giriniz",
+    "emailLabel": "E-posta",
+    "emailPlaceholder": "ornek@eposta.com",
+    "messageLabel": "Mesajiniz",
+    "messagePlaceholder": "Eser hakkinda sormak istediklerinizi yaziniz...",
+    "submit": "Mesaj Gonder",
+    "submitting": "Gonderiliyor...",
+    "successMessage": "Mesajiniz gonderildi. En kisa surede donus yapacagiz."
+  },
+  "meta": {
+    "homeTitle": "U-Art Tasarim",
+    "homeDesc": "Sade, galeri kalitesinde sanat vitrini.",
+    "galleryTitle": "Galeri | U-Art Tasarim",
+    "galleryDesc": "Ozgun tablolar, heykeller ve baski resimler."
+  }
+}

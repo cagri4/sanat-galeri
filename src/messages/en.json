@@ -1,1 +1,43 @@
-{ "common": { "siteTitle": "U-Art Design", "loading": "Loading..." } }
+{
+  "common": {
+    "siteTitle": "U-Art Design",
+    "loading": "Loading..."
+  },
+  "nav": {
+    "siteTitle": "U-Art Design",
+    "gallery": "Gallery",
+    "artists": "Artists",
+    "backToMain": "Home"
+  },
+  "gallery": {
+    "title": "Gallery",
+    "filterAll": "Show All",
+    "emptyState": "No artworks yet",
+    "artist": "Artist",
+    "medium": "Medium",
+    "dimensions": "Dimensions",
+    "year": "Year",
+    "price": "Price",
+    "contactForPrice": "Contact for price",
+    "sold": "Sold",
+    "contactTitle": "Get in Touch",
+    "whatsappCta": "Ask via WhatsApp"
+  },
+  "contact": {
+    "nameLabel": "Your Name",
+    "namePlaceholder": "Enter your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "example@email.com",
+    "messageLabel": "Your Message",
+    "messagePlaceholder": "Write your questions about the artwork...",
+    "submit": "Send Message",
+    "submitting": "Sending...",
+    "successMessage": "Your message has been sent. We will get back to you shortly."
+  },
+  "meta": {
+    "homeTitle": "U-Art Design",
+    "homeDesc": "Simple, gallery-quality art showcase.",
+    "galleryTitle": "Gallery | U-Art Design",
+    "galleryDesc": "Original paintings, sculptures, and prints."
+  }
+}
