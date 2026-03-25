@@ -105,6 +105,7 @@ export const artistsRelations = relations(artists, ({ many }) => ({
   portfolioItems: many(portfolioItems),
   exhibitions: many(exhibitions),
   pressItems: many(pressItems),
+  messages: many(messages),
 }))
 
 export const productsRelations = relations(products, ({ many, one }) => ({
@@ -126,4 +127,8 @@ export const exhibitionsRelations = relations(exhibitions, ({ one }) => ({
 
 export const pressItemsRelations = relations(pressItems, ({ one }) => ({
   artist: one(artists, { fields: [pressItems.artistId], references: [artists.id] }),
+}))
+
+export const messagesRelations = relations(messages, ({ one }) => ({
+  artist: one(artists, { fields: [messages.artistId], references: [artists.id] }),
 }))
