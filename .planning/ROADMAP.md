@@ -75,7 +75,11 @@ Plans:
   3. Sergi listesi solo/grup ayrımıyla ters kronolojik sırada görüntülenir; ödüller, eğitim ve artist statement ayrı bölümler olarak mevcuttur
   4. Basın/yayın listesi varsa görüntülenir; yoksa bölüm gizlenir
   5. Sanatçıya özel iletişim formu gönderildiğinde mesaj o sanatçıya atanarak veritabanına kaydedilir
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 04-01-PLAN.md — Schema migration, query layer, artist contact action, translations, seed data, and contract tests
+- [ ] 04-02-PLAN.md — Artist bio/statement landing page and portfolio gallery page
+- [ ] 04-03-PLAN.md — Exhibitions/CV page with grouped sections and artist contact form
 
 ### Phase 5: Admin Paneli
 **Goal**: Admin, eser ekleme/düzenleme/silme, sanatçı CV içeriklerini güncelleme ve gelen mesajları okuma işlemlerini panelden yapabilir
@@ -97,5 +101,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Foundation | 3/3 | Complete    | 2026-03-24 |
 | 2. Ana Galeri | 3/3 | Complete    | 2026-03-24 |
 | 3. Platform (i18n + Nav + SEO) | 2/2 | Complete    | 2026-03-25 |
-| 4. Sanatçı CV Subdomainleri | 0/TBD | Not started | - |
+| 4. Sanatçı CV Subdomainleri | 0/3 | Not started | - |
 | 5. Admin Paneli | 0/TBD | Not started | - |
