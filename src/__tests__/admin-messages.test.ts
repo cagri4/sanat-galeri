@@ -32,7 +32,8 @@ jest.mock('next/navigation', () => ({
 
 import { db } from '@/lib/db'
 import { auth } from '@/auth'
-import { markMessageRead, parseProductContext } from '@/lib/actions/message'
+import { markMessageRead } from '@/lib/actions/message'
+import { parseProductContext } from '@/lib/utils/message-utils'
 
 const mockAuth = auth as jest.Mock
 const mockUpdate = db.update as jest.Mock
