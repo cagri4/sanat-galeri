@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 05-03-PLAN.md — Artist CV editor and message inbox UI
-last_updated: "2026-03-25T08:24:44.420Z"
+stopped_at: Completed 05-02-PLAN.md — Admin artwork CRUD UI
+last_updated: "2026-03-25T08:28:01.930Z"
 last_activity: 2026-03-23 — Roadmap created, traceability mapped
 progress:
   total_phases: 5
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 14
-  completed_plans: 13
+  completed_plans: 14
   percent: 33
 ---
 
@@ -63,6 +63,7 @@ Progress: [███░░░░░░░] 33%
 | Phase 04-sanatci-cv-subdomainleri P03 | 18 | 2 tasks | 5 files |
 | Phase 05-admin-paneli P01 | 15 | 2 tasks | 10 files |
 | Phase 05-admin-paneli P03 | 20 | 2 tasks | 9 files |
+| Phase 05-admin-paneli P02 | 12 | 2 tasks | 17 files |
 
 ## Accumulated Context
 
@@ -108,6 +109,9 @@ Recent decisions affecting current work:
 - [Phase 05-admin-paneli]: parseProductContext exported as plain function (not async server action) — simpler testing without async mocks
 - [Phase 05-admin-paneli]: parseProductContext must live in lib/utils/message-utils.ts (not actions/message.ts) — non-async functions cannot be exported from 'use server' modules for client component imports in Turbopack
 - [Phase 05-admin-paneli]: Exhibition form uses delete + re-create pattern (no in-place edit) — sufficient for admin panel and reduces form complexity
+- [Phase 05-admin-paneli]: AdminNav split into Server Component (admin-nav.tsx) + Client Component (admin-nav-client.tsx) — signOut needs server action, usePathname needs 'use client'
+- [Phase 05-admin-paneli]: parseProductContext moved from actions/message.ts to lib/utils/message-utils.ts — Client Component (message-list) cannot import 'use server' modules
+- [Phase 05-admin-paneli]: ImageUploader uses dynamic import('@vercel/blob/client') to avoid SSR import errors for client-only blob SDK
 
 ### Pending Todos
 
@@ -121,6 +125,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-25T08:24:44.399Z
-Stopped at: Completed 05-03-PLAN.md — Artist CV editor and message inbox UI
+Last session: 2026-03-25T08:28:01.917Z
+Stopped at: Completed 05-02-PLAN.md — Admin artwork CRUD UI
 Resume file: None
