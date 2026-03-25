@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation** - Multi-domain routing, veritabanı şeması, görsel depolama ve admin auth altyapısı (completed 2026-03-23)
 - [x] **Phase 2: Ana Galeri** - Kategori filtreli ürün vitrini, eser detay sayfası, lightbox, WhatsApp ve iletişim formu (completed 2026-03-24)
 - [x] **Phase 3: Platform (i18n + Nav + SEO)** - TR/EN dil desteği, domain arası tutarlı navigasyon ve SEO temelleri (completed 2026-03-25)
-- [ ] **Phase 4: Sanatçı CV Subdomainleri** - İki sanatçıya ait biyografi, portfolyo, sergi/ödül/eğitim, artist statement ve iletişim formu
+- [x] **Phase 4: Sanatçı CV Subdomainleri** - İki sanatçıya ait biyografi, portfolyo, sergi/ödül/eğitim, artist statement ve iletişim formu (completed 2026-03-25)
 - [ ] **Phase 5: Admin Paneli** - Eser CRUD, CV içerik düzenleme ve mesaj gelen kutusu
 
 ## Phase Details
@@ -101,5 +101,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Foundation | 3/3 | Complete    | 2026-03-24 |
 | 2. Ana Galeri | 3/3 | Complete    | 2026-03-24 |
 | 3. Platform (i18n + Nav + SEO) | 2/2 | Complete    | 2026-03-25 |
-| 4. Sanatçı CV Subdomainleri | 2/3 | In Progress|  |
+| 4. Sanatçı CV Subdomainleri | 3/3 | Complete   | 2026-03-25 |
 | 5. Admin Paneli | 0/TBD | Not started | - |

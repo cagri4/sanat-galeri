@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 04-02-PLAN.md — Artist bio/statement landing page and portfolio gallery
-last_updated: "2026-03-25T05:24:31.458Z"
+stopped_at: Completed 04-03-PLAN.md — Exhibitions page, press section, and artist contact form
+last_updated: "2026-03-25T05:27:39.715Z"
 last_activity: 2026-03-23 — Roadmap created, traceability mapped
 progress:
   total_phases: 5
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 11
-  completed_plans: 10
+  completed_plans: 11
   percent: 33
 ---
 
@@ -60,6 +60,7 @@ Progress: [███░░░░░░░] 33%
 | Phase 03-platform-i18n-nav-seo P02 | 9 | 2 tasks | 11 files |
 | Phase 04-sanatci-cv-subdomainleri P01 | 35 | 2 tasks | 9 files |
 | Phase 04-sanatci-cv-subdomainleri P02 | 7 | 2 tasks | 5 files |
+| Phase 04-sanatci-cv-subdomainleri P03 | 18 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -98,6 +99,8 @@ Recent decisions affecting current work:
 - [Phase 04-sanatci-cv-subdomainleri]: BioSection and StatementSection are Server Components using getTranslations directly — no translation prop drilling from page
 - [Phase 04-sanatci-cv-subdomainleri]: PortfolioGallery is 'use client' to wrap LightboxViewer; data fetching stays in Server Component page
 - [Phase 04-sanatci-cv-subdomainleri]: StatementSection returns null early if no statement for current locale to avoid empty section rendering
+- [Phase 04-sanatci-cv-subdomainleri]: PressList is self-contained async server component fetching its own press data — returns null when empty, completely absent from DOM (CV-07)
+- [Phase 04-sanatci-cv-subdomainleri]: ArtistContactForm uses cv.contactPlaceholder for textarea — artist-specific prompt (exhibition/collaboration) vs product-inquiry prompt
 
 ### Pending Todos
 
@@ -111,6 +114,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-25T05:24:31.444Z
-Stopped at: Completed 04-02-PLAN.md — Artist bio/statement landing page and portfolio gallery
+Last session: 2026-03-25T05:27:39.702Z
+Stopped at: Completed 04-03-PLAN.md — Exhibitions page, press section, and artist contact form
 Resume file: None
