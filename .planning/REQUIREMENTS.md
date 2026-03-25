@@ -34,9 +34,9 @@
 
 ### Admin
 
-- [ ] **ADM-01**: Admin eser ekleyebilir, düzenleyebilir ve silebilir (fotoğraf yükleme dahil)
-- [ ] **ADM-02**: Admin sanatçı CV içeriklerini düzenleyebilir
-- [ ] **ADM-03**: Admin gelen mesajları görüntüleyebilir
+- [x] **ADM-01**: Admin eser ekleyebilir, düzenleyebilir ve silebilir (fotoğraf yükleme dahil)
+- [x] **ADM-02**: Admin sanatçı CV içeriklerini düzenleyebilir
+- [x] **ADM-03**: Admin gelen mesajları görüntüleyebilir
 - [x] **ADM-04**: Admin paneline güvenli giriş yapılabilir
 
 ## v2 Requirements
@@ -94,9 +94,9 @@
 | PLT-03 | Phase 1 | Complete |
 | PLT-04 | Phase 3 | Complete |
 | PLT-05 | Phase 3 | Complete |
-| ADM-01 | Phase 5 | Pending |
-| ADM-02 | Phase 5 | Pending |
-| ADM-03 | Phase 5 | Pending |
+| ADM-01 | Phase 5 | Complete |
+| ADM-02 | Phase 5 | Complete |
+| ADM-03 | Phase 5 | Complete |
 | ADM-04 | Phase 1 | Complete |
 
 **Coverage:**

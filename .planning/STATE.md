@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 04-03-PLAN.md — Exhibitions page, press section, and artist contact form
-last_updated: "2026-03-25T05:31:55.597Z"
+stopped_at: Completed 05-01-PLAN.md — Admin Server Actions and query layer
+last_updated: "2026-03-25T08:11:34.031Z"
 last_activity: 2026-03-23 — Roadmap created, traceability mapped
 progress:
   total_phases: 5
   completed_phases: 4
-  total_plans: 11
-  completed_plans: 11
+  total_plans: 14
+  completed_plans: 12
   percent: 33
 ---
 
@@ -61,6 +61,7 @@ Progress: [███░░░░░░░] 33%
 | Phase 04-sanatci-cv-subdomainleri P01 | 35 | 2 tasks | 9 files |
 | Phase 04-sanatci-cv-subdomainleri P02 | 7 | 2 tasks | 5 files |
 | Phase 04-sanatci-cv-subdomainleri P03 | 18 | 2 tasks | 5 files |
+| Phase 05-admin-paneli P01 | 15 | 2 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -101,6 +102,9 @@ Recent decisions affecting current work:
 - [Phase 04-sanatci-cv-subdomainleri]: StatementSection returns null early if no statement for current locale to avoid empty section rendering
 - [Phase 04-sanatci-cv-subdomainleri]: PressList is self-contained async server component fetching its own press data — returns null when empty, completely absent from DOM (CV-07)
 - [Phase 04-sanatci-cv-subdomainleri]: ArtistContactForm uses cv.contactPlaceholder for textarea — artist-specific prompt (exhibition/collaboration) vs product-inquiry prompt
+- [Phase 05-admin-paneli]: messagesRelations added to schema.ts — required for db.query.messages with: { artist: true } in getAllMessages()
+- [Phase 05-admin-paneli]: Admin query layer (admin.ts) separate from gallery.ts — gallery.ts has isVisible=true filter, admin.ts has none
+- [Phase 05-admin-paneli]: parseProductContext exported as plain function (not async server action) — simpler testing without async mocks
 
 ### Pending Todos
 
@@ -114,6 +118,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-25T05:27:39.702Z
-Stopped at: Completed 04-03-PLAN.md — Exhibitions page, press section, and artist contact form
+Last session: 2026-03-25T08:11:34.012Z
+Stopped at: Completed 05-01-PLAN.md — Admin Server Actions and query layer
 Resume file: None
