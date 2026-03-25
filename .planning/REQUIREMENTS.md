@@ -15,14 +15,14 @@
 
 ### Sanatçı CV (Subdomain)
 
-- [ ] **CV-01**: Kullanıcı sanatçının biyografisini ve fotoğrafını görebilir
-- [ ] **CV-02**: Kullanıcı sanatçının portfolyo galerisini görüntüleyebilir
-- [ ] **CV-03**: Kullanıcı sanatçının sergi listesini (solo/grup, ters kronolojik) görebilir
-- [ ] **CV-04**: Kullanıcı sanatçının ödüllerini görebilir
-- [ ] **CV-05**: Kullanıcı sanatçının eğitim geçmişini görebilir
-- [ ] **CV-06**: Kullanıcı sanatçının beyanını (artist statement) okuyabilir
-- [ ] **CV-07**: Kullanıcı sanatçının basın/yayın listesini görebilir
-- [ ] **CV-08**: Kullanıcı sanatçıya özel iletişim formu ile mesaj gönderebilir
+- [x] **CV-01**: Kullanıcı sanatçının biyografisini ve fotoğrafını görebilir
+- [x] **CV-02**: Kullanıcı sanatçının portfolyo galerisini görüntüleyebilir
+- [x] **CV-03**: Kullanıcı sanatçının sergi listesini (solo/grup, ters kronolojik) görebilir
+- [x] **CV-04**: Kullanıcı sanatçının ödüllerini görebilir
+- [x] **CV-05**: Kullanıcı sanatçının eğitim geçmişini görebilir
+- [x] **CV-06**: Kullanıcı sanatçının beyanını (artist statement) okuyabilir
+- [x] **CV-07**: Kullanıcı sanatçının basın/yayın listesini görebilir
+- [x] **CV-08**: Kullanıcı sanatçıya özel iletişim formu ile mesaj gönderebilir
 
 ### Platform
 
@@ -81,14 +81,14 @@
 | GAL-03 | Phase 2 | Complete |
 | GAL-04 | Phase 2 | Complete |
 | GAL-05 | Phase 2 | Complete |
-| CV-01 | Phase 4 | Pending |
-| CV-02 | Phase 4 | Pending |
-| CV-03 | Phase 4 | Pending |
-| CV-04 | Phase 4 | Pending |
-| CV-05 | Phase 4 | Pending |
-| CV-06 | Phase 4 | Pending |
-| CV-07 | Phase 4 | Pending |
-| CV-08 | Phase 4 | Pending |
+| CV-01 | Phase 4 | Complete |
+| CV-02 | Phase 4 | Complete |
+| CV-03 | Phase 4 | Complete |
+| CV-04 | Phase 4 | Complete |
+| CV-05 | Phase 4 | Complete |
+| CV-06 | Phase 4 | Complete |
+| CV-07 | Phase 4 | Complete |
+| CV-08 | Phase 4 | Complete |
 | PLT-01 | Phase 1 | Complete |
 | PLT-02 | Phase 3 | Complete |
 | PLT-03 | Phase 1 | Complete |

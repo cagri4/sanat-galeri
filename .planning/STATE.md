@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 03-02-PLAN.md — LanguageSwitcher, Navbar, and locale-aware SEO metadata
-last_updated: "2026-03-25T03:51:00.467Z"
+stopped_at: Completed 04-01-PLAN.md — Schema migration, query layer, CV translations, and contract tests
+last_updated: "2026-03-25T05:14:10.865Z"
 last_activity: 2026-03-23 — Roadmap created, traceability mapped
 progress:
   total_phases: 5
   completed_phases: 3
-  total_plans: 8
-  completed_plans: 8
+  total_plans: 11
+  completed_plans: 9
   percent: 33
 ---
 
@@ -58,6 +58,7 @@ Progress: [███░░░░░░░] 33%
 | Phase 02-ana-galeri P02 | 12 | 2 tasks | 5 files |
 | Phase 03-platform-i18n-nav-seo P01 | 20 | 2 tasks | 9 files |
 | Phase 03-platform-i18n-nav-seo P02 | 9 | 2 tasks | 11 files |
+| Phase 04-sanatci-cv-subdomainleri P01 | 35 | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -90,6 +91,9 @@ Recent decisions affecting current work:
 - [Phase 03-platform-i18n-nav-seo]: createNavigation from next-intl/navigation is the correct next-intl 4.x API for locale-aware usePathname/Link — usePathname is not directly exported; navigation.ts wrapper created at src/lib/i18n/navigation.ts
 - [Phase 03-platform-i18n-nav-seo]: Pure helper functions exported from components (getLanguageLinks, getCrossDomainLinks) enable contract testing without DOM or framework dependencies
 - [Phase 03-platform-i18n-nav-seo]: jest.mock must be called before imports when testing components with next-intl ESM dependencies to avoid SyntaxError on unexpected token export
+- [Phase 04-sanatci-cv-subdomainleri]: getArtistPortfolio/Exhibitions/PressItems use raw db.select() chains — consistent with gallery.ts pattern
+- [Phase 04-sanatci-cv-subdomainleri]: submitArtistContact in contact.ts: resolves artistSlug to artistId before inserting message with correct FK
+- [Phase 04-sanatci-cv-subdomainleri]: drizzle-kit push incompatible with Supabase pooler via neon-http — migration SQL generated as 0002_clever_mimic.sql for manual application
 
 ### Pending Todos
 
@@ -103,6 +107,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-25T03:46:32.906Z
-Stopped at: Completed 03-02-PLAN.md — LanguageSwitcher, Navbar, and locale-aware SEO metadata
+Last session: 2026-03-25T05:14:10.852Z
+Stopped at: Completed 04-01-PLAN.md — Schema migration, query layer, CV translations, and contract tests
 Resume file: None
