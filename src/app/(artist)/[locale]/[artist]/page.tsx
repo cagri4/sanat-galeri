@@ -1,14 +1,36 @@
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
+import { getArtistBySlug } from '@/lib/queries/artist'
+import BioSection from '@/components/artist/bio-section'
+import StatementSection from '@/components/artist/statement-section'
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string; artist: string }>
 }): Promise<Metadata> {
-  const { artist } = await params
-  const name = artist.charAt(0).toUpperCase() + artist.slice(1)
-  return { title: `${name} | U-Art`, description: `${name} - artist portfolio` }
+  const { locale, artist } = await params
+  const data = await getArtistBySlug(artist)
+  const t = await getTranslations({ locale, namespace: 'meta' })
+
+  if (!data) {
+    const name = artist.charAt(0).toUpperCase() + artist.slice(1)
+    return { title: `${name} | U-Art` }
+  }
+
+  const name =
+    locale === 'tr'
+      ? (data.nameTr ?? data.nameEn ?? artist)
+      : (data.nameEn ?? data.nameTr ?? artist)
+
+  return {
+    title: t('artistTitle', { name }),
+    description: t('artistDesc', { name }),
+    openGraph: data.photoUrl
+      ? { images: [{ url: data.photoUrl }] }
+      : undefined,
+  }
 }
 
 export default async function ArtistPage({
@@ -17,15 +39,15 @@ export default async function ArtistPage({
   params: Promise<{ locale: string; artist: string }>
 }) {
   const { locale, artist } = await params
-  const t = await getTranslations({ locale, namespace: 'common' })
+  const data = await getArtistBySlug(artist)
+  if (!data) notFound()
+
+  const hasStatement = Boolean(data.statementTr || data.statementEn)
+
   return (
     <main className="py-8 sm:py-12 lg:py-16">
-      <h1 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-tight capitalize">
-        {artist}
-      </h1>
-      <p className="mt-4 text-base sm:text-lg text-neutral-600">
-        {t('loading')}
-      </p>
+      <BioSection artist={data} locale={locale} />
+      {hasStatement && <StatementSection artist={data} locale={locale} />}
     </main>
   )
 }
