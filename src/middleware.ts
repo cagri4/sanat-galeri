@@ -26,6 +26,11 @@ function getTenant(request: NextRequest): string {
 export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
+  // 0. Skip API routes — let them handle themselves
+  if (pathname.startsWith('/api')) {
+    return NextResponse.next()
+  }
+
   // 1. Admin guard: check cookie BEFORE domain rewrite
   if (pathname.startsWith('/admin')) {
     // next-auth session cookie check
