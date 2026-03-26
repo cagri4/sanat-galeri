@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { buildDomainLink } from '@/components/shared/navbar'
+import { getCrossDomainLinks } from '@/components/shared/navbar'
 
 export async function generateMetadata({
   params,
@@ -25,8 +25,10 @@ export default async function AboutPage({
   const { locale } = await params
   const isTr = locale === 'tr'
 
+  const MAIN_URL = process.env.NEXT_PUBLIC_MAIN_URL ?? ''
   const MELIKE_URL = process.env.NEXT_PUBLIC_MELIKE_URL ?? '#'
   const SEREF_URL = process.env.NEXT_PUBLIC_SEREF_URL ?? '#'
+  const domainLinks = getCrossDomainLinks(locale, MAIN_URL, MELIKE_URL, SEREF_URL)
 
   return (
     <main>
@@ -82,7 +84,7 @@ export default async function AboutPage({
                 : 'A versatile artist building bridges between color and texture. Her works reflect the striking contrasts of nature and urban life. She works with acrylic, oil, and mixed media techniques. With exhibitions in Istanbul and international galleries, Melike creates a unique language by blending organic forms with geometric structures.'}
             </p>
             <a
-              href={buildDomainLink(MELIKE_URL, `/${locale}`)}
+              href={domainLinks.melike}
               className="mt-6 inline-block text-[13px] uppercase tracking-[0.15em] text-[#612E49] hover:text-[#4f243b] transition-colors"
             >
               {isTr ? 'Portfolyoyu Gör' : 'View Portfolio'} &rarr;
@@ -114,7 +116,7 @@ export default async function AboutPage({
                 : 'A master blending traditional techniques with contemporary expression. Known for sculpture, ceramics, and installation works. His pieces explore the balance between form and space. Working with natural materials like clay, stone, and metal, he creates three-dimensional works that invite the viewer into a tactile experience.'}
             </p>
             <a
-              href={buildDomainLink(SEREF_URL, `/${locale}`)}
+              href={domainLinks.seref}
               className="mt-6 inline-block text-[13px] uppercase tracking-[0.15em] text-[#612E49] hover:text-[#4f243b] transition-colors"
             >
               {isTr ? 'Portfolyoyu Gör' : 'View Portfolio'} &rarr;

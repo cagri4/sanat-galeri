@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getProducts } from '@/lib/queries/gallery'
-import { buildDomainLink } from '@/components/shared/navbar'
+import { getCrossDomainLinks } from '@/components/shared/navbar'
 
 export async function generateMetadata({
   params,
@@ -24,8 +24,10 @@ export default async function HomePage({
   const t = await getTranslations({ locale, namespace: 'meta' })
   const isTr = locale === 'tr'
 
+  const MAIN_URL = process.env.NEXT_PUBLIC_MAIN_URL ?? ''
   const MELIKE_URL = process.env.NEXT_PUBLIC_MELIKE_URL ?? '#'
   const SEREF_URL = process.env.NEXT_PUBLIC_SEREF_URL ?? '#'
+  const domainLinks = getCrossDomainLinks(locale, MAIN_URL, MELIKE_URL, SEREF_URL)
 
   let recentProducts: Awaited<ReturnType<typeof getProducts>> = []
   try {
@@ -161,7 +163,7 @@ export default async function HomePage({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Melike */}
           <a
-            href={buildDomainLink(MELIKE_URL, `/${locale}`)}
+            href={domainLinks.melike}
             className="group block"
           >
             <div className="aspect-[4/5] relative overflow-hidden bg-[#f0ece4]">
@@ -188,7 +190,7 @@ export default async function HomePage({
 
           {/* Seref */}
           <a
-            href={buildDomainLink(SEREF_URL, `/${locale}`)}
+            href={domainLinks.seref}
             className="group block"
           >
             <div className="aspect-[4/5] relative overflow-hidden bg-[#f0ece4]">

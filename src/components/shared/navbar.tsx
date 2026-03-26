@@ -11,6 +11,23 @@ export function buildDomainLink(baseUrl: string, path: string): string {
   }
 }
 
+function buildArtistLink(mainUrl: string, artistUrl: string, locale: string, artist: string): string {
+  // If artist URL is same as main URL → path-based routing (Vercel preview / single domain)
+  // If different domain → subdomain routing (production)
+  try {
+    const main = new URL(mainUrl)
+    const art = new URL(artistUrl)
+    if (main.hostname === art.hostname) {
+      // Same domain: use /locale/artist path
+      return buildDomainLink(mainUrl, `/${locale}/${artist}`)
+    }
+    // Different domain: use subdomain/locale
+    return buildDomainLink(artistUrl, `/${locale}`)
+  } catch {
+    return `/${locale}/${artist}`
+  }
+}
+
 export function getCrossDomainLinks(
   locale: string,
   mainUrl: string,
@@ -21,8 +38,8 @@ export function getCrossDomainLinks(
     main: buildDomainLink(mainUrl, `/${locale}`),
     gallery: buildDomainLink(mainUrl, `/${locale}/galeri`),
     about: buildDomainLink(mainUrl, `/${locale}/hakkimizda`),
-    melike: buildDomainLink(melikeUrl, `/${locale}`),
-    seref: buildDomainLink(serefUrl, `/${locale}`),
+    melike: buildArtistLink(mainUrl, melikeUrl, locale, 'melike'),
+    seref: buildArtistLink(mainUrl, serefUrl, locale, 'seref'),
   }
 }
 
@@ -35,16 +52,13 @@ export default async function Navbar({ locale }: NavbarProps) {
   const t = await getTranslations({ locale, namespace: 'nav' })
 
   const MAIN_URL = process.env.NEXT_PUBLIC_MAIN_URL ?? 'https://uarttasarim.com'
-  const MELIKE_URL =
-    process.env.NEXT_PUBLIC_MELIKE_URL ?? 'https://melike.uarttasarim.com'
-  const SEREF_URL =
-    process.env.NEXT_PUBLIC_SEREF_URL ?? 'https://seref.uarttasarim.com'
+  const MELIKE_URL = process.env.NEXT_PUBLIC_MELIKE_URL ?? 'https://melike.uarttasarim.com'
+  const SEREF_URL = process.env.NEXT_PUBLIC_SEREF_URL ?? 'https://seref.uarttasarim.com'
 
   const links = getCrossDomainLinks(locale, MAIN_URL, MELIKE_URL, SEREF_URL)
 
   return (
     <header className="border-b border-[#e8e4de]">
-      {/* Main nav */}
       <nav className="flex items-center justify-between py-6">
         <a
           href={links.main}
