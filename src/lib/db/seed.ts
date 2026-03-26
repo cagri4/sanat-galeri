@@ -6,8 +6,8 @@
  * Idempotent: uses ON CONFLICT DO NOTHING via insertIgnore pattern.
  */
 
-import { neon } from '@neondatabase/serverless'
-import { drizzle } from 'drizzle-orm/neon-http'
+import { drizzle } from 'drizzle-orm/postgres-js'
+import postgres from 'postgres'
 import * as schema from './schema'
 import { sql } from 'drizzle-orm'
 
@@ -16,8 +16,8 @@ if (!DATABASE_URL) {
   throw new Error('DATABASE_URL environment variable is not set')
 }
 
-const connection = neon(DATABASE_URL)
-const db = drizzle(connection, { schema })
+const client = postgres(DATABASE_URL, { prepare: false })
+const db = drizzle(client, { schema })
 
 async function seed() {
   console.log('Seeding database...')
