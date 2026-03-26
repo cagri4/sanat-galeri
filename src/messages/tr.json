@@ -1,10 +1,10 @@
 {
   "common": {
-    "siteTitle": "U-Art Tasarim",
+    "siteTitle": "U-Art Tasarım",
     "loading": "Yukleniyor..."
   },
   "nav": {
-    "siteTitle": "U-Art Tasarim",
+    "siteTitle": "U-Art Tasarım",
     "gallery": "Galeri",
     "artists": "Sanatcilar",
     "backToMain": "Ana Sayfa"
@@ -35,11 +35,19 @@
     "successMessage": "Mesajiniz gonderildi. En kisa surede donus yapacagiz."
   },
   "meta": {
-    "homeTitle": "U-Art Tasarim",
+    "homeTitle": "U-Art Tasarım",
     "homeDesc": "Sade, galeri kalitesinde sanat vitrini.",
-    "galleryTitle": "Galeri | U-Art Tasarim",
+    "heroSubtitle": "Özgün sanat eserleri — tablo, heykel, seramik ve baskı",
+    "exploreGallery": "Galeriyi Keşfet",
+    "meetArtists": "Sanatçılarımız",
+    "melikeBio": "Melike Yıldız — renk ve doku arasında köprüler kuran çok yönlü bir sanatçı.",
+    "serefBio": "Şeref Kaya — geleneksel teknikleri çağdaş yorumlarla buluşturan bir usta.",
+    "viewPortfolio": "Portfolyoyu Gör",
+    "recentWorks": "Son Eserler",
+    "viewAll": "Tüm Eserleri Gör",
+    "galleryTitle": "Galeri | U-Art Tasarım",
     "galleryDesc": "Ozgun tablolar, heykeller ve baski resimler.",
-    "artistTitle": "{name} | U-Art Tasarim",
+    "artistTitle": "{name} | U-Art Tasarım",
     "artistDesc": "{name} - sanatci portfolyosu ve CV",
     "portfolioTitle": "Portfolyo | {name}",
     "exhibitionsTitle": "Sergiler | {name}",
