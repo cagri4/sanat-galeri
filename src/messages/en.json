@@ -7,7 +7,8 @@
     "siteTitle": "U-Art Design",
     "gallery": "Gallery",
     "artists": "Artists",
-    "backToMain": "Home"
+    "backToMain": "Home",
+    "about": "About"
   },
   "gallery": {
     "title": "Gallery",
@@ -66,5 +67,13 @@
     "groupExhibition": "Group Exhibition",
     "contactPlaceholder": "Write your exhibition or collaboration proposal...",
     "noPortfolio": "No portfolio items yet"
+  },
+  "footer": {
+    "copyright": "© {year} U-Art Design. All rights reserved.",
+    "galleryLink": "Gallery",
+    "aboutLink": "About",
+    "contactLink": "Contact",
+    "address": "Istanbul, Turkey",
+    "followUs": "Follow Us"
   }
 }
