@@ -2,8 +2,6 @@ import { getTranslations } from 'next-intl/server'
 import LanguageSwitcher from './language-switcher'
 
 export function buildDomainLink(baseUrl: string, path: string): string {
-  // Handle URLs with query params (e.g. ?tenant=melike on Vercel preview)
-  // Must put path BEFORE query string, not after
   try {
     const url = new URL(baseUrl)
     url.pathname = path
@@ -45,44 +43,41 @@ export default async function Navbar({ locale }: NavbarProps) {
   const links = getCrossDomainLinks(locale, MAIN_URL, MELIKE_URL, SEREF_URL)
 
   return (
-    <header className="border-b border-neutral-200">
-      <nav className="flex items-center justify-between py-4">
+    <header className="border-b border-[#e8e4de]">
+      {/* Main nav */}
+      <nav className="flex items-center justify-between py-6">
         <a
           href={links.main}
-          className="text-base font-semibold tracking-tight text-neutral-900 hover:text-neutral-700"
+          className="font-[family-name:var(--font-serif)] text-xl sm:text-2xl font-light tracking-wide text-[#1a1a1a] hover:opacity-70 transition-opacity"
         >
-          {t('siteTitle')}
+          U-Art Tasarım
         </a>
 
-        <div className="flex items-center gap-1 sm:gap-5">
+        <div className="flex items-center gap-6 sm:gap-8">
           <a
             href={links.gallery}
-            className="px-2 py-1 text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
+            className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
           >
             {t('gallery')}
           </a>
-          <span className="text-neutral-300 hidden sm:inline">|</span>
           <a
             href={links.about}
-            className="px-2 py-1 text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
+            className="hidden sm:inline text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
           >
             {t('about')}
           </a>
-          <span className="text-neutral-300 hidden sm:inline">|</span>
           <a
             href={links.melike}
-            className="px-2 py-1 text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
+            className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
           >
             Melike
           </a>
-          <span className="text-neutral-300 hidden sm:inline">|</span>
           <a
             href={links.seref}
-            className="px-2 py-1 text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
+            className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
           >
             Şeref
           </a>
-          <span className="text-neutral-300 hidden sm:inline">|</span>
           <LanguageSwitcher />
         </div>
       </nav>

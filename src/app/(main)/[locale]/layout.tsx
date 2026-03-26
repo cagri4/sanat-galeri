@@ -19,7 +19,7 @@ export default async function MainLayout({
   const messages = await getMessages()
   return (
     <NextIntlClientProvider messages={messages}>
-      <div className="min-w-[320px] mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+      <div className="min-w-[320px] mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">
         <Navbar locale={locale} domain="main" />
         <div className="min-h-[60vh]">{children}</div>
         <Footer locale={locale} />

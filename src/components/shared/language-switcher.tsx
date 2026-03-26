@@ -16,17 +16,17 @@ export default function LanguageSwitcher() {
   const links = getLanguageLinks(locale, pathname)
 
   return (
-    <div className="flex items-center gap-2 text-sm">
+    <div className="flex items-center gap-1 text-[13px] uppercase tracking-[0.15em]">
       {links.map((link, idx) => (
-        <span key={link.locale} className="flex items-center gap-2">
-          {idx > 0 && <span className="text-neutral-300">|</span>}
+        <span key={link.locale} className="flex items-center gap-1">
+          {idx > 0 && <span className="text-[#d4cfc7]">/</span>}
           <Link
             href={link.href}
             locale={link.locale}
             className={
               link.active
-                ? 'font-semibold'
-                : 'text-neutral-500 hover:text-neutral-900'
+                ? 'text-[#1a1a1a] font-medium'
+                : 'text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors'
             }
           >
             {link.locale.toUpperCase()}

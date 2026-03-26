@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import { buildDomainLink } from '@/components/shared/navbar'
 
@@ -30,119 +29,96 @@ export default async function AboutPage({
   const SEREF_URL = process.env.NEXT_PUBLIC_SEREF_URL ?? '#'
 
   return (
-    <main className="py-12 sm:py-16 lg:py-20">
+    <main>
       {/* Hero */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-neutral-900">
-            {isTr ? 'Hakkımızda' : 'About Us'}
-          </h1>
-          <p className="mt-6 text-lg text-neutral-600 leading-relaxed">
-            {isTr
-              ? 'U-Art Tasarım, Melike Yıldız ve Şeref Kaya tarafından kurulan bir sanat atölyesidir. Tablo, heykel, seramik ve baskı resim gibi farklı disiplinlerde özgün eserler üretiyoruz.'
-              : 'U-Art Design is an art studio founded by Melike Yıldız and Şeref Kaya. We create original works across various disciplines including painting, sculpture, ceramics, and prints.'}
-          </p>
-          <p className="mt-4 text-lg text-neutral-600 leading-relaxed">
-            {isTr
-              ? 'Atölyemiz, geleneksel sanat formlarını çağdaş yaklaşımlarla birleştirerek, her eserde özgün bir ifade yaratmayı amaçlamaktadır.'
-              : 'Our studio aims to create unique expressions in every piece by combining traditional art forms with contemporary approaches.'}
-          </p>
-        </div>
-        <div className="aspect-[4/3] relative overflow-hidden">
+      <section className="py-20 sm:py-28 max-w-3xl">
+        <h1 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl font-light tracking-wide text-[#1a1a1a]">
+          {isTr ? 'Hakkımızda' : 'About Us'}
+        </h1>
+        <p className="mt-8 text-base text-[#6b6b6b] leading-[1.8]">
+          {isTr
+            ? 'U-Art Tasarım, Melike Yıldız ve Şeref Kaya tarafından kurulan bir sanat atölyesidir. Tablo, heykel, seramik ve baskı resim gibi farklı disiplinlerde özgün eserler üretiyoruz. Atölyemiz, geleneksel sanat formlarını çağdaş yaklaşımlarla birleştirerek, her eserde özgün bir ifade yaratmayı amaçlamaktadır.'
+            : 'U-Art Design is an art studio founded by Melike Yıldız and Şeref Kaya. We create original works across various disciplines including painting, sculpture, ceramics, and prints. Our studio aims to create unique expressions in every piece by combining traditional art forms with contemporary approaches.'}
+        </p>
+      </section>
+
+      {/* Studio image — full bleed */}
+      <section className="-mx-4 sm:-mx-6 lg:-mx-8">
+        <div className="aspect-[16/6] relative overflow-hidden">
           <Image
-            src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80"
+            src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1600&q=80"
             alt={isTr ? 'Sanat atölyesi' : 'Art studio'}
             fill
             className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            sizes="100vw"
           />
         </div>
       </section>
 
       {/* Artists */}
-      <section className="mt-16 sm:mt-20 pt-12 border-t border-neutral-100">
-        <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-neutral-900 mb-10">
+      <section className="py-20 sm:py-28">
+        <h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl font-light text-[#1a1a1a] mb-14">
           {isTr ? 'Sanatçılarımız' : 'Our Artists'}
         </h2>
 
         {/* Melike */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-          <div className="aspect-square relative overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 items-start">
+          <div className="md:col-span-2 aspect-[3/4] relative overflow-hidden bg-[#f0ece4]">
             <Image
-              src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=500&q=80"
+              src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=600&q=80"
               alt="Melike Yıldız"
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, 33vw"
+              sizes="(max-width: 768px) 100vw, 40vw"
             />
           </div>
-          <div className="md:col-span-2">
-            <h3 className="text-xl font-medium text-neutral-900">Melike Yıldız</h3>
-            <p className="mt-3 text-neutral-600 leading-relaxed">
+          <div className="md:col-span-3 md:pt-8">
+            <h3 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a]">
+              Melike Yıldız
+            </h3>
+            <p className="mt-4 text-[15px] text-[#6b6b6b] leading-[1.8]">
               {isTr
-                ? 'Renk ve doku arasında köprüler kuran çok yönlü bir sanatçı. Eserleri, doğanın ve şehir yaşamının çarpıcı kontrastlarını yansıtır. Akrilik, yağlı boya ve karışık tekniklerle çalışır.'
-                : 'A versatile artist building bridges between color and texture. Her works reflect the striking contrasts of nature and urban life. She works with acrylic, oil, and mixed media techniques.'}
+                ? 'Renk ve doku arasında köprüler kuran çok yönlü bir sanatçı. Eserleri, doğanın ve şehir yaşamının çarpıcı kontrastlarını yansıtır. Akrilik, yağlı boya ve karışık tekniklerle çalışır. İstanbul ve uluslararası galerilerde sergileri bulunan Melike, eserlerinde organik formlar ile geometrik yapıları harmanlayarak kendine özgü bir dil yaratır.'
+                : 'A versatile artist building bridges between color and texture. Her works reflect the striking contrasts of nature and urban life. She works with acrylic, oil, and mixed media techniques. With exhibitions in Istanbul and international galleries, Melike creates a unique language by blending organic forms with geometric structures.'}
             </p>
             <a
               href={buildDomainLink(MELIKE_URL, `/${locale}`)}
-              className="mt-4 inline-block text-sm text-neutral-700 underline underline-offset-4 hover:text-neutral-900 transition-colors"
+              className="mt-6 inline-block text-[13px] uppercase tracking-[0.15em] text-[#612E49] hover:text-[#4f243b] transition-colors"
             >
               {isTr ? 'Portfolyoyu Gör' : 'View Portfolio'} &rarr;
             </a>
           </div>
         </div>
 
+        {/* Divider */}
+        <div className="my-16 border-t border-[#e8e4de]" />
+
         {/* Seref */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start mt-12">
-          <div className="aspect-square relative overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 items-start">
+          <div className="md:col-span-2 md:order-2 aspect-[3/4] relative overflow-hidden bg-[#f0ece4]">
             <Image
-              src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500&q=80"
+              src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80"
               alt="Şeref Kaya"
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, 33vw"
+              sizes="(max-width: 768px) 100vw, 40vw"
             />
           </div>
-          <div className="md:col-span-2">
-            <h3 className="text-xl font-medium text-neutral-900">Şeref Kaya</h3>
-            <p className="mt-3 text-neutral-600 leading-relaxed">
+          <div className="md:col-span-3 md:order-1 md:pt-8">
+            <h3 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a]">
+              Şeref Kaya
+            </h3>
+            <p className="mt-4 text-[15px] text-[#6b6b6b] leading-[1.8]">
               {isTr
-                ? 'Geleneksel teknikleri çağdaş yorumlarla buluşturan bir usta. Heykel, seramik ve enstalasyon çalışmalarıyla tanınır. Eserleri form ve boşluk arasındaki dengeyi araştırır.'
-                : 'A master blending traditional techniques with contemporary expression. Known for sculpture, ceramics, and installation works. His pieces explore the balance between form and space.'}
+                ? 'Geleneksel teknikleri çağdaş yorumlarla buluşturan bir usta. Heykel, seramik ve enstalasyon çalışmalarıyla tanınır. Eserleri form ve boşluk arasındaki dengeyi araştırır. Toprak, taş ve metal gibi doğal malzemelerle çalışarak, izleyiciyi dokunsal bir deneyime davet eden üç boyutlu eserler üretir.'
+                : 'A master blending traditional techniques with contemporary expression. Known for sculpture, ceramics, and installation works. His pieces explore the balance between form and space. Working with natural materials like clay, stone, and metal, he creates three-dimensional works that invite the viewer into a tactile experience.'}
             </p>
             <a
               href={buildDomainLink(SEREF_URL, `/${locale}`)}
-              className="mt-4 inline-block text-sm text-neutral-700 underline underline-offset-4 hover:text-neutral-900 transition-colors"
+              className="mt-6 inline-block text-[13px] uppercase tracking-[0.15em] text-[#612E49] hover:text-[#4f243b] transition-colors"
             >
               {isTr ? 'Portfolyoyu Gör' : 'View Portfolio'} &rarr;
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Studio */}
-      <section className="mt-16 sm:mt-20 pt-12 border-t border-neutral-100">
-        <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-neutral-900 mb-8">
-          {isTr ? 'Atölyemiz' : 'Our Studio'}
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <div className="aspect-[4/3] relative overflow-hidden col-span-2">
-            <Image
-              src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80"
-              alt={isTr ? 'Atölye iç mekan' : 'Studio interior'}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 66vw"
-            />
-          </div>
-          <div className="aspect-[4/3] relative overflow-hidden">
-            <Image
-              src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=400&q=80"
-              alt={isTr ? 'Çalışma alanı' : 'Workspace'}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 50vw, 33vw"
-            />
           </div>
         </div>
       </section>
