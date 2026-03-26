@@ -43,7 +43,7 @@ export default async function AboutPage({
       </section>
 
       {/* Studio image — full bleed */}
-      <section className="-mx-4 sm:-mx-6 lg:-mx-8">
+      <section className="-mx-6 sm:-mx-10 lg:-mx-16 overflow-hidden">
         <div className="aspect-[16/6] relative overflow-hidden">
           <Image
             src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1600&q=80"

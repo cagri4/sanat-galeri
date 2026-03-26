@@ -25,22 +25,31 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
   const { category } = await searchParams
   const t = await getTranslations({ locale, namespace: 'gallery' })
 
-  const [categories, products] = await Promise.all([
-    getCategories(),
-    getProducts(category),
-  ])
+  let categories: string[] = []
+  let products: Awaited<ReturnType<typeof getProducts>> = []
+
+  try {
+    ;[categories, products] = await Promise.all([
+      getCategories(),
+      getProducts(category),
+    ])
+  } catch {
+    // DB not available — show empty state
+  }
 
   return (
-    <main className="py-8">
-      <h1 className="text-3xl font-bold text-neutral-900 mb-6">
+    <main className="py-12 sm:py-16">
+      <h1 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl font-light tracking-wide text-[#1a1a1a]">
         {t('title')}
       </h1>
 
-      <Suspense fallback={<div className="h-12" />}>
-        <CategoryFilter categories={categories} active={category ?? null} />
-      </Suspense>
+      {categories.length > 0 && (
+        <Suspense fallback={<div className="h-12" />}>
+          <CategoryFilter categories={categories} active={category ?? null} />
+        </Suspense>
+      )}
 
-      <div className="mt-6">
+      <div className="mt-8">
         <ArtworkGrid products={products} locale={locale} />
       </div>
     </main>
