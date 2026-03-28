@@ -14,16 +14,14 @@ export default async function ArtworkGrid({ products, locale }: ArtworkGridProps
 
   if (products.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 text-center">
-        <p className="text-neutral-500 text-lg">
-          {t('emptyState')}
-        </p>
+      <div className="py-20 text-center">
+        <p className="text-[#999] text-sm">{t('emptyState')}</p>
       </div>
     )
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10">
       {products.map((product) => (
         <ArtworkCard key={product.id} product={product} locale={locale} />
       ))}

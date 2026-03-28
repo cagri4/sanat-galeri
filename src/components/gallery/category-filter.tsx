@@ -24,13 +24,13 @@ export default function CategoryFilter({ categories, active }: CategoryFilterPro
   }
 
   return (
-    <div className="flex gap-2 overflow-x-auto pb-2">
+    <div className="flex flex-wrap gap-2 mt-6">
       <button
         onClick={handleAll}
-        className={`flex-none px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
+        className={`px-4 py-2 text-[13px] uppercase tracking-[0.1em] transition-colors ${
           active == null
-            ? 'bg-neutral-900 text-white'
-            : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+            ? 'bg-[#1a1a1a] text-white'
+            : 'bg-[#f0ece4] text-[#6b6b6b] hover:text-[#1a1a1a]'
         }`}
       >
         {t('filterAll')}
@@ -39,10 +39,10 @@ export default function CategoryFilter({ categories, active }: CategoryFilterPro
         <button
           key={cat}
           onClick={() => handleCategory(cat)}
-          className={`flex-none px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
+          className={`px-4 py-2 text-[13px] uppercase tracking-[0.1em] transition-colors ${
             active === cat
-              ? 'bg-neutral-900 text-white'
-              : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+              ? 'bg-[#1a1a1a] text-white'
+              : 'bg-[#f0ece4] text-[#6b6b6b] hover:text-[#1a1a1a]'
           }`}
         >
           {cat}
