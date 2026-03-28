@@ -12,7 +12,7 @@ export default async function SanatçılarPage() {
       </h1>
 
       {artists.length === 0 ? (
-        <p className="text-neutral-500">Hic sanatci bulunamadi.</p>
+        <p className="text-neutral-500">Hiç sanatçı bulunamadı.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {artists.map((artist) => (

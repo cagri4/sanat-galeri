@@ -15,110 +15,88 @@ export default async function UrunlerPage() {
           href="/admin/urunler/yeni"
           className="px-4 py-2 bg-neutral-900 text-white text-sm rounded hover:bg-neutral-700 transition-colors"
         >
-          + Yeni Eser Ekle
+          + Yeni Eser
         </Link>
       </div>
 
       {products.length === 0 ? (
         <div className="bg-white rounded-lg border border-neutral-200 p-12 text-center">
-          <p className="text-neutral-500">Henuz eser eklenmemis.</p>
+          <p className="text-neutral-500">Henüz eser eklenmemiş.</p>
           <Link
             href="/admin/urunler/yeni"
             className="mt-4 inline-block text-sm text-neutral-700 underline"
           >
-            Ilk eseri ekle
+            İlk eseri ekle
           </Link>
         </div>
       ) : (
-        <div className="bg-white rounded-lg border border-neutral-200 overflow-hidden">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-neutral-200 bg-neutral-50">
-                <th className="text-left px-4 py-3 font-medium text-neutral-600">
-                  Gorsel
-                </th>
-                <th className="text-left px-4 py-3 font-medium text-neutral-600">
-                  Baslik
-                </th>
-                <th className="text-left px-4 py-3 font-medium text-neutral-600">
-                  Kategori
-                </th>
-                <th className="text-left px-4 py-3 font-medium text-neutral-600">
-                  Gorunurluk
-                </th>
-                <th className="text-left px-4 py-3 font-medium text-neutral-600">
-                  Tarih
-                </th>
-                <th className="px-4 py-3"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => {
-                const firstImage = product.images?.[0]
-                const createdAt = product.createdAt
-                  ? new Date(product.createdAt).toLocaleDateString('tr-TR')
-                  : '—'
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {products.map((product) => {
+            const firstImage = product.images?.[0]
+            const createdAt = product.createdAt
+              ? new Date(product.createdAt).toLocaleDateString('tr-TR')
+              : '—'
 
-                return (
-                  <tr
-                    key={product.id}
-                    className="border-b border-neutral-100 last:border-0 hover:bg-neutral-50"
+            return (
+              <Link
+                key={product.id}
+                href={`/admin/urunler/${product.id}`}
+                className="bg-white rounded-lg border border-neutral-200 overflow-hidden hover:shadow-md transition-shadow"
+              >
+                {/* Image */}
+                <div className="relative aspect-[4/3] bg-neutral-100">
+                  {firstImage ? (
+                    <Image
+                      src={firstImage.url}
+                      alt={firstImage.altTr ?? product.titleTr}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-neutral-300 text-sm">Görsel yok</span>
+                    </div>
+                  )}
+                  {/* Visibility badge */}
+                  <span
+                    className={`absolute top-2 right-2 px-2 py-0.5 rounded-full text-xs font-medium ${
+                      product.isVisible
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-neutral-100 text-neutral-600'
+                    }`}
                   >
-                    <td className="px-4 py-3">
-                      {firstImage ? (
-                        <div className="relative w-12 h-12 rounded overflow-hidden bg-neutral-100">
-                          <Image
-                            src={firstImage.url}
-                            alt={firstImage.altTr ?? product.titleTr}
-                            fill
-                            className="object-cover"
-                            sizes="48px"
-                          />
-                        </div>
-                      ) : (
-                        <div className="w-12 h-12 rounded bg-neutral-100 flex items-center justify-center">
-                          <span className="text-neutral-400 text-xs">—</span>
-                        </div>
-                      )}
-                    </td>
-                    <td className="px-4 py-3">
-                      <span className="font-medium text-neutral-900">
-                        {product.titleTr}
-                      </span>
-                      {product.artist && (
-                        <span className="block text-neutral-500 text-xs mt-0.5">
-                          {product.artist.nameTr}
-                        </span>
-                      )}
-                    </td>
-                    <td className="px-4 py-3 text-neutral-600 capitalize">
+                    {product.isVisible ? 'Görünür' : 'Gizli'}
+                  </span>
+                </div>
+
+                {/* Info */}
+                <div className="p-4">
+                  <h2 className="font-medium text-neutral-900 text-sm">
+                    {product.titleTr}
+                  </h2>
+                  {product.artist && (
+                    <p className="text-xs text-neutral-500 mt-0.5">
+                      {product.artist.nameTr}
+                    </p>
+                  )}
+                  <div className="flex items-center justify-between mt-3">
+                    <span className="text-xs text-neutral-400 capitalize">
                       {product.category}
-                    </td>
-                    <td className="px-4 py-3">
-                      <span
-                        className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
-                          product.isVisible
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-neutral-100 text-neutral-600'
-                        }`}
-                      >
-                        {product.isVisible ? 'Gorунур' : 'Gizli'}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-neutral-500">{createdAt}</td>
-                    <td className="px-4 py-3">
-                      <Link
-                        href={`/admin/urunler/${product.id}`}
-                        className="text-neutral-600 hover:text-neutral-900 text-xs underline-offset-2 hover:underline"
-                      >
-                        Duzenle
-                      </Link>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
+                    </span>
+                    <span className="text-xs text-neutral-400">
+                      {createdAt}
+                    </span>
+                  </div>
+                  {product.price && (
+                    <p className="text-sm font-medium text-neutral-700 mt-2">
+                      {Number(product.price).toLocaleString('tr-TR')} {product.currency ?? 'TRY'}
+                    </p>
+                  )}
+                </div>
+              </Link>
+            )
+          })}
         </div>
       )}
     </div>

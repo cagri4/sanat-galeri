@@ -57,7 +57,7 @@ export default function MessageList({ messages }: MessageListProps) {
   if (messages.length === 0) {
     return (
       <div className="rounded-lg border border-neutral-200 bg-white p-8 text-center">
-        <p className="text-neutral-500">Hic mesaj bulunamadi.</p>
+        <p className="text-neutral-500">Hiç mesaj bulunamadı.</p>
       </div>
     )
   }
