@@ -5,10 +5,17 @@ import { routing } from '@/lib/i18n/routing'
 const intlMiddleware = createIntlMiddleware(routing)
 
 const DOMAIN_MAP: Record<string, string> = {
+  // Main domain
   'uarttasarim.com': 'main',
   'www.uarttasarim.com': 'main',
+  // Subdomain routing
   'melike.uarttasarim.com': 'melike',
   'seref.uarttasarim.com': 'seref',
+  // Custom domain routing (add when domains are purchased)
+  'melikedogan.com': 'melike',
+  'www.melikedogan.com': 'melike',
+  'serefdogan.com': 'seref',
+  'www.serefdogan.com': 'seref',
 }
 
 function getTenant(request: NextRequest): string {

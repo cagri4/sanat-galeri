@@ -22,7 +22,7 @@ export default async function ArtistLayout({
     <NextIntlClientProvider messages={messages}>
       <div className="min-w-[320px] mx-auto max-w-6xl px-6 sm:px-10 lg:px-16 overflow-x-hidden">
         <Navbar locale={locale} domain={artist as 'melike' | 'seref'} />
-        <div className="min-h-[60vh]">{children}</div>
+        {children}
         <Footer locale={locale} />
       </div>
     </NextIntlClientProvider>

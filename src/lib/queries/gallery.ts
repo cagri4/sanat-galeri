@@ -76,6 +76,40 @@ export async function getProductBySlug(slug: string) {
   }
 }
 
+export async function getProductsByArtist(artistId: number, limit?: number) {
+  let query = supabase
+    .from('products')
+    .select('*, images:product_images(*)')
+    .eq('is_visible', true)
+    .eq('artist_id', artistId)
+    .order('created_at', { ascending: false })
+
+  if (limit) query = query.limit(limit)
+
+  const { data, error } = await query
+  if (error) throw error
+  return (data ?? []).map(p => ({
+    ...p,
+    titleTr: p.title_tr,
+    titleEn: p.title_en,
+    mediumTr: p.medium_tr,
+    mediumEn: p.medium_en,
+    dimensionsTr: p.dimensions_tr,
+    dimensionsEn: p.dimensions_en,
+    artistId: p.artist_id,
+    isVisible: p.is_visible,
+    isSold: p.is_sold,
+    createdAt: p.created_at,
+    images: (p.images ?? []).map((img: any) => ({
+      ...img,
+      altTr: img.alt_tr,
+      altEn: img.alt_en,
+      sortOrder: img.sort_order,
+      productId: img.product_id,
+    })),
+  }))
+}
+
 export async function getCategories() {
   const { data, error } = await supabase
     .from('products')
