@@ -45,7 +45,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
   const artistName = eser.artist ? (isTr ? eser.artist.nameTr : eser.artist.nameEn) : null
 
   // Build slides and thumbnails from product images
-  const slides = eser.images.map((img) => ({
+  const slides = eser.images.map((img: any) => ({
     src: img.url,
     alt: (isTr ? img.altTr : img.altEn) ?? title,
     width: 1200,
@@ -53,7 +53,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
     title: title,
   }))
 
-  const thumbnails = eser.images.map((img) => ({
+  const thumbnails = eser.images.map((img: any) => ({
     src: img.url,
     alt: (isTr ? img.altTr : img.altEn) ?? title,
   }))

@@ -1,48 +1,90 @@
-import { db } from '@/lib/db'
-import { artists, portfolioItems, exhibitions, pressItems } from '@/lib/db/schema'
-import { eq, asc, desc } from 'drizzle-orm'
+import { supabase } from '@/lib/db/supabase'
 
-/**
- * Get artist by slug — returns full artist record including bio, photo, statement.
- * Returns undefined if not found.
- */
+function mapArtist(a: any) {
+  return {
+    ...a,
+    nameTr: a.name_tr,
+    nameEn: a.name_en,
+    bioTr: a.bio_tr,
+    bioEn: a.bio_en,
+    photoUrl: a.photo_url,
+    statementTr: a.statement_tr,
+    statementEn: a.statement_en,
+    createdAt: a.created_at,
+  }
+}
+
+function mapExhibition(e: any) {
+  return {
+    ...e,
+    titleTr: e.title_tr,
+    titleEn: e.title_en,
+    artistId: e.artist_id,
+    sortOrder: e.sort_order,
+  }
+}
+
+function mapPortfolio(p: any) {
+  return {
+    ...p,
+    titleTr: p.title_tr,
+    titleEn: p.title_en,
+    mediumTr: p.medium_tr,
+    mediumEn: p.medium_en,
+    imageUrl: p.image_url,
+    artistId: p.artist_id,
+    sortOrder: p.sort_order,
+  }
+}
+
+function mapPress(p: any) {
+  return {
+    ...p,
+    artistId: p.artist_id,
+    sortOrder: p.sort_order,
+  }
+}
+
 export async function getArtistBySlug(slug: string) {
-  return db.query.artists.findFirst({
-    where: eq(artists.slug, slug),
-  })
+  const { data, error } = await supabase
+    .from('artists')
+    .select('*')
+    .eq('slug', slug)
+    .single()
+
+  if (error || !data) return null
+  return mapArtist(data)
 }
 
-/**
- * Get portfolio items for an artist, ordered by sortOrder ascending.
- */
 export async function getArtistPortfolio(artistId: number) {
-  return db
-    .select()
-    .from(portfolioItems)
-    .where(eq(portfolioItems.artistId, artistId))
-    .orderBy(asc(portfolioItems.sortOrder))
+  const { data, error } = await supabase
+    .from('portfolio_items')
+    .select('*')
+    .eq('artist_id', artistId)
+    .order('sort_order', { ascending: true })
+
+  if (error) throw error
+  return (data ?? []).map(mapPortfolio)
 }
 
-/**
- * Get exhibitions for an artist, ordered by year descending.
- * Covers CV-03 (solo/group), CV-04 (awards), CV-05 (education).
- */
 export async function getArtistExhibitions(artistId: number) {
-  return db
-    .select()
-    .from(exhibitions)
-    .where(eq(exhibitions.artistId, artistId))
-    .orderBy(desc(exhibitions.year))
+  const { data, error } = await supabase
+    .from('exhibitions')
+    .select('*')
+    .eq('artist_id', artistId)
+    .order('year', { ascending: false })
+
+  if (error) throw error
+  return (data ?? []).map(mapExhibition)
 }
 
-/**
- * Get press items for an artist, ordered by year descending.
- * Returns empty array when no items exist (CV-07 empty state).
- */
 export async function getArtistPressItems(artistId: number) {
-  return db
-    .select()
-    .from(pressItems)
-    .where(eq(pressItems.artistId, artistId))
-    .orderBy(desc(pressItems.year))
+  const { data, error } = await supabase
+    .from('press_items')
+    .select('*')
+    .eq('artist_id', artistId)
+    .order('year', { ascending: false })
+
+  if (error) throw error
+  return (data ?? []).map(mapPress)
 }
