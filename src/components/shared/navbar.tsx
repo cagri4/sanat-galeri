@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 import LanguageSwitcher from './language-switcher'
+import MobileMenu from './mobile-menu'
 
 export function buildDomainLink(baseUrl: string, path: string): string {
   try {
@@ -58,7 +59,7 @@ export default async function Navbar({ locale }: NavbarProps) {
   const links = getCrossDomainLinks(locale, MAIN_URL, MELIKE_URL, SEREF_URL)
 
   return (
-    <header className="border-b border-[#e8e4de]">
+    <header className="relative border-b border-[#e8e4de]">
       <nav className="flex items-center justify-between py-6">
         <a
           href={links.main}
@@ -67,33 +68,28 @@ export default async function Navbar({ locale }: NavbarProps) {
           U-Art Tasarım
         </a>
 
-        <div className="flex items-center gap-6 sm:gap-8">
-          <a
-            href={links.gallery}
-            className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
-          >
+        {/* Desktop nav */}
+        <div className="hidden sm:flex items-center gap-8">
+          <a href={links.gallery} className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
             {t('gallery')}
           </a>
-          <a
-            href={links.about}
-            className="hidden sm:inline text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
-          >
+          <a href={links.about} className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
             {t('about')}
           </a>
-          <a
-            href={links.melike}
-            className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
-          >
+          <a href={links.melike} className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
             Melike
           </a>
-          <a
-            href={links.seref}
-            className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
-          >
+          <a href={links.seref} className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
             Şeref
           </a>
           <LanguageSwitcher />
         </div>
+
+        {/* Mobile hamburger */}
+        <MobileMenu
+          links={{ gallery: links.gallery, about: links.about, melike: links.melike, seref: links.seref }}
+          labels={{ gallery: t('gallery'), about: t('about') }}
+        />
       </nav>
     </header>
   )
