@@ -13,7 +13,8 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params
-  const eser = await getProductBySlug(slug)
+  let eser: Awaited<ReturnType<typeof getProductBySlug>> | null = null
+  try { eser = await getProductBySlug(slug) } catch {}
   if (!eser) return {}
 
   const title = locale === 'tr' ? eser.titleTr : eser.titleEn
@@ -29,7 +30,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ArtworkDetailPage({ params }: PageProps) {
   const { locale, slug } = await params
-  const eser = await getProductBySlug(slug)
+  let eser: Awaited<ReturnType<typeof getProductBySlug>> | null = null
+  try { eser = await getProductBySlug(slug) } catch {}
 
   if (!eser) {
     notFound()

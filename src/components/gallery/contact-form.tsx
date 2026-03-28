@@ -1,132 +1,106 @@
 'use client'
 
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 import { useTranslations } from 'next-intl'
-import { contactSchema, submitContact } from '@/lib/actions/contact'
-
-type ContactFormData = z.infer<typeof contactSchema>
 
 interface ContactFormProps {
   productSlug: string
 }
 
 export default function ContactForm({ productSlug }: ContactFormProps) {
-  const [isSuccess, setIsSuccess] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const t = useTranslations('contact')
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: { productSlug },
-  })
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setStatus('submitting')
 
-  const onSubmit = async (data: ContactFormData) => {
-    setIsSubmitting(true)
+    const form = new FormData(e.currentTarget)
     try {
-      const result = await submitContact(data)
-      if (result.success) {
-        setIsSuccess(true)
-      }
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.get('senderName'),
+          email: form.get('senderEmail'),
+          message: `[Eser: ${productSlug}] ${form.get('body')}`,
+        }),
+      })
+      setStatus(res.ok ? 'success' : 'error')
     } catch {
-      // Server action failed; keep form open for retry
-    } finally {
-      setIsSubmitting(false)
+      setStatus('error')
     }
   }
 
-  if (isSuccess) {
+  if (status === 'success') {
     return (
-      <div className="rounded-lg bg-green-50 border border-green-200 p-6 text-green-800">
-        <p className="font-medium">{t('successMessage')}</p>
+      <div className="py-6 text-center">
+        <div className="w-10 h-10 mx-auto rounded-full bg-[#612E49]/10 flex items-center justify-center mb-3">
+          <svg className="w-5 h-5 text-[#612E49]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <p className="text-[15px] text-[#1a1a1a]">{t('successMessage')}</p>
       </div>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="senderName" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="senderName" className="block text-[13px] text-[#6b6b6b] mb-1.5">
           {t('nameLabel')}
         </label>
         <input
           id="senderName"
+          name="senderName"
           type="text"
-          {...register('senderName')}
-          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
+          required
           placeholder={t('namePlaceholder')}
+          className="w-full px-4 py-3 bg-white border border-[#e8e4de] text-[15px] text-[#1a1a1a] placeholder-[#bbb] focus:outline-none focus:border-[#612E49] transition-colors"
         />
-        {errors.senderName && (
-          <p className="mt-1 text-sm text-red-600">{errors.senderName.message}</p>
-        )}
       </div>
 
       <div>
-        <label htmlFor="senderEmail" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="senderEmail" className="block text-[13px] text-[#6b6b6b] mb-1.5">
           {t('emailLabel')}
         </label>
         <input
           id="senderEmail"
+          name="senderEmail"
           type="email"
-          {...register('senderEmail')}
-          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
+          required
           placeholder={t('emailPlaceholder')}
+          className="w-full px-4 py-3 bg-white border border-[#e8e4de] text-[15px] text-[#1a1a1a] placeholder-[#bbb] focus:outline-none focus:border-[#612E49] transition-colors"
         />
-        {errors.senderEmail && (
-          <p className="mt-1 text-sm text-red-600">{errors.senderEmail.message}</p>
-        )}
       </div>
 
       <div>
-        <label htmlFor="body" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="body" className="block text-[13px] text-[#6b6b6b] mb-1.5">
           {t('messageLabel')}
         </label>
         <textarea
           id="body"
+          name="body"
+          required
           rows={5}
-          {...register('body')}
-          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent resize-none"
           placeholder={t('messagePlaceholder')}
+          className="w-full px-4 py-3 bg-white border border-[#e8e4de] text-[15px] text-[#1a1a1a] placeholder-[#bbb] focus:outline-none focus:border-[#612E49] transition-colors resize-none"
         />
-        {errors.body && (
-          <p className="mt-1 text-sm text-red-600">{errors.body.message}</p>
-        )}
       </div>
 
-      <input type="hidden" {...register('productSlug')} />
+      {status === 'error' && (
+        <p className="text-sm text-red-600">
+          {t('submitting') === 'Gonderiliyor...' ? 'Bir hata oluştu. Lütfen tekrar deneyin.' : 'An error occurred. Please try again.'}
+        </p>
+      )}
 
       <button
         type="submit"
-        disabled={isSubmitting}
-        className="w-full rounded-md bg-gray-900 text-white py-3 px-6 text-sm font-medium hover:bg-gray-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        disabled={status === 'submitting'}
+        className="w-full bg-[#612E49] text-white text-[13px] uppercase tracking-[0.15em] px-8 py-4 hover:bg-[#4f243b] transition-colors disabled:opacity-50"
       >
-        {isSubmitting ? (
-          <>
-            <svg
-              className="animate-spin h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-              />
-            </svg>
-            {t('submitting')}
-          </>
-        ) : (
-          t('submit')
-        )}
+        {status === 'submitting' ? t('submitting') : t('submit')}
       </button>
     </form>
   )
