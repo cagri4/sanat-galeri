@@ -34,7 +34,7 @@ export default function MobileMenu({ links, labels }: MobileMenuProps) {
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute top-full left-0 right-0 bg-[#fbf9f5] border-b border-[#e8e4de] z-50 px-6 py-6">
+        <div className="fixed top-[73px] left-0 right-0 bg-[#fbf9f5] border-b border-[#e8e4de] z-50 px-6 py-6">
           <nav className="flex flex-col gap-5">
             <a
               href={links.gallery}
