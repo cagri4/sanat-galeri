@@ -44,7 +44,7 @@ describe('ProtectedAdminLayout', () => {
 
     // Dynamically import to allow per-test mock resets
     const { default: ProtectedAdminLayout } = await import(
-      '@/app/(admin)/(protected)/layout'
+      '@/app/admin/(protected)/layout'
     )
 
     const mockChildren = { type: 'div', props: {}, key: null } as never
@@ -62,7 +62,7 @@ describe('ProtectedAdminLayout', () => {
     })
 
     const { default: ProtectedAdminLayout } = await import(
-      '@/app/(admin)/(protected)/layout'
+      '@/app/admin/(protected)/layout'
     )
 
     const mockChildren = { type: 'div', props: {}, key: null } as never
@@ -79,7 +79,7 @@ describe('ProtectedAdminLayout', () => {
     mockAuth.mockResolvedValue(session as never)
 
     const { default: ProtectedAdminLayout } = await import(
-      '@/app/(admin)/(protected)/layout'
+      '@/app/admin/(protected)/layout'
     )
 
     const mockChildren = 'test-children-content' as never

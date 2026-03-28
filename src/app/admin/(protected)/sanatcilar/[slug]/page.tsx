@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { getArtistBySlug } from '@/lib/queries/admin'
+import { getAdminArtistBySlug as getArtistBySlug } from '@/lib/queries/admin'
 import ArtistForm from '@/components/admin/artist-form'
 import ExhibitionForm from '@/components/admin/exhibition-form'
 
