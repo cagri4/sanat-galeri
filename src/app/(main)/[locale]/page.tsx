@@ -40,7 +40,7 @@ export default async function HomePage({
   return (
     <main>
       {/* Hero — full width image with overlay text */}
-      <section className="relative -mx-6 sm:-mx-10 lg:-mx-16 overflow-hidden">
+      <section className="full-bleed">
         <div className="aspect-[16/7] sm:aspect-[16/6] relative">
           <Image
             src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1600&q=80"
