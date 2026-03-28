@@ -39,25 +39,31 @@ export default async function HomePage({
 
   return (
     <main>
-      {/* Hero — full width image with overlay text */}
+      {/* Hero — full viewport height */}
       <section className="full-bleed">
-        <div className="aspect-[16/7] sm:aspect-[16/6] relative">
+        <div className="relative h-[100svh]">
           <Image
-            src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1600&q=80"
+            src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1920&q=80"
             alt={isTr ? 'U-Art Tasarım Atölyesi' : 'U-Art Design Studio'}
             fill
             className="object-cover"
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-black/20" />
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-            <h1 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl lg:text-7xl font-light text-white tracking-wide">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
+          <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 sm:pb-28 text-center px-6">
+            <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-6xl lg:text-8xl font-light text-white tracking-wide">
               U-Art Tasarım
             </h1>
-            <p className="mt-4 text-sm sm:text-base text-white/80 tracking-[0.2em] uppercase">
+            <p className="mt-5 text-sm sm:text-base text-white/70 tracking-[0.25em] uppercase max-w-lg">
               {t('heroSubtitle')}
             </p>
+            <div className="mt-10 animate-bounce">
+              <svg width="20" height="32" viewBox="0 0 20 32" fill="none" className="text-white/50">
+                <rect x="1" y="1" width="18" height="30" rx="9" stroke="currentColor" strokeWidth="1.5" />
+                <circle cx="10" cy="10" r="2.5" fill="currentColor" className="animate-pulse" />
+              </svg>
+            </div>
           </div>
         </div>
       </section>
