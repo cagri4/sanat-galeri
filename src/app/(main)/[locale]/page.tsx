@@ -201,7 +201,7 @@ export default async function HomePage({
           >
             <div className="aspect-[4/5] relative overflow-hidden bg-[#f0ece4]">
               <Image
-                src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=700&q=80"
+                src="https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=700&q=80"
                 alt="Şeref Doğan"
                 fill
                 className="object-cover group-hover:scale-[1.03] transition-transform duration-700"

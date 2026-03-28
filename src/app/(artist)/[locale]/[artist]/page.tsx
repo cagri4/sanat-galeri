@@ -9,7 +9,7 @@ import ArtistNav from '@/components/artist/artist-nav'
 // Hero images per artist (placeholder — will come from DB later)
 const HERO_IMAGES: Record<string, string> = {
   melike: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=1920&q=80',
-  seref: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1920&q=80',
+  seref: 'https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=1920&q=80',
 }
 
 export async function generateMetadata({

@@ -7,12 +7,14 @@ interface MobileMenuProps {
   links: {
     gallery: string
     about: string
+    contact: string
     melike: string
     seref: string
   }
   labels: {
     gallery: string
     about: string
+    contact: string
   }
 }
 
@@ -49,6 +51,13 @@ export default function MobileMenu({ links, labels }: MobileMenuProps) {
               onClick={() => setOpen(false)}
             >
               {labels.about}
+            </a>
+            <a
+              href={links.contact}
+              className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
+              onClick={() => setOpen(false)}
+            >
+              {labels.contact}
             </a>
             <div className="border-t border-[#e8e4de] pt-4">
               <p className="text-[11px] uppercase tracking-[0.2em] text-[#999] mb-3">

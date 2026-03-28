@@ -46,6 +46,11 @@ export default async function Footer({ locale }: FooterProps) {
                   {t('aboutLink')}
                 </a>
               </li>
+              <li>
+                <a href={links.contact} className="text-[13px] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
+                  {t('contactLink')}
+                </a>
+              </li>
             </ul>
           </div>
 
