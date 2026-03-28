@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server'
-import { buildDomainLink } from './navbar'
+import { getCrossDomainLinks } from './navbar'
 
 interface FooterProps {
   locale: string
@@ -11,6 +11,7 @@ export default async function Footer({ locale }: FooterProps) {
   const MAIN_URL = process.env.NEXT_PUBLIC_MAIN_URL ?? ''
   const MELIKE_URL = process.env.NEXT_PUBLIC_MELIKE_URL ?? '#'
   const SEREF_URL = process.env.NEXT_PUBLIC_SEREF_URL ?? '#'
+  const links = getCrossDomainLinks(locale, MAIN_URL, MELIKE_URL, SEREF_URL)
 
   return (
     <footer className="border-t border-[#e8e4de] mt-20">
@@ -36,12 +37,12 @@ export default async function Footer({ locale }: FooterProps) {
             </h4>
             <ul className="space-y-2.5">
               <li>
-                <a href={buildDomainLink(MAIN_URL, `/${locale}/galeri`)} className="text-[13px] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
+                <a href={links.gallery} className="text-[13px] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
                   {t('galleryLink')}
                 </a>
               </li>
               <li>
-                <a href={buildDomainLink(MAIN_URL, `/${locale}/hakkimizda`)} className="text-[13px] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
+                <a href={links.about} className="text-[13px] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
                   {t('aboutLink')}
                 </a>
               </li>
@@ -55,12 +56,12 @@ export default async function Footer({ locale }: FooterProps) {
             </h4>
             <ul className="space-y-2.5">
               <li>
-                <a href={buildDomainLink(MELIKE_URL, `/${locale}`)} className="text-[13px] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
+                <a href={links.melike} className="text-[13px] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
                   Melike Doğan
                 </a>
               </li>
               <li>
-                <a href={buildDomainLink(SEREF_URL, `/${locale}`)} className="text-[13px] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
+                <a href={links.seref} className="text-[13px] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
                   Şeref Doğan
                 </a>
               </li>

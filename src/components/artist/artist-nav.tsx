@@ -16,12 +16,12 @@ export default async function ArtistNav({ locale, artist }: ArtistNavProps) {
   ]
 
   return (
-    <nav className="flex flex-wrap gap-x-6 gap-y-2 py-5 border-b border-[#e8e4de]">
+    <nav className="flex flex-wrap gap-x-4 sm:gap-x-7 gap-y-1 py-4 sm:py-5 border-b border-[#e8e4de]">
       {links.map((link) => (
         <a
           key={link.href}
           href={link.href}
-          className="text-[13px] uppercase tracking-[0.12em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
+          className="text-[12px] sm:text-[13px] uppercase tracking-[0.1em] sm:tracking-[0.12em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors py-1"
         >
           {link.label}
         </a>

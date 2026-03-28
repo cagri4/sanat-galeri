@@ -63,8 +63,8 @@ export async function GET() {
       'sonbahar-senfoni': ['https://images.unsplash.com/photo-1482160549825-59d1b23cb208?w=800&q=80'],
       'kirmizi-ruya': ['https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=800&q=80'],
       'toprak-kase': ['https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800&q=80', 'https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?w=800&q=80'],
-      'anadolu-vazo': ['https://images.unsplash.com/photo-1604076913837-52ab5f33e2f7?w=800&q=80'],
-      'denge-heykeli': ['https://images.unsplash.com/photo-1561839561-b13bcfe57670?w=800&q=80'],
+      'anadolu-vazo': ['https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&q=80'],
+      'denge-heykeli': ['https://images.unsplash.com/photo-1504198322253-cfa87a0ff25f?w=800&q=80'],
       'ruzgar-formu': ['https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=800&q=80'],
     }
     for (const p of products) {
