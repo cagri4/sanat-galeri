@@ -78,7 +78,7 @@ function ExhibitionSection({ type, items, artistId, onRefresh }: SectionProps) {
         setShowForm(false)
         onRefresh()
       } else {
-        setError('Kayit basarisiz oldu.')
+        setError('Kayıt başarısız oldu.')
       }
     } catch {
       setError('Bir hata olustu.')

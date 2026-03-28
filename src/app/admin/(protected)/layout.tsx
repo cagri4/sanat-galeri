@@ -12,9 +12,9 @@ export default async function ProtectedAdminLayout({
     redirect('/admin/login')
   }
   return (
-    <div className="flex min-h-screen bg-neutral-50">
+    <div className="md:flex min-h-screen bg-neutral-50">
       <AdminNav />
-      <main className="flex-1 p-6">{children}</main>
+      <main className="flex-1 p-4 sm:p-6">{children}</main>
     </div>
   )
 }

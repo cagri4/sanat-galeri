@@ -2,13 +2,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getAllArtists } from '@/lib/queries/admin'
 
-export default async function SanatcilarPage() {
+export default async function SanatçılarPage() {
   const artists = await getAllArtists()
 
   return (
     <div>
       <h1 className="text-2xl font-light tracking-tight text-neutral-900 mb-6">
-        Sanatcilar
+        Sanatçılar
       </h1>
 
       {artists.length === 0 ? (

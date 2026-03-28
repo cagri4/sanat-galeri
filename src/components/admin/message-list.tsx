@@ -88,7 +88,7 @@ export default function MessageList({ messages }: MessageListProps) {
 
                   {/* Unread dot */}
                   {!isRead && (
-                    <span className="h-2 w-2 rounded-full bg-blue-500 flex-shrink-0" aria-label="Okunmamis" />
+                    <span className="h-2 w-2 rounded-full bg-blue-500 flex-shrink-0" aria-label="Okunmamış" />
                   )}
                 </div>
 

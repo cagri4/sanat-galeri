@@ -18,23 +18,23 @@ export default async function DashboardPage() {
       description: 'Toplam eser',
     },
     {
-      title: 'Sanatcilar',
+      title: 'Sanatçılar',
       count: artists.length,
       href: '/admin/sanatcilar',
-      description: 'Kayitli sanatci',
+      description: 'Kayıtlı sanatçı',
     },
     {
       title: 'Mesajlar',
       count: unreadCount,
       href: '/admin/mesajlar',
-      description: 'Okunmamis mesaj',
+      description: 'Okunmamış mesaj',
     },
   ]
 
   return (
     <div>
       <h1 className="text-2xl font-light tracking-tight text-neutral-900 mb-8">
-        Yonetim Paneli
+        Yönetim Paneli
       </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -54,7 +54,7 @@ export default async function DashboardPage() {
               href={section.href}
               className="text-sm text-neutral-500 hover:text-neutral-900 underline-offset-2 hover:underline transition-colors"
             >
-              Goruntule &rarr;
+              Görüntüle &rarr;
             </Link>
           </div>
         ))}

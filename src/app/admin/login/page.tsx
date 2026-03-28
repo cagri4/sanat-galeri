@@ -8,7 +8,7 @@ export default function LoginPage() {
           <h1 className="text-2xl font-light tracking-tight text-neutral-900">
             U-Art Admin
           </h1>
-          <p className="mt-2 text-sm text-neutral-500">Yonetim paneline giris yapin</p>
+          <p className="mt-2 text-sm text-neutral-500">Yönetim paneline giriş yapın</p>
         </div>
         <form
           action={async (formData: FormData) => {

@@ -126,7 +126,7 @@ export default function ProductForm({ product, artists }: ProductFormProps) {
   const handleDelete = async () => {
     if (!product) return
     const confirmed = window.confirm(
-      `"${product.titleTr}" eserini silmek istediginizden emin misiniz? Bu islemi geri alamazsiniz.`
+      `"${product.titleTr}" eserini silmek istediğinizden emin misiniz? Bu işlemi geri alamazsınız.`
     )
     if (!confirmed) return
 
