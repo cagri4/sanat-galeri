@@ -26,13 +26,13 @@ async function seed() {
   await db.execute(sql`
     INSERT INTO artists (slug, name_tr, name_en, bio_tr, bio_en, statement_tr, statement_en, whatsapp)
     VALUES
-      ('melike', 'Melike Yıldız', 'Melike Yildiz',
+      ('melike', 'Melike Doğan', 'Melike Dogan',
        'İstanbul''lu ressam. Renk ve doku üzerine çalışmalar.',
        'Istanbul-based painter. Works on color and texture.',
        'Rengim benim dilim. Her fırça darbesiyle yaşadığım duyguları tuvale aktarıyor, seyirciye içimden geçenleri göstermeye çalışıyorum. Işık ve rengin iç içe geçtiği bu yolculuk, benim için hem bir keşif hem de bir özgürlük.',
        'Color is my language. With every brushstroke I transfer my emotions to the canvas, trying to show the viewer what passes through me. This journey where light and color intertwine is both a discovery and a freedom for me.',
        '905551234567'),
-      ('seref', 'Şeref Kaya', 'Seref Kaya',
+      ('seref', 'Şeref Doğan', 'Seref Dogan',
        'Ankara''lı seramik sanatçısı.',
        'Ankara-based ceramic artist.',
        'Toprakla kurduğum bağ, atalarımdan gelen bir miras. Anadolu''nun bin yıllık seramik geleneğini çağdaş formlarla buluşturmak, hem geçmişe saygı hem de geleceğe bir köprü kurmak demek.',

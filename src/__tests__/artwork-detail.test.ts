@@ -53,8 +53,8 @@ const sampleProduct = {
   artist: {
     id: 1,
     slug: 'melike',
-    nameTr: 'Melike Yıldız',
-    nameEn: 'Melike Yildiz',
+    nameTr: 'Melike Doğan',
+    nameEn: 'Melike Dogan',
     whatsapp: '905551234567',
   },
 }

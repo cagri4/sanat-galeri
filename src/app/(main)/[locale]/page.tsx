@@ -169,7 +169,7 @@ export default async function HomePage({
             <div className="aspect-[4/5] relative overflow-hidden bg-[#f0ece4]">
               <Image
                 src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=700&q=80"
-                alt="Melike Yıldız"
+                alt="Melike Doğan"
                 fill
                 className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -177,7 +177,7 @@ export default async function HomePage({
             </div>
             <div className="mt-5">
               <h3 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a]">
-                Melike Yıldız
+                Melike Doğan
               </h3>
               <p className="mt-2 text-[13px] text-[#6b6b6b] leading-relaxed max-w-sm">
                 {t('melikeBio')}
@@ -196,7 +196,7 @@ export default async function HomePage({
             <div className="aspect-[4/5] relative overflow-hidden bg-[#f0ece4]">
               <Image
                 src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=700&q=80"
-                alt="Şeref Kaya"
+                alt="Şeref Doğan"
                 fill
                 className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -204,7 +204,7 @@ export default async function HomePage({
             </div>
             <div className="mt-5">
               <h3 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a]">
-                Şeref Kaya
+                Şeref Doğan
               </h3>
               <p className="mt-2 text-[13px] text-[#6b6b6b] leading-relaxed max-w-sm">
                 {t('serefBio')}

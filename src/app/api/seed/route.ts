@@ -18,14 +18,14 @@ export async function GET() {
     await client`
       INSERT INTO artists (slug, name_tr, name_en, bio_tr, bio_en, photo_url, statement_tr, statement_en, whatsapp, email)
       VALUES
-        ('melike', 'Melike Yıldız', 'Melike Yildiz',
+        ('melike', 'Melike Doğan', 'Melike Dogan',
          'İstanbul doğumlu çok yönlü bir sanatçı. Renk ve doku arasında köprüler kurarak, doğanın ve şehir yaşamının çarpıcı kontrastlarını tuvale aktarır.',
          'Istanbul-born versatile artist. Building bridges between color and texture, she transfers the striking contrasts of nature and urban life onto canvas.',
          'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&q=80',
          'Rengim benim dilim. Her fırça darbesiyle yaşadığım duyguları tuvale aktarıyor, seyirciye içimden geçenleri göstermeye çalışıyorum.',
          'Color is my language. With every brushstroke I transfer my emotions to the canvas, trying to show the viewer what passes through me.',
          '905551234567', 'melike@uarttasarim.com'),
-        ('seref', 'Şeref Kaya', 'Seref Kaya',
+        ('seref', 'Şeref Doğan', 'Seref Dogan',
          'Ankara doğumlu seramik ve heykel sanatçısı. Geleneksel Anadolu tekniklerini çağdaş formlarla buluşturarak üç boyutlu eserler üretir.',
          'Ankara-born ceramics and sculpture artist. Blending traditional Anatolian techniques with contemporary forms to create three-dimensional works.',
          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',

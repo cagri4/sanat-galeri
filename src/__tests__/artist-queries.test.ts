@@ -58,8 +58,8 @@ describe('getArtistBySlug()', () => {
     const mockArtist = {
       id: 1,
       slug: 'melike',
-      nameTr: 'Melike Yıldız',
-      nameEn: 'Melike Yildiz',
+      nameTr: 'Melike Doğan',
+      nameEn: 'Melike Dogan',
       bioTr: 'Bio TR',
       bioEn: 'Bio EN',
       statementTr: 'Statement TR',

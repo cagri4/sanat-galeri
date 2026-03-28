@@ -56,12 +56,12 @@ export default async function Footer({ locale }: FooterProps) {
             <ul className="space-y-2.5">
               <li>
                 <a href={buildDomainLink(MELIKE_URL, `/${locale}`)} className="text-[13px] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
-                  Melike Yıldız
+                  Melike Doğan
                 </a>
               </li>
               <li>
                 <a href={buildDomainLink(SEREF_URL, `/${locale}`)} className="text-[13px] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
-                  Şeref Kaya
+                  Şeref Doğan
                 </a>
               </li>
             </ul>

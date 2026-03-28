@@ -39,8 +39,8 @@ export default async function AboutPage({
         </h1>
         <p className="mt-8 text-base text-[#6b6b6b] leading-[1.8]">
           {isTr
-            ? 'U-Art Tasarım, Melike Yıldız ve Şeref Kaya tarafından kurulan bir sanat atölyesidir. Tablo, heykel, seramik ve baskı resim gibi farklı disiplinlerde özgün eserler üretiyoruz. Atölyemiz, geleneksel sanat formlarını çağdaş yaklaşımlarla birleştirerek, her eserde özgün bir ifade yaratmayı amaçlamaktadır.'
-            : 'U-Art Design is an art studio founded by Melike Yıldız and Şeref Kaya. We create original works across various disciplines including painting, sculpture, ceramics, and prints. Our studio aims to create unique expressions in every piece by combining traditional art forms with contemporary approaches.'}
+            ? 'U-Art Tasarım, Melike Doğan ve Şeref Doğan tarafından kurulan bir sanat atölyesidir. Tablo, heykel, seramik ve baskı resim gibi farklı disiplinlerde özgün eserler üretiyoruz. Atölyemiz, geleneksel sanat formlarını çağdaş yaklaşımlarla birleştirerek, her eserde özgün bir ifade yaratmayı amaçlamaktadır.'
+            : 'U-Art Design is an art studio founded by Melike Doğan and Şeref Doğan. We create original works across various disciplines including painting, sculpture, ceramics, and prints. Our studio aims to create unique expressions in every piece by combining traditional art forms with contemporary approaches.'}
         </p>
       </section>
 
@@ -68,7 +68,7 @@ export default async function AboutPage({
           <div className="md:col-span-2 aspect-[3/4] relative overflow-hidden bg-[#f0ece4]">
             <Image
               src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=600&q=80"
-              alt="Melike Yıldız"
+              alt="Melike Doğan"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 40vw"
@@ -76,7 +76,7 @@ export default async function AboutPage({
           </div>
           <div className="md:col-span-3 md:pt-8">
             <h3 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a]">
-              Melike Yıldız
+              Melike Doğan
             </h3>
             <p className="mt-4 text-[15px] text-[#6b6b6b] leading-[1.8]">
               {isTr
@@ -100,7 +100,7 @@ export default async function AboutPage({
           <div className="md:col-span-2 md:order-2 aspect-[3/4] relative overflow-hidden bg-[#f0ece4]">
             <Image
               src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80"
-              alt="Şeref Kaya"
+              alt="Şeref Doğan"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 40vw"
@@ -108,7 +108,7 @@ export default async function AboutPage({
           </div>
           <div className="md:col-span-3 md:order-1 md:pt-8">
             <h3 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a]">
-              Şeref Kaya
+              Şeref Doğan
             </h3>
             <p className="mt-4 text-[15px] text-[#6b6b6b] leading-[1.8]">
               {isTr
