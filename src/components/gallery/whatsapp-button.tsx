@@ -17,7 +17,10 @@ export default async function WhatsAppButton({ phone, artworkTitle, pageUrl, loc
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#1ebe5d] transition-colors duration-200"
+      /* Parlak yesil dolgu yerine ince cerceveli, sakin buton: galeri
+         paletini bozmadan taniniyor kalir. Hover'da yalnizca renk degisir
+         (layout kaydiran transform yok). min-h-11 = 44px dokunma hedefi. */
+      className="group inline-flex min-h-11 items-center gap-2.5 border border-[#1a1a1a] px-6 py-3 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#1a1a1a] transition-colors duration-[var(--dur-micro)] hover:border-[#25D366] hover:bg-[#25D366] hover:text-white"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

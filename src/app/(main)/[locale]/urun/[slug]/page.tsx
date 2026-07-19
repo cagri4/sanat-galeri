@@ -6,6 +6,7 @@ import { getProductBySlug } from '@/lib/queries/gallery'
 import LightboxViewer from '@/components/gallery/lightbox-viewer'
 import WhatsAppButton from '@/components/gallery/whatsapp-button'
 import ContactForm from '@/components/gallery/contact-form'
+import Reveal from '@/components/motion/reveal'
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>
@@ -90,29 +91,33 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
     : null
 
   return (
-    <div className="py-8 lg:py-12">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+    <div className="py-12 lg:py-20">
+      {/* lg:gap-20 — gorsel ile kunye arasinda muze etiketi mesafesi */}
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20">
         {/* Image gallery */}
         {slides.length > 0 && (
-          <div>
+          <Reveal>
             <LightboxViewer slides={slides} thumbnails={thumbnails} />
-          </div>
+          </Reveal>
         )}
 
         {/* Metadata + CTAs */}
-        <div className="space-y-8">
-          <h1 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl font-light tracking-tight text-[#1a1a1a]">
+        <Reveal delay={0.08} className="space-y-10">
+          <h1 className="font-[family-name:var(--font-serif)] text-4xl font-light leading-[1.1] tracking-[-0.01em] text-[#1a1a1a] sm:text-5xl">
             {title}
           </h1>
 
           {/* Katalog künyesi */}
-          <dl className="divide-y divide-[#e8e2d8] border-y border-[#e8e2d8]">
+          <dl className="divide-y divide-[var(--rule)] border-y border-[var(--rule)]">
             {artistName && (
-              <div className="py-3 grid grid-cols-[minmax(0,9rem)_1fr] gap-4">
-                <dt className="text-[11px] uppercase tracking-[0.15em] text-[#999]">{t('artist')}</dt>
-                <dd className="text-sm text-[#1a1a1a]">
+              <div className="grid grid-cols-[minmax(0,8rem)_1fr] gap-6 py-4">
+                <dt className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{t('artist')}</dt>
+                <dd className="text-[length:var(--text-body)] text-[#1a1a1a]">
                   {eser.artist?.slug ? (
-                    <a href={`/${locale}/${eser.artist.slug}`} className="hover:underline">
+                    <a
+                      href={`/${locale}/${eser.artist.slug}`}
+                      className="underline decoration-[var(--rule)] underline-offset-4 transition-colors duration-[var(--dur-micro)] hover:decoration-[var(--accent)] hover:text-[var(--accent)]"
+                    >
                       {artistName}
                     </a>
                   ) : (
@@ -123,16 +128,16 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
             )}
 
             {catalogRows.map((row) => (
-              <div key={row.label} className="py-3 grid grid-cols-[minmax(0,9rem)_1fr] gap-4">
-                <dt className="text-[11px] uppercase tracking-[0.15em] text-[#999]">{row.label}</dt>
-                <dd className="text-sm leading-relaxed text-[#1a1a1a]">{row.value}</dd>
+              <div key={row.label} className="grid grid-cols-[minmax(0,8rem)_1fr] gap-6 py-4">
+                <dt className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{row.label}</dt>
+                <dd className="text-[length:var(--text-body)] leading-relaxed text-[#1a1a1a]">{row.value}</dd>
               </div>
             ))}
 
             {(priceDisplay || eser.isSold) && (
-              <div className="py-3 grid grid-cols-[minmax(0,9rem)_1fr] gap-4">
-                <dt className="text-[11px] uppercase tracking-[0.15em] text-[#999]">{t('price')}</dt>
-                <dd className="text-sm text-[#1a1a1a]">
+              <div className="grid grid-cols-[minmax(0,8rem)_1fr] gap-6 py-4">
+                <dt className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{t('price')}</dt>
+                <dd className="text-[length:var(--text-body)] text-[#1a1a1a]">
                   {eser.isSold ? <span className="text-[#8a6d3b]">{t('sold')}</span> : priceDisplay}
                 </dd>
               </div>
@@ -143,7 +148,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
           {description && (
             <div className="space-y-4">
               {String(description).split('\n\n').filter(Boolean).map((para: string, i: number) => (
-                <p key={i} className="text-[15px] leading-[1.75] text-[#4a4a4a]">
+                <p key={i} className="max-w-[68ch] text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]">
                   {para}
                 </p>
               ))}
@@ -151,9 +156,9 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
           )}
 
           {/* Replika Hakkında — sanatçının katalog şemasındaki sabit bölüm */}
-          <div className="border-l-2 border-[#e8e2d8] pl-4">
-            <h2 className="text-[11px] uppercase tracking-[0.15em] text-[#999]">{t('about')}</h2>
-            <p className="mt-2 text-[15px] leading-[1.75] text-[#4a4a4a]">{t('aboutText')}</p>
+          <div className="border-l border-[var(--rule)] pl-5">
+            <h2 className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{t('about')}</h2>
+            <p className="mt-3 max-w-[68ch] text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]">{t('aboutText')}</p>
           </div>
 
           {/* WhatsApp CTA */}
@@ -173,7 +178,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
             </h2>
             <ContactForm productSlug={slug} />
           </div>
-        </div>
+        </Reveal>
       </div>
     </div>
   )

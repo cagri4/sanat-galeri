@@ -1,6 +1,8 @@
 import { getTranslations } from 'next-intl/server'
 import { getProducts } from '@/lib/queries/gallery'
 import { COLLECTIONS } from '@/lib/categories'
+import Reveal from '@/components/motion/reveal'
+import { staggerDelay } from '@/lib/motion'
 import ArtworkCard from './artwork-card'
 
 type ProductWithImage = Awaited<ReturnType<typeof getProducts>>[number]
@@ -51,9 +53,13 @@ export default async function ArtworkGrid({ products, locale, category }: Artwor
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10">
-      {products.map((product) => (
-        <ArtworkCard key={product.id} product={product} locale={locale} />
+    // gap-y > gap-x: satirlar arasi nefes, kunye metinlerinin bir sonraki
+    // kartin gorseline yapismasini onler.
+    <div className="grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+      {products.map((product, i) => (
+        <Reveal key={product.id} delay={staggerDelay(i)}>
+          <ArtworkCard product={product} locale={locale} />
+        </Reveal>
       ))}
     </div>
   )

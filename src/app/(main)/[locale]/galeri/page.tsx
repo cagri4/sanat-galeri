@@ -37,8 +37,10 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
   }
 
   return (
-    <main className="py-12 sm:py-16">
-      <h1 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl font-light tracking-wide text-[#1a1a1a]">
+    <main className="py-16 sm:py-24">
+      {/* Baslik olcegi buyutuldu ve tracking sikilastirildi: iri + ince
+          serif, "Exaggerated Minimalism" dilinin sakin yorumu. */}
+      <h1 className="font-[family-name:var(--font-serif)] text-4xl font-light leading-[1.1] tracking-[-0.01em] text-[#1a1a1a] sm:text-5xl lg:text-6xl">
         {t('title')}
       </h1>
 
@@ -48,7 +50,7 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
         </Suspense>
       )}
 
-      <div className="mt-8">
+      <div className="mt-14">
         <ArtworkGrid products={products} locale={locale} category={category ?? null} />
       </div>
     </main>

@@ -5,8 +5,31 @@
   --background: #fbf9f5;
   --foreground: #1a1a1a;
   --muted: #6b6b6b;
+  --faint: #999999;
   --border: #e8e4de;
+  --rule: #e8e2d8;
   --accent: #612E49;
+
+  /* ---- Tipografik olcek ----------------------------------------------
+     Muze etiketi mantigi: kucuk, harf arallikli "kunye" metinleri +
+     iri, ince serif basliklar. Aradaki basamaklar bilincli olarak az —
+     az sayida net kademe, cok sayida yakin boydan daha sakin durur.     */
+  --text-label: 0.6875rem;   /* 11px — ust etiket / kunye basligi (uppercase) */
+  --text-meta: 0.8125rem;    /* 13px — nav, yardimci metin */
+  --text-body: 0.9375rem;    /* 15px — okuma metni */
+  --text-lead: 1.0625rem;    /* 17px — giris paragrafi */
+
+  --tracking-label: 0.15em;  /* etiketler icin genis harf araligi */
+
+  /* ---- Dikey ritim ---------------------------------------------------- */
+  --space-section: 6rem;     /* bolumler arasi */
+  --space-block: 3rem;       /* blok ici buyuk ayrim */
+
+  /* ---- Hareket --------------------------------------------------------
+     Galeri sukuneti: giriste ease-out, kisa ve tek yonlu.               */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-micro: 200ms;        /* hover/focus mikro etkilesim */
+  --dur-image: 700ms;        /* gorsel zoom — bilincli olarak yavas */
 }
 
 @theme inline {
@@ -18,6 +41,7 @@
 
 html {
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -25,16 +49,83 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Elegant serif headings */
 h1, h2, h3 {
   font-family: var(--font-serif);
 }
 
-/* Smooth image transitions */
-img {
-  transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+/* ---- Odak halkasi ---------------------------------------------------
+   Klavye kullanicisi icin her yerde gorunur; fare tiklamasinda cikmaz. */
+:focus-visible {
+  /* Kisayol tek parcada yazilir: Tailwind preflight ve tarayici UA sayfasi
+     `outline: auto` uretiyor; `auto` stilinde Chrome outline-color'i yok
+     sayip kendi platform halkasini ciziyordu. Shorthand stil+renk+kalinligi
+     birlikte ezdigi icin marka rengi kesin uygulanir.
+     Tailwind v4 ayrica --tw-outline-style degiskenini kullaniyor; onu da
+     ayarliyoruz ki utility'lerle catismasin. */
+  --tw-outline-style: solid;
+  outline: 2px solid #612E49;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Gorsel gecisleri artik GLOBAL DEGIL: yalnizca .media-zoom kapsayicisi
+   icindeki gorsellere uygulanir (artwork-card, lightbox thumbnail). */
+.media-zoom img {
+  transition: transform var(--dur-image) var(--ease-out-soft);
+  will-change: transform;
+}
+
+/* ---- Scroll-reveal ---------------------------------------------------
+   Varsayilan durum GORUNUR. data-reveal niteligini yalnizca istemci JS'i,
+   yalnizca ekran disindaki ogelere ekler (bkz. components/motion/reveal).
+   Boylece JS yoksa hicbir icerik gizlenmez.                              */
+[data-reveal='hidden'] {
+  opacity: 0;
+  transform: translateY(10px);
+}
+[data-reveal='in'] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.5s var(--ease-out-soft) var(--reveal-delay, 0s),
+    transform 0.5s var(--ease-out-soft) var(--reveal-delay, 0s);
+}
+
+/* ---- Sayfa girisi ----------------------------------------------------
+   Saf CSS: JS gerekmez. fill-mode both => hareket kapaliyken son durumda kalir. */
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: none; }
+}
+.page-in {
+  animation: page-in 0.35s var(--ease-out-soft) both;
+}
+
+/* Yatay kaydirilan filtre satiri: kaydirma cubugu gizli, kaydirma calisir.
+   Dokunmatikte parmak birakilinca kategoriye hizalanir. */
+.filter-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+.filter-scroll::-webkit-scrollbar {
+  display: none;
+}
+.filter-scroll > * {
+  scroll-snap-align: start;
+}
+/* Sag kenarda yumusak solma: satirin devam ettigini gosterir, kesik
+   metin izlenimi vermez. Yalnizca kaydirmanin acik oldugu dar ekranda. */
+@media (max-width: 639px) {
+  .filter-scroll {
+    -webkit-mask-image: linear-gradient(to right, #000 82%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 82%, transparent 100%);
+  }
 }
 
 /* Full-bleed sections */
@@ -53,4 +144,37 @@ img {
 ::selection {
   background: var(--accent);
   color: white;
+}
+
+/* ---- Hareket azaltma tercihi ----------------------------------------
+   Sistem ayari "reduce" ise TUM animasyonlar tek noktadan kapatilir.
+   Motion bilesenleri ayrica useReducedMotion ile kendi icinde de kontrol
+   eder; bu blok CSS tarafindaki her sey icin guvenlik agidir.          */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .media-zoom img {
+    transition: none;
+    transform: none !important;
+  }
+  /* Hareket kapali: hicbir oge gizli kalmasin. */
+  [data-reveal],
+  [data-reveal='hidden'],
+  [data-reveal='in'] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .page-in {
+    animation: none !important;
+  }
 }

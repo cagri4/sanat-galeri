@@ -62,32 +62,32 @@ export default async function Navbar({ locale }: NavbarProps) {
 
   return (
     <header className="relative border-b border-[#e8e4de]">
-      <nav className="flex items-center justify-between py-6">
+      <nav className="flex items-center justify-between py-7">
         <a
           href={links.main}
-          className="font-[family-name:var(--font-serif)] text-xl sm:text-2xl font-light tracking-wide text-[#1a1a1a] hover:opacity-70 transition-opacity"
+          className="inline-flex min-h-11 items-center font-[family-name:var(--font-serif)] text-xl font-light tracking-wide text-[#1a1a1a] transition-colors duration-[var(--dur-micro)] hover:text-[var(--accent)] sm:text-2xl"
         >
           U-Art Tasarım
         </a>
 
         {/* Desktop nav */}
         <div className="hidden sm:flex items-center gap-8">
-          <a href={links.gallery} className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
+          <a href={links.gallery} className="relative inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#1a1a1a] after:absolute after:inset-x-0 after:bottom-2.5 after:h-px after:origin-left after:scale-x-0 after:bg-[#1a1a1a] after:transition-transform after:duration-[var(--dur-micro)] after:ease-out hover:after:scale-x-100">
             {t('gallery')}
           </a>
-          <a href={links.exhibition} className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
+          <a href={links.exhibition} className="relative inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#1a1a1a] after:absolute after:inset-x-0 after:bottom-2.5 after:h-px after:origin-left after:scale-x-0 after:bg-[#1a1a1a] after:transition-transform after:duration-[var(--dur-micro)] after:ease-out hover:after:scale-x-100">
             {t('exhibitions')}
           </a>
-          <a href={links.about} className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
+          <a href={links.about} className="relative inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#1a1a1a] after:absolute after:inset-x-0 after:bottom-2.5 after:h-px after:origin-left after:scale-x-0 after:bg-[#1a1a1a] after:transition-transform after:duration-[var(--dur-micro)] after:ease-out hover:after:scale-x-100">
             {t('about')}
           </a>
-          <a href={links.contact} className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
+          <a href={links.contact} className="relative inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#1a1a1a] after:absolute after:inset-x-0 after:bottom-2.5 after:h-px after:origin-left after:scale-x-0 after:bg-[#1a1a1a] after:transition-transform after:duration-[var(--dur-micro)] after:ease-out hover:after:scale-x-100">
             {t('contact')}
           </a>
-          <a href={links.melike} className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
+          <a href={links.melike} className="relative inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#1a1a1a] after:absolute after:inset-x-0 after:bottom-2.5 after:h-px after:origin-left after:scale-x-0 after:bg-[#1a1a1a] after:transition-transform after:duration-[var(--dur-micro)] after:ease-out hover:after:scale-x-100">
             Melike
           </a>
-          <a href={links.seref} className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
+          <a href={links.seref} className="relative inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#1a1a1a] after:absolute after:inset-x-0 after:bottom-2.5 after:h-px after:origin-left after:scale-x-0 after:bg-[#1a1a1a] after:transition-transform after:duration-[var(--dur-micro)] after:ease-out hover:after:scale-x-100">
             Şeref
           </a>
           <LanguageSwitcher />

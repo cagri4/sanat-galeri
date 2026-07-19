@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import LightboxViewer from '@/components/gallery/lightbox-viewer'
+import Reveal from '@/components/motion/reveal'
 
 /**
  * Bozcaada 2010 sergi sayfasi.
@@ -40,23 +41,25 @@ export default async function BozcaadaPage({
   }))
 
   return (
-    <main className="py-12 sm:py-16">
-      <header className="max-w-2xl">
+    <main className="py-16 sm:py-24">
+      <Reveal as="section" className="max-w-2xl">
         <p className="text-[11px] uppercase tracking-[0.15em] text-[#999]">
           {t('eyebrow')}
         </p>
-        <h1 className="mt-3 font-[family-name:var(--font-serif)] text-3xl sm:text-4xl font-light tracking-wide text-[#1a1a1a]">
+        <h1 className="mt-4 font-[family-name:var(--font-serif)] text-4xl font-light leading-[1.1] tracking-[-0.01em] text-[#1a1a1a] sm:text-5xl lg:text-6xl">
           {t('title')}
         </h1>
         <p className="mt-2 text-sm text-[#6b6b6b]">{t('venue')}</p>
-        <p className="mt-6 text-[15px] leading-[1.75] text-[#4a4a4a]">{t('lead')}</p>
-      </header>
+        <p className="mt-8 text-[length:var(--text-lead)] leading-[1.8] text-[#4a4a4a]">
+          {t('lead')}
+        </p>
+      </Reveal>
 
-      <div className="mt-12">
+      <Reveal className="mt-16">
         <LightboxViewer slides={photos} thumbnails={photos.map((p) => ({ src: p.src, alt: p.alt }))} />
-      </div>
+      </Reveal>
 
-      <p className="mt-10 max-w-2xl border-l-2 border-[#e8e2d8] pl-4 text-sm leading-relaxed text-[#999]">
+      <p className="mt-16 max-w-2xl border-l border-[var(--rule)] pl-5 text-[length:var(--text-meta)] leading-relaxed text-[#999]">
         {t('captionNote')}
       </p>
     </main>
