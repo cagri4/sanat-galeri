@@ -6,6 +6,7 @@ import LanguageSwitcher from './language-switcher'
 interface MobileMenuProps {
   links: {
     gallery: string
+    technique: string
     exhibition: string
     about: string
     contact: string
@@ -14,6 +15,7 @@ interface MobileMenuProps {
   }
   labels: {
     gallery: string
+    technique: string
     exhibition: string
     about: string
     contact: string
@@ -46,6 +48,13 @@ export default function MobileMenu({ links, labels }: MobileMenuProps) {
               onClick={() => setOpen(false)}
             >
               {labels.gallery}
+            </a>
+            <a
+              href={links.technique}
+              className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
+              onClick={() => setOpen(false)}
+            >
+              {labels.technique}
             </a>
             <a
               href={links.exhibition}

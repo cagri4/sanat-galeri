@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getProducts } from '@/lib/queries/gallery'
+import HeroSlideshow, { type HeroSlide } from '@/components/gallery/hero-slideshow'
 import { getCrossDomainLinks } from '@/components/shared/navbar'
 
 export async function generateMetadata({
@@ -22,6 +23,7 @@ export default async function HomePage({
 }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'meta' })
+  const tc = await getTranslations({ locale, namespace: 'collection' })
   const isTr = locale === 'tr'
 
   const MAIN_URL = process.env.NEXT_PUBLIC_MAIN_URL ?? ''
@@ -29,58 +31,64 @@ export default async function HomePage({
   const SEREF_URL = process.env.NEXT_PUBLIC_SEREF_URL ?? '#'
   const domainLinks = getCrossDomainLinks(locale, MAIN_URL, MELIKE_URL, SEREF_URL)
 
-  let recentProducts: Awaited<ReturnType<typeof getProducts>> = []
+  let allProducts: Awaited<ReturnType<typeof getProducts>> = []
   try {
-    recentProducts = await getProducts()
-    recentProducts = recentProducts.slice(0, 6)
+    allProducts = await getProducts()
   } catch {
     // DB not available
   }
+  const recentProducts = allProducts.slice(0, 6)
+
+  // Hero: 5 FARKLI seriden birer guclu gorsel (sanatcinin sirasindan secildi).
+  // Gorsel cesitliligi gozetildi: krater / kylix / figurlu tabak / geometrik.
+  const HERO_SLUGS = ['volutlu-krater', 'afrodit-ve-kaz', 'thetis', 'siren', 'geometrik-donem-tabak']
+  const heroSlides: HeroSlide[] = HERO_SLUGS.map((slug) => {
+    const p = allProducts.find((x) => x.slug === slug)
+    if (!p || !p.images?.[0]) return null
+    const title = isTr ? p.titleTr : p.titleEn
+    return {
+      slug: p.slug,
+      title,
+      image: p.images[0].url,
+      alt: (isTr ? p.images[0].altTr : p.images[0].altEn) ?? title,
+      category: p.category,
+    }
+  }).filter(Boolean) as HeroSlide[]
 
   return (
     <main>
-      {/* Hero — full viewport height */}
-      <section className="full-bleed">
-        <div className="relative h-[100svh]">
-          <Image
-            src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1920&q=80"
-            alt={isTr ? 'U-Art Tasarım Atölyesi' : 'U-Art Design Studio'}
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
-          <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 sm:pb-28 text-center px-6">
-            <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-6xl lg:text-8xl font-light text-white tracking-wide">
-              U-Art Tasarım
-            </h1>
-            <p className="mt-5 text-sm sm:text-base text-white/70 tracking-[0.25em] uppercase max-w-lg">
-              {t('heroSubtitle')}
-            </p>
-            <div className="mt-10 animate-bounce">
-              <svg width="20" height="32" viewBox="0 0 20 32" fill="none" className="text-white/50">
-                <rect x="1" y="1" width="18" height="30" rx="9" stroke="currentColor" strokeWidth="1.5" />
-                <circle cx="10" cy="10" r="2.5" fill="currentColor" className="animate-pulse" />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero — sanatcinin 5 eserinden slayt (stok fotograf kaldirildi) */}
+      <HeroSlideshow slides={heroSlides} locale={locale} ctaLabel={tc('cta')} />
 
       {/* Intro text */}
       <section className="py-20 sm:py-28 max-w-3xl mx-auto text-center">
-        <p className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-light leading-relaxed text-[#1a1a1a]">
-          {isTr
-            ? 'Geleneksel sanat formlarını çağdaş yaklaşımlarla buluşturan özgün eserler. Tablo, heykel, seramik ve baskı resimlerden oluşan koleksiyonumuzu keşfedin.'
-            : 'Original works that blend traditional art forms with contemporary approaches. Explore our collection of paintings, sculptures, ceramics, and prints.'}
+        <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
+          {tc('eyebrow')}
         </p>
-        <Link
-          href={`/${locale}/galeri`}
-          className="mt-10 inline-block bg-[#612E49] text-white text-[13px] uppercase tracking-[0.15em] px-10 py-4 rounded-full hover:bg-[#4f243b] transition-colors"
-        >
-          {t('exploreGallery')}
-        </Link>
+        <h2 className="mt-4 font-[family-name:var(--font-serif)] text-3xl font-light leading-tight text-[#1a1a1a] sm:text-4xl">
+          {tc('title')}
+        </h2>
+        {/* Sanatcinin kendi koleksiyon tanitim metni */}
+        <p className="mx-auto mt-8 max-w-[68ch] text-[length:var(--text-lead)] leading-[1.8] text-[#4a4a4a]">
+          {tc('short')}
+        </p>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-2">
+          <Link
+            href={`/${locale}/galeri`}
+            className="group inline-flex min-h-11 items-center gap-2 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#1a1a1a]"
+          >
+            <span className="bg-[linear-gradient(var(--accent),var(--accent))] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-1 transition-[background-size] duration-[var(--dur-micro)] ease-out group-hover:bg-[length:100%_1px]">
+              {tc('cta')}
+            </span>
+            <span aria-hidden className="transition-transform duration-[var(--dur-micro)] group-hover:translate-x-1">→</span>
+          </Link>
+          <Link
+            href={`/${locale}/teknik`}
+            className="group inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#1a1a1a]"
+          >
+            {tc('techniqueCta')}
+          </Link>
+        </div>
       </section>
 
       {/* Featured works — 3 column grid */}

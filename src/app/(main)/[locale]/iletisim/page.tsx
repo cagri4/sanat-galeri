@@ -49,6 +49,16 @@ export default async function ContactPage({
         <div>
           {/* Contact details */}
           <div className="space-y-6">
+            {/* Atolye adresi — Cagri tarafindan verildi (dogrulanmis) */}
+            <div>
+              <h2 className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999] mb-2">
+                {isTr ? 'Adres' : 'Address'}
+              </h2>
+              <p className="whitespace-pre-line text-[length:var(--text-body)] leading-relaxed text-[#1a1a1a]">
+                {'Boğazkent mah. 3.cad. 1/10\nKepez, Çanakkale 17100\nTürkiye'}
+              </p>
+            </div>
+
             <div className="space-y-8">
               {artists.map((a: any) => (
                 <div key={a.slug}>

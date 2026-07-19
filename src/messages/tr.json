@@ -10,7 +10,8 @@
     "backToMain": "Ana Sayfa",
     "about": "Hakkımızda",
     "contact": "İletişim",
-    "exhibitions": "Sergiler"
+    "exhibitions": "Sergiler",
+    "technique": "Teknik"
   },
   "gallery": {
     "title": "Galeri",
@@ -49,7 +50,8 @@
     "messagePlaceholder": "Eser hakkinda sormak istediklerinizi yaziniz...",
     "submit": "Mesaj Gonder",
     "submitting": "Gonderiliyor...",
-    "successMessage": "Mesajiniz gonderildi. En kisa surede donus yapacagiz."
+    "successMessage": "Mesajiniz gonderildi. En kisa surede donus yapacagiz.",
+    "addressLabel": "Adres"
   },
   "meta": {
     "homeTitle": "U-Art Tasarım",
@@ -89,7 +91,7 @@
     "galleryLink": "Galeri",
     "aboutLink": "Hakkımızda",
     "contactLink": "İletişim",
-    "address": "İstanbul, Türkiye",
+    "address": "Boğazkent mah. 3.cad. 1/10\nKepez, Çanakkale 17100\nTürkiye",
     "followUs": "Bizi Takip Edin"
   },
   "exhibition": {
@@ -98,6 +100,32 @@
     "venue": "Bozcaada Sanat Galerisi · 2010",
     "lead": "2010 yılında Bozcaada'da açılan bu sergide koleksiyonun ilk örnekleri izleyiciyle buluştu. Sergide yer alan eserlerin önemli bir bölümü daha sonra özel koleksiyonlara girdi. Günümüzde bu çalışmaların büyük kısmı farklı koleksiyonlarda bulunmaktadır.",
     "installation": "Sergi Yerleştirmesi",
-    "captionNote": "⚠️ TASLAK — fotoğrafların tek tek açıklamaları sanatçıdan alınacaktır. Şu an yalnızca numaralandırma kullanılmaktadır."
+    "captionNote": "İlk üç fotoğrafın açıklamaları sanatçının kendi metninden alınmıştır. Diğer fotoğrafların açıklamaları sanatçıdan beklenmektedir.",
+    "cap1": "Volütlü kraterler, kyliksler ve geometrik dönem replikalarının birlikte sergilendiği bölüm.",
+    "cap2": "Antik kap formlarının farklı yüksekliklerde kaideler üzerinde sergilendiği görünüm.",
+    "cap3": "Günlük kullanım kapları ile figürlü kraterlerin bir arada sunulduğu bölüm."
+  },
+  "terra": {
+    "eyebrow": "Teknik",
+    "title": "Toprağın Hafızası: Terra Sigillata",
+    "lead": "Terra sigillata, Latince'de \"mühürlü toprak\" anlamına gelir. Ancak seramik sanatında bu terim, kilin en ince taneciklerinden elde edilen, doğal ve parlak görünümlü bir astarı ifade eder.\n\nBu ince kil süspansiyonu, seramik yüzeyine uygulanarak kadifemsi, pürüzsüz ve hafif parlak bir görünüm kazandırır. Sırlı bir yüzey oluşturmadan estetik bir etki yaratması nedeniyle Antik Çağ'dan günümüze kadar önemini koruyan yüzey tekniklerinden biridir.",
+    "s1title": "Terra Sigillata Nasıl Hazırlanır?",
+    "s1body": "Terra sigillata, ince taneli bir kilin su içerisinde çöktürülmesiyle elde edilir. Hazırlık süreci genel olarak şu aşamalardan oluşur: Kil, belirli oranlarda su ile karıştırılır. Karışımın içerisine sodyum silikat veya soda külü gibi çöktürücü (deflokülan) maddeler eklenerek kil taneciklerinin ayrışması sağlanır. Karışım birkaç gün dinlendirilir. Ağır tanecikler dibe çökerken, en ince kil parçacıkları üst bölümde süspansiyon hâlinde kalır. Bu üstte kalan ince tabaka dikkatlice alınarak terra sigillata astarı elde edilir. Uygulandıktan sonra yüzey, yarı kuruyken taş veya yumuşak bir bezle perdahlanarak doğal parlaklığı artırılabilir.",
+    "s2title": "Antik Dönemde Terra Sigillata",
+    "s2body": "Terra sigillata tekniğinin kökeni Antik Çağ'a uzanır. İlk örnekleri Eski Yunan seramiklerinde görülen ince astar uygulamaları, daha sonra Roma döneminde büyük bir gelişim göstermiştir.\n\nÖzellikle Roma İmparatorluğu döneminde üretilen kırmızı parlak masa kapları, bugün arkeolojide Terra Sigillata Seramikleri olarak adlandırılır. Bu kaplar ince işçilikleri, parlak yüzeyleri ve çoğu zaman kalıpla yapılmış kabartma bezemeleriyle tanınır.\n\nAntik Yunan seramiklerinde ise benzer yüzey anlayışı, siyah figür ve kırmızı figür vazolarında kullanılan ince kil astarlarının pişirim sırasında kontrollü atmosfer sayesinde parlak siyaha dönüşmesiyle görülür. Bu teknik, antik seramik sanatının en önemli estetik özelliklerinden biridir.",
+    "s3title": "Ben Bu Tekniği Nasıl Uyguluyorum?",
+    "s3body": "Bu koleksiyondaki eserler, Antik Yunan seramiklerinin form, oran ve bezeme anlayışını araştıran uzun soluklu bir çalışmanın ürünüdür.\n\nHer eserde formlar tornada şekillendirilir. Özgün antik örnekler incelenerek yeniden çizilir, ince terra sigillata astarı uygulanır, yüzey bezemeleri elle işlenir, kontrollü pişirim süreçleriyle tamamlanır.\n\nAmacım yalnızca antik eserlerin bir benzerini üretmek değil; onların estetik dilini, yüzey karakterini ve anlatım gücünü günümüz izleyicisine yeniden kazandırmaktır.\n\nBu nedenle her replika, hem tarihsel bir araştırmanın hem de çağdaş seramik pratiğinin bir parçasıdır.",
+    "s4title": "Antik Seramiklerden Günümüze",
+    "s4body": "Bu koleksiyon, Antik Yunan seramik sanatının biçimsel ve ikonografik mirasını korurken, aynı zamanda geleneksel seramik tekniklerinin günümüzde nasıl yaşatılabileceğine dair bir araştırma niteliği taşımaktadır.\n\nHer eser; mitoloji, sanat tarihi ve seramik teknolojisini bir araya getiren disiplinlerarası bir üretim sürecinin sonucudur."
+  },
+  "collection": {
+    "eyebrow": "Koleksiyon",
+    "title": "Antik Dönem Replikaları",
+    "short": "Antik Yunan seramik sanatının seçkin örneklerinden esinlenerek, terra sigillata tekniğiyle yeniden üretilmiş bu koleksiyon; mitolojik anlatıları, gündelik yaşam sahnelerini ve dönemin bezeme anlayışını günümüz izleyicisiyle buluşturmayı amaçlamaktadır.",
+    "long": "Antik Dönem Replikaları, Antik Yunan seramik sanatının form, bezeme ve ikonografisini araştırmaya yönelik uzun soluklu bir çalışmanın ürünüdür. Koleksiyonda yer alan eserler, antik örnekler incelenerek terra sigillata tekniğiyle yeniden üretilmiş; özgün formlar, bezeme düzenleri ve mitolojik anlatılar çağdaş bir seramik pratiği içinde yorumlanmıştır.",
+    "cta": "Koleksiyonu Keşfet",
+    "techniqueCta": "Terra Sigillata tekniği hakkında",
+    "ongoingTitle": "Koleksiyonun Devam Eden Çalışmaları",
+    "ongoingBody": "Bozcaada sergisinin ardından antik seramikler üzerine araştırmalar ve üretim süreci devam etti. Bu bölümde yer alan eserler, sergi sonrasında üretilen ve bugün sanatçının koleksiyonunda bulunan çalışmalardan oluşmaktadır."
   }
 }

@@ -10,7 +10,8 @@
     "backToMain": "Home",
     "about": "About",
     "contact": "Contact",
-    "exhibitions": "Exhibitions"
+    "exhibitions": "Exhibitions",
+    "technique": "Technique"
   },
   "gallery": {
     "title": "Gallery",
@@ -49,7 +50,8 @@
     "messagePlaceholder": "Write your questions about the artwork...",
     "submit": "Send Message",
     "submitting": "Sending...",
-    "successMessage": "Your message has been sent. We will get back to you shortly."
+    "successMessage": "Your message has been sent. We will get back to you shortly.",
+    "addressLabel": "Address"
   },
   "meta": {
     "homeTitle": "U-Art Design",
@@ -89,7 +91,7 @@
     "galleryLink": "Gallery",
     "aboutLink": "About",
     "contactLink": "Contact",
-    "address": "Istanbul, Turkey",
+    "address": "Boğazkent mah. 3.cad. 1/10\nKepez, Çanakkale 17100\nTürkiye",
     "followUs": "Follow Us"
   },
   "exhibition": {
@@ -98,6 +100,32 @@
     "venue": "Bozcaada Art Gallery · 2010",
     "lead": "Opened in Bozcaada in 2010, this exhibition brought the first pieces of the collection before an audience. A significant part of the works shown later entered private collections, and most of them are today held in various collections.",
     "installation": "Installation View",
-    "captionNote": "⚠️ DRAFT — individual captions for the photographs are to be supplied by the artist. Only numbering is used at present."
+    "captionNote": "The captions for the first three photographs are the artist's own. Captions for the remaining photographs are awaited from the artist.",
+    "cap1": "The section where volute kraters, kylikes and Geometric-period replicas were shown together.",
+    "cap2": "A view of ancient vessel forms displayed on plinths of differing heights.",
+    "cap3": "The section presenting everyday vessels together with figured kraters."
+  },
+  "terra": {
+    "eyebrow": "Technique",
+    "title": "The Memory of Clay: Terra Sigillata",
+    "lead": "Terra sigillata means \"sealed earth\" in Latin. In ceramic art, however, the term refers to a natural, lustrous slip obtained from the very finest particles of clay.\n\nApplied to the ceramic surface, this fine clay suspension gives a velvety, smooth and slightly lustrous appearance. Because it creates an aesthetic effect without forming a glazed surface, it has remained one of the significant surface techniques from Antiquity to the present day.",
+    "s1title": "How Is Terra Sigillata Prepared?",
+    "s1body": "Terra sigillata is obtained by settling a fine-grained clay in water. The preparation generally consists of these stages: the clay is mixed with water in certain proportions. Deflocculants such as sodium silicate or soda ash are added so that the clay particles separate. The mixture is left to rest for several days. While the heavier particles settle to the bottom, the finest clay particles remain in suspension in the upper portion. This upper layer is carefully drawn off to obtain the terra sigillata slip. Once applied, the surface can be burnished while half-dry with a stone or a soft cloth to increase its natural lustre.",
+    "s2title": "Terra Sigillata in Antiquity",
+    "s2body": "The origins of the terra sigillata technique reach back to Antiquity. The fine slip applications first seen on ancient Greek pottery later underwent considerable development in the Roman period.\n\nThe glossy red tablewares produced during the Roman Empire in particular are known in archaeology today as Terra Sigillata ceramics. These vessels are recognised by their fine workmanship, lustrous surfaces and frequently mould-made relief decoration.\n\nIn Greek pottery a comparable understanding of surface appears where the fine clay slips used on black-figure and red-figure vases turn a lustrous black through a controlled atmosphere during firing. This technique is one of the most important aesthetic characteristics of ancient ceramic art.",
+    "s3title": "How I Apply This Technique",
+    "s3body": "The works in this collection are the product of a long-running study into the form, proportion and decorative language of ancient Greek pottery.\n\nFor each piece the forms are thrown on the wheel. Original ancient examples are studied and redrawn, a fine terra sigillata slip is applied, the surface decoration is worked by hand, and the piece is completed through controlled firing processes.\n\nMy aim is not merely to produce a likeness of the ancient works, but to restore their aesthetic language, surface character and expressive power for a contemporary viewer.\n\nFor this reason every replica is part both of a historical enquiry and of a contemporary ceramic practice.",
+    "s4title": "From Ancient Ceramics to the Present",
+    "s4body": "While preserving the formal and iconographic heritage of ancient Greek ceramic art, this collection also constitutes an enquiry into how traditional ceramic techniques can be kept alive today.\n\nEach work is the result of an interdisciplinary process bringing together mythology, art history and ceramic technology."
+  },
+  "collection": {
+    "eyebrow": "Collection",
+    "title": "Ancient Period Replicas",
+    "short": "Inspired by distinguished examples of ancient Greek ceramic art and reproduced using the terra sigillata technique, this collection seeks to bring mythological narratives, scenes of daily life and the decorative sensibility of the period to a contemporary audience.",
+    "long": "The Ancient Period Replicas are the product of a long-running study into the form, decoration and iconography of ancient Greek ceramic art. The works in the collection were reproduced using the terra sigillata technique through the study of ancient examples; original forms, decorative schemes and mythological narratives are interpreted within a contemporary ceramic practice.",
+    "cta": "Explore the Collection",
+    "techniqueCta": "About the terra sigillata technique",
+    "ongoingTitle": "Ongoing Work in the Collection",
+    "ongoingBody": "Following the Bozcaada exhibition, research and production on ancient ceramics continued. The works in this section were produced after the exhibition and are today part of the artist's own collection."
   }
 }

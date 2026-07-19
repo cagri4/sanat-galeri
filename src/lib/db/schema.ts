@@ -49,6 +49,7 @@ export const products = pgTable('products', {
   subjectEn: text('subject_en'),
   isSold: boolean('is_sold').default(false),
   isVisible: boolean('is_visible').default(true),
+  sortOrder: integer('sort_order').default(0),  // sanatcinin verdigi sira
   createdAt: timestamp('created_at').defaultNow(),
 })
 

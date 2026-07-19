@@ -5,6 +5,8 @@ export async function getProducts(category?: string) {
     .from('products')
     .select('*, images:product_images(*)')
     .eq('is_visible', true)
+    // Sanatcinin verdigi sira (SANATCI-SITE-DUZENI.md); esitlikte yeni once.
+    .order('sort_order', { ascending: true })
     .order('created_at', { ascending: false })
 
   if (category) {
@@ -88,6 +90,7 @@ export async function getProductsByArtist(artistId: number, limit?: number) {
     .select('*, images:product_images(*)')
     .eq('is_visible', true)
     .eq('artist_id', artistId)
+    .order('sort_order', { ascending: true })
     .order('created_at', { ascending: false })
 
   if (limit) query = query.limit(limit)

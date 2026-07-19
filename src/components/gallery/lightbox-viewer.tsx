@@ -16,6 +16,8 @@ interface LightboxSlide {
   width?: number
   height?: number
   title?: string
+  /** Captions eklentisinin alt yazi alani (sanatcinin foto altlari). */
+  description?: string
 }
 
 interface ThumbnailImage {
@@ -75,6 +77,7 @@ export default function LightboxViewer({ slides, thumbnails }: LightboxViewerPro
         styles={{
           container: { backgroundColor: 'rgba(16, 14, 13, 0.96)' },
           captionsTitle: { fontSize: '0.875rem', letterSpacing: '0.05em' },
+          captionsDescription: { fontSize: '0.8125rem', lineHeight: 1.6, opacity: 0.85 },
         }}
         controller={{ closeOnBackdropClick: true }}
         carousel={{ finite: slides.length <= 1 }}

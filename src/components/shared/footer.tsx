@@ -16,13 +16,14 @@ export default async function Footer({ locale }: FooterProps) {
   return (
     <footer className="border-t border-[#e8e4de] mt-20">
       <div className="py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           {/* Brand */}
           <div className="md:col-span-1">
             <h3 className="font-[family-name:var(--font-serif)] text-xl font-light tracking-wide text-[#1a1a1a]">
               U-Art Tasarım
             </h3>
-            <p className="mt-3 text-[13px] text-[#6b6b6b] leading-relaxed">
+            {/* whitespace-pre-line: adres cok satirli */}
+            <p className="mt-3 whitespace-pre-line text-[length:var(--text-meta)] leading-relaxed text-[#6b6b6b]">
               {t('address')}
             </p>
             {/* Genel "info@" adresi dogrulanmadigi icin kaldirildi; sanatcilarin
@@ -78,34 +79,9 @@ export default async function Footer({ locale }: FooterProps) {
             </ul>
           </div>
 
-          {/* Social */}
-          <div>
-            <h4 className="text-[11px] uppercase tracking-[0.2em] text-[#999] mb-4">
-              {t('followUs')}
-            </h4>
-            <ul className="space-y-2.5">
-              <li>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[13px] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
-                >
-                  Instagram
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[13px] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors"
-                >
-                  Facebook
-                </a>
-              </li>
-            </ul>
-          </div>
+          {/* Sosyal: instagram.com / facebook.com genel adreslerine giden
+              yer tutucu linkler kaldirildi (gercek hesap adi henuz yok).
+              Instagram bolumu Cagri hesap adini verince eklenecek. */}
         </div>
 
         <div className="mt-14 pt-6 border-t border-[#e8e4de]">

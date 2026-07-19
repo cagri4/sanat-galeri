@@ -32,13 +32,26 @@ export default async function BozcaadaPage({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'exhibition' })
 
-  const photos = Array.from({ length: PHOTO_COUNT }, (_, i) => ({
-    src: `${BUCKET}/bozcaada-${i + 1}.jpg`,
-    alt: `${t('title')} — ${t('installation')} ${i + 1}`,
-    width: 1600,
-    height: 1200,
-    title: `${t('installation')} ${i + 1}`,
-  }))
+  // Sanatci ilk uc yerlestirme icin kendi acikamasini yazdi (Sergi
+  // Yerlestirmesi I / II / III). Kalan fotograflar icin metin vermedigi
+  // icin yalnizca numaralandiriliyor — uydurma alt yazi yazilmadi.
+  const ROMAN = ['I', 'II', 'III']
+  const artistCaptions = [t('cap1'), t('cap2'), t('cap3')]
+
+  const photos = Array.from({ length: PHOTO_COUNT }, (_, i) => {
+    const label = i < ROMAN.length
+      ? `${t('installation')} ${ROMAN[i]}`
+      : `${t('installation')} ${i + 1}`
+    const caption = i < artistCaptions.length ? artistCaptions[i] : undefined
+    return {
+      src: `${BUCKET}/bozcaada-${i + 1}.jpg`,
+      alt: caption ? `${label} — ${caption}` : `${t('title')} — ${label}`,
+      width: 1600,
+      height: 1200,
+      title: label,
+      description: caption,
+    }
+  })
 
   return (
     <main className="py-16 sm:py-24">
