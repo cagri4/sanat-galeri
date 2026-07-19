@@ -56,6 +56,17 @@ export async function getArtistBySlug(slug: string) {
   return mapArtist(data)
 }
 
+/** Ana site iletişim sayfası için tüm sanatçılar (id sırasıyla). */
+export async function getAllArtists() {
+  const { data, error } = await supabase
+    .from('artists')
+    .select('*')
+    .order('id', { ascending: true })
+
+  if (error || !data) return []
+  return data.map(mapArtist)
+}
+
 export async function getArtistPortfolio(artistId: number) {
   const { data, error } = await supabase
     .from('portfolio_items')
