@@ -56,16 +56,14 @@
   "meta": {
     "homeTitle": "U-Art Tasarım",
     "homeDesc": "Sade, galeri kalitesinde sanat vitrini.",
-    "heroSubtitle": "Özgün sanat eserleri — tablo, heykel, seramik ve baskı",
+    "heroSubtitle": "Terra sigillata tekniğiyle antik dönem seramik replikaları",
     "exploreGallery": "Galeriyi Keşfet",
     "meetArtists": "Sanatçılarımız",
-    "melikeBio": "Melike Doğan — renk ve doku arasında köprüler kuran çok yönlü bir sanatçı.",
-    "serefBio": "Şeref Doğan — geleneksel teknikleri çağdaş yorumlarla buluşturan bir usta.",
     "viewPortfolio": "Portfolyoyu Gör",
     "recentWorks": "Son Eserler",
     "viewAll": "Tüm Eserleri Gör",
     "galleryTitle": "Galeri | U-Art Tasarım",
-    "galleryDesc": "Ozgun tablolar, heykeller ve baski resimler.",
+    "galleryDesc": "Terra sigillata tekniğiyle üretilmiş antik dönem seramik replikaları.",
     "artistTitle": "{name} | U-Art Tasarım",
     "artistDesc": "{name} - sanatci portfolyosu ve CV",
     "portfolioTitle": "Portfolyo | {name}",
@@ -127,5 +125,10 @@
     "techniqueCta": "Terra Sigillata tekniği hakkında",
     "ongoingTitle": "Koleksiyonun Devam Eden Çalışmaları",
     "ongoingBody": "Bozcaada sergisinin ardından antik seramikler üzerine araştırmalar ve üretim süreci devam etti. Bu bölümde yer alan eserler, sergi sonrasında üretilen ve bugün sanatçının koleksiyonunda bulunan çalışmalardan oluşmaktadır."
+  },
+  "instagram": {
+    "title": "Instagram'da bizi takip edin",
+    "body": "Atölyeden ve koleksiyondan seçtiğimiz çalışmalar. Güncel paylaşımlar için Instagram hesabımıza göz atabilirsiniz.",
+    "followCta": "Instagram'da takip et"
   }
 }

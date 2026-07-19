@@ -4,6 +4,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getProducts } from '@/lib/queries/gallery'
 import HeroSlideshow, { type HeroSlide } from '@/components/gallery/hero-slideshow'
+import InstagramSection from '@/components/gallery/instagram-section'
+import { ARTIST_AVATARS, AVATAR_CLASS } from '@/lib/artist-avatars'
 import { getCrossDomainLinks } from '@/components/shared/navbar'
 
 export async function generateMetadata({
@@ -38,6 +40,24 @@ export default async function HomePage({
     // DB not available
   }
   const recentProducts = allProducts.slice(0, 6)
+
+  // Sanatci kartlari icin GECICI gorseller: figursuz geometrik eserler
+  // secildi — mitolojik figurlu eserler bir sanatciyi cagristirabilir,
+  // atama ise hala gecici. Portre/atolye fotografi gelince degisecek.
+  const artistPlaceholders = ['geometrik-donem-tabak', 'geometrik-donem-toren-kabi']
+    .map((slug) => allProducts.find((p) => p.slug === slug)?.images?.[0]?.url)
+    .filter(Boolean) as string[]
+
+  // Instagram bolumu icin secilmis 9 gorsel — sanatcinin eserlerinden.
+  // CANLI FEED DEGIL; bu gorsellerin belirli IG gonderileri oldugu iddia
+  // edilmiyor (bkz. instagram-section.tsx duruluk notu).
+  const instagramItems = allProducts
+    .filter((p) => p.images?.[0]?.url)
+    .slice(0, 9)
+    .map((p) => ({
+      src: p.images[0].url,
+      alt: isTr ? p.titleTr : p.titleEn,
+    }))
 
   // Hero: 5 FARKLI seriden birer guclu gorsel (sanatcinin sirasindan secildi).
   // Gorsel cesitliligi gozetildi: krater / kylix / figurlu tabak / geometrik.
@@ -140,33 +160,16 @@ export default async function HomePage({
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
-            {[
-              { src: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=500&q=80', title: isTr ? 'Mavi Düşler' : 'Blue Dreams' },
-              { src: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=500&q=80', title: isTr ? 'Sonbahar Işığı' : 'Autumn Light' },
-              { src: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=500&q=80', title: isTr ? 'Toprak ve Form' : 'Earth & Form' },
-              { src: 'https://images.unsplash.com/photo-1549490349-8643362247b5?w=500&q=80', title: isTr ? 'Doğanın Sesi' : 'Voice of Nature' },
-              { src: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=500&q=80', title: isTr ? 'Sessiz Şehir' : 'Silent City' },
-              { src: 'https://images.unsplash.com/photo-1482160549825-59d1b23cb208?w=500&q=80', title: isTr ? 'Renk Çalışması' : 'Color Study' },
-            ].map((item, i) => (
-              <div key={i} className="group cursor-pointer">
-                <div className="aspect-[3/4] bg-[#f0ece4] overflow-hidden">
-                  <Image
-                    src={item.src}
-                    alt={item.title}
-                    fill={false}
-                    width={500}
-                    height={667}
-                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
-                    sizes="(max-width: 768px) 50vw, 33vw"
-                  />
-                </div>
-                <h3 className="mt-3 text-sm text-[#1a1a1a]">{item.title}</h3>
-              </div>
-            ))}
-          </div>
+          // Uydurma eser adlari ("Mavi Dusler" vb.) ve stok fotograflardan
+          // olusan yedek izgara kaldirildi — veri yoksa sessiz bos durum.
+          <p className="py-16 text-center text-[length:var(--text-meta)] text-[#999]">
+            {isTr ? 'Eserler yakında burada olacak.' : 'Works will appear here shortly.'}
+          </p>
         )}
       </section>
+
+      {/* Instagram — curated (canli feed degil), "Son Eserler" sonrasi */}
+      <InstagramSection locale={locale} items={instagramItems} />
 
       {/* Artists — side by side with large images */}
       <section className="py-20 border-t border-[#e8e4de]">
@@ -181,21 +184,36 @@ export default async function HomePage({
             className="group block"
           >
             <div className="aspect-[4/5] relative overflow-hidden bg-[#f0ece4]">
+              {/* GECICI GORSEL: elimizde sanatci portresi/atolye fotografi yok.
+                  Eser->sanatci atamasi da hala gecici oldugu icin figursuz,
+                  belirli bir sanatciya baglanmayan notr bir eser gorseli
+                  kullaniliyor. alt="" -> dekoratif; bu gorselin sanatciya ait
+                  oldugu IDDIA EDILMIYOR (ad zaten baslikta).
+                  Atolye/calisirken fotografi gelince degistirilecek. */}
               <Image
-                src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=700&q=80"
-                alt="Melike Doğan"
+                src={artistPlaceholders[0]}
+                alt=""
                 fill
                 className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
             <div className="mt-5">
-              <h3 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a]">
-                Melike Doğan
-              </h3>
-              <p className="mt-2 text-[13px] text-[#6b6b6b] leading-relaxed max-w-sm">
-                {t('melikeBio')}
-              </p>
+              <div className="flex items-center gap-3">
+                {/* Kucuk yuvarlak atolye gorseli — kaynak dusuk cozunurluklu
+                    oldugu icin buyuk kullanilmiyor (bkz. lib/artist-avatars).
+                    Yuksek cozunurluklu orijinal gelince degistirilecek. */}
+                <Image
+                  src={ARTIST_AVATARS.melike.src}
+                  alt={isTr ? ARTIST_AVATARS.melike.alt.tr : ARTIST_AVATARS.melike.alt.en}
+                  width={320}
+                  height={320}
+                  className={`h-14 w-14 shrink-0 ${AVATAR_CLASS}`}
+                />
+                <h3 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a]">
+                  Melike Doğan
+                </h3>
+              </div>
               <span className="mt-3 inline-block text-[13px] uppercase tracking-[0.15em] text-[#612E49] group-hover:text-[#4f243b] transition-colors">
                 {t('viewPortfolio')} &rarr;
               </span>
@@ -208,21 +226,32 @@ export default async function HomePage({
             className="group block"
           >
             <div className="aspect-[4/5] relative overflow-hidden bg-[#f0ece4]">
+              {/* GECICI GORSEL — yukaridaki notun aynisi gecerli.
+                  Atolye/calisirken fotografi gelince degistirilecek. */}
               <Image
-                src="https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=700&q=80"
-                alt="Şeref Doğan"
+                src={artistPlaceholders[1]}
+                alt=""
                 fill
                 className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
             <div className="mt-5">
-              <h3 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a]">
-                Şeref Doğan
-              </h3>
-              <p className="mt-2 text-[13px] text-[#6b6b6b] leading-relaxed max-w-sm">
-                {t('serefBio')}
-              </p>
+              <div className="flex items-center gap-3">
+                {/* Kucuk yuvarlak atolye gorseli — kaynak dusuk cozunurluklu
+                    oldugu icin buyuk kullanilmiyor (bkz. lib/artist-avatars).
+                    Yuksek cozunurluklu orijinal gelince degistirilecek. */}
+                <Image
+                  src={ARTIST_AVATARS.seref.src}
+                  alt={isTr ? ARTIST_AVATARS.seref.alt.tr : ARTIST_AVATARS.seref.alt.en}
+                  width={320}
+                  height={320}
+                  className={`h-14 w-14 shrink-0 ${AVATAR_CLASS}`}
+                />
+                <h3 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a]">
+                  Şeref Doğan
+                </h3>
+              </div>
               <span className="mt-3 inline-block text-[13px] uppercase tracking-[0.15em] text-[#612E49] group-hover:text-[#4f243b] transition-colors">
                 {t('viewPortfolio')} &rarr;
               </span>

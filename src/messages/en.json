@@ -56,16 +56,14 @@
   "meta": {
     "homeTitle": "U-Art Design",
     "homeDesc": "Simple, gallery-quality art showcase.",
-    "heroSubtitle": "Original artworks — paintings, sculptures, ceramics and prints",
+    "heroSubtitle": "Ancient-period ceramic replicas in the terra sigillata technique",
     "exploreGallery": "Explore Gallery",
     "meetArtists": "Our Artists",
-    "melikeBio": "Melike Doğan — a versatile artist building bridges between color and texture.",
-    "serefBio": "Şeref Doğan — a master blending traditional techniques with contemporary expression.",
     "viewPortfolio": "View Portfolio",
     "recentWorks": "Recent Works",
     "viewAll": "View All Works",
     "galleryTitle": "Gallery | U-Art Design",
-    "galleryDesc": "Original paintings, sculptures, and prints.",
+    "galleryDesc": "Ancient-period ceramic replicas produced in the terra sigillata technique.",
     "artistTitle": "{name} | U-Art Design",
     "artistDesc": "{name} - artist portfolio and CV",
     "portfolioTitle": "Portfolio | {name}",
@@ -127,5 +125,10 @@
     "techniqueCta": "About the terra sigillata technique",
     "ongoingTitle": "Ongoing Work in the Collection",
     "ongoingBody": "Following the Bozcaada exhibition, research and production on ancient ceramics continued. The works in this section were produced after the exhibition and are today part of the artist's own collection."
+  },
+  "instagram": {
+    "title": "Follow us on Instagram",
+    "body": "A selection of works from the studio and the collection. Visit our Instagram account for current posts.",
+    "followCta": "Follow on Instagram"
   }
 }

@@ -1,6 +1,26 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 import { getCrossDomainLinks } from '@/components/shared/navbar'
+import { ARTIST_AVATARS, AVATAR_CLASS } from '@/lib/artist-avatars'
+import Reveal from '@/components/motion/reveal'
+
+/**
+ * Hakkimizda.
+ *
+ * ONCEKI HALINDE UYDURMA ICERIK VARDI, KALDIRILDI:
+ * - "Tablo, heykel, baski resim" konumlandirmasi (atolye antik donem seramik
+ *   replikasi uretiyor).
+ * - Melike icin "Akrilik, yagli boya ile calisir", "Istanbul ve uluslararasi
+ *   galerilerde sergileri bulunan" — DOGRULANMAMIS sergi iddiasi.
+ * - Seref icin "heykel, enstalasyon", "tas ve metal ile calisir".
+ * - Uc adet stok Unsplash fotografi; ikisi gercek kisi adiyla etiketliydi.
+ *
+ * Simdi yalnizca DOGRULANMIS bilgi var: atolyenin ne urettigi (sanatcinin
+ * kendi dokumani), gercek atolye gorselleri ve gercek Bozcaada 2010 sergisi.
+ * Sanatci basina biyografi metni sanatciDAN gelene kadar YAZILMAZ.
+ */
 
 export async function generateMetadata({
   params,
@@ -24,106 +44,94 @@ export default async function AboutPage({
 }) {
   const { locale } = await params
   const isTr = locale === 'tr'
+  const tc = await getTranslations({ locale, namespace: 'collection' })
 
   const MAIN_URL = process.env.NEXT_PUBLIC_MAIN_URL ?? ''
   const MELIKE_URL = process.env.NEXT_PUBLIC_MELIKE_URL ?? '#'
   const SEREF_URL = process.env.NEXT_PUBLIC_SEREF_URL ?? '#'
   const domainLinks = getCrossDomainLinks(locale, MAIN_URL, MELIKE_URL, SEREF_URL)
 
+  const artists = [
+    { slug: 'melike', name: 'Melike Doğan', href: domainLinks.melike },
+    { slug: 'seref', name: 'Şeref Doğan', href: domainLinks.seref },
+  ]
+
   return (
-    <main>
-      {/* Hero */}
-      <section className="py-20 sm:py-28 max-w-3xl">
-        <h1 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl font-light tracking-wide text-[#1a1a1a]">
+    <main className="py-16 sm:py-24">
+      <Reveal as="section" className="max-w-2xl">
+        <h1 className="font-[family-name:var(--font-serif)] text-4xl font-light leading-[1.1] tracking-[-0.01em] text-[#1a1a1a] sm:text-5xl lg:text-6xl">
           {isTr ? 'Hakkımızda' : 'About Us'}
         </h1>
-        <p className="mt-8 text-base text-[#6b6b6b] leading-[1.8]">
+        <p className="mt-8 max-w-[68ch] text-[length:var(--text-lead)] leading-[1.8] text-[#4a4a4a]">
           {isTr
-            ? 'U-Art Tasarım, Melike Doğan ve Şeref Doğan tarafından kurulan bir sanat atölyesidir. Tablo, heykel, seramik ve baskı resim gibi farklı disiplinlerde özgün eserler üretiyoruz. Atölyemiz, geleneksel sanat formlarını çağdaş yaklaşımlarla birleştirerek, her eserde özgün bir ifade yaratmayı amaçlamaktadır.'
-            : 'U-Art Design is an art studio founded by Melike Doğan and Şeref Doğan. We create original works across various disciplines including painting, sculpture, ceramics, and prints. Our studio aims to create unique expressions in every piece by combining traditional art forms with contemporary approaches.'}
+            ? 'U-Art Tasarım, Melike Doğan ve Şeref Doğan’ın Çanakkale’deki sanat atölyesidir. Atölyede antik dönem seramiklerinin form, bezeme ve ikonografisi araştırılır; eserler terra sigillata tekniğiyle yeniden üretilir.'
+            : 'U-Art Design is the Çanakkale studio of Melike Doğan and Şeref Doğan. The studio researches the form, decoration and iconography of ancient ceramics, reproducing works in the terra sigillata technique.'}
         </p>
-      </section>
-
-      {/* Studio image — full bleed */}
-      <section className="full-bleed">
-        <div className="aspect-[16/6] relative overflow-hidden">
-          <Image
-            src="https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=1600&q=80"
-            alt={isTr ? 'Sanat atölyesi' : 'Art studio'}
-            fill
-            className="object-cover"
-            sizes="100vw"
-          />
+        {/* Koleksiyon tanitimi — sanatcinin kendi metni */}
+        <p className="mt-6 max-w-[68ch] text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]">
+          {tc('short')}
+        </p>
+        <div className="mt-8 flex flex-wrap gap-x-10 gap-y-2">
+          <Link
+            href={`/${locale}/teknik`}
+            className="group inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#1a1a1a]"
+          >
+            <span className="bg-[linear-gradient(var(--accent),var(--accent))] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-1 transition-[background-size] duration-[var(--dur-micro)] ease-out group-hover:bg-[length:100%_1px]">
+              {tc('techniqueCta')}
+            </span>
+          </Link>
+          <Link
+            href={`/${locale}/sergi/bozcaada-2010`}
+            className="inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#1a1a1a]"
+          >
+            {isTr ? 'Bozcaada Sergisi · 2010' : 'Bozcaada Exhibition · 2010'}
+          </Link>
         </div>
-      </section>
+      </Reveal>
 
-      {/* Artists */}
-      <section className="py-20 sm:py-28">
-        <h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl font-light text-[#1a1a1a] mb-14">
-          {isTr ? 'Sanatçılarımız' : 'Our Artists'}
+      {/* Sanatcilar — biyografi metni sanatcidan gelene kadar YAZILMIYOR;
+          yalnizca ad, gercek atolye gorseli ve portfolyo baglantisi. */}
+      <Reveal as="section" className="mt-24 border-t border-[var(--rule)] pt-16">
+        <h2 className="font-[family-name:var(--font-serif)] text-3xl font-light text-[#1a1a1a] sm:text-4xl">
+          {isTr ? 'Sanatçılar' : 'Artists'}
         </h2>
 
-        {/* Melike */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 items-start">
-          <div className="md:col-span-2 aspect-[3/4] relative overflow-hidden bg-[#f0ece4]">
-            <Image
-              src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=600&q=80"
-              alt="Melike Doğan"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 40vw"
-            />
-          </div>
-          <div className="md:col-span-3 md:pt-8">
-            <h3 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a]">
-              Melike Doğan
-            </h3>
-            <p className="mt-4 text-[15px] text-[#6b6b6b] leading-[1.8]">
-              {isTr
-                ? 'Renk ve doku arasında köprüler kuran çok yönlü bir sanatçı. Eserleri, doğanın ve şehir yaşamının çarpıcı kontrastlarını yansıtır. Akrilik, yağlı boya ve karışık tekniklerle çalışır. İstanbul ve uluslararası galerilerde sergileri bulunan Melike, eserlerinde organik formlar ile geometrik yapıları harmanlayarak kendine özgü bir dil yaratır.'
-                : 'A versatile artist building bridges between color and texture. Her works reflect the striking contrasts of nature and urban life. She works with acrylic, oil, and mixed media techniques. With exhibitions in Istanbul and international galleries, Melike creates a unique language by blending organic forms with geometric structures.'}
-            </p>
-            <a
-              href={domainLinks.melike}
-              className="mt-6 inline-block text-[13px] uppercase tracking-[0.15em] text-[#612E49] hover:text-[#4f243b] transition-colors"
-            >
-              {isTr ? 'Portfolyoyu Gör' : 'View Portfolio'} &rarr;
-            </a>
-          </div>
+        <div className="mt-12 grid grid-cols-1 gap-12 sm:grid-cols-2">
+          {artists.map((a) => {
+            const avatar = ARTIST_AVATARS[a.slug]
+            return (
+              <a key={a.slug} href={a.href} className="group flex items-center gap-5">
+                {avatar && (
+                  // Kucuk/yuvarlak: kaynak gorsel dusuk cozunurluklu
+                  // (bkz. lib/artist-avatars). Yuksek cozunurluklu orijinal
+                  // gelince degistirilecek.
+                  <Image
+                    src={avatar.src}
+                    alt={isTr ? avatar.alt.tr : avatar.alt.en}
+                    width={320}
+                    height={320}
+                    className={`h-20 w-20 shrink-0 sm:h-24 sm:w-24 ${AVATAR_CLASS}`}
+                  />
+                )}
+                <div>
+                  <h3 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a]">
+                    {a.name}
+                  </h3>
+                  <span className="mt-2 inline-block text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] group-hover:text-[var(--accent)]">
+                    {isTr ? 'Portfolyoyu Gör' : 'View Portfolio'} &rarr;
+                  </span>
+                </div>
+              </a>
+            )
+          })}
         </div>
 
-        {/* Divider */}
-        <div className="my-16 border-t border-[#e8e4de]" />
-
-        {/* Seref */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 items-start">
-          <div className="md:col-span-2 md:order-2 aspect-[3/4] relative overflow-hidden bg-[#f0ece4]">
-            <Image
-              src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80"
-              alt="Şeref Doğan"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 40vw"
-            />
-          </div>
-          <div className="md:col-span-3 md:order-1 md:pt-8">
-            <h3 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a]">
-              Şeref Doğan
-            </h3>
-            <p className="mt-4 text-[15px] text-[#6b6b6b] leading-[1.8]">
-              {isTr
-                ? 'Geleneksel teknikleri çağdaş yorumlarla buluşturan bir usta. Heykel, seramik ve enstalasyon çalışmalarıyla tanınır. Eserleri form ve boşluk arasındaki dengeyi araştırır. Toprak, taş ve metal gibi doğal malzemelerle çalışarak, izleyiciyi dokunsal bir deneyime davet eden üç boyutlu eserler üretir.'
-                : 'A master blending traditional techniques with contemporary expression. Known for sculpture, ceramics, and installation works. His pieces explore the balance between form and space. Working with natural materials like clay, stone, and metal, he creates three-dimensional works that invite the viewer into a tactile experience.'}
-            </p>
-            <a
-              href={domainLinks.seref}
-              className="mt-6 inline-block text-[13px] uppercase tracking-[0.15em] text-[#612E49] hover:text-[#4f243b] transition-colors"
-            >
-              {isTr ? 'Portfolyoyu Gör' : 'View Portfolio'} &rarr;
-            </a>
-          </div>
-        </div>
-      </section>
+        <p className="mt-12 max-w-[68ch] border-l border-[var(--rule)] pl-5 text-[length:var(--text-meta)] leading-relaxed text-[#999]">
+          {isTr
+            ? 'Sanatçı biyografileri ve sergi geçmişi sanatçılardan geldikçe bu sayfaya eklenecektir.'
+            : 'Artist biographies and exhibition histories will be added to this page as they are provided by the artists.'}
+        </p>
+      </Reveal>
     </main>
   )
 }

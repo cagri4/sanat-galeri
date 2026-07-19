@@ -4,13 +4,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getArtistBySlug, getArtistPortfolio, getArtistExhibitions } from '@/lib/queries/artist'
 import { getProductsByArtist } from '@/lib/queries/gallery'
+import { ARTIST_AVATARS, AVATAR_CLASS } from '@/lib/artist-avatars'
 import ArtistNav from '@/components/artist/artist-nav'
 
-// Hero images per artist (placeholder — will come from DB later)
-const HERO_IMAGES: Record<string, string> = {
-  melike: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=1920&q=80',
-  seref: 'https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=1920&q=80',
-}
+// NOT: Burada daha once stok fotograflar vardi ve gercek kisi adiyla
+// etiketleniyordu (alt="Melike Dogan") — kaldirildi. Artik baslik bandinda
+// sanatcinin gercek atolye gorseli yuvarlak avatar olarak kullaniliyor
+// (bkz. lib/artist-avatars).
 
 export async function generateMetadata({
   params,
@@ -62,36 +62,42 @@ export default async function ArtistPage({
 
   const bio = data ? (isTr ? (data.bioTr ?? data.bioEn) : (data.bioEn ?? data.bioTr)) : null
   const statement = data ? (isTr ? (data.statementTr ?? data.statementEn) : (data.statementEn ?? data.statementTr)) : null
-  const heroImg = HERO_IMAGES[artist] ?? HERO_IMAGES.melike
+  // Hero gorseli: sanatcinin kendi eserlerinden ilki. Portre/atolye
+  // fotografi gelince HERO_IMAGES uzerinden gecilecek.
+  // Atolye profil gorseli — kucuk/yuvarlak kullanilir (bkz. lib/artist-avatars).
+  const avatar = ARTIST_AVATARS[artist]
   const soloCount = exhibitions.filter(e => e.type === 'solo_sergi').length
   const groupCount = exhibitions.filter(e => e.type === 'grup_sergi').length
 
   return (
     <main>
-      {/* Hero — full viewport */}
-      <section className="full-bleed">
-        <div className="relative h-[70svh] sm:h-[80svh]">
-          <Image
-            src={heroImg}
-            alt={name}
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-          <div className="absolute inset-0 flex flex-col items-center justify-end pb-16 sm:pb-20 text-center px-6">
-            <h1 className="font-[family-name:var(--font-serif)] text-4xl sm:text-5xl lg:text-7xl font-light text-white tracking-wide">
-              {name}
-            </h1>
-            {soloCount + groupCount > 0 && (
-              <p className="mt-3 text-sm text-white/60 tracking-[0.2em] uppercase">
-                {soloCount > 0 && `${soloCount} ${isTr ? 'solo sergi' : 'solo exhibitions'}`}
-                {soloCount > 0 && groupCount > 0 && ' · '}
-                {groupCount > 0 && `${groupCount} ${isTr ? 'grup sergisi' : 'group exhibitions'}`}
-              </p>
-            )}
-          </div>
+      {/* Baslik bandi — sade.
+          Onceki halinde eser fotografi tam ekran object-cover ile arka plana
+          konuyordu; kap asiri buyuyup dokuya donusuyor, ustundeki beyaz metin
+          ve yuvarlak avatar okunmuyordu. Eserler zaten asagidaki portfolyoda
+          hakkiyla gosteriliyor, bu yuzden baslik sakin bir bant oldu. */}
+      <section className="full-bleed bg-[#f4f0e9]">
+        <div className="mx-auto flex max-w-6xl flex-col items-center px-6 py-16 text-center sm:px-10 sm:py-20 lg:px-16">
+          {avatar && (
+            <Image
+              src={avatar.src}
+              alt={isTr ? avatar.alt.tr : avatar.alt.en}
+              width={320}
+              height={320}
+              priority
+              className={`mb-7 h-28 w-28 sm:h-32 sm:w-32 ${AVATAR_CLASS}`}
+            />
+          )}
+          <h1 className="font-[family-name:var(--font-serif)] text-4xl font-light tracking-[-0.01em] text-[#1a1a1a] sm:text-5xl lg:text-6xl">
+            {name}
+          </h1>
+          {soloCount + groupCount > 0 && (
+            <p className="mt-4 text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
+              {soloCount > 0 && `${soloCount} ${isTr ? 'solo sergi' : 'solo exhibitions'}`}
+              {soloCount > 0 && groupCount > 0 && ' · '}
+              {groupCount > 0 && `${groupCount} ${isTr ? 'grup sergisi' : 'group exhibitions'}`}
+            </p>
+          )}
         </div>
       </section>
 
