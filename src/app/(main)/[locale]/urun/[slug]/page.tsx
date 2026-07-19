@@ -5,6 +5,7 @@ import { getProductBySlug } from '@/lib/queries/gallery'
 import LightboxViewer from '@/components/gallery/lightbox-viewer'
 import ContactForm from '@/components/gallery/contact-form'
 import Reveal from '@/components/motion/reveal'
+import RichText from '@/components/shared/rich-text'
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>
@@ -137,15 +138,14 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
             )}
           </dl>
 
-          {/* Açıklama — paragraflar korunur */}
+          {/* Açıklama / ikonografik çözümleme — sanatçının kendi metni,
+              paragrafları ve vurguları korunarak basılır. */}
           {description && (
-            <div className="space-y-4">
-              {String(description).split('\n\n').filter(Boolean).map((para: string, i: number) => (
-                <p key={i} className="max-w-[68ch] text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]">
-                  {para}
-                </p>
-              ))}
-            </div>
+            <RichText
+              text={String(description)}
+              className="space-y-5"
+              paragraphClassName="max-w-[68ch] text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]"
+            />
           )}
 
           {/* Replika Hakkında — sanatçının katalog şemasındaki sabit bölüm */}

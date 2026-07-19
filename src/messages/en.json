@@ -71,6 +71,7 @@
     "contactTitle": "Contact | {name}"
   },
   "cv": {
+    "navLabel": "Artist section navigation",
     "bioTitle": "About",
     "statementTitle": "Artist Statement",
     "portfolioTitle": "Portfolio",
@@ -82,7 +83,14 @@
     "soloExhibition": "Solo Exhibition",
     "groupExhibition": "Group Exhibition",
     "contactPlaceholder": "Write your exhibition or collaboration proposal...",
-    "noPortfolio": "No portfolio items yet"
+    "noPortfolio": "Works by this artist will appear in this section soon.",
+    "recentWorks": "Recent Works",
+    "viewAll": "View All",
+    "workCount": "{count} works",
+    "techniqueLink": "The Terra Sigillata Technique",
+    "studioIntro": "Inspired by distinguished examples of ancient Greek ceramic art and remade in the terra sigillata technique, this collection sets out to bring mythological narratives, scenes of daily life and the decorative language of the period to a contemporary audience.",
+    "studioIntro2": "The works in the collection were reproduced in the terra sigillata technique after close study of ancient examples; original forms, decorative schemes and mythological narratives are interpreted within a contemporary ceramic practice. Each form is thrown on the wheel, coated with a fine terra sigillata slip, and its surface decoration worked by hand.",
+    "bioPending": "The artist's personal biography has not been published yet; it will be added to this section once the artist's own text is available."
   },
   "footer": {
     "copyright": "© {year} U-Art Design. All rights reserved.",

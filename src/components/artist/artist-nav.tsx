@@ -1,31 +1,66 @@
-import { getTranslations } from 'next-intl/server'
+'use client'
+
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+
+/**
+ * Sanatci alt navigasyonu.
+ *
+ * ONEMLI: Bu bilesen `layout.tsx` icinde render edilir; daha once yalnizca
+ * sanatci ANA sayfasinda (page.tsx) duruyordu, bu yuzden "Portfolyo" veya
+ * "Sergiler"e gecince tum sekmeler kayboluyor ve kullanici geri donemiyordu.
+ * Layout'ta durdugu icin dort sayfada da gorunur.
+ *
+ * Client bilesen olmasinin tek sebebi aktif sekmeyi isaretlemek (usePathname).
+ */
 
 interface ArtistNavProps {
   locale: string
   artist: string
 }
 
-export default async function ArtistNav({ locale, artist }: ArtistNavProps) {
-  const t = await getTranslations({ locale, namespace: 'cv' })
+export default function ArtistNav({ locale, artist }: ArtistNavProps) {
+  const t = useTranslations('cv')
+  const pathname = usePathname()
 
+  const base = `/${locale}/${artist}`
   const links = [
-    { href: `/${locale}/${artist}`, label: t('bioTitle') },
-    { href: `/${locale}/${artist}/portfolyo`, label: t('portfolioTitle') },
-    { href: `/${locale}/${artist}/sergiler`, label: t('exhibitionsTitle') },
-    { href: `/${locale}/${artist}/iletisim`, label: t('contactTitle') },
+    { href: base, label: t('bioTitle') },
+    { href: `${base}/portfolyo`, label: t('portfolioTitle') },
+    { href: `${base}/sergiler`, label: t('exhibitionsTitle') },
+    { href: `${base}/iletisim`, label: t('contactTitle') },
   ]
 
+  // Sondaki egik cizgiyi yok say ("/tr/melike/" == "/tr/melike").
+  const current = pathname.replace(/\/$/, '') || '/'
+
+  // Mobilde sekmeler satira sigmaz; TEK satirda yatay kaydirilir.
+  // `-mx-6` ile tam-genislik tasirmasi DENENDI ve geri alindi: sayfa kabugu bir
+  // flex ogesi oldugu icin negatif kenar bosluklari kabugu buyutuyor ve 390px'te
+  // 52px yatay tasma yaratiyordu.
   return (
-    <nav className="flex flex-wrap gap-x-4 sm:gap-x-7 gap-y-1 py-4 sm:py-5 border-b border-[#e8e4de]">
-      {links.map((link) => (
-        <a
-          key={link.href}
-          href={link.href}
-          className="text-[12px] sm:text-[13px] uppercase tracking-[0.1em] sm:tracking-[0.12em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors py-1"
-        >
-          {link.label}
-        </a>
-      ))}
+    <nav
+      aria-label={t('navLabel')}
+      className="filter-scroll flex min-w-0 gap-x-6 overflow-x-auto border-b border-[var(--rule)] sm:gap-x-8"
+    >
+      {links.map((link) => {
+        const active = current === link.href
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            aria-current={active ? 'page' : undefined}
+            className={`relative shrink-0 whitespace-nowrap py-4 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] transition-colors duration-[var(--dur-micro)] sm:py-5 ${
+              active
+                ? 'text-[#1a1a1a] after:absolute after:inset-x-0 after:bottom-[-1px] after:h-px after:bg-[var(--accent)]'
+                : 'text-[#6b6b6b] hover:text-[#1a1a1a]'
+            }`}
+          >
+            {link.label}
+          </Link>
+        )
+      })}
     </nav>
   )
 }

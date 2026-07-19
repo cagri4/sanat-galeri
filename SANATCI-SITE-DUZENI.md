@@ -100,4 +100,5 @@ Bu bölümde bugün sanatçıda bulunan eserler yer alır: Afrodit ve Kaz, Europ
 - **Logo:** `public/brand/uart-logo-orijinal.jpg` (bordo yuvarlak, "U ART tasarım")
 - **Adres:** Boğazkent mah. 3.cad.1/10, Kepez, Çanakkale, Türkiye 17100
 - **E-posta:** melike@uarttasarim.com · seref@uarttasarim.com
-- **WhatsApp:** Şeref +90 554 290 31 65 · Melike +90 555 277 30 46
+- **WhatsApp:** ⛔ **SİTEDE KULLANILMAYACAK.** Çağrı 2026-07-19'da kaldırttı — kişisel cep numaraları açık sitede durmayacak. İletişim yalnızca sol alttaki ikon → modal form üzerinden. Numaraları siteye GERİ EKLEME.
+- **İletişim akışı:** sol alt ikon → modal form → `/api/contact` → `messages` tablosu (admin panelinde görünür) → (eklenecek) info@uarttasarim.com'a Nodemailer ile bildirim maili, Reply-To = ziyaretçi.
