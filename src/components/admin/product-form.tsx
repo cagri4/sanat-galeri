@@ -28,10 +28,9 @@ const productFormSchema = z.object({
 type ProductFormData = z.infer<typeof productFormSchema>
 
 const CATEGORIES = [
-  { value: 'resim', label: 'Resim' },
-  { value: 'heykel', label: 'Heykel' },
-  { value: 'seramik', label: 'Seramik' },
-  { value: 'diger', label: 'Diger' },
+  { value: 'Antik Dönem Replikaları', label: 'Antik Dönem Replikaları' },
+  { value: 'Resimli Seramikler', label: 'Resimli Seramikler' },
+  { value: 'Mimari Duvar Panoları', label: 'Mimari Duvar Panoları' },
 ]
 
 interface ProductData {

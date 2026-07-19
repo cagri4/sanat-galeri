@@ -13,6 +13,9 @@ export default function CategoryFilter({ categories, active }: CategoryFilterPro
   const pathname = usePathname()
   const t = useTranslations('gallery')
 
+  // Kategoriler DB'de TR kanonik adıyla saklanır; çeviri yoksa ham değere düş.
+  const label = (cat: string) => t.has(`categories.${cat}`) ? t(`categories.${cat}`) : cat
+
   const handleAll = () => {
     router.replace(pathname)
   }
@@ -45,7 +48,7 @@ export default function CategoryFilter({ categories, active }: CategoryFilterPro
               : 'bg-[#f0ece4] text-[#6b6b6b] hover:text-[#1a1a1a]'
           }`}
         >
-          {cat}
+          {label(cat)}
         </button>
       ))}
     </div>

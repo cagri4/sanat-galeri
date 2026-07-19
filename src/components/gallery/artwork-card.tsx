@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 import { getProducts } from '@/lib/queries/gallery'
 
 type ProductWithImage = Awaited<ReturnType<typeof getProducts>>[number]
@@ -9,9 +10,13 @@ interface ArtworkCardProps {
   locale: string
 }
 
-export default function ArtworkCard({ product, locale }: ArtworkCardProps) {
+export default async function ArtworkCard({ product, locale }: ArtworkCardProps) {
+  const t = await getTranslations({ locale, namespace: 'gallery' })
   const title = locale === 'tr' ? product.titleTr : product.titleEn
   const image = product.images[0]
+  const categoryLabel = t.has(`categories.${product.category}`)
+    ? t(`categories.${product.category}`)
+    : product.category
 
   const priceDisplay =
     product.price != null
@@ -39,7 +44,7 @@ export default function ArtworkCard({ product, locale }: ArtworkCardProps) {
         )}
       </div>
       <div className="mt-3">
-        <p className="text-[11px] uppercase tracking-[0.15em] text-[#999]">{product.category}</p>
+        <p className="text-[11px] uppercase tracking-[0.15em] text-[#999]">{categoryLabel}</p>
         <h3 className="mt-1 text-sm text-[#1a1a1a]">{title}</h3>
         {priceDisplay && (
           <p className="mt-0.5 text-[13px] text-[#6b6b6b]">{priceDisplay}</p>

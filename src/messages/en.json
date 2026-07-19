@@ -23,7 +23,12 @@
     "contactForPrice": "Contact for price",
     "sold": "Sold",
     "contactTitle": "Get in Touch",
-    "whatsappCta": "Ask via WhatsApp"
+    "whatsappCta": "Ask via WhatsApp",
+    "categories": {
+      "Antik Dönem Replikaları": "Ancient Period Replicas",
+      "Resimli Seramikler": "Painted Ceramics",
+      "Mimari Duvar Panoları": "Architectural Wall Panels"
+    }
   },
   "contact": {
     "nameLabel": "Your Name",

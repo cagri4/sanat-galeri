@@ -13,17 +13,22 @@
   },
   "gallery": {
     "title": "Galeri",
-    "filterAll": "Tumunu Goster",
-    "emptyState": "Henuz eser eklenmedi",
-    "artist": "Sanatci",
+    "filterAll": "Tümünü Göster",
+    "emptyState": "Henüz eser eklenmedi",
+    "artist": "Sanatçı",
     "medium": "Teknik",
     "dimensions": "Boyut",
-    "year": "Yil",
+    "year": "Yıl",
     "price": "Fiyat",
-    "contactForPrice": "Fiyat icin iletisime gecin",
-    "sold": "Satildi",
+    "contactForPrice": "Fiyat için iletişime geçin",
+    "sold": "Satıldı",
     "contactTitle": "Bilgi Al",
-    "whatsappCta": "WhatsApp ile Sor"
+    "whatsappCta": "WhatsApp ile Sor",
+    "categories": {
+      "Antik Dönem Replikaları": "Antik Dönem Replikaları",
+      "Resimli Seramikler": "Resimli Seramikler",
+      "Mimari Duvar Panoları": "Mimari Duvar Panoları"
+    }
   },
   "contact": {
     "nameLabel": "Adiniz",
