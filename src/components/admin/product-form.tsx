@@ -21,6 +21,12 @@ const productFormSchema = z.object({
   mediumEn: z.string().optional(),
   dimensionsTr: z.string().optional(),
   dimensionsEn: z.string().optional(),
+  formTr: z.string().optional(),
+  formEn: z.string().optional(),
+  periodTr: z.string().optional(),
+  periodEn: z.string().optional(),
+  subjectTr: z.string().optional(),
+  subjectEn: z.string().optional(),
   isSold: z.boolean().optional(),
   isVisible: z.boolean().optional(),
 })
@@ -47,6 +53,12 @@ interface ProductData {
   mediumTr: string | null
   mediumEn: string | null
   dimensionsTr: string | null
+  formTr: string | null
+  formEn: string | null
+  periodTr: string | null
+  periodEn: string | null
+  subjectTr: string | null
+  subjectEn: string | null
   dimensionsEn: string | null
   isSold: boolean | null
   isVisible: boolean | null
@@ -88,6 +100,12 @@ export default function ProductForm({ product, artists }: ProductFormProps) {
       mediumTr: product?.mediumTr ?? '',
       mediumEn: product?.mediumEn ?? '',
       dimensionsTr: product?.dimensionsTr ?? '',
+      formTr: product?.formTr ?? '',
+      formEn: product?.formEn ?? '',
+      periodTr: product?.periodTr ?? '',
+      periodEn: product?.periodEn ?? '',
+      subjectTr: product?.subjectTr ?? '',
+      subjectEn: product?.subjectEn ?? '',
       dimensionsEn: product?.dimensionsEn ?? '',
       isSold: product?.isSold ?? false,
       isVisible: product?.isVisible ?? true,
@@ -341,6 +359,81 @@ export default function ProductForm({ product, artists }: ProductFormProps) {
               className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400"
               placeholder="50 x 70 cm"
             />
+          </div>
+        </div>
+
+        {/* Katalog bilgileri — eser sayfasindaki kunye satirlari.
+            Bos birakilan alan sitede hic gosterilmez. */}
+        <div className="pt-6 border-t border-neutral-200">
+          <h3 className="text-sm font-medium text-neutral-900 mb-1">Katalog Bilgileri</h3>
+          <p className="text-xs text-neutral-500 mb-4">
+            Bos birakilan alanlar eser sayfasinda gosterilmez. Emin olmadiginiz
+            bilgiyi bos birakin — tahmin yazmayin.
+          </p>
+
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-neutral-700 mb-1">Kap Formu (TR)</label>
+                <input
+                  type="text"
+                  {...register('formTr')}
+                  className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400"
+                  placeholder="Kylix"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-neutral-700 mb-1">Vessel Form (EN)</label>
+                <input
+                  type="text"
+                  {...register('formEn')}
+                  className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400"
+                  placeholder="Kylix"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-neutral-700 mb-1">Donemi (TR)</label>
+                <input
+                  type="text"
+                  {...register('periodTr')}
+                  className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400"
+                  placeholder="MO 5. yuzyil"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-neutral-700 mb-1">Period (EN)</label>
+                <input
+                  type="text"
+                  {...register('periodEn')}
+                  className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400"
+                  placeholder="5th century BC"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-neutral-700 mb-1">Mitolojik Konu (TR)</label>
+                <textarea
+                  rows={2}
+                  {...register('subjectTr')}
+                  className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400"
+                  placeholder="Afrodit'in kutsal hayvani kaz ile betimlenisi."
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-neutral-700 mb-1">Mythological Subject (EN)</label>
+                <textarea
+                  rows={2}
+                  {...register('subjectEn')}
+                  className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400"
+                  placeholder="Aphrodite depicted with the goose, her sacred animal."
+                />
+              </div>
+            </div>
           </div>
         </div>
 

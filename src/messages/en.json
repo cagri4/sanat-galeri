@@ -9,7 +9,8 @@
     "artists": "Artists",
     "backToMain": "Home",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "exhibitions": "Exhibitions"
   },
   "gallery": {
     "title": "Gallery",
@@ -28,7 +29,16 @@
       "Antik Dönem Replikaları": "Ancient Period Replicas",
       "Resimli Seramikler": "Painted Ceramics",
       "Mimari Duvar Panoları": "Architectural Wall Panels"
-    }
+    },
+    "form": "Vessel Form",
+    "period": "Period",
+    "subject": "Mythological Subject",
+    "about": "About the Replica",
+    "aboutText": "This piece was reproduced using the terra sigillata technique, remaining faithful to the original ancient example.",
+    "comingSoon": "Coming soon",
+    "comingSoonBody": "The works in this section are being prepared. They will be here shortly.",
+    "collectionsLabel": "Collection to appear in this section",
+    "exhibitionsNav": "Exhibitions"
   },
   "contact": {
     "nameLabel": "Your Name",
@@ -81,5 +91,13 @@
     "contactLink": "Contact",
     "address": "Istanbul, Turkey",
     "followUs": "Follow Us"
+  },
+  "exhibition": {
+    "eyebrow": "Exhibition",
+    "title": "Journeys",
+    "venue": "Bozcaada Art Gallery · 2010",
+    "lead": "Opened in Bozcaada in 2010, this exhibition brought the first pieces of the collection before an audience. A significant part of the works shown later entered private collections, and most of them are today held in various collections.",
+    "installation": "Installation View",
+    "captionNote": "⚠️ DRAFT — individual captions for the photographs are to be supplied by the artist. Only numbering is used at present."
   }
 }

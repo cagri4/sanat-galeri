@@ -44,7 +44,20 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
   const description = isTr ? eser.descriptionTr : eser.descriptionEn
   const medium = isTr ? eser.mediumTr : eser.mediumEn
   const dimensions = isTr ? eser.dimensionsTr : eser.dimensionsEn
+  const form = isTr ? eser.formTr : eser.formEn
+  const period = isTr ? eser.periodTr : eser.periodEn
+  const subject = isTr ? eser.subjectTr : eser.subjectEn
   const artistName = eser.artist ? (isTr ? eser.artist.nameTr : eser.artist.nameEn) : null
+
+  // Katalog satırları — sanatçının istediği sıra. Değeri olmayan alan gizlenir.
+  const catalogRows = [
+    { label: t('form'), value: form },
+    { label: t('period'), value: period },
+    { label: t('medium'), value: medium },
+    { label: t('subject'), value: subject },
+    { label: t('dimensions'), value: dimensions },
+    { label: t('year'), value: eser.year ? String(eser.year) : null },
+  ].filter((r) => r.value)
 
   // Build slides and thumbnails from product images
   const slides = eser.images.map((img: any) => ({
@@ -66,19 +79,15 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
   const protocol = host.includes('localhost') ? 'http' : 'https'
   const pageUrl = `${protocol}://${host}/${locale}/urun/${slug}`
 
-  // Format price
-  let priceDisplay: string
-  if (eser.price) {
-    const currency = eser.currency ?? 'TRY'
-    const amount = parseFloat(eser.price)
-    priceDisplay = new Intl.NumberFormat(isTr ? 'tr-TR' : 'en-US', {
-      style: 'currency',
-      currency,
-      maximumFractionDigits: 0,
-    }).format(amount)
-  } else {
-    priceDisplay = t('contactForPrice')
-  }
+  // Katalog modeli: fiyat yoksa fiyat satırı hiç gösterilmez ("fiyat için
+  // iletişime geçin" de yazılmaz). Fiyatlı eserlerde satır görünür.
+  const priceDisplay = eser.price
+    ? new Intl.NumberFormat(isTr ? 'tr-TR' : 'en-US', {
+        style: 'currency',
+        currency: eser.currency ?? 'TRY',
+        maximumFractionDigits: 0,
+      }).format(parseFloat(eser.price))
+    : null
 
   return (
     <div className="py-8 lg:py-12">
@@ -91,22 +100,19 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
         )}
 
         {/* Metadata + CTAs */}
-        <div className="space-y-6">
-          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">{title}</h1>
+        <div className="space-y-8">
+          <h1 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl font-light tracking-tight text-[#1a1a1a]">
+            {title}
+          </h1>
 
-          {/* Definition list */}
-          <dl className="divide-y divide-gray-100">
+          {/* Katalog künyesi */}
+          <dl className="divide-y divide-[#e8e2d8] border-y border-[#e8e2d8]">
             {artistName && (
-              <div className="py-3 grid grid-cols-2 gap-4">
-                <dt className="text-sm font-medium text-gray-500">
-                  {t('artist')}
-                </dt>
-                <dd className="text-sm text-gray-900">
+              <div className="py-3 grid grid-cols-[minmax(0,9rem)_1fr] gap-4">
+                <dt className="text-[11px] uppercase tracking-[0.15em] text-[#999]">{t('artist')}</dt>
+                <dd className="text-sm text-[#1a1a1a]">
                   {eser.artist?.slug ? (
-                    <a
-                      href={`/${locale}/sanatci/${eser.artist.slug}`}
-                      className="hover:underline"
-                    >
+                    <a href={`/${locale}/${eser.artist.slug}`} className="hover:underline">
                       {artistName}
                     </a>
                   ) : (
@@ -116,53 +122,39 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
               </div>
             )}
 
-            {medium && (
-              <div className="py-3 grid grid-cols-2 gap-4">
-                <dt className="text-sm font-medium text-gray-500">
-                  {t('medium')}
-                </dt>
-                <dd className="text-sm text-gray-900">{medium}</dd>
+            {catalogRows.map((row) => (
+              <div key={row.label} className="py-3 grid grid-cols-[minmax(0,9rem)_1fr] gap-4">
+                <dt className="text-[11px] uppercase tracking-[0.15em] text-[#999]">{row.label}</dt>
+                <dd className="text-sm leading-relaxed text-[#1a1a1a]">{row.value}</dd>
+              </div>
+            ))}
+
+            {(priceDisplay || eser.isSold) && (
+              <div className="py-3 grid grid-cols-[minmax(0,9rem)_1fr] gap-4">
+                <dt className="text-[11px] uppercase tracking-[0.15em] text-[#999]">{t('price')}</dt>
+                <dd className="text-sm text-[#1a1a1a]">
+                  {eser.isSold ? <span className="text-[#8a6d3b]">{t('sold')}</span> : priceDisplay}
+                </dd>
               </div>
             )}
-
-            {dimensions && (
-              <div className="py-3 grid grid-cols-2 gap-4">
-                <dt className="text-sm font-medium text-gray-500">
-                  {t('dimensions')}
-                </dt>
-                <dd className="text-sm text-gray-900">{dimensions}</dd>
-              </div>
-            )}
-
-            {eser.year && (
-              <div className="py-3 grid grid-cols-2 gap-4">
-                <dt className="text-sm font-medium text-gray-500">
-                  {t('year')}
-                </dt>
-                <dd className="text-sm text-gray-900">{eser.year}</dd>
-              </div>
-            )}
-
-            <div className="py-3 grid grid-cols-2 gap-4">
-              <dt className="text-sm font-medium text-gray-500">
-                {t('price')}
-              </dt>
-              <dd className="text-sm font-semibold text-gray-900">
-                {eser.isSold ? (
-                  <span className="text-red-600">{t('sold')}</span>
-                ) : (
-                  priceDisplay
-                )}
-              </dd>
-            </div>
           </dl>
 
-          {/* Description */}
+          {/* Açıklama — paragraflar korunur */}
           {description && (
-            <div className="prose prose-sm max-w-none text-gray-700">
-              <p>{description}</p>
+            <div className="space-y-4">
+              {String(description).split('\n\n').filter(Boolean).map((para: string, i: number) => (
+                <p key={i} className="text-[15px] leading-[1.75] text-[#4a4a4a]">
+                  {para}
+                </p>
+              ))}
             </div>
           )}
+
+          {/* Replika Hakkında — sanatçının katalog şemasındaki sabit bölüm */}
+          <div className="border-l-2 border-[#e8e2d8] pl-4">
+            <h2 className="text-[11px] uppercase tracking-[0.15em] text-[#999]">{t('about')}</h2>
+            <p className="mt-2 text-[15px] leading-[1.75] text-[#4a4a4a]">{t('aboutText')}</p>
+          </div>
 
           {/* WhatsApp CTA */}
           {eser.artist?.whatsapp && (
@@ -175,8 +167,8 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
           )}
 
           {/* Contact Form */}
-          <div className="pt-4 border-t border-gray-100">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          <div className="pt-6 border-t border-[#e8e2d8]">
+            <h2 className="font-[family-name:var(--font-serif)] text-xl font-light text-[#1a1a1a] mb-4">
               {t('contactTitle')}
             </h2>
             <ContactForm productSlug={slug} />

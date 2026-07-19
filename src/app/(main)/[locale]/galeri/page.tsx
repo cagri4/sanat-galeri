@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { getTranslations } from 'next-intl/server'
-import { getProducts, getCategories } from '@/lib/queries/gallery'
+import { getProducts } from '@/lib/queries/gallery'
+import { CATEGORIES } from '@/lib/categories'
 import CategoryFilter from '@/components/gallery/category-filter'
 import ArtworkGrid from '@/components/gallery/artwork-grid'
 
@@ -25,14 +26,12 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
   const { category } = await searchParams
   const t = await getTranslations({ locale, namespace: 'gallery' })
 
-  let categories: string[] = []
+  // Kategori listesi sabit: bos kategoriler de filtrede gorunur (bkz. lib/categories).
+  const categories = [...CATEGORIES]
   let products: Awaited<ReturnType<typeof getProducts>> = []
 
   try {
-    ;[categories, products] = await Promise.all([
-      getCategories(),
-      getProducts(category),
-    ])
+    products = await getProducts(category)
   } catch {
     // DB not available — show empty state
   }
@@ -50,7 +49,7 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
       )}
 
       <div className="mt-8">
-        <ArtworkGrid products={products} locale={locale} />
+        <ArtworkGrid products={products} locale={locale} category={category ?? null} />
       </div>
     </main>
   )

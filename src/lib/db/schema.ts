@@ -40,6 +40,13 @@ export const products = pgTable('products', {
   mediumEn: text('medium_en'),
   dimensionsTr: text('dimensions_tr'),
   dimensionsEn: text('dimensions_en'),
+  // Katalog formatı (sanatçının istediği eser sayfası şeması)
+  formTr: text('form_tr'),        // Kap Formu — ör. Kylix, Volütlü Krater
+  formEn: text('form_en'),
+  periodTr: text('period_tr'),    // Dönemi — ör. MÖ 5. yüzyıl
+  periodEn: text('period_en'),
+  subjectTr: text('subject_tr'),  // Mitolojik Konu
+  subjectEn: text('subject_en'),
   isSold: boolean('is_sold').default(false),
   isVisible: boolean('is_visible').default(true),
   createdAt: timestamp('created_at').defaultNow(),

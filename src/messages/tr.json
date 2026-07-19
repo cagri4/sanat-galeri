@@ -6,10 +6,11 @@
   "nav": {
     "siteTitle": "U-Art Tasarım",
     "gallery": "Galeri",
-    "artists": "Sanatcilar",
+    "artists": "Sanatçılar",
     "backToMain": "Ana Sayfa",
     "about": "Hakkımızda",
-    "contact": "İletişim"
+    "contact": "İletişim",
+    "exhibitions": "Sergiler"
   },
   "gallery": {
     "title": "Galeri",
@@ -28,7 +29,16 @@
       "Antik Dönem Replikaları": "Antik Dönem Replikaları",
       "Resimli Seramikler": "Resimli Seramikler",
       "Mimari Duvar Panoları": "Mimari Duvar Panoları"
-    }
+    },
+    "form": "Kap Formu",
+    "period": "Dönemi",
+    "subject": "Mitolojik Konu",
+    "about": "Replika Hakkında",
+    "aboutText": "Bu eser, terra sigillata tekniği kullanılarak özgün antik örneğe bağlı kalınarak yeniden üretilmiştir.",
+    "comingSoon": "İçerik yakında",
+    "comingSoonBody": "Bu bölümdeki eserler hazırlanıyor. Çok yakında burada olacak.",
+    "collectionsLabel": "Bu bölümde yer alacak koleksiyon",
+    "exhibitionsNav": "Sergiler"
   },
   "contact": {
     "nameLabel": "Adiniz",
@@ -81,5 +91,13 @@
     "contactLink": "İletişim",
     "address": "İstanbul, Türkiye",
     "followUs": "Bizi Takip Edin"
+  },
+  "exhibition": {
+    "eyebrow": "Sergi",
+    "title": "Yolculuklar",
+    "venue": "Bozcaada Sanat Galerisi · 2010",
+    "lead": "2010 yılında Bozcaada'da açılan bu sergide koleksiyonun ilk örnekleri izleyiciyle buluştu. Sergide yer alan eserlerin önemli bir bölümü daha sonra özel koleksiyonlara girdi. Günümüzde bu çalışmaların büyük kısmı farklı koleksiyonlarda bulunmaktadır.",
+    "installation": "Sergi Yerleştirmesi",
+    "captionNote": "⚠️ TASLAK — fotoğrafların tek tek açıklamaları sanatçıdan alınacaktır. Şu an yalnızca numaralandırma kullanılmaktadır."
   }
 }

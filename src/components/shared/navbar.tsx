@@ -39,6 +39,7 @@ export function getCrossDomainLinks(
     main: buildDomainLink(mainUrl, `/${locale}`),
     gallery: buildDomainLink(mainUrl, `/${locale}/galeri`),
     about: buildDomainLink(mainUrl, `/${locale}/hakkimizda`),
+    exhibition: buildDomainLink(mainUrl, `/${locale}/sergi/bozcaada-2010`),
     contact: buildDomainLink(mainUrl, `/${locale}/iletisim`),
     melike: buildArtistLink(mainUrl, melikeUrl, locale, 'melike'),
     seref: buildArtistLink(mainUrl, serefUrl, locale, 'seref'),
@@ -74,6 +75,9 @@ export default async function Navbar({ locale }: NavbarProps) {
           <a href={links.gallery} className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
             {t('gallery')}
           </a>
+          <a href={links.exhibition} className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
+            {t('exhibitions')}
+          </a>
           <a href={links.about} className="text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors">
             {t('about')}
           </a>
@@ -91,8 +95,8 @@ export default async function Navbar({ locale }: NavbarProps) {
 
         {/* Mobile hamburger */}
         <MobileMenu
-          links={{ gallery: links.gallery, about: links.about, contact: links.contact, melike: links.melike, seref: links.seref }}
-          labels={{ gallery: t('gallery'), about: t('about'), contact: t('contact') }}
+          links={{ gallery: links.gallery, exhibition: links.exhibition, about: links.about, contact: links.contact, melike: links.melike, seref: links.seref }}
+          labels={{ gallery: t('gallery'), exhibition: t('exhibitions'), about: t('about'), contact: t('contact') }}
         />
       </nav>
     </header>
