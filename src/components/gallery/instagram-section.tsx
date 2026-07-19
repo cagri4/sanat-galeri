@@ -13,8 +13,10 @@ import { getTranslations } from 'next-intl/server'
  * hesabi + token yenileme gerektiriyor, Cagri bunu istemedi.
  */
 
-const IG_URL = 'https://www.instagram.com/uarttasarim'
-const IG_HANDLE = '@uarttasarim'
+import { SOCIAL } from '@/lib/social'
+
+const IG_URL = SOCIAL.instagram.url
+const IG_HANDLE = SOCIAL.instagram.handle
 
 interface Item {
   src: string
