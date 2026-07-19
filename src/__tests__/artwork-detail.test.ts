@@ -55,7 +55,6 @@ const sampleProduct = {
     slug: 'melike',
     nameTr: 'Melike Doğan',
     nameEn: 'Melike Dogan',
-    whatsapp: '905551234567',
   },
 }
 
@@ -102,10 +101,10 @@ describe('Artwork detail page (contract)', () => {
     expect(product!.images.length).toBeGreaterThan(0)
   })
 
-  it('product has artist object with whatsapp field', async () => {
+  it('product has artist object', async () => {
     const product = await getProductBySlug('mavi-akin')
     expect(product).toHaveProperty('artist')
-    expect(product!.artist).toHaveProperty('whatsapp', '905551234567')
+    expect(product!.artist).toHaveProperty('nameTr')
   })
 
   it('returns null for nonexistent product', async () => {

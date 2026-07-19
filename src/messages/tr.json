@@ -25,7 +25,6 @@
     "contactForPrice": "Fiyat için iletişime geçin",
     "sold": "Satıldı",
     "contactTitle": "Bilgi Al",
-    "whatsappCta": "WhatsApp ile Sor",
     "categories": {
       "Antik Dönem Replikaları": "Antik Dönem Replikaları",
       "Resimli Seramikler": "Resimli Seramikler",
@@ -42,16 +41,17 @@
     "exhibitionsNav": "Sergiler"
   },
   "contact": {
-    "nameLabel": "Adiniz",
-    "namePlaceholder": "Adinizi giriniz",
+    "nameLabel": "Adınız",
+    "namePlaceholder": "Adınızı giriniz",
     "emailLabel": "E-posta",
     "emailPlaceholder": "ornek@eposta.com",
-    "messageLabel": "Mesajiniz",
-    "messagePlaceholder": "Eser hakkinda sormak istediklerinizi yaziniz...",
-    "submit": "Mesaj Gonder",
-    "submitting": "Gonderiliyor...",
-    "successMessage": "Mesajiniz gonderildi. En kisa surede donus yapacagiz.",
-    "addressLabel": "Adres"
+    "messageLabel": "Mesajınız",
+    "messagePlaceholder": "Sormak istediklerinizi yazınız…",
+    "submit": "Mesaj Gönder",
+    "submitting": "Gönderiliyor…",
+    "successMessage": "Mesajınız gönderildi. En kısa sürede dönüş yapacağız.",
+    "addressLabel": "Adres",
+    "errorMessage": "Mesaj gönderilemedi. Lütfen tekrar deneyin."
   },
   "meta": {
     "homeTitle": "U-Art Tasarım",
@@ -130,5 +130,11 @@
     "title": "Instagram'da bizi takip edin",
     "body": "Atölyeden ve koleksiyondan seçtiğimiz çalışmalar. Güncel paylaşımlar için Instagram hesabımıza göz atabilirsiniz.",
     "followCta": "Instagram'da takip et"
+  },
+  "contactWidget": {
+    "trigger": "İletişim",
+    "title": "Bize yazın",
+    "close": "Kapat",
+    "rateLimited": "Çok fazla mesaj gönderildi. Lütfen birkaç dakika sonra tekrar deneyin."
   }
 }

@@ -24,6 +24,7 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
           name: form.get('senderName'),
           email: form.get('senderEmail'),
           message: `[Eser: ${productSlug}] ${form.get('body')}`,
+          website: form.get('website'),
         }),
       })
       setStatus(res.ok ? 'success' : 'error')
@@ -47,6 +48,13 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Honeypot — kullanicidan ve ekran okuyucudan gizli; bot doldurursa
+          sunucu mesaji sessizce yok sayar (bkz. api/contact/route.ts). */}
+      <div aria-hidden className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
+        <label htmlFor="cf-website">Website</label>
+        <input id="cf-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div>
         <label htmlFor="senderName" className="block text-[13px] text-[#6b6b6b] mb-1.5">
           {t('nameLabel')}

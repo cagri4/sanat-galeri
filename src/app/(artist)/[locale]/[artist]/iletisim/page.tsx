@@ -36,7 +36,7 @@ export default async function ContactPage({
         </h1>
         <p className="text-base text-neutral-600 mb-8">{data.nameTr}</p>
 
-        {(data.email || data.whatsapp) && (
+        {data.email && (
           <div className="mb-8 flex flex-col gap-2">
             {data.email && (
               <a
@@ -44,16 +44,6 @@ export default async function ContactPage({
                 className="text-sm text-neutral-700 hover:text-neutral-900 underline underline-offset-2"
               >
                 {data.email}
-              </a>
-            )}
-            {data.whatsapp && (
-              <a
-                href={`https://wa.me/${data.whatsapp.replace(/\D/g, '')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-neutral-700 hover:text-neutral-900 underline underline-offset-2"
-              >
-                WhatsApp: {data.whatsapp}
               </a>
             )}
           </div>

@@ -1,10 +1,8 @@
 import { notFound } from 'next/navigation'
-import { headers } from 'next/headers'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { getProductBySlug } from '@/lib/queries/gallery'
 import LightboxViewer from '@/components/gallery/lightbox-viewer'
-import WhatsAppButton from '@/components/gallery/whatsapp-button'
 import ContactForm from '@/components/gallery/contact-form'
 import Reveal from '@/components/motion/reveal'
 
@@ -74,11 +72,6 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
     alt: (isTr ? img.altTr : img.altEn) ?? title,
   }))
 
-  // Build current page URL for WhatsApp
-  const headersList = await headers()
-  const host = headersList.get('host') ?? 'localhost:3000'
-  const protocol = host.includes('localhost') ? 'http' : 'https'
-  const pageUrl = `${protocol}://${host}/${locale}/urun/${slug}`
 
   // Katalog modeli: fiyat yoksa fiyat satırı hiç gösterilmez ("fiyat için
   // iletişime geçin" de yazılmaz). Fiyatlı eserlerde satır görünür.
@@ -161,15 +154,6 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
             <p className="mt-3 max-w-[68ch] text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]">{t('aboutText')}</p>
           </div>
 
-          {/* WhatsApp CTA */}
-          {eser.artist?.whatsapp && (
-            <WhatsAppButton
-              phone={eser.artist.whatsapp}
-              artworkTitle={title}
-              pageUrl={pageUrl}
-              locale={locale}
-            />
-          )}
 
           {/* Contact Form */}
           <div className="pt-6 border-t border-[#e8e2d8]">

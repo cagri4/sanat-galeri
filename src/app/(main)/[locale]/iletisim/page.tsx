@@ -73,16 +73,6 @@ export default async function ContactPage({
                       {a.email}
                     </a>
                   )}
-                  {a.whatsapp && (
-                    <a
-                      href={`https://wa.me/${a.whatsapp.replace(/\D/g, '')}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-1 block text-[15px] text-[#1a1a1a] hover:text-[#612E49] transition-colors"
-                    >
-                      WhatsApp: {a.whatsapp}
-                    </a>
-                  )}
                 </div>
               ))}
             </div>

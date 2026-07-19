@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/lib/i18n/routing'
 import Navbar from '@/components/shared/navbar'
 import Footer from '@/components/shared/footer'
+import ContactWidget from '@/components/shared/contact-widget'
 
 export default async function MainLayout({
   children,
@@ -24,6 +25,8 @@ export default async function MainLayout({
         <div className="min-h-[60vh]">{children}</div>
         <Footer locale={locale} />
       </div>
+      {/* Sol altta sabit iletisim dugmesi + modal (mevcut /api/contact'e gider) */}
+      <ContactWidget />
     </NextIntlClientProvider>
   )
 }
