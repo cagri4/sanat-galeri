@@ -25,9 +25,14 @@ export default async function Footer({ locale }: FooterProps) {
             <p className="mt-3 text-[13px] text-[#6b6b6b] leading-relaxed">
               {t('address')}
             </p>
-            <p className="mt-1 text-[13px] text-[#6b6b6b]">
-              info@uarttasarim.com
-            </p>
+            {/* Genel "info@" adresi dogrulanmadigi icin kaldirildi; sanatcilarin
+                gercek e-posta/WhatsApp bilgileri iletisim sayfasinda. */}
+            <a
+              href={links.contact}
+              className="mt-1 inline-block text-[13px] text-[#6b6b6b] hover:text-[#1a1a1a] transition-colors underline underline-offset-2"
+            >
+              {t('contactLink')}
+            </a>
           </div>
 
           {/* Navigation */}

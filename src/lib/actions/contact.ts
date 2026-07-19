@@ -3,13 +3,7 @@ import { z } from 'zod'
 import { db } from '@/lib/db'
 import { messages, artists } from '@/lib/db/schema'
 import { eq } from 'drizzle-orm'
-
-export const contactSchema = z.object({
-  senderName: z.string().min(2).max(100),
-  senderEmail: z.string().email(),
-  body: z.string().min(10).max(2000),
-  productSlug: z.string().optional(),
-})
+import { contactSchema, artistContactSchema } from '@/lib/validation/contact'
 
 export type ContactFormState = {
   success: boolean
@@ -32,13 +26,6 @@ export async function submitContact(data: z.infer<typeof contactSchema>): Promis
   })
   return { success: true }
 }
-
-export const artistContactSchema = z.object({
-  senderName: z.string().min(2).max(100),
-  senderEmail: z.string().email(),
-  body: z.string().min(10).max(2000),
-  artistSlug: z.string(),
-})
 
 export async function submitArtistContact(
   data: z.infer<typeof artistContactSchema>

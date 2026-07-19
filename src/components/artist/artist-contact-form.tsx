@@ -5,7 +5,8 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useTranslations } from 'next-intl'
-import { artistContactSchema, submitArtistContact } from '@/lib/actions/contact'
+import { submitArtistContact } from '@/lib/actions/contact'
+import { artistContactSchema } from '@/lib/validation/contact'
 
 type ArtistContactFormData = z.infer<typeof artistContactSchema>
 

@@ -25,7 +25,8 @@ jest.mock('@/lib/db', () => {
 })
 
 import { db } from '@/lib/db'
-import { submitArtistContact, artistContactSchema } from '@/lib/actions/contact'
+import { submitArtistContact } from '@/lib/actions/contact'
+import { artistContactSchema } from '@/lib/validation/contact'
 
 const mockInsert = db.insert as jest.Mock
 const mockFindFirst = db.query.artists.findFirst as jest.Mock
