@@ -38,7 +38,8 @@
     "comingSoon": "Coming soon",
     "comingSoonBody": "The works in this section are being prepared. They will be here shortly.",
     "collectionsLabel": "Collection to appear in this section",
-    "exhibitionsNav": "Exhibitions"
+    "exhibitionsNav": "Exhibitions",
+    "collection": "Collection"
   },
   "contact": {
     "nameLabel": "Your name",

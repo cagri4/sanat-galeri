@@ -1,10 +1,14 @@
 'use server'
 import { z } from 'zod'
-import { db } from '@/lib/db'
-import { artists } from '@/lib/db/schema'
-import { eq } from 'drizzle-orm'
+import { supabase } from '@/lib/db/supabase'
 import { auth } from '@/auth'
 import { revalidatePath } from 'next/cache'
+
+// Supabase REST kullanma gerekcesi icin bkz. `actions/product.ts` bas notu.
+//
+// NOT: WhatsApp alani BILEREK kaldirildi. Kisisel cep numaralari siteden
+// cikarildi (2026-07-19, Cagri); alanin panelde durmasi numaranin yeniden
+// yayimlanabilecegi izlenimi veriyordu. DB sutunu duruyor, panelden yazilmiyor.
 
 const artistSchema = z.object({
   bioTr: z.string().optional(),
@@ -13,10 +17,14 @@ const artistSchema = z.object({
   statementEn: z.string().optional(),
   photoUrl: z.string().optional(),
   email: z.string().email().optional().or(z.literal('')),
-  whatsapp: z.string().optional(),
 })
 
 type ArtistInput = z.infer<typeof artistSchema>
+
+const nn = (v: string | undefined) => {
+  const t = v?.trim()
+  return t ? t : null
+}
 
 export async function updateArtist(
   id: number,
@@ -26,22 +34,24 @@ export async function updateArtist(
   if (!session) return { success: false, error: 'Unauthorized' }
 
   const parsed = artistSchema.safeParse(data)
-  if (!parsed.success) {
-    return { success: false, errors: parsed.error.flatten().fieldErrors }
-  }
+  if (!parsed.success) return { success: false, errors: parsed.error.flatten().fieldErrors }
 
-  await db
-    .update(artists)
-    .set({
-      bioTr: parsed.data.bioTr,
-      bioEn: parsed.data.bioEn,
-      statementTr: parsed.data.statementTr,
-      statementEn: parsed.data.statementEn,
-      photoUrl: parsed.data.photoUrl,
-      email: parsed.data.email,
-      whatsapp: parsed.data.whatsapp,
+  const { error } = await supabase
+    .from('artists')
+    .update({
+      bio_tr: nn(parsed.data.bioTr),
+      bio_en: nn(parsed.data.bioEn),
+      statement_tr: nn(parsed.data.statementTr),
+      statement_en: nn(parsed.data.statementEn),
+      photo_url: nn(parsed.data.photoUrl),
+      email: nn(parsed.data.email),
     })
-    .where(eq(artists.id, id))
+    .eq('id', id)
+
+  if (error) {
+    console.error('updateArtist:', error)
+    return { success: false, error: error.message }
+  }
 
   revalidatePath('/', 'layout')
   return { success: true }

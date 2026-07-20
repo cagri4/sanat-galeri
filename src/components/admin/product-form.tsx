@@ -6,12 +6,15 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { createProduct, deleteProduct, updateProduct } from '@/lib/actions/product'
+import { CATEGORIES, COLLECTIONS } from '@/lib/categories'
 
 const productFormSchema = z.object({
   titleTr: z.string().min(1, 'Baslik (TR) zorunludur'),
   titleEn: z.string().min(1, 'Title (EN) is required'),
   category: z.string().min(1, 'Kategori zorunludur'),
+  collection: z.string().optional(),
   artistId: z.number().optional(),
+  sortOrder: z.number().optional(),
   descriptionTr: z.string().optional(),
   descriptionEn: z.string().optional(),
   price: z.string().optional(),
@@ -27,24 +30,24 @@ const productFormSchema = z.object({
   periodEn: z.string().optional(),
   subjectTr: z.string().optional(),
   subjectEn: z.string().optional(),
+  aboutTr: z.string().optional(),
+  aboutEn: z.string().optional(),
   isSold: z.boolean().optional(),
   isVisible: z.boolean().optional(),
 })
 
 type ProductFormData = z.infer<typeof productFormSchema>
 
-const CATEGORIES = [
-  { value: 'Antik Dönem Replikaları', label: 'Antik Dönem Replikaları' },
-  { value: 'Resimli Seramikler', label: 'Resimli Seramikler' },
-  { value: 'Mimari Duvar Panoları', label: 'Mimari Duvar Panoları' },
-]
+// Tek kaynak: lib/categories.ts — site ve panel ayni listeyi kullanir.
 
 interface ProductData {
   id: number
   titleTr: string
   titleEn: string
   category: string
+  collection: string | null
   artistId: number | null
+  sortOrder: number | null
   descriptionTr: string | null
   descriptionEn: string | null
   price: string | null
@@ -59,6 +62,8 @@ interface ProductData {
   periodEn: string | null
   subjectTr: string | null
   subjectEn: string | null
+  aboutTr: string | null
+  aboutEn: string | null
   dimensionsEn: string | null
   isSold: boolean | null
   isVisible: boolean | null
@@ -84,6 +89,7 @@ export default function ProductForm({ product, artists }: ProductFormProps) {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<ProductFormData>({
     resolver: zodResolver(productFormSchema),
@@ -91,7 +97,9 @@ export default function ProductForm({ product, artists }: ProductFormProps) {
       titleTr: product?.titleTr ?? '',
       titleEn: product?.titleEn ?? '',
       category: product?.category ?? '',
+      collection: product?.collection ?? '',
       artistId: product?.artistId ?? undefined,
+      sortOrder: product?.sortOrder ?? 0,
       descriptionTr: product?.descriptionTr ?? '',
       descriptionEn: product?.descriptionEn ?? '',
       price: product?.price ?? '',
@@ -106,11 +114,18 @@ export default function ProductForm({ product, artists }: ProductFormProps) {
       periodEn: product?.periodEn ?? '',
       subjectTr: product?.subjectTr ?? '',
       subjectEn: product?.subjectEn ?? '',
+      aboutTr: product?.aboutTr ?? '',
+      aboutEn: product?.aboutEn ?? '',
       dimensionsEn: product?.dimensionsEn ?? '',
       isSold: product?.isSold ?? false,
       isVisible: product?.isVisible ?? true,
     },
   })
+
+  // Koleksiyon (alt-seri) yalnizca ilgili kategoride anlamli.
+  // Or. "Zamansiz Manzaralar" -> "Resimli Seramikler" altinda.
+  const selectedCategory = watch('category')
+  const collections = COLLECTIONS[selectedCategory] ?? []
 
   const onSubmit = async (data: ProductFormData) => {
     setSaveStatus('saving')
@@ -212,8 +227,8 @@ export default function ProductForm({ product, artists }: ProductFormProps) {
             >
               <option value="">Kategori secin</option>
               {CATEGORIES.map((cat) => (
-                <option key={cat.value} value={cat.value}>
-                  {cat.label}
+                <option key={cat} value={cat}>
+                  {cat}
                 </option>
               ))}
             </select>
@@ -238,6 +253,48 @@ export default function ProductForm({ product, artists }: ProductFormProps) {
                 </option>
               ))}
             </select>
+          </div>
+        </div>
+
+        {/* Koleksiyon + siralama */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-neutral-700 mb-1">
+              Koleksiyon (alt-seri)
+            </label>
+            <select
+              {...register('collection')}
+              disabled={collections.length === 0}
+              className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400 bg-white disabled:bg-neutral-50 disabled:text-neutral-400"
+            >
+              <option value="">Koleksiyon yok</option>
+              {collections.map((c) => (
+                <option key={c.tr} value={c.tr}>
+                  {c.tr}
+                </option>
+              ))}
+            </select>
+            <p className="mt-1 text-xs text-neutral-500">
+              {collections.length === 0
+                ? 'Bu kategoride tanimli koleksiyon yok.'
+                : 'Bos birakilirsa eser dogrudan kategoride listelenir.'}
+            </p>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-neutral-700 mb-1">
+              Siralama
+            </label>
+            <input
+              type="number"
+              {...register('sortOrder', {
+                setValueAs: (v) => (v === '' ? 0 : Number(v)),
+              })}
+              className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400"
+              placeholder="0"
+            />
+            <p className="mt-1 text-xs text-neutral-500">
+              Kucuk sayi once gosterilir. Sanatcinin verdigi eser sirasi buradan ayarlanir.
+            </p>
           </div>
         </div>
 
@@ -435,6 +492,27 @@ export default function ProductForm({ product, artists }: ProductFormProps) {
               </div>
             </div>
           </div>
+
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-neutral-700 mb-1">Replika Hakkinda (TR)</label>
+              <textarea
+                rows={3}
+                {...register('aboutTr')}
+                className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400"
+                placeholder="Bos birakilirsa sitedeki genel replika metni gosterilir."
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-neutral-700 mb-1">About the Replica (EN)</label>
+              <textarea
+                rows={3}
+                {...register('aboutEn')}
+                className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400"
+                placeholder="Leave empty to use the general replica text."
+              />
+            </div>
+          </div>
         </div>
 
         {/* Checkboxes */}
@@ -445,7 +523,7 @@ export default function ProductForm({ product, artists }: ProductFormProps) {
               {...register('isSold')}
               className="h-4 w-4 rounded border-neutral-300 text-neutral-900 focus:ring-neutral-400"
             />
-            <span className="text-sm text-neutral-700">Satildi</span>
+            <span className="text-sm text-neutral-700">Satıldı</span>
           </label>
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -453,7 +531,7 @@ export default function ProductForm({ product, artists }: ProductFormProps) {
               {...register('isVisible')}
               className="h-4 w-4 rounded border-neutral-300 text-neutral-900 focus:ring-neutral-400"
             />
-            <span className="text-sm text-neutral-700">Gorунур (sitede goster)</span>
+            <span className="text-sm text-neutral-700">Görünür (sitede göster)</span>
           </label>
         </div>
 

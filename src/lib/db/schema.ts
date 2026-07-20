@@ -47,9 +47,28 @@ export const products = pgTable('products', {
   periodEn: text('period_en'),
   subjectTr: text('subject_tr'),  // Mitolojik Konu
   subjectEn: text('subject_en'),
+  aboutTr: text('about_tr'),      // Replika Hakkında — bos ise ceviri dosyasindaki genel metin
+  aboutEn: text('about_en'),
+  collection: text('collection'), // Alt-seri, or. "Zamansiz Manzaralar"
+  // Ana sayfa yerlesimleri. NULL = o bolumde gosterilmez.
+  heroOrder: integer('hero_order'),
+  instagramOrder: integer('instagram_order'),
   isSold: boolean('is_sold').default(false),
   isVisible: boolean('is_visible').default(true),
   sortOrder: integer('sort_order').default(0),  // sanatcinin verdigi sira
+  createdAt: timestamp('created_at').defaultNow(),
+})
+
+/** Sergi fotograflari (Bozcaada 2010 vb.) — foto alti aciklamalari dahil. */
+export const exhibitionPhotos = pgTable('exhibition_photos', {
+  id: serial('id').primaryKey(),
+  exhibitionSlug: text('exhibition_slug').notNull(), // 'bozcaada-2010'
+  url: text('url').notNull(),
+  titleTr: text('title_tr'),
+  titleEn: text('title_en'),
+  captionTr: text('caption_tr'),
+  captionEn: text('caption_en'),
+  sortOrder: integer('sort_order').default(0),
   createdAt: timestamp('created_at').defaultNow(),
 })
 

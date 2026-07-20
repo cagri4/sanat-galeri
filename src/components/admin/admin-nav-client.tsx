@@ -7,6 +7,8 @@ const navLinks = [
   { href: '/admin/dashboard', label: 'Dashboard' },
   { href: '/admin/urunler', label: 'Eserler' },
   { href: '/admin/sanatcilar', label: 'Sanatçılar' },
+  { href: '/admin/ana-sayfa', label: 'Ana Sayfa' },
+  { href: '/admin/sergi-fotograflari', label: 'Sergi Fotoğrafları' },
   { href: '/admin/mesajlar', label: 'Mesajlar' },
 ]
 

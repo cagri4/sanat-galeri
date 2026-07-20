@@ -48,9 +48,12 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
   const period = isTr ? eser.periodTr : eser.periodEn
   const subject = isTr ? eser.subjectTr : eser.subjectEn
   const artistName = eser.artist ? (isTr ? eser.artist.nameTr : eser.artist.nameEn) : null
+  // Esere özel "Replika Hakkında" metni panelden girilebilir; yoksa genel metin.
+  const aboutText = (isTr ? eser.aboutTr : eser.aboutEn) || t('aboutText')
 
   // Katalog satırları — sanatçının istediği sıra. Değeri olmayan alan gizlenir.
   const catalogRows = [
+    { label: t('collection'), value: eser.collection },
     { label: t('form'), value: form },
     { label: t('period'), value: period },
     { label: t('medium'), value: medium },
@@ -148,10 +151,15 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
             />
           )}
 
-          {/* Replika Hakkında — sanatçının katalog şemasındaki sabit bölüm */}
+          {/* Replika Hakkında — panelden esere özel metin girilebilir; boşsa
+              sitedeki genel replika metnine düşer. */}
           <div className="border-l border-[var(--rule)] pl-5">
             <h2 className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{t('about')}</h2>
-            <p className="mt-3 max-w-[68ch] text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]">{t('aboutText')}</p>
+            <RichText
+              text={aboutText}
+              className="mt-3 space-y-4"
+              paragraphClassName="max-w-[68ch] text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]"
+            />
           </div>
 
 

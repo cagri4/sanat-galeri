@@ -13,7 +13,6 @@ const artistFormSchema = z.object({
   statementEn: z.string().optional(),
   photoUrl: z.string().optional(),
   email: z.string().email('Gecersiz e-posta').optional().or(z.literal('')),
-  whatsapp: z.string().optional(),
 })
 
 type ArtistFormData = z.infer<typeof artistFormSchema>
@@ -29,7 +28,6 @@ interface ArtistData {
   statementEn: string | null
   photoUrl: string | null
   email: string | null
-  whatsapp: string | null
 }
 
 interface ArtistFormProps {
@@ -39,6 +37,7 @@ interface ArtistFormProps {
 export default function ArtistForm({ artist }: ArtistFormProps) {
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle')
   const [isUploading, setIsUploading] = useState(false)
+  const [uploadError, setUploadError] = useState<string | null>(null)
 
   const {
     register,
@@ -55,7 +54,6 @@ export default function ArtistForm({ artist }: ArtistFormProps) {
       statementEn: artist.statementEn ?? '',
       photoUrl: artist.photoUrl ?? '',
       email: artist.email ?? '',
-      whatsapp: artist.whatsapp ?? '',
     },
   })
 
@@ -81,15 +79,20 @@ export default function ArtistForm({ artist }: ArtistFormProps) {
     if (!file) return
 
     setIsUploading(true)
+    setUploadError(null)
     try {
-      const { upload } = await import('@vercel/blob/client')
-      const blob = await upload(file.name, file, {
-        access: 'public',
-        handleUploadUrl: '/api/upload',
-      })
-      setValue('photoUrl', blob.url)
+      const body = new FormData()
+      body.append('file', file)
+      body.append('folder', 'sanatci')
+      const res = await fetch('/api/upload', { method: 'POST', body })
+      const json = await res.json().catch(() => ({}))
+      if (!res.ok || !json.url) {
+        setUploadError(json.error ?? 'Yükleme başarısız.')
+        return
+      }
+      setValue('photoUrl', json.url, { shouldDirty: true })
     } catch {
-      // Upload failed — user can manually enter URL
+      setUploadError('Yükleme başarısız. Tekrar deneyin.')
     } finally {
       setIsUploading(false)
     }
@@ -121,6 +124,7 @@ export default function ArtistForm({ artist }: ArtistFormProps) {
               />
             </label>
           </div>
+          {uploadError && <p className="mt-2 text-sm text-red-600">{uploadError}</p>}
           {photoUrl && (
             <div className="mt-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -179,27 +183,19 @@ export default function ArtistForm({ artist }: ArtistFormProps) {
           </div>
         </div>
 
-        {/* Contact */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-1">E-posta</label>
-            <input
-              type="email"
-              {...register('email')}
-              className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400"
-              placeholder="sanatci@ornek.com"
-            />
-            {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-1">WhatsApp</label>
-            <input
-              type="text"
-              {...register('whatsapp')}
-              className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400"
-              placeholder="+90 555 000 00 00"
-            />
-          </div>
+        {/* Iletisim.
+            WhatsApp alani BILEREK yok: kisisel cep numaralari siteden
+            kaldirildi (2026-07-19, Cagri). Ziyaretci iletisimi sol alttaki
+            modal form -> /api/contact -> Mesajlar ekrani uzerinden yurur. */}
+        <div className="max-w-md">
+          <label className="block text-sm font-medium text-neutral-700 mb-1">E-posta</label>
+          <input
+            type="email"
+            {...register('email')}
+            className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400"
+            placeholder="sanatci@uarttasarim.com"
+          />
+          {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
         </div>
 
         {/* Save */}

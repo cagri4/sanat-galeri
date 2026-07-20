@@ -1,10 +1,10 @@
 'use server'
 import { z } from 'zod'
-import { db } from '@/lib/db'
-import { exhibitions } from '@/lib/db/schema'
-import { eq } from 'drizzle-orm'
+import { supabase } from '@/lib/db/supabase'
 import { auth } from '@/auth'
 import { revalidatePath } from 'next/cache'
+
+// Supabase REST kullanma gerekcesi icin bkz. `actions/product.ts` bas notu.
 
 const exhibitionSchema = z.object({
   artistId: z.number(),
@@ -18,6 +18,21 @@ const exhibitionSchema = z.object({
 
 type ExhibitionInput = z.infer<typeof exhibitionSchema>
 
+const nn = (v: string | undefined) => {
+  const t = v?.trim()
+  return t ? t : null
+}
+
+const toRow = (d: ExhibitionInput) => ({
+  artist_id: d.artistId,
+  type: d.type,
+  title_tr: d.titleTr.trim(),
+  title_en: d.titleEn.trim(),
+  location: nn(d.location),
+  year: d.year ?? null,
+  sort_order: d.sortOrder ?? 0,
+})
+
 export async function createExhibition(
   data: ExhibitionInput
 ): Promise<{ success: boolean; id?: number; error?: string; errors?: Record<string, string[]> }> {
@@ -25,25 +40,21 @@ export async function createExhibition(
   if (!session) return { success: false, error: 'Unauthorized' }
 
   const parsed = exhibitionSchema.safeParse(data)
-  if (!parsed.success) {
-    return { success: false, errors: parsed.error.flatten().fieldErrors }
+  if (!parsed.success) return { success: false, errors: parsed.error.flatten().fieldErrors }
+
+  const { data: row, error } = await supabase
+    .from('exhibitions')
+    .insert(toRow(parsed.data))
+    .select('id')
+    .single()
+
+  if (error) {
+    console.error('createExhibition:', error)
+    return { success: false, error: error.message }
   }
 
-  const rows = await db
-    .insert(exhibitions)
-    .values({
-      artistId: parsed.data.artistId,
-      type: parsed.data.type,
-      titleTr: parsed.data.titleTr,
-      titleEn: parsed.data.titleEn,
-      location: parsed.data.location,
-      year: parsed.data.year,
-      sortOrder: parsed.data.sortOrder ?? 0,
-    })
-    .returning({ id: exhibitions.id })
-
   revalidatePath('/', 'layout')
-  return { success: true, id: rows[0]?.id }
+  return { success: true, id: row?.id }
 }
 
 export async function updateExhibition(
@@ -54,22 +65,13 @@ export async function updateExhibition(
   if (!session) return { success: false, error: 'Unauthorized' }
 
   const parsed = exhibitionSchema.safeParse(data)
-  if (!parsed.success) {
-    return { success: false, errors: parsed.error.flatten().fieldErrors }
-  }
+  if (!parsed.success) return { success: false, errors: parsed.error.flatten().fieldErrors }
 
-  await db
-    .update(exhibitions)
-    .set({
-      artistId: parsed.data.artistId,
-      type: parsed.data.type,
-      titleTr: parsed.data.titleTr,
-      titleEn: parsed.data.titleEn,
-      location: parsed.data.location,
-      year: parsed.data.year,
-      sortOrder: parsed.data.sortOrder,
-    })
-    .where(eq(exhibitions.id, id))
+  const { error } = await supabase.from('exhibitions').update(toRow(parsed.data)).eq('id', id)
+  if (error) {
+    console.error('updateExhibition:', error)
+    return { success: false, error: error.message }
+  }
 
   revalidatePath('/', 'layout')
   return { success: true }
@@ -81,7 +83,11 @@ export async function deleteExhibition(
   const session = await auth()
   if (!session) return { success: false, error: 'Unauthorized' }
 
-  await db.delete(exhibitions).where(eq(exhibitions.id, id))
+  const { error } = await supabase.from('exhibitions').delete().eq('id', id)
+  if (error) {
+    console.error('deleteExhibition:', error)
+    return { success: false, error: error.message }
+  }
 
   revalidatePath('/', 'layout')
   return { success: true }

@@ -48,23 +48,27 @@ export default async function HomePage({
     .map((slug) => allProducts.find((p) => p.slug === slug)?.images?.[0]?.url)
     .filter(Boolean) as string[]
 
-  // Instagram bolumu icin secilmis 9 gorsel — sanatcinin eserlerinden.
-  // CANLI FEED DEGIL; bu gorsellerin belirli IG gonderileri oldugu iddia
-  // edilmiyor (bkz. instagram-section.tsx duruluk notu).
-  const instagramItems = allProducts
-    .filter((p) => p.images?.[0]?.url)
-    .slice(0, 9)
-    .map((p) => ({
-      src: p.images[0].url,
-      alt: isTr ? p.titleTr : p.titleEn,
-    }))
+  // Ana sayfa yerlesimleri artik ADMIN PANELINDEN secilir
+  // (/admin/ana-sayfa -> products.hero_order / instagram_order).
+  // Kodda sabit slug listesi YOK; panelde hic secim yapilmamissa gorunur
+  // eserlerin sirasina duserek bolum bos kalmaz.
+  const withImage = allProducts.filter((p) => p.images?.[0]?.url)
 
-  // Hero: 5 FARKLI seriden birer guclu gorsel (sanatcinin sirasindan secildi).
-  // Gorsel cesitliligi gozetildi: krater / kylix / figurlu tabak / geometrik.
-  const HERO_SLUGS = ['volutlu-krater', 'afrodit-ve-kaz', 'thetis', 'siren', 'geometrik-donem-tabak']
-  const heroSlides: HeroSlide[] = HERO_SLUGS.map((slug) => {
-    const p = allProducts.find((x) => x.slug === slug)
-    if (!p || !p.images?.[0]) return null
+  const pickSlots = (key: 'heroOrder' | 'instagramOrder', limit: number) => {
+    const chosen = withImage
+      .filter((p) => typeof p[key] === 'number' && p[key] !== null)
+      .sort((a, b) => (a[key] as number) - (b[key] as number))
+    return (chosen.length > 0 ? chosen : withImage).slice(0, limit)
+  }
+
+  // Instagram: CANLI FEED DEGIL; bu gorsellerin belirli IG gonderileri oldugu
+  // iddia edilmiyor (bkz. instagram-section.tsx duruluk notu).
+  const instagramItems = pickSlots('instagramOrder', 9).map((p) => ({
+    src: p.images[0].url,
+    alt: isTr ? p.titleTr : p.titleEn,
+  }))
+
+  const heroSlides: HeroSlide[] = pickSlots('heroOrder', 5).map((p) => {
     const title = isTr ? p.titleTr : p.titleEn
     return {
       slug: p.slug,
@@ -73,7 +77,7 @@ export default async function HomePage({
       alt: (isTr ? p.images[0].altTr : p.images[0].altEn) ?? title,
       category: p.category,
     }
-  }).filter(Boolean) as HeroSlide[]
+  })
 
   return (
     <main>

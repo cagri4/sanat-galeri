@@ -1,10 +1,11 @@
 'use server'
-import { db } from '@/lib/db'
-import { productImages } from '@/lib/db/schema'
-import { eq } from 'drizzle-orm'
+import { supabase } from '@/lib/db/supabase'
 import { auth } from '@/auth'
 import { revalidatePath } from 'next/cache'
-import { del } from '@vercel/blob'
+import { deleteImage } from '@/lib/storage'
+
+// Supabase REST kullanma gerekcesi icin bkz. `actions/product.ts` bas notu.
+// Depo tarafi icin bkz. `lib/storage.ts`.
 
 export async function addProductImage(data: {
   productId: number
@@ -16,13 +17,40 @@ export async function addProductImage(data: {
   const session = await auth()
   if (!session) return { success: false, error: 'Unauthorized' }
 
-  await db.insert(productImages).values({
-    productId: data.productId,
+  const { error } = await supabase.from('product_images').insert({
+    product_id: data.productId,
     url: data.url,
-    altTr: data.altTr,
-    altEn: data.altEn,
-    sortOrder: data.sortOrder ?? 0,
+    alt_tr: data.altTr?.trim() || null,
+    alt_en: data.altEn?.trim() || null,
+    sort_order: data.sortOrder ?? 0,
   })
+
+  if (error) {
+    console.error('addProductImage:', error)
+    return { success: false, error: error.message }
+  }
+
+  revalidatePath('/', 'layout')
+  return { success: true }
+}
+
+export async function updateProductImage(
+  id: number,
+  data: { altTr?: string; altEn?: string; sortOrder?: number }
+): Promise<{ success: boolean; error?: string }> {
+  const session = await auth()
+  if (!session) return { success: false, error: 'Unauthorized' }
+
+  const patch: Record<string, unknown> = {}
+  if (data.altTr !== undefined) patch.alt_tr = data.altTr.trim() || null
+  if (data.altEn !== undefined) patch.alt_en = data.altEn.trim() || null
+  if (data.sortOrder !== undefined) patch.sort_order = data.sortOrder
+
+  const { error } = await supabase.from('product_images').update(patch).eq('id', id)
+  if (error) {
+    console.error('updateProductImage:', error)
+    return { success: false, error: error.message }
+  }
 
   revalidatePath('/', 'layout')
   return { success: true }
@@ -34,15 +62,21 @@ export async function deleteProductImage(
   const session = await auth()
   if (!session) return { success: false, error: 'Unauthorized' }
 
-  const image = await db.query.productImages.findFirst({
-    where: eq(productImages.id, id),
-  })
+  const { data: image } = await supabase
+    .from('product_images')
+    .select('url')
+    .eq('id', id)
+    .single()
 
-  if (image?.url) {
-    await del(image.url)
+  const { error } = await supabase.from('product_images').delete().eq('id', id)
+  if (error) {
+    console.error('deleteProductImage:', error)
+    return { success: false, error: error.message }
   }
 
-  await db.delete(productImages).where(eq(productImages.id, id))
+  // Satir silindikten sonra dosyayi da kaldir. Dosya silinemezse kayit yine
+  // gitmis olur — yetim dosya, kirik gorselden iyidir.
+  if (image?.url) await deleteImage(image.url)
 
   revalidatePath('/', 'layout')
   return { success: true }
@@ -55,10 +89,14 @@ export async function reorderProductImages(
   if (!session) return { success: false, error: 'Unauthorized' }
 
   for (const image of images) {
-    await db
-      .update(productImages)
-      .set({ sortOrder: image.sortOrder })
-      .where(eq(productImages.id, image.id))
+    const { error } = await supabase
+      .from('product_images')
+      .update({ sort_order: image.sortOrder })
+      .eq('id', image.id)
+    if (error) {
+      console.error('reorderProductImages:', error)
+      return { success: false, error: error.message }
+    }
   }
 
   revalidatePath('/', 'layout')

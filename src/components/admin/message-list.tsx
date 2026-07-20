@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { markMessageRead } from '@/lib/actions/message'
+import { deleteMessage, markMessageRead } from '@/lib/actions/message'
 import { parseProductContext } from '@/lib/utils/message-utils'
 
 interface Artist {
@@ -41,6 +41,7 @@ function formatDate(date: Date | null): string {
 export default function MessageList({ messages }: MessageListProps) {
   const router = useRouter()
   const [markingId, setMarkingId] = useState<number | null>(null)
+  const [deletingId, setDeletingId] = useState<number | null>(null)
 
   const handleMarkRead = async (id: number) => {
     setMarkingId(id)
@@ -51,6 +52,17 @@ export default function MessageList({ messages }: MessageListProps) {
       // silently fail
     } finally {
       setMarkingId(null)
+    }
+  }
+
+  const handleDelete = async (id: number, sender: string) => {
+    if (!window.confirm(`"${sender}" kişisinden gelen mesaj silinsin mi? Geri alınamaz.`)) return
+    setDeletingId(id)
+    try {
+      await deleteMessage(id)
+      router.refresh()
+    } finally {
+      setDeletingId(null)
     }
   }
 
@@ -122,15 +134,24 @@ export default function MessageList({ messages }: MessageListProps) {
                 <span className="text-xs text-neutral-400">
                   {formatDate(message.createdAt)}
                 </span>
-                {!isRead && (
+                <div className="flex items-center gap-3">
+                  {!isRead && (
+                    <button
+                      onClick={() => handleMarkRead(message.id)}
+                      disabled={markingId === message.id}
+                      className="text-xs text-blue-600 hover:text-blue-800 underline underline-offset-2 disabled:opacity-50"
+                    >
+                      {markingId === message.id ? '...' : 'Okundu'}
+                    </button>
+                  )}
                   <button
-                    onClick={() => handleMarkRead(message.id)}
-                    disabled={markingId === message.id}
-                    className="text-xs text-blue-600 hover:text-blue-800 underline underline-offset-2 disabled:opacity-50"
+                    onClick={() => handleDelete(message.id, message.senderName)}
+                    disabled={deletingId === message.id}
+                    className="text-xs text-red-600 hover:text-red-800 underline underline-offset-2 disabled:opacity-50"
                   >
-                    {markingId === message.id ? '...' : 'Okundu'}
+                    {deletingId === message.id ? '...' : 'Sil'}
                   </button>
-                )}
+                </div>
               </div>
             </div>
 

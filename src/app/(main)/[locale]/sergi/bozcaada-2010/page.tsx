@@ -2,17 +2,22 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import LightboxViewer from '@/components/gallery/lightbox-viewer'
 import Reveal from '@/components/motion/reveal'
+import { getExhibitionPhotos } from '@/lib/queries/exhibition-photos'
 
 /**
  * Bozcaada 2010 sergi sayfasi.
  *
- * Metin sanatcinin kendi yazdigi "Internet site duzeni.docx" dosyasindan alindi.
- * Fotograflarin TEK TEK aciklamalari sanatcidan gelmedi — uydurulmadi, notrl
- * numaralandirma kullanildi.
+ * Sayfa metni sanatcinin kendi yazdigi "Internet site duzeni.docx" dosyasindan.
+ *
+ * FOTOGRAFLAR ARTIK DB'DEN: `exhibition_photos` tablosu, /admin/sergi-fotograflari
+ * ekranindan yonetilir. Onceden dosya adlari ve alt yazilar kodda sabitti;
+ * sanatcidan kalan 9 aciklama gelince kod degistirmek gerekiyordu.
+ *
+ * Alt yazisi olmayan fotograf icin uydurma metin YAZILMAZ — yalnizca basligi
+ * gosterilir.
  */
 
-const PHOTO_COUNT = 12
-const BUCKET = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/eserler`
+const SLUG = 'bozcaada-2010'
 
 export async function generateMetadata({
   params,
@@ -32,19 +37,14 @@ export default async function BozcaadaPage({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'exhibition' })
 
-  // Sanatci ilk uc yerlestirme icin kendi acikamasini yazdi (Sergi
-  // Yerlestirmesi I / II / III). Kalan fotograflar icin metin vermedigi
-  // icin yalnizca numaralandiriliyor — uydurma alt yazi yazilmadi.
-  const ROMAN = ['I', 'II', 'III']
-  const artistCaptions = [t('cap1'), t('cap2'), t('cap3')]
+  const isTr = locale === 'tr'
+  const rows = await getExhibitionPhotos(SLUG)
 
-  const photos = Array.from({ length: PHOTO_COUNT }, (_, i) => {
-    const label = i < ROMAN.length
-      ? `${t('installation')} ${ROMAN[i]}`
-      : `${t('installation')} ${i + 1}`
-    const caption = i < artistCaptions.length ? artistCaptions[i] : undefined
+  const photos = rows.map((row, i) => {
+    const label = (isTr ? row.titleTr : row.titleEn) ?? `${t('installation')} ${i + 1}`
+    const caption = (isTr ? row.captionTr : row.captionEn) ?? undefined
     return {
-      src: `${BUCKET}/bozcaada-${i + 1}.jpg`,
+      src: row.url,
       alt: caption ? `${label} — ${caption}` : `${t('title')} — ${label}`,
       width: 1600,
       height: 1200,
@@ -52,6 +52,8 @@ export default async function BozcaadaPage({
       description: caption,
     }
   })
+
+  const missingCaptions = photos.some((p) => !p.description)
 
   return (
     <main className="py-16 sm:py-24">
@@ -68,13 +70,17 @@ export default async function BozcaadaPage({
         </p>
       </Reveal>
 
-      <Reveal className="mt-16">
-        <LightboxViewer slides={photos} thumbnails={photos.map((p) => ({ src: p.src, alt: p.alt }))} />
-      </Reveal>
+      {photos.length > 0 && (
+        <Reveal className="mt-16">
+          <LightboxViewer slides={photos} thumbnails={photos.map((p) => ({ src: p.src, alt: p.alt }))} />
+        </Reveal>
+      )}
 
-      <p className="mt-16 max-w-2xl border-l border-[var(--rule)] pl-5 text-[length:var(--text-meta)] leading-relaxed text-[#999]">
-        {t('captionNote')}
-      </p>
+      {missingCaptions && (
+        <p className="mt-16 max-w-2xl border-l border-[var(--rule)] pl-5 text-[length:var(--text-meta)] leading-relaxed text-[#999]">
+          {t('captionNote')}
+        </p>
+      )}
     </main>
   )
 }

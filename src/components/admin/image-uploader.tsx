@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { addProductImage, deleteProductImage } from '@/lib/actions/product-image'
+import { addProductImage, deleteProductImage, updateProductImage } from '@/lib/actions/product-image'
 
 const MAX_WIDTH = 1600
 const MAX_HEIGHT = 1600
@@ -77,6 +77,20 @@ export default function ImageUploader({ productId, existingImages }: ImageUpload
   const [isUploading, setIsUploading] = useState(false)
   const [uploadError, setUploadError] = useState<string | null>(null)
   const [deletingId, setDeletingId] = useState<number | null>(null)
+  const [savedAltId, setSavedAltId] = useState<number | null>(null)
+
+  // Alt metin: gorme engelli kullanicilar ve arama motorlari icin.
+  // Bos birakilirsa site eser basligina duser.
+  const handleAltSave = async (id: number, altTr: string, altEn: string) => {
+    const result = await updateProductImage(id, { altTr, altEn })
+    if (result.success) {
+      setSavedAltId(id)
+      setTimeout(() => setSavedAltId(null), 2500)
+      router.refresh()
+    } else {
+      setUploadError(result.error ?? 'Alt metin kaydedilemedi.')
+    }
+  }
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files ?? [])
@@ -86,27 +100,32 @@ export default function ImageUploader({ productId, existingImages }: ImageUpload
     setUploadError(null)
 
     try {
-      const { upload } = await import('@vercel/blob/client')
+      let index = existingImages.length
 
       for (const file of files) {
-        // Resize before upload
+        // Tarayicida kucult — depoya buyuk dosya gitmesin.
         const optimized = await resizeImage(file)
 
-        const blob = await upload(optimized.name, optimized, {
-          access: 'public',
-          handleUploadUrl: '/api/upload',
-        })
+        const body = new FormData()
+        body.append('file', optimized)
+        body.append('folder', 'urunler')
+
+        const res = await fetch('/api/upload', { method: 'POST', body })
+        const json = await res.json().catch(() => ({}))
+
+        if (!res.ok || !json.url) {
+          setUploadError(json.error ?? 'Yükleme başarısız. Tekrar deneyin.')
+          continue
+        }
 
         const result = await addProductImage({
           productId,
-          url: blob.url,
-          altTr: '',
-          altEn: '',
-          sortOrder: existingImages.length,
+          url: json.url,
+          sortOrder: index++,
         })
 
         if (!result.success) {
-          setUploadError('Görsel kaydedilemedi.')
+          setUploadError('Görsel kaydedilemedi: ' + (result.error ?? 'bilinmeyen hata'))
         }
       }
 
@@ -142,31 +161,68 @@ export default function ImageUploader({ productId, existingImages }: ImageUpload
       <h2 className="text-lg font-medium text-neutral-900 mb-4">Görseller</h2>
 
       {existingImages.length > 0 && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-6">
+        <ul className="mb-6 space-y-3">
           {existingImages
             .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
             .map((image) => (
-              <div key={image.id} className="relative group">
-                <div className="relative aspect-square rounded-md overflow-hidden bg-neutral-100 border border-neutral-200">
-                  <Image
-                    src={image.url}
-                    alt={image.altTr ?? 'Ürün görseli'}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
-                  />
-                </div>
-                <button
-                  onClick={() => handleDelete(image.id)}
-                  disabled={deletingId === image.id}
-                  className="absolute top-1 right-1 h-6 w-6 rounded-full bg-red-600 text-white text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700 disabled:opacity-50"
-                  aria-label="Görseli sil"
+              <li key={image.id} className="rounded-md border border-neutral-200 p-3">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault()
+                    const fd = new FormData(e.currentTarget)
+                    handleAltSave(image.id, String(fd.get('altTr') ?? ''), String(fd.get('altEn') ?? ''))
+                  }}
+                  className="flex flex-col gap-3 sm:flex-row sm:items-center"
                 >
-                  {deletingId === image.id ? '...' : '×'}
-                </button>
-              </div>
+                  <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md border border-neutral-200 bg-neutral-100">
+                    <Image
+                      src={image.url}
+                      alt={image.altTr ?? 'Ürün görseli'}
+                      fill
+                      className="object-cover"
+                      sizes="96px"
+                    />
+                  </div>
+                  <div className="flex-1 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    <input
+                      name="altTr"
+                      defaultValue={image.altTr ?? ''}
+                      placeholder="Alt metin (TR)"
+                      aria-label="Alt metin (TR)"
+                      className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400"
+                    />
+                    <input
+                      name="altEn"
+                      defaultValue={image.altEn ?? ''}
+                      placeholder="Alt text (EN)"
+                      aria-label="Alt text (EN)"
+                      className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400"
+                    />
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="submit"
+                      className="rounded-md border border-neutral-300 px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-50 transition-colors"
+                    >
+                      Kaydet
+                    </button>
+                    {savedAltId === image.id && (
+                      <span className="text-sm font-medium text-green-600">✓</span>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(image.id)}
+                      disabled={deletingId === image.id}
+                      className="rounded-md border border-red-300 px-3 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50"
+                      aria-label="Görseli sil"
+                    >
+                      {deletingId === image.id ? '...' : 'Sil'}
+                    </button>
+                  </div>
+                </form>
+              </li>
             ))}
-        </div>
+        </ul>
       )}
 
       {existingImages.length === 0 && (
