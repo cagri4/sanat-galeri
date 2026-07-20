@@ -1,85 +1,87 @@
 /**
- * Unit tests for admin message Server Actions (ADM-03).
- * Tests auth guard, markMessageRead, and parseProductContext utility.
+ * Admin mesaj server-action'ları: markMessageRead, deleteMessage.
+ * Ayrıca mesaj gövdesindeki eser bağlamının ayrıştırılması.
+ *
+ * Eski hali drizzle mock'luyordu; yazma işlemleri 2026-07-20'de Supabase
+ * REST'e taşındı — o tarihe kadar "Okundu" işaretleme canlıda çalışmıyordu.
  */
 
-// Mock the db module before any imports
-jest.mock('@/lib/db', () => {
-  const mockWhere = jest.fn().mockResolvedValue([])
-  const mockSet = jest.fn().mockReturnValue({ where: mockWhere })
-  const mockUpdate = jest.fn().mockReturnValue({ set: mockSet })
-  return {
-    db: {
-      update: mockUpdate,
-    },
-    _mockUpdate: mockUpdate,
-    _mockSet: mockSet,
-    _mockWhere: mockWhere,
-  }
-})
+jest.mock('@/lib/db/supabase', () => ({ supabase: { from: jest.fn() } }))
+jest.mock('@/auth', () => ({ auth: jest.fn() }))
+jest.mock('next/cache', () => ({ revalidatePath: jest.fn() }))
 
-jest.mock('@/auth', () => ({
-  auth: jest.fn(),
-}))
-
-jest.mock('next/cache', () => ({
-  revalidatePath: jest.fn(),
-}))
-
-jest.mock('next/navigation', () => ({
-  redirect: jest.fn(),
-}))
-
-import { db } from '@/lib/db'
+import { supabase } from '@/lib/db/supabase'
 import { auth } from '@/auth'
-import { markMessageRead } from '@/lib/actions/message'
+import { mockFrom } from './helpers/supabase-mock'
+import { markMessageRead, deleteMessage } from '@/lib/actions/message'
 import { parseProductContext } from '@/lib/utils/message-utils'
 
-const mockAuth = auth as jest.Mock
-const mockUpdate = db.update as jest.Mock
+const mockAuth = auth as unknown as jest.Mock
+
+beforeEach(() => {
+  jest.clearAllMocks()
+  mockAuth.mockResolvedValue({ user: { name: 'Admin' } })
+})
 
 describe('markMessageRead()', () => {
-  beforeEach(() => {
-    jest.clearAllMocks()
-    const mockWhere = jest.fn().mockResolvedValue([])
-    const mockSet = jest.fn().mockReturnValue({ where: mockWhere })
-    mockUpdate.mockReturnValue({ set: mockSet })
-  })
-
-  it('returns { success: false, error: Unauthorized } when auth() returns null', async () => {
+  it('oturum yoksa reddeder ve hiçbir şey yazmaz', async () => {
     mockAuth.mockResolvedValue(null)
-    const result = await markMessageRead(1)
-    expect(result.success).toBe(false)
-    expect(result.error).toBe('Unauthorized')
-    expect(mockUpdate).not.toHaveBeenCalled()
+    const { from } = mockFrom(supabase, { data: null, error: null })
+    const res = await markMessageRead(1)
+
+    expect(res).toEqual({ success: false, error: 'Unauthorized' })
+    expect(from).not.toHaveBeenCalled()
   })
 
-  it('calls db.update setting isRead=true when authorized', async () => {
-    mockAuth.mockResolvedValue({ user: { id: '1' } })
-    const result = await markMessageRead(1)
-    expect(mockUpdate).toHaveBeenCalledTimes(1)
-    const mockSet = mockUpdate.mock.results[0]?.value?.set as jest.Mock
-    expect(mockSet).toHaveBeenCalledWith(expect.objectContaining({ isRead: true }))
-    expect(result.success).toBe(true)
+  it('is_read=true olarak günceller', async () => {
+    const { builder, lastTable } = mockFrom(supabase, { data: null, error: null })
+    const res = await markMessageRead(7)
+
+    expect(lastTable()).toBe('messages')
+    expect(builder.argsOf('update')?.[0]).toEqual({ is_read: true })
+    expect(builder.argsOf('eq')).toEqual(['id', 7])
+    expect(res.success).toBe(true)
+  })
+
+  it('DB hatasında success:false döner', async () => {
+    mockFrom(supabase, { data: null, error: { message: 'patladı' } })
+    expect(await markMessageRead(1)).toEqual({ success: false, error: 'patladı' })
+  })
+})
+
+describe('deleteMessage()', () => {
+  it('oturum yoksa reddeder', async () => {
+    mockAuth.mockResolvedValue(null)
+    expect(await deleteMessage(1)).toEqual({ success: false, error: 'Unauthorized' })
+  })
+
+  it('doğru id ile siler', async () => {
+    const { builder, lastTable } = mockFrom(supabase, { data: null, error: null })
+    const res = await deleteMessage(3)
+
+    expect(lastTable()).toBe('messages')
+    expect(builder.delete).toHaveBeenCalled()
+    expect(builder.argsOf('eq')).toEqual(['id', 3])
+    expect(res.success).toBe(true)
   })
 })
 
 describe('parseProductContext()', () => {
-  it('extracts slug from body prefix and returns clean body', () => {
-    const result = parseProductContext('[Eser: mavi-akin]\n\nMesaj')
-    expect(result.productSlug).toBe('mavi-akin')
-    expect(result.cleanBody).toBe('Mesaj')
+  it('gövde önekinden eser slug’ını çıkarır', () => {
+    const r = parseProductContext('[Eser: mavi-akin]\n\nMesaj')
+    expect(r.productSlug).toBe('mavi-akin')
+    expect(r.cleanBody).toBe('Mesaj')
   })
 
-  it('returns { productSlug: null, cleanBody } for normal message without prefix', () => {
-    const result = parseProductContext('Normal mesaj')
-    expect(result.productSlug).toBeNull()
-    expect(result.cleanBody).toBe('Normal mesaj')
+  it('önek yoksa slug null döner', () => {
+    const r = parseProductContext('Normal mesaj')
+    expect(r.productSlug).toBeNull()
+    expect(r.cleanBody).toBe('Normal mesaj')
   })
 
-  it('handles multi-line body correctly after prefix', () => {
-    const result = parseProductContext('[Eser: guzel-tablo]\n\nBu eser hakkında bilgi almak istiyorum.\nFiyat nedir?')
-    expect(result.productSlug).toBe('guzel-tablo')
-    expect(result.cleanBody).toBe('Bu eser hakkında bilgi almak istiyorum.\nFiyat nedir?')
+  it('çok satırlı gövdeyi korur', () => {
+    const r = parseProductContext('[Eser: guzel-tablo]\n\nBu eser hakkında bilgi almak istiyorum.\nFiyat nedir?')
+    expect(r.productSlug).toBe('guzel-tablo')
+    expect(r.cleanBody).toBe('Bu eser hakkında bilgi almak istiyorum.\nFiyat nedir?')
   })
 })

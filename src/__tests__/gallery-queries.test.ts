@@ -1,114 +1,145 @@
 /**
- * Unit tests for gallery query functions.
- * Tests getProducts(), getProductBySlug(), getCategories()
- * using mocked Drizzle db.query interface.
+ * Galeri sorguları — getProducts, getProductBySlug, getProductsByArtist,
+ * getCategories.
+ *
+ * NOT: Bu testler eskiden drizzle'ın `db.query.*` arayüzünü mock'luyordu.
+ * Sorgular Supabase REST'e taşındığında güncellenmemişlerdi; import sırasında
+ * düştükleri için de fark edilmemişti (bkz. jest.setup.ts). Artık gerçek
+ * uygulamayı doğruluyorlar: hangi filtreler uygulanıyor ve snake_case sütunlar
+ * camelCase alanlara doğru eşleniyor mu.
  */
 
-// Mock the db module before any imports
-jest.mock('@/lib/db', () => ({
-  db: {
-    query: {
-      products: {
-        findMany: jest.fn(),
-        findFirst: jest.fn(),
-      },
-    },
-    selectDistinct: jest.fn(),
-  },
-}))
+jest.mock('@/lib/db/supabase', () => ({ supabase: { from: jest.fn() } }))
 
-import { db } from '@/lib/db'
-import { getProducts, getProductBySlug, getCategories } from '@/lib/queries/gallery'
-import { products } from '@/lib/db/schema'
+import { supabase } from '@/lib/db/supabase'
+import { mockFrom } from './helpers/supabase-mock'
+import {
+  getProducts,
+  getProductBySlug,
+  getProductsByArtist,
+  getCategories,
+} from '@/lib/queries/gallery'
 
-const mockFindMany = db.query.products.findMany as jest.Mock
-const mockFindFirst = db.query.products.findFirst as jest.Mock
-const mockSelectDistinct = db.selectDistinct as jest.Mock
+const ROW = {
+  id: 1,
+  slug: 'test-slug',
+  title_tr: 'Eser',
+  title_en: 'Artwork',
+  description_tr: 'Açıklama',
+  description_en: 'Description',
+  about_tr: 'Replika hakkında',
+  about_en: 'About the replica',
+  collection: 'Zamansız Manzaralar',
+  category: 'Resimli Seramikler',
+  medium_tr: 'Terra sigillata',
+  medium_en: 'Terra sigillata',
+  dimensions_tr: '20 cm',
+  dimensions_en: '20 cm',
+  form_tr: 'Kylix',
+  form_en: 'Kylix',
+  period_tr: 'MÖ 5. yüzyıl',
+  period_en: '5th century BC',
+  subject_tr: 'Afrodit',
+  subject_en: 'Aphrodite',
+  hero_order: 0,
+  instagram_order: 3,
+  artist_id: 2,
+  is_visible: true,
+  is_sold: false,
+  created_at: '2026-01-01',
+  images: [{ id: 9, url: 'u', alt_tr: 'a', alt_en: 'b', sort_order: 1, product_id: 1 }],
+  artist: { id: 2, slug: 'seref', name_tr: 'Şeref Doğan', name_en: 'Seref Dogan' },
+}
 
 describe('getProducts()', () => {
-  beforeEach(() => {
-    jest.clearAllMocks()
-    mockFindMany.mockResolvedValue([])
-  })
-
-  it('calls findMany with isVisible filter when no category', async () => {
+  it('yalnızca görünür eserleri ister ve sanatçı sırasına göre sıralar', async () => {
+    const { builder, lastTable } = mockFrom(supabase, { data: [], error: null })
     await getProducts()
-    expect(mockFindMany).toHaveBeenCalledTimes(1)
-    const callArg = mockFindMany.mock.calls[0][0]
-    expect(callArg).toHaveProperty('with')
-    expect(callArg.with).toHaveProperty('images')
-    expect(callArg).toHaveProperty('orderBy')
+
+    expect(lastTable()).toBe('products')
+    expect(builder.argsOf('eq')).toEqual(['is_visible', true])
+    expect(builder.calls.filter((c) => c.method === 'order')[0].args[0]).toBe('sort_order')
   })
 
-  it('calls findMany with category filter when category is provided', async () => {
-    await getProducts('Tablo')
-    expect(mockFindMany).toHaveBeenCalledTimes(1)
-    const callArg = mockFindMany.mock.calls[0][0]
-    expect(callArg).toHaveProperty('where')
-    expect(callArg).toHaveProperty('with')
+  it('kategori verildiğinde kategori filtresi ekler', async () => {
+    const { builder } = mockFrom(supabase, { data: [], error: null })
+    await getProducts('Antik Dönem Replikaları')
+
+    const eqCalls = builder.calls.filter((c) => c.method === 'eq')
+    expect(eqCalls).toContainEqual({ method: 'eq', args: ['category', 'Antik Dönem Replikaları'] })
   })
 
-  it('returns the result from findMany', async () => {
-    const mockData = [{ id: 1, titleTr: 'Eser 1', images: [] }]
-    mockFindMany.mockResolvedValue(mockData)
-    const result = await getProducts()
-    expect(result).toEqual(mockData)
+  it('snake_case sütunları camelCase alanlara eşler', async () => {
+    mockFrom(supabase, { data: [ROW], error: null })
+    const [p] = await getProducts()
+
+    expect(p.titleTr).toBe('Eser')
+    expect(p.collection).toBe('Zamansız Manzaralar')
+    expect(p.heroOrder).toBe(0)
+    expect(p.instagramOrder).toBe(3)
+    expect(p.images[0].altTr).toBe('a')
+  })
+
+  it('hata durumunda fırlatır (sessizce boş dönmez)', async () => {
+    mockFrom(supabase, { data: null, error: { message: 'boom' } })
+    await expect(getProducts()).rejects.toBeDefined()
   })
 })
 
 describe('getProductBySlug()', () => {
-  beforeEach(() => {
-    jest.clearAllMocks()
-    mockFindFirst.mockResolvedValue(null)
-  })
-
-  it('calls findFirst with slug and isVisible filter', async () => {
+  it('slug + görünürlük filtresiyle tek kayıt ister', async () => {
+    const { builder, lastTable } = mockFrom(supabase, { data: ROW, error: null })
     await getProductBySlug('test-slug')
-    expect(mockFindFirst).toHaveBeenCalledTimes(1)
-    const callArg = mockFindFirst.mock.calls[0][0]
-    expect(callArg).toHaveProperty('where')
-    expect(callArg).toHaveProperty('with')
-    expect(callArg.with).toHaveProperty('images')
-    expect(callArg.with).toHaveProperty('artist')
+
+    expect(lastTable()).toBe('products')
+    const eqCalls = builder.calls.filter((c) => c.method === 'eq')
+    expect(eqCalls).toContainEqual({ method: 'eq', args: ['slug', 'test-slug'] })
+    expect(eqCalls).toContainEqual({ method: 'eq', args: ['is_visible', true] })
+    expect(builder.single).toHaveBeenCalled()
   })
 
-  it('returns the product from findFirst', async () => {
-    const mockProduct = {
-      id: 1,
-      slug: 'test-slug',
-      titleTr: 'Eser',
-      images: [],
-      artist: { id: 1, nameTr: 'Melike' },
-    }
-    mockFindFirst.mockResolvedValue(mockProduct)
-    const result = await getProductBySlug('test-slug')
-    expect(result).toEqual(mockProduct)
+  it('katalog ve "Replika Hakkında" alanlarını eşler', async () => {
+    mockFrom(supabase, { data: ROW, error: null })
+    const p = await getProductBySlug('test-slug')
+
+    expect(p?.formTr).toBe('Kylix')
+    expect(p?.periodTr).toBe('MÖ 5. yüzyıl')
+    expect(p?.subjectTr).toBe('Afrodit')
+    expect(p?.aboutTr).toBe('Replika hakkında')
+    expect(p?.aboutEn).toBe('About the replica')
+    expect(p?.artist?.nameTr).toBe('Şeref Doğan')
   })
 
-  it('returns null when product not found', async () => {
-    mockFindFirst.mockResolvedValue(null)
-    const result = await getProductBySlug('nonexistent')
-    expect(result).toBeNull()
+  it('bulunamayan eser için null döner (gizli eser dahil)', async () => {
+    mockFrom(supabase, { data: null, error: { code: 'PGRST116' } })
+    expect(await getProductBySlug('yok')).toBeNull()
+  })
+})
+
+describe('getProductsByArtist()', () => {
+  it('sanatçıya ve görünürlüğe göre filtreler', async () => {
+    const { builder } = mockFrom(supabase, { data: [], error: null })
+    await getProductsByArtist(2)
+
+    const eqCalls = builder.calls.filter((c) => c.method === 'eq')
+    expect(eqCalls).toContainEqual({ method: 'eq', args: ['artist_id', 2] })
+    expect(eqCalls).toContainEqual({ method: 'eq', args: ['is_visible', true] })
+    expect(builder.limit).not.toHaveBeenCalled()
+  })
+
+  it('limit verildiğinde uygular', async () => {
+    const { builder } = mockFrom(supabase, { data: [], error: null })
+    await getProductsByArtist(2, 4)
+    expect(builder.limit).toHaveBeenCalledWith(4)
   })
 })
 
 describe('getCategories()', () => {
-  beforeEach(() => {
-    jest.clearAllMocks()
-  })
-
-  it('calls selectDistinct and returns category array', async () => {
-    const mockChain = {
-      from: jest.fn().mockReturnThis(),
-      where: jest.fn().mockResolvedValue([
-        { category: 'Tablo' },
-        { category: 'Seramik' },
-      ]),
-    }
-    mockSelectDistinct.mockReturnValue(mockChain)
-
-    const result = await getCategories()
-    expect(mockSelectDistinct).toHaveBeenCalledTimes(1)
-    expect(result).toEqual(['Tablo', 'Seramik'])
+  it('benzersiz kategori listesi döner', async () => {
+    mockFrom(supabase, {
+      data: [{ category: 'A' }, { category: 'B' }, { category: 'A' }],
+      error: null,
+    })
+    expect(await getCategories()).toEqual(['A', 'B'])
   })
 })

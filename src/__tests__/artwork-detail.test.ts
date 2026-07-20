@@ -1,115 +1,99 @@
 /**
- * Wave 0 contract test for artwork detail page.
- * Tests that getProductBySlug returns data matching the expected shape
- * for the detail page to render (title, medium, dimensions, year, price, images, artist).
+ * Eser detay sayfası sözleşmesi.
  *
- * This is a contract test — actual rendering is verified visually in Plan 03.
+ * Sayfanın (`/[locale]/urun/[slug]`) ihtiyaç duyduğu her alanın sorgudan
+ * geldiğini doğrular. Görsel yerleşim ayrıca tarayıcıda kontrol ediliyor.
+ *
+ * Eski hali drizzle mock'luyordu; sorgular REST'e taşınınca güncellenmemişti.
  */
 
-jest.mock('@/lib/db', () => ({
-  db: {
-    query: {
-      products: {
-        findFirst: jest.fn(),
-      },
-    },
-  },
-}))
+jest.mock('@/lib/db/supabase', () => ({ supabase: { from: jest.fn() } }))
 
-import { db } from '@/lib/db'
+import { supabase } from '@/lib/db/supabase'
+import { mockFrom } from './helpers/supabase-mock'
 import { getProductBySlug } from '@/lib/queries/gallery'
 
-const mockFindFirst = db.query.products.findFirst as jest.Mock
-
-const sampleProduct = {
+const ROW = {
   id: 1,
-  slug: 'mavi-akin',
-  titleTr: 'Mavi Akın',
-  titleEn: 'Blue Flow',
-  category: 'Tablo',
-  year: 2023,
-  mediumTr: 'Tuval üzerine yağlıboya',
-  mediumEn: 'Oil on canvas',
-  dimensionsTr: '100x80 cm',
-  dimensionsEn: '100x80 cm',
-  price: '4500.00',
+  slug: 'afrodit-ve-kaz',
+  title_tr: 'Afrodit ve Kaz',
+  title_en: 'Aphrodite and the Goose',
+  category: 'Antik Dönem Replikaları',
+  collection: null,
+  year: 2010,
+  medium_tr: 'Terra sigillata',
+  medium_en: 'Terra sigillata',
+  dimensions_tr: '32 cm',
+  dimensions_en: '32 cm',
+  form_tr: 'Kylix',
+  form_en: 'Kylix',
+  period_tr: 'MÖ 5. yüzyıl',
+  period_en: '5th century BC',
+  subject_tr: 'Afrodit ve kutsal hayvanı kaz',
+  subject_en: 'Aphrodite and her sacred goose',
+  description_tr: 'İkonografik çözümleme...',
+  description_en: 'Iconographic reading...',
+  about_tr: null,
+  about_en: null,
+  price: null,
   currency: 'TRY',
-  isSold: false,
-  isVisible: true,
-  descriptionTr: 'Mavi tonlarda bir akar eser.',
-  descriptionEn: 'A flowing artwork in blue tones.',
-  artistId: 1,
-  createdAt: new Date(),
+  is_sold: false,
+  is_visible: true,
+  artist_id: 2,
+  created_at: '2026-01-01',
   images: [
-    {
-      id: 1,
-      productId: 1,
-      url: 'https://placehold.co/800x600.webp',
-      altTr: 'Mavi Akın - Ana Görsel',
-      altEn: 'Blue Flow - Main Image',
-      sortOrder: 0,
-    },
+    { id: 1, product_id: 1, url: 'https://x/1.jpg', alt_tr: 'Ana görsel', alt_en: 'Main image', sort_order: 0 },
   ],
-  artist: {
-    id: 1,
-    slug: 'melike',
-    nameTr: 'Melike Doğan',
-    nameEn: 'Melike Dogan',
-  },
+  artist: { id: 2, slug: 'seref', name_tr: 'Şeref Doğan', name_en: 'Seref Dogan' },
 }
 
-describe('Artwork detail page (contract)', () => {
-  beforeEach(() => {
-    jest.clearAllMocks()
-    mockFindFirst.mockResolvedValue(sampleProduct)
+describe('Eser detay sayfası sözleşmesi', () => {
+  beforeEach(() => mockFrom(supabase, { data: ROW, error: null }))
+
+  it('iki dilde başlık döner', async () => {
+    const p = await getProductBySlug('afrodit-ve-kaz')
+    expect(p?.titleTr).toBe('Afrodit ve Kaz')
+    expect(p?.titleEn).toBe('Aphrodite and the Goose')
   })
 
-  it('getProductBySlug returns product with all required fields', async () => {
-    const product = await getProductBySlug('mavi-akin')
-    expect(product).not.toBeNull()
-    expect(product).toBeDefined()
+  it('sanatçının istediği katalog künyesini döner', async () => {
+    const p = await getProductBySlug('afrodit-ve-kaz')
+    // Kap Formu / Dönemi / Teknik / Mitolojik Konu — SANATCI-SITE-DUZENI.md
+    expect(p?.formTr).toBe('Kylix')
+    expect(p?.periodTr).toBe('MÖ 5. yüzyıl')
+    expect(p?.mediumTr).toBe('Terra sigillata')
+    expect(p?.subjectTr).toBe('Afrodit ve kutsal hayvanı kaz')
+    expect(p?.dimensionsTr).toBe('32 cm')
+    expect(p?.year).toBe(2010)
   })
 
-  it('product has titleTr and titleEn fields', async () => {
-    const product = await getProductBySlug('mavi-akin')
-    expect(product).toHaveProperty('titleTr')
-    expect(product).toHaveProperty('titleEn')
+  it('açıklama ve "Replika Hakkında" alanlarını taşır', async () => {
+    const p = await getProductBySlug('afrodit-ve-kaz')
+    expect(p?.descriptionTr).toContain('İkonografik')
+    // about_* boşsa sayfa çeviri dosyasındaki genel metne düşer
+    expect(p?.aboutTr).toBeNull()
   })
 
-  it('product has year, mediumTr, mediumEn fields', async () => {
-    const product = await getProductBySlug('mavi-akin')
-    expect(product).toHaveProperty('year', 2023)
-    expect(product).toHaveProperty('mediumTr', 'Tuval üzerine yağlıboya')
-    expect(product).toHaveProperty('mediumEn', 'Oil on canvas')
+  it('fiyat boşken null döner (katalog modeli — fiyat gösterilmez)', async () => {
+    const p = await getProductBySlug('afrodit-ve-kaz')
+    expect(p?.price).toBeNull()
+    expect(p?.isSold).toBe(false)
   })
 
-  it('product has dimensionsTr and dimensionsEn fields', async () => {
-    const product = await getProductBySlug('mavi-akin')
-    expect(product).toHaveProperty('dimensionsTr', '100x80 cm')
-    expect(product).toHaveProperty('dimensionsEn', '100x80 cm')
+  it('görselleri alt metinleriyle döner', async () => {
+    const p = await getProductBySlug('afrodit-ve-kaz')
+    expect(p?.images).toHaveLength(1)
+    expect(p?.images[0].altTr).toBe('Ana görsel')
   })
 
-  it('product has price field', async () => {
-    const product = await getProductBySlug('mavi-akin')
-    expect(product).toHaveProperty('price', '4500.00')
+  it('sanatçı bilgisini bağlar', async () => {
+    const p = await getProductBySlug('afrodit-ve-kaz')
+    expect(p?.artist?.slug).toBe('seref')
+    expect(p?.artist?.nameTr).toBe('Şeref Doğan')
   })
 
-  it('product has images array', async () => {
-    const product = await getProductBySlug('mavi-akin')
-    expect(product).toHaveProperty('images')
-    expect(Array.isArray(product!.images)).toBe(true)
-    expect(product!.images.length).toBeGreaterThan(0)
-  })
-
-  it('product has artist object', async () => {
-    const product = await getProductBySlug('mavi-akin')
-    expect(product).toHaveProperty('artist')
-    expect(product!.artist).toHaveProperty('nameTr')
-  })
-
-  it('returns null for nonexistent product', async () => {
-    mockFindFirst.mockResolvedValue(null)
-    const product = await getProductBySlug('nonexistent')
-    expect(product).toBeNull()
+  it('olmayan/gizli eser için null döner', async () => {
+    mockFrom(supabase, { data: null, error: { code: 'PGRST116' } })
+    expect(await getProductBySlug('yok')).toBeNull()
   })
 })
