@@ -22,7 +22,7 @@ export default async function ArtworkGrid({ products, locale, category }: Artwor
     // Henüz eser girilmemiş kategori: hata gibi değil, sakin bir bekleme durumu.
     const collections = category ? (COLLECTIONS[category] ?? []) : []
     return (
-      <div className="py-24 text-center">
+      <div className="py-14 text-center">
         <p className="font-[family-name:var(--font-serif)] text-xl font-light text-[#1a1a1a]">
           {category ? t('comingSoon') : t('emptyState')}
         </p>

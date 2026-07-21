@@ -38,6 +38,26 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
     // DB not available — show empty state
   }
 
+  // Antik Donem Replikalari icin sanatcinin ortak-uretim aciklamasi
+  // (SANATCI-ESER-ACIKLAMALARI.md / Edit Talepleri satir 5). Hem gruplu
+  // gorunumde hem de kategori secildiginde ayni yerde gosterilir.
+  const antikIntro = (
+    <div className="mt-6 max-w-[68ch] space-y-4">
+      <p className="text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]">
+        {tc('jointProduction')}
+      </p>
+      <Link
+        href={`/${locale}/teknik`}
+        className="group inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#1a1a1a]"
+      >
+        {tc('techniqueCta')}
+      </Link>
+    </div>
+  )
+
+  const heading = (cat: string) =>
+    t.has(`categories.${cat}`) ? t(`categories.${cat}`) : cat
+
   return (
     <main className="py-16 sm:py-24">
       {/* Baslik olcegi buyutuldu ve tracking sikilastirildi: iri + ince
@@ -46,31 +66,50 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
         {t('title')}
       </h1>
 
-      {/* Antik Donem Replikalari secildiginde sanatcinin kendi koleksiyon
-          tanitimi gosterilir (SANATCI-SITE-DUZENI.md). */}
-      {category === 'Antik Dönem Replikaları' && (
-        <div className="mt-8 max-w-[68ch]">
-          <p className="text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]">
-            {tc('long')}
-          </p>
-          <Link
-            href={`/${locale}/teknik`}
-            className="group mt-4 inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#1a1a1a]"
-          >
-            {tc('techniqueCta')}
-          </Link>
-        </div>
-      )}
-
       {categories.length > 0 && (
         <Suspense fallback={<div className="h-12" />}>
           <CategoryFilter categories={categories} active={category ?? null} />
         </Suspense>
       )}
 
-      <div className="mt-14">
-        <ArtworkGrid products={products} locale={locale} category={category ?? null} />
-      </div>
+      {category ? (
+        // TEK KATEGORI — filtre secili. Baslik + (Antik ise) ortak uretim metni.
+        <section className="mt-12">
+          <h2 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a] sm:text-3xl">
+            {heading(category)}
+          </h2>
+          {category === 'Antik Dönem Replikaları' && antikIntro}
+          <div className="mt-10">
+            <ArtworkGrid products={products} locale={locale} category={category} />
+          </div>
+        </section>
+      ) : (
+        // TUMU — eserler kategori BASLIKLARINA ayrilir (Edit Talepleri satir 4).
+        // Sanatcinin sirasi korunur; bos kategori zarif "icerik yakinda" ile durur.
+        <div className="mt-14 space-y-20">
+          {categories.map((cat) => {
+            const items = products.filter((p) => p.category === cat)
+            return (
+              <section key={cat}>
+                <div className="flex items-baseline gap-4">
+                  <h2 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a] sm:text-3xl">
+                    {heading(cat)}
+                  </h2>
+                  {items.length > 0 && (
+                    <span className="text-[length:var(--text-meta)] text-[#b5aea3]">
+                      {items.length}
+                    </span>
+                  )}
+                </div>
+                {cat === 'Antik Dönem Replikaları' && antikIntro}
+                <div className="mt-10">
+                  <ArtworkGrid products={items} locale={locale} category={cat} />
+                </div>
+              </section>
+            )
+          })}
+        </div>
+      )}
     </main>
   )
 }
