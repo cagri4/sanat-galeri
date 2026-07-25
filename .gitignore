@@ -42,3 +42,4 @@ next-env.d.ts
 
 # Drive'dan indirilen orijinal fotograflar (176MB) — Supabase Storage'a yuklendi
 drive-fotolar/
+preview-shots/
