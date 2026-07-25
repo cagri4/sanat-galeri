@@ -77,6 +77,11 @@ export default async function KoleksiyonlarPage({
               />
             )}
             <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+            {count === 0 && (
+              <span className="absolute left-6 top-6 rounded-full bg-white/80 px-3 py-1 text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b]">
+                {t('comingSoonTag')}
+              </span>
+            )}
             <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7">
               <h2 className="text-xl font-medium text-white sm:text-2xl">{label}</h2>
               <p className="mt-1.5 flex items-center gap-3 text-[length:var(--text-meta)] text-white/80">

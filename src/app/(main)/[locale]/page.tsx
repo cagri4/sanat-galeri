@@ -146,6 +146,11 @@ export default async function HomePage({
                 />
               )}
               <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
+              {!cover && (
+                <span className="absolute left-4 top-4 rounded-full bg-white/80 px-3 py-1 text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b]">
+                  {tcol('comingSoonTag')}
+                </span>
+              )}
               <h3 className="absolute inset-x-0 bottom-0 p-5 text-lg font-medium text-white">
                 {label}
               </h3>

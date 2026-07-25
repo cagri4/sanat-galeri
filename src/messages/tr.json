@@ -155,7 +155,8 @@
     "title": "Koleksiyonlar",
     "lead": "Her koleksiyon, antik seramik geleneğinin farklı bir yüzünü bugüne taşır. Formlar tornada şekillenir, yüzeyler terra sigillata tekniğiyle elle işlenir.",
     "viewCollection": "Koleksiyonu gör",
-    "emptyNote": "Bu koleksiyonun eserleri hazırlanıyor."
+    "emptyNote": "Bu koleksiyonun eserleri hazırlanıyor.",
+    "comingSoonTag": "Yakında"
   },
   "commissions": {
     "title": "Özel Sipariş",
