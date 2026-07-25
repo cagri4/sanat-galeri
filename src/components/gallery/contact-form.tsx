@@ -36,12 +36,12 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
   if (status === 'success') {
     return (
       <div className="py-6 text-center">
-        <div className="w-10 h-10 mx-auto rounded-full bg-[#612E49]/10 flex items-center justify-center mb-3">
-          <svg className="w-5 h-5 text-[#612E49]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="w-10 h-10 mx-auto rounded-full bg-[#2C2C2C]/10 flex items-center justify-center mb-3">
+          <svg className="w-5 h-5 text-[#2C2C2C]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <p className="text-[15px] text-[#1a1a1a]">{t('successMessage')}</p>
+        <p className="text-[15px] text-[#2C2C2C]">{t('successMessage')}</p>
       </div>
     )
   }
@@ -65,7 +65,7 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
           type="text"
           required
           placeholder={t('namePlaceholder')}
-          className="w-full px-4 py-3 bg-white border border-[#e8e4de] text-[15px] text-[#1a1a1a] placeholder-[#bbb] focus:outline-none focus:border-[#612E49] transition-colors"
+          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder-[#bbb] focus:outline-none focus:border-[#2C2C2C] transition-colors"
         />
       </div>
 
@@ -79,7 +79,7 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
           type="email"
           required
           placeholder={t('emailPlaceholder')}
-          className="w-full px-4 py-3 bg-white border border-[#e8e4de] text-[15px] text-[#1a1a1a] placeholder-[#bbb] focus:outline-none focus:border-[#612E49] transition-colors"
+          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder-[#bbb] focus:outline-none focus:border-[#2C2C2C] transition-colors"
         />
       </div>
 
@@ -93,7 +93,7 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
           required
           rows={5}
           placeholder={t('messagePlaceholder')}
-          className="w-full px-4 py-3 bg-white border border-[#e8e4de] text-[15px] text-[#1a1a1a] placeholder-[#bbb] focus:outline-none focus:border-[#612E49] transition-colors resize-none"
+          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder-[#bbb] focus:outline-none focus:border-[#2C2C2C] transition-colors resize-none"
         />
       </div>
 
@@ -106,7 +106,7 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="w-full bg-[#612E49] text-white text-[13px] uppercase tracking-[0.15em] px-8 py-4 hover:bg-[#4f243b] transition-colors disabled:opacity-50"
+        className="w-full bg-[#2C2C2C] text-white text-[13px] uppercase tracking-[0.15em] px-8 py-4 hover:bg-[#1f1f1f] transition-colors disabled:opacity-50"
       >
         {status === 'submitting' ? t('submitting') : t('submit')}
       </button>

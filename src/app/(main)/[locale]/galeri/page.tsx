@@ -48,7 +48,7 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
       </p>
       <Link
         href={`/${locale}/teknik`}
-        className="group inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#1a1a1a]"
+        className="group inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#2C2C2C]"
       >
         {tc('techniqueCta')}
       </Link>
@@ -62,7 +62,7 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
     <main className="py-16 sm:py-24">
       {/* Baslik olcegi buyutuldu ve tracking sikilastirildi: iri + ince
           serif, "Exaggerated Minimalism" dilinin sakin yorumu. */}
-      <h1 className="font-[family-name:var(--font-serif)] text-4xl font-light leading-[1.1] tracking-[-0.01em] text-[#1a1a1a] sm:text-5xl lg:text-6xl">
+      <h1 className="text-4xl font-medium leading-[1.1] tracking-[-0.01em] text-[#2C2C2C] sm:text-5xl lg:text-6xl">
         {t('title')}
       </h1>
 
@@ -75,7 +75,7 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
       {category ? (
         // TEK KATEGORI — filtre secili. Baslik + (Antik ise) ortak uretim metni.
         <section className="mt-12">
-          <h2 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a] sm:text-3xl">
+          <h2 className="text-2xl font-medium text-[#2C2C2C] sm:text-3xl">
             {heading(category)}
           </h2>
           {category === 'Antik Dönem Replikaları' && antikIntro}
@@ -92,7 +92,7 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
             return (
               <section key={cat}>
                 <div className="flex items-baseline gap-4">
-                  <h2 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a] sm:text-3xl">
+                  <h2 className="text-2xl font-medium text-[#2C2C2C] sm:text-3xl">
                     {heading(cat)}
                   </h2>
                   {items.length > 0 && (

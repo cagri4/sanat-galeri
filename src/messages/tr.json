@@ -11,7 +11,9 @@
     "about": "Hakkımızda",
     "contact": "İletişim",
     "exhibitions": "Sergiler",
-    "technique": "Teknik"
+    "technique": "Teknik",
+    "collections": "Koleksiyonlar",
+    "commissions": "Özel Sipariş"
   },
   "gallery": {
     "title": "Galeri",
@@ -99,7 +101,9 @@
     "aboutLink": "Hakkımızda",
     "contactLink": "İletişim",
     "address": "Boğazkent mah. 3.cad. 1/10\nKepez, Çanakkale 17100\nTürkiye",
-    "followUs": "Bizi Takip Edin"
+    "followUs": "Bizi Takip Edin",
+    "collectionsLink": "Koleksiyonlar",
+    "commissionsLink": "Özel Sipariş"
   },
   "exhibition": {
     "eyebrow": "Sergi",
@@ -146,5 +150,18 @@
     "title": "Bize yazın",
     "close": "Kapat",
     "rateLimited": "Çok fazla mesaj gönderildi. Lütfen birkaç dakika sonra tekrar deneyin."
+  },
+  "collectionsPage": {
+    "title": "Koleksiyonlar",
+    "lead": "Her koleksiyon, antik seramik geleneğinin farklı bir yüzünü bugüne taşır. Formlar tornada şekillenir, yüzeyler terra sigillata tekniğiyle elle işlenir.",
+    "viewCollection": "Koleksiyonu gör",
+    "emptyNote": "Bu koleksiyonun eserleri hazırlanıyor."
+  },
+  "commissions": {
+    "title": "Özel Sipariş",
+    "lead": "Belirli bir mekân, form ya da mitolojik anlatı için özel çalışmalar üretiyoruz. Her eser elde biçimlenir; ölçü, yüzey ve konu birlikte kararlaştırılır.",
+    "body": "Bir mekâna özel bir pano, sevdiğiniz bir mitolojik sahnenin replikası ya da bir dizi kap — düşüncenizi bizimle paylaşın, birlikte yorumlayalım. Bu bir satış sistemi değil; bir başlangıç sohbetidir.",
+    "cta": "Teklif / İletişim",
+    "note": "Fiyat ve süre, işin kapsamına göre görüşmede netleşir."
   }
 }

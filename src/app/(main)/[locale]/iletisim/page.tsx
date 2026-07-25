@@ -35,7 +35,7 @@ export default async function ContactPage({
 
   return (
     <main className="py-12 sm:py-16 lg:py-20">
-      <h1 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl lg:text-5xl font-light tracking-wide text-[#1a1a1a]">
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-wide text-[#2C2C2C]">
         {isTr ? 'İletişim' : 'Contact'}
       </h1>
       <p className="mt-4 text-[15px] text-[#6b6b6b] max-w-2xl">
@@ -54,7 +54,7 @@ export default async function ContactPage({
               <h2 className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999] mb-2">
                 {isTr ? 'Adres' : 'Address'}
               </h2>
-              <p className="whitespace-pre-line text-[length:var(--text-body)] leading-relaxed text-[#1a1a1a]">
+              <p className="whitespace-pre-line text-[length:var(--text-body)] leading-relaxed text-[#2C2C2C]">
                 {'Boğazkent mah. 3.cad. 1/10\nKepez, Çanakkale 17100\nTürkiye'}
               </p>
             </div>
@@ -68,7 +68,7 @@ export default async function ContactPage({
                   {a.email && (
                     <a
                       href={`mailto:${a.email}`}
-                      className="block text-[15px] text-[#1a1a1a] hover:text-[#612E49] transition-colors"
+                      className="block text-[15px] text-[#2C2C2C] hover:text-[#2C2C2C] transition-colors"
                     >
                       {a.email}
                     </a>

@@ -56,7 +56,7 @@ export default async function TeknikPage({
         <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
           {t('eyebrow')}
         </p>
-        <h1 className="mt-4 font-[family-name:var(--font-serif)] text-4xl font-light leading-[1.1] tracking-[-0.01em] text-[#1a1a1a] sm:text-5xl">
+        <h1 className="mt-4 text-4xl font-medium leading-[1.1] tracking-[-0.01em] text-[#2C2C2C] sm:text-5xl">
           {t('title')}
         </h1>
         <div className="mt-8">
@@ -67,7 +67,7 @@ export default async function TeknikPage({
       <div className="mt-20 space-y-16">
         {sections.map((s, i) => (
           <Reveal as="section" key={s.title} delay={i === 0 ? 0 : 0.05}>
-            <h2 className="font-[family-name:var(--font-serif)] text-2xl font-light leading-snug text-[#1a1a1a] sm:text-3xl">
+            <h2 className="text-2xl font-medium leading-snug text-[#2C2C2C] sm:text-3xl">
               {s.title}
             </h2>
             <div className="mt-5">
@@ -80,7 +80,7 @@ export default async function TeknikPage({
       <Reveal className="mt-24 border-t border-[var(--rule)] pt-10">
         <Link
           href={`/${locale}/galeri?category=${encodeURIComponent('Antik Dönem Replikaları')}`}
-          className="group inline-flex min-h-11 items-center gap-2 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#1a1a1a]"
+          className="group inline-flex min-h-11 items-center gap-2 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#2C2C2C]"
         >
           <span className="bg-[linear-gradient(var(--accent),var(--accent))] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-1 transition-[background-size] duration-[var(--dur-micro)] ease-out group-hover:bg-[length:100%_1px]">
             {tc('cta')}

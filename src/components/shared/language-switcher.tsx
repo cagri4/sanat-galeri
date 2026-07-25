@@ -26,8 +26,8 @@ export default function LanguageSwitcher() {
             aria-current={link.active ? 'true' : undefined}
             className={`inline-flex min-h-11 items-center px-1.5 transition-colors duration-[var(--dur-micro)] ${
               link.active
-                ? 'font-medium text-[#1a1a1a]'
-                : 'text-[#6b6b6b] hover:text-[#1a1a1a]'
+                ? 'font-medium text-[#2C2C2C]'
+                : 'text-[#6b6b6b] hover:text-[#2C2C2C]'
             }`}
           >
             {link.locale.toUpperCase()}

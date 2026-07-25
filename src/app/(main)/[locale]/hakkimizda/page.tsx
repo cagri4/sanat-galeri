@@ -59,7 +59,7 @@ export default async function AboutPage({
   return (
     <main className="py-16 sm:py-24">
       <Reveal as="section" className="max-w-2xl">
-        <h1 className="font-[family-name:var(--font-serif)] text-4xl font-light leading-[1.1] tracking-[-0.01em] text-[#1a1a1a] sm:text-5xl lg:text-6xl">
+        <h1 className="text-4xl font-medium leading-[1.1] tracking-[-0.01em] text-[#2C2C2C] sm:text-5xl lg:text-6xl">
           {isTr ? 'Hakkımızda' : 'About Us'}
         </h1>
         <p className="mt-8 max-w-[68ch] text-[length:var(--text-lead)] leading-[1.8] text-[#4a4a4a]">
@@ -74,7 +74,7 @@ export default async function AboutPage({
         <div className="mt-8 flex flex-wrap gap-x-10 gap-y-2">
           <Link
             href={`/${locale}/teknik`}
-            className="group inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#1a1a1a]"
+            className="group inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#2C2C2C]"
           >
             <span className="bg-[linear-gradient(var(--accent),var(--accent))] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-1 transition-[background-size] duration-[var(--dur-micro)] ease-out group-hover:bg-[length:100%_1px]">
               {tc('techniqueCta')}
@@ -82,7 +82,7 @@ export default async function AboutPage({
           </Link>
           <Link
             href={`/${locale}/sergi/bozcaada-2010`}
-            className="inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#1a1a1a]"
+            className="inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#2C2C2C]"
           >
             {isTr ? 'Bozcaada Sergisi · 2010' : 'Bozcaada Exhibition · 2010'}
           </Link>
@@ -92,7 +92,7 @@ export default async function AboutPage({
       {/* Sanatcilar — biyografi metni sanatcidan gelene kadar YAZILMIYOR;
           yalnizca ad, gercek atolye gorseli ve portfolyo baglantisi. */}
       <Reveal as="section" className="mt-24 border-t border-[var(--rule)] pt-16">
-        <h2 className="font-[family-name:var(--font-serif)] text-3xl font-light text-[#1a1a1a] sm:text-4xl">
+        <h2 className="text-3xl font-medium text-[#2C2C2C] sm:text-4xl">
           {isTr ? 'Sanatçılar' : 'Artists'}
         </h2>
 
@@ -114,7 +114,7 @@ export default async function AboutPage({
                   />
                 )}
                 <div>
-                  <h3 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a]">
+                  <h3 className="text-2xl font-medium text-[#2C2C2C]">
                     {a.name}
                   </h3>
                   <span className="mt-2 inline-block text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] group-hover:text-[var(--accent)]">

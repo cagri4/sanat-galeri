@@ -50,12 +50,12 @@ export default function ContactPageForm({ locale, labels }: ContactPageFormProps
   if (status === 'success') {
     return (
       <div className="py-12 text-center">
-        <div className="w-12 h-12 mx-auto rounded-full bg-[#612E49]/10 flex items-center justify-center mb-4">
-          <svg className="w-6 h-6 text-[#612E49]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="w-12 h-12 mx-auto rounded-full bg-[#2C2C2C]/10 flex items-center justify-center mb-4">
+          <svg className="w-6 h-6 text-[#2C2C2C]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <p className="text-[15px] text-[#1a1a1a]">{labels.success}</p>
+        <p className="text-[15px] text-[#2C2C2C]">{labels.success}</p>
       </div>
     )
   }
@@ -72,7 +72,7 @@ export default function ContactPageForm({ locale, labels }: ContactPageFormProps
           type="text"
           required
           placeholder={labels.namePlaceholder}
-          className="w-full px-4 py-3 bg-white border border-[#e8e4de] text-[15px] text-[#1a1a1a] placeholder-[#bbb] focus:outline-none focus:border-[#612E49] transition-colors"
+          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder-[#bbb] focus:outline-none focus:border-[#2C2C2C] transition-colors"
         />
       </div>
 
@@ -86,7 +86,7 @@ export default function ContactPageForm({ locale, labels }: ContactPageFormProps
           type="email"
           required
           placeholder={labels.emailPlaceholder}
-          className="w-full px-4 py-3 bg-white border border-[#e8e4de] text-[15px] text-[#1a1a1a] placeholder-[#bbb] focus:outline-none focus:border-[#612E49] transition-colors"
+          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder-[#bbb] focus:outline-none focus:border-[#2C2C2C] transition-colors"
         />
       </div>
 
@@ -100,7 +100,7 @@ export default function ContactPageForm({ locale, labels }: ContactPageFormProps
           required
           rows={6}
           placeholder={labels.messagePlaceholder}
-          className="w-full px-4 py-3 bg-white border border-[#e8e4de] text-[15px] text-[#1a1a1a] placeholder-[#bbb] focus:outline-none focus:border-[#612E49] transition-colors resize-none"
+          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder-[#bbb] focus:outline-none focus:border-[#2C2C2C] transition-colors resize-none"
         />
       </div>
 
@@ -113,7 +113,7 @@ export default function ContactPageForm({ locale, labels }: ContactPageFormProps
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="w-full bg-[#612E49] text-white text-[13px] uppercase tracking-[0.15em] px-8 py-4 hover:bg-[#4f243b] transition-colors disabled:opacity-50"
+        className="w-full bg-[#2C2C2C] text-white text-[13px] uppercase tracking-[0.15em] px-8 py-4 hover:bg-[#1f1f1f] transition-colors disabled:opacity-50"
       >
         {status === 'submitting' ? labels.submitting : labels.submit}
       </button>

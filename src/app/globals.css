@@ -1,14 +1,23 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* ---------------------------------------------------------------------------
+   sevaceramics.com referansli redesign (2026-07-25, Cagri onayi):
+   minimalist-lux vitrin. Sans-serif (Inter), warm off-white zemin, antrasit
+   metin, YUKSEK-DOYGUN AKSAN YOK — renk yalnizca eser fotograflarindan gelir.
+   Onceki kimlik: sicak krem + bordo + serif (Cormorant). Karar geregi degisti.
+--------------------------------------------------------------------------- */
 :root {
-  --background: #fbf9f5;
-  --foreground: #1a1a1a;
+  --background: #FAFAF8;       /* warm off-white */
+  --foreground: #2C2C2C;       /* antrasit */
   --muted: #6b6b6b;
-  --faint: #999999;
-  --border: #e8e4de;
-  --rule: #e8e2d8;
-  --accent: #612E49;
+  --faint: #9a9a96;
+  --border: #e9e7e1;
+  --rule: #e9e7e1;
+  /* Aksan bilerek NOTR: eski bordo (#612E49) yerine antrasit. Boylece
+     `var(--accent)` kullanan ~37 yer renkli vurgu uretmez; renk fotograftan
+     gelir. Odak halkasi da bu tonu kullanir (erisilebilirlik korunur). */
+  --accent: #2C2C2C;
 
   /* ---- Tipografik olcek ----------------------------------------------
      Muze etiketi mantigi: kucuk, harf arallikli "kunye" metinleri +
@@ -21,9 +30,10 @@
 
   --tracking-label: 0.15em;  /* etiketler icin genis harf araligi */
 
-  /* ---- Dikey ritim ---------------------------------------------------- */
-  --space-section: 6rem;     /* bolumler arasi */
-  --space-block: 3rem;       /* blok ici buyuk ayrim */
+  /* ---- Dikey ritim ----------------------------------------------------
+     Referans: bolum arasi 60-100px, kenar 40-60px. Nefes once.           */
+  --space-section: 7.5rem;   /* bolumler arasi (~120px) */
+  --space-block: 3.5rem;     /* blok ici buyuk ayrim */
 
   /* ---- Hareket --------------------------------------------------------
      Galeri sukuneti: giriste ease-out, kisa ve tek yonlu.               */
@@ -35,7 +45,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+  /* Tek aile: Inter. `--font-serif` adi geriye donuk uyumluluk icin duruyor
+     (34 kullanim otomatik sans olur); serif YOK. Basliklar agir Inter +
+     sikilastirilmis tracking ile ayrisir. */
+  --font-serif: 'Inter', system-ui, sans-serif;
   --font-sans: 'Inter', system-ui, sans-serif;
 }
 
@@ -53,8 +66,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Basliklar: geometrik-modern his icin agir Inter + hafif negatif tracking.
+   Referanstaki iri, kalin, sakin baslik dili. */
 h1, h2, h3 {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 /* ---- Odak halkasi ---------------------------------------------------
@@ -67,7 +84,7 @@ h1, h2, h3 {
      Tailwind v4 ayrica --tw-outline-style degiskenini kullaniyor; onu da
      ayarliyoruz ki utility'lerle catismasin. */
   --tw-outline-style: solid;
-  outline: 2px solid #612E49;
+  outline: 2px solid #2C2C2C;
   outline-offset: 3px;
   border-radius: 2px;
 }

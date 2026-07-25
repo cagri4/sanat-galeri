@@ -23,7 +23,7 @@ export default async function ArtworkGrid({ products, locale, category }: Artwor
     const collections = category ? (COLLECTIONS[category] ?? []) : []
     return (
       <div className="py-14 text-center">
-        <p className="font-[family-name:var(--font-serif)] text-xl font-light text-[#1a1a1a]">
+        <p className="text-xl font-medium text-[#2C2C2C]">
           {category ? t('comingSoon') : t('emptyState')}
         </p>
         {category && (
@@ -38,10 +38,7 @@ export default async function ArtworkGrid({ products, locale, category }: Artwor
             </p>
             <ul className="mt-3 space-y-1">
               {collections.map((c) => (
-                <li
-                  key={c.tr}
-                  className="font-[family-name:var(--font-serif)] text-base font-light italic text-[#6b6b6b]"
-                >
+                <li key={c.tr} className="text-base italic text-[#6b6b6b]">
                   {isTr ? c.tr : c.en}
                 </li>
               ))}
@@ -53,9 +50,10 @@ export default async function ArtworkGrid({ products, locale, category }: Artwor
   }
 
   return (
-    // gap-y > gap-x: satirlar arasi nefes, kunye metinlerinin bir sonraki
-    // kartin gorseline yapismasini onler.
-    <div className="grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+    // REDESIGN: 3 sutun, ~1:1 kare, tile arasi ~24px. Kart kunyesi hover'da
+    // gorselin ustunde belirdigi icin satir arasi ekstra bosluga gerek yok;
+    // izgara ciplak gorsel duvari gibi durur. Mobilde 2 sutun.
+    <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 lg:gap-6">
       {products.map((product, i) => (
         <Reveal key={product.id} delay={staggerDelay(i)}>
           <ArtworkCard product={product} locale={locale} />

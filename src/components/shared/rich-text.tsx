@@ -28,7 +28,7 @@ export default function RichText({
         <p key={i} className={paragraphClassName}>
           {para.split(/(\*\*[^*]+\*\*)/g).map((chunk, j) =>
             chunk.startsWith('**') && chunk.endsWith('**') && chunk.length > 4 ? (
-              <strong key={j} className="font-medium text-[#1a1a1a]">
+              <strong key={j} className="font-medium text-[#2C2C2C]">
                 {chunk.slice(2, -2)}
               </strong>
             ) : (

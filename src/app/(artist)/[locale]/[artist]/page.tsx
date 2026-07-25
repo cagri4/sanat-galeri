@@ -97,13 +97,13 @@ export default async function ArtistPage({
         <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
           <Link
             href={`/${locale}/teknik`}
-            className="text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[var(--accent)] transition-colors duration-[var(--dur-micro)] hover:text-[#4f243b]"
+            className="text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[var(--accent)] transition-colors duration-[var(--dur-micro)] hover:text-[#1f1f1f]"
           >
             {t('techniqueLink')} &rarr;
           </Link>
           <Link
             href={`/${locale}/${artist}/portfolyo`}
-            className="text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[var(--accent)] transition-colors duration-[var(--dur-micro)] hover:text-[#4f243b]"
+            className="text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[var(--accent)] transition-colors duration-[var(--dur-micro)] hover:text-[#1f1f1f]"
           >
             {t('portfolioTitle')} &rarr;
           </Link>
@@ -115,7 +115,7 @@ export default async function ArtistPage({
           <h2 className="mb-6 text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
             {t('statementTitle')}
           </h2>
-          <blockquote className="max-w-3xl border-l-2 border-[var(--accent)] pl-6 font-[family-name:var(--font-serif)] text-xl font-light italic leading-relaxed text-[#1a1a1a] sm:text-2xl">
+          <blockquote className="max-w-3xl border-l-2 border-[var(--accent)] pl-6 text-xl font-medium italic leading-relaxed text-[#2C2C2C] sm:text-2xl">
             {statement}
           </blockquote>
         </section>
@@ -124,12 +124,12 @@ export default async function ArtistPage({
       {exhibitions.length > 0 && (
         <section className="border-t border-[var(--rule)] py-12">
           <div className="flex items-end justify-between gap-6">
-            <h2 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a] sm:text-3xl">
+            <h2 className="text-2xl font-medium text-[#2C2C2C] sm:text-3xl">
               {t('exhibitionsTitle')}
             </h2>
             <Link
               href={`/${locale}/${artist}/sergiler`}
-              className="shrink-0 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[var(--accent)] transition-colors duration-[var(--dur-micro)] hover:text-[#4f243b]"
+              className="shrink-0 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[var(--accent)] transition-colors duration-[var(--dur-micro)] hover:text-[#1f1f1f]"
             >
               {t('viewAll')} &rarr;
             </Link>
@@ -140,12 +140,12 @@ export default async function ArtistPage({
       {works.length > 0 && (
         <section className="border-t border-[var(--rule)] py-14">
           <div className="mb-8 flex items-end justify-between gap-6">
-            <h2 className="font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a] sm:text-3xl">
+            <h2 className="text-2xl font-medium text-[#2C2C2C] sm:text-3xl">
               {t('recentWorks')}
             </h2>
             <Link
               href={`/${locale}/${artist}/portfolyo`}
-              className="shrink-0 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[var(--accent)] transition-colors duration-[var(--dur-micro)] hover:text-[#4f243b]"
+              className="shrink-0 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[var(--accent)] transition-colors duration-[var(--dur-micro)] hover:text-[#1f1f1f]"
             >
               {t('viewAll')} &rarr;
             </Link>
@@ -153,7 +153,7 @@ export default async function ArtistPage({
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {works.map((work) => (
               <Link key={work.id} href={`/${locale}/urun/${work.slug}`} className="media-zoom group">
-                <div className="aspect-[3/4] overflow-hidden bg-[#f0ece4]">
+                <div className="aspect-[3/4] overflow-hidden bg-[#f0efe9]">
                   {work.images?.[0] && (
                     <img
                       src={work.images[0].url}
@@ -166,7 +166,7 @@ export default async function ArtistPage({
                     />
                   )}
                 </div>
-                <h3 className="mt-3 text-[length:var(--text-body)] text-[#1a1a1a]">
+                <h3 className="mt-3 text-[length:var(--text-body)] text-[#2C2C2C]">
                   {isTr ? work.titleTr : work.titleEn}
                 </h3>
               </Link>

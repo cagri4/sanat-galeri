@@ -108,7 +108,7 @@ export default function ContactWidget() {
   }
 
   const field =
-    'w-full border border-[var(--rule)] bg-white px-3 py-2.5 text-[length:var(--text-body)] text-[#1a1a1a] transition-colors duration-[var(--dur-micro)] placeholder:text-[#b5aea3] hover:border-[#cfc7ba] focus:border-[var(--accent)] focus:outline-none'
+    'w-full border border-[var(--rule)] bg-white px-3 py-2.5 text-[length:var(--text-body)] text-[#2C2C2C] transition-colors duration-[var(--dur-micro)] placeholder:text-[#b5aea3] hover:border-[#cfc7ba] focus:border-[var(--accent)] focus:outline-none'
 
   return (
     <>
@@ -119,7 +119,7 @@ export default function ContactWidget() {
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
         aria-expanded={open}
-        className="fixed bottom-5 left-5 z-40 inline-flex h-12 items-center gap-2.5 rounded-full border border-[var(--rule)] bg-[#fbf9f5]/95 px-4 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#1a1a1a] shadow-[0_2px_12px_rgba(26,26,26,0.08)] backdrop-blur transition-colors duration-[var(--dur-micro)] hover:border-[var(--accent)] hover:text-[var(--accent)] sm:h-12"
+        className="fixed bottom-5 left-5 z-40 inline-flex h-12 items-center gap-2.5 rounded-full border border-[var(--rule)] bg-[#FAFAF8]/95 px-4 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#2C2C2C] shadow-[0_2px_12px_rgba(26,26,26,0.08)] backdrop-blur transition-colors duration-[var(--dur-micro)] hover:border-[var(--accent)] hover:text-[var(--accent)] sm:h-12"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden className="h-5 w-5">
           <path
@@ -139,7 +139,7 @@ export default function ContactWidget() {
             type="button"
             aria-label={t('close')}
             onClick={close}
-            className="absolute inset-0 bg-[#1a1a1a]/40 backdrop-blur-[2px]"
+            className="absolute inset-0 bg-[#2C2C2C]/40 backdrop-blur-[2px]"
           />
 
           <div
@@ -148,7 +148,7 @@ export default function ContactWidget() {
             aria-modal="true"
             aria-labelledby="contact-widget-title"
             // page-in: mevcut CSS keyframe'i; reduced-motion'da otomatik kapali
-            className="page-in relative m-0 w-full max-w-lg border border-[var(--rule)] bg-[#fbf9f5] p-6 shadow-[0_8px_40px_rgba(26,26,26,0.16)] sm:m-6 sm:p-8"
+            className="page-in relative m-0 w-full max-w-lg border border-[var(--rule)] bg-[#FAFAF8] p-6 shadow-[0_8px_40px_rgba(26,26,26,0.16)] sm:m-6 sm:p-8"
           >
             <div className="flex items-start justify-between gap-6">
               <div>
@@ -157,7 +157,7 @@ export default function ContactWidget() {
                 </p>
                 <h2
                   id="contact-widget-title"
-                  className="mt-2 font-[family-name:var(--font-serif)] text-2xl font-light text-[#1a1a1a] sm:text-3xl"
+                  className="mt-2 text-2xl font-medium text-[#2C2C2C] sm:text-3xl"
                 >
                   {t('title')}
                 </h2>
@@ -166,7 +166,7 @@ export default function ContactWidget() {
                 type="button"
                 onClick={close}
                 aria-label={t('close')}
-                className="-mr-2 -mt-2 inline-flex h-11 w-11 shrink-0 items-center justify-center text-[#999] transition-colors duration-[var(--dur-micro)] hover:text-[#1a1a1a]"
+                className="-mr-2 -mt-2 inline-flex h-11 w-11 shrink-0 items-center justify-center text-[#999] transition-colors duration-[var(--dur-micro)] hover:text-[#2C2C2C]"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden className="h-5 w-5">
                   <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
@@ -176,13 +176,13 @@ export default function ContactWidget() {
 
             {status === 'success' ? (
               <div className="py-10 text-center">
-                <p className="font-[family-name:var(--font-serif)] text-xl font-light text-[#1a1a1a]">
+                <p className="text-xl font-medium text-[#2C2C2C]">
                   {tc('successMessage')}
                 </p>
                 <button
                   type="button"
                   onClick={close}
-                  className="mt-6 inline-flex min-h-11 items-center border border-[#1a1a1a] px-6 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#1a1a1a] transition-colors duration-[var(--dur-micro)] hover:bg-[#1a1a1a] hover:text-white"
+                  className="mt-6 inline-flex min-h-11 items-center border border-[#2C2C2C] px-6 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#2C2C2C] transition-colors duration-[var(--dur-micro)] hover:bg-[#2C2C2C] hover:text-white"
                 >
                   {t('close')}
                 </button>
@@ -259,7 +259,7 @@ export default function ContactWidget() {
                 <button
                   type="submit"
                   disabled={status === 'sending'}
-                  className="inline-flex min-h-11 w-full items-center justify-center border border-[#1a1a1a] px-6 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#1a1a1a] transition-colors duration-[var(--dur-micro)] hover:bg-[#1a1a1a] hover:text-white disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+                  className="inline-flex min-h-11 w-full items-center justify-center border border-[#2C2C2C] px-6 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#2C2C2C] transition-colors duration-[var(--dur-micro)] hover:bg-[#2C2C2C] hover:text-white disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
                 >
                   {status === 'sending' ? tc('submitting') : tc('submit')}
                 </button>

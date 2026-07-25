@@ -53,8 +53,8 @@ export default function ArtistNav({ locale, artist }: ArtistNavProps) {
             aria-current={active ? 'page' : undefined}
             className={`relative shrink-0 whitespace-nowrap py-4 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] transition-colors duration-[var(--dur-micro)] sm:py-5 ${
               active
-                ? 'text-[#1a1a1a] after:absolute after:inset-x-0 after:bottom-[-1px] after:h-px after:bg-[var(--accent)]'
-                : 'text-[#6b6b6b] hover:text-[#1a1a1a]'
+                ? 'text-[#2C2C2C] after:absolute after:inset-x-0 after:bottom-[-1px] after:h-px after:bg-[var(--accent)]'
+                : 'text-[#6b6b6b] hover:text-[#2C2C2C]'
             }`}
           >
             {link.label}

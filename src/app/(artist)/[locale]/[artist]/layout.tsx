@@ -52,7 +52,7 @@ export default async function ArtistLayout({
       <div className="mx-auto w-full min-w-0 max-w-6xl px-6 sm:px-10 lg:px-16">
         <Navbar locale={locale} domain={artist as 'melike' | 'seref'} />
 
-        <header className="full-bleed bg-[#f4f0e9]">
+        <header className="full-bleed bg-[#f2f1ec]">
           <div className="mx-auto flex max-w-6xl flex-col items-center px-6 py-14 text-center sm:px-10 sm:py-18 lg:px-16">
             {avatar && (
               <Image
@@ -64,7 +64,7 @@ export default async function ArtistLayout({
                 className={`mb-6 h-24 w-24 sm:h-28 sm:w-28 ${AVATAR_CLASS}`}
               />
             )}
-            <h1 className="font-[family-name:var(--font-serif)] text-4xl font-light tracking-[-0.01em] text-[#1a1a1a] sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-medium tracking-[-0.01em] text-[#2C2C2C] sm:text-5xl lg:text-6xl">
               {name}
             </h1>
             <p className="mt-4 text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">

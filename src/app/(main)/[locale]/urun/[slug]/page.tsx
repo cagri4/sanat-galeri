@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
+import Link from 'next/link'
 import { getProductBySlug } from '@/lib/queries/gallery'
 import LightboxViewer from '@/components/gallery/lightbox-viewer'
 import ContactForm from '@/components/gallery/contact-form'
@@ -100,7 +101,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
 
         {/* Metadata + CTAs */}
         <Reveal delay={0.08} className="space-y-10">
-          <h1 className="font-[family-name:var(--font-serif)] text-4xl font-light leading-[1.1] tracking-[-0.01em] text-[#1a1a1a] sm:text-5xl">
+          <h1 className="text-4xl font-medium leading-[1.1] tracking-[-0.01em] text-[#2C2C2C] sm:text-5xl">
             {title}
           </h1>
 
@@ -109,7 +110,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
             {artistName && (
               <div className="grid grid-cols-[minmax(0,8rem)_1fr] gap-6 py-4">
                 <dt className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{t('artist')}</dt>
-                <dd className="text-[length:var(--text-body)] text-[#1a1a1a]">
+                <dd className="text-[length:var(--text-body)] text-[#2C2C2C]">
                   {eser.artist?.slug ? (
                     <a
                       href={`/${locale}/${eser.artist.slug}`}
@@ -127,14 +128,14 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
             {catalogRows.map((row) => (
               <div key={row.label} className="grid grid-cols-[minmax(0,8rem)_1fr] gap-6 py-4">
                 <dt className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{row.label}</dt>
-                <dd className="text-[length:var(--text-body)] leading-relaxed text-[#1a1a1a]">{row.value}</dd>
+                <dd className="text-[length:var(--text-body)] leading-relaxed text-[#2C2C2C]">{row.value}</dd>
               </div>
             ))}
 
             {(priceDisplay || eser.isSold) && (
               <div className="grid grid-cols-[minmax(0,8rem)_1fr] gap-6 py-4">
                 <dt className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{t('price')}</dt>
-                <dd className="text-[length:var(--text-body)] text-[#1a1a1a]">
+                <dd className="text-[length:var(--text-body)] text-[#2C2C2C]">
                   {eser.isSold ? <span className="text-[#8a6d3b]">{t('sold')}</span> : priceDisplay}
                 </dd>
               </div>
@@ -163,11 +164,18 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
           </div>
 
 
-          {/* Contact Form */}
-          <div className="pt-6 border-t border-[#e8e2d8]">
-            <h2 className="font-[family-name:var(--font-serif)] text-xl font-light text-[#1a1a1a] mb-4">
-              {t('contactTitle')}
-            </h2>
+          {/* İletişim + Özel sipariş — vitrin modeli: satın alma yok,
+              bilgi/özel üretim için iletişim. */}
+          <div className="border-t border-[#e9e7e1] pt-6">
+            <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+              <h2 className="text-xl font-medium text-[#2C2C2C]">{t('contactTitle')}</h2>
+              <Link
+                href={`/${locale}/ozel-siparis`}
+                className="text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#2C2C2C]"
+              >
+                {isTr ? 'Özel sipariş' : 'Commissions'} &rarr;
+              </Link>
+            </div>
             <ContactForm productSlug={slug} />
           </div>
         </Reveal>

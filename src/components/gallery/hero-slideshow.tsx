@@ -188,7 +188,6 @@ export default function HeroSlideshow({
   }
 
   if (count === 0) return null
-  const active = slides[index] ?? slides[0]
 
   // JS devralmadan once serit sabit durur (ilk eser gorunur).
   const offsetPct = enhanced ? -index * 100 : 0
@@ -198,90 +197,94 @@ export default function HeroSlideshow({
   }
 
   return (
+    // REDESIGN (sevaceramics referansi): full-bleed, ~65vh, UZERINDE YAZI YOK.
+    // Kare studyo fotolari cover'da kirpilir; full-bleed notr bant + contain
+    // ile eser buyuk ve butun kalir ("eser yildiz"). Manuel kontrol: ok
+    // dugmeleri + noktalar + swipe + klavye.
     <section
-      className="full-bleed bg-[#f4f0e9]"
+      className="full-bleed bg-[#f2f1ec]"
       onMouseEnter={() => (hovering.current = true)}
       onMouseLeave={() => (hovering.current = false)}
       onFocusCapture={() => (hovering.current = true)}
       onBlurCapture={() => (hovering.current = false)}
     >
-      <div className="mx-auto max-w-6xl px-6 py-12 sm:px-10 sm:py-16 lg:px-16">
-        <div
-          ref={viewportRef}
-          role="region"
-          aria-roledescription="carousel"
-          aria-label={ctaLabel}
-          tabIndex={0}
-          onKeyDown={onKeyDown}
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={endDrag}
-          onPointerCancel={endDrag}
-          onClickCapture={(e) => {
-            if (suppressClick.current) {
-              e.preventDefault()
-              e.stopPropagation()
-            }
-          }}
-          // pan-y: dikey kaydirma tarayicida kalir, yatayi biz yonetiriz.
-          className={`relative aspect-[3/4] w-full touch-pan-y overflow-hidden select-none sm:aspect-[16/10] ${
-            count > 1 ? (dragging ? 'cursor-grabbing' : 'cursor-grab') : ''
-          }`}
-        >
-          <div className="flex h-full w-full" style={trackStyle}>
-            {slides.map((s, i) => (
-              <div
-                key={s.slug}
-                className="relative h-full w-full shrink-0"
-                aria-hidden={enhanced ? i !== index : i !== 0}
-              >
-                <Image
-                  src={s.image}
-                  alt={s.alt}
-                  fill
-                  priority={i === 0}
-                  draggable={false}
-                  sizes="(max-width: 1152px) 100vw, 1152px"
-                  className="pointer-events-none object-contain"
-                />
-              </div>
-            ))}
-          </div>
+      <div
+        ref={viewportRef}
+        role="region"
+        aria-roledescription="carousel"
+        aria-label={ctaLabel}
+        tabIndex={0}
+        onKeyDown={onKeyDown}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        onClickCapture={(e) => {
+          if (suppressClick.current) {
+            e.preventDefault()
+            e.stopPropagation()
+          }
+        }}
+        // pan-y: dikey kaydirma tarayicida kalir, yatayi biz yonetiriz.
+        className={`relative h-[58vh] min-h-[360px] w-full touch-pan-y select-none overflow-hidden sm:h-[66vh] ${
+          count > 1 ? (dragging ? 'cursor-grabbing' : 'cursor-grab') : ''
+        }`}
+      >
+        <div className="flex h-full w-full" style={trackStyle}>
+          {slides.map((s, i) => (
+            <Link
+              key={s.slug}
+              href={`/${locale}/urun/${s.slug}`}
+              tabIndex={i === index ? 0 : -1}
+              aria-hidden={enhanced ? i !== index : i !== 0}
+              aria-label={s.title}
+              className="relative block h-full w-full shrink-0"
+              draggable={false}
+            >
+              <Image
+                src={s.image}
+                alt={s.alt}
+                fill
+                priority={i === 0}
+                draggable={false}
+                sizes="100vw"
+                className="pointer-events-none object-contain p-6 sm:p-10"
+              />
+            </Link>
+          ))}
         </div>
 
-        {/* Kunye: eser adi + koleksiyona link */}
-        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
-              {active.category}
-            </p>
-            <h2 className="mt-2 font-[family-name:var(--font-serif)] text-3xl font-light leading-tight text-[#1a1a1a] sm:text-4xl">
-              <Link href={`/${locale}/urun/${active.slug}`} className="group inline-block">
-                <span className="bg-[linear-gradient(var(--accent),var(--accent))] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-1 transition-[background-size] duration-[var(--dur-micro)] ease-out group-hover:bg-[length:100%_1px]">
-                  {active.title}
-                </span>
-              </Link>
-            </h2>
-          </div>
-
-          <Link
-            href={`/${locale}/galeri?category=${encodeURIComponent(active.category)}`}
-            className="group inline-flex min-h-11 items-center gap-2 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#1a1a1a]"
-          >
-            <span className="bg-[linear-gradient(var(--accent),var(--accent))] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-1 transition-[background-size] duration-[var(--dur-micro)] ease-out group-hover:bg-[length:100%_1px]">
-              {ctaLabel}
-            </span>
-            <span aria-hidden className="transition-transform duration-[var(--dur-micro)] group-hover:translate-x-1">
-              →
-            </span>
-          </Link>
-        </div>
-
-        {/* Slayt gostergeleri — kac slayt var, hangisindeyiz.
-            pl-14 (mobil): sol alttaki sabit iletisim dugmesi ilk noktanin
-            uzerine gelip dokunmayi engelliyordu. sm+ ekranda gerekmiyor. */}
+        {/* Manuel ok kontrolleri — sade, dusuk kontrastli, dokunma hedefi 44px. */}
         {count > 1 && (
-          <div className="mt-8 flex items-center gap-3 pl-14 sm:pl-0">
+          <>
+            <button
+              type="button"
+              onClick={() => go(index - 1)}
+              disabled={index === 0}
+              aria-label={locale === 'tr' ? 'Önceki' : 'Previous'}
+              className="absolute left-2 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center text-[#2C2C2C] opacity-60 transition-opacity duration-[var(--dur-micro)] hover:opacity-100 disabled:opacity-0 sm:flex"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="h-6 w-6" aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 6l-6 6 6 6" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={() => go(index + 1)}
+              disabled={index === count - 1}
+              aria-label={locale === 'tr' ? 'Sonraki' : 'Next'}
+              className="absolute right-2 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center text-[#2C2C2C] opacity-60 transition-opacity duration-[var(--dur-micro)] hover:opacity-100 disabled:opacity-0 sm:flex"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="h-6 w-6" aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
+          </>
+        )}
+
+        {/* Noktalar — gorselin uzerinde, alt-orta (referans dizilimi). */}
+        {count > 1 && (
+          <div className="absolute inset-x-0 bottom-5 z-10 flex items-center justify-center gap-3">
             {slides.map((s, i) => (
               <button
                 key={s.slug}
@@ -289,11 +292,11 @@ export default function HeroSlideshow({
                 onClick={() => go(i)}
                 aria-label={`${i + 1}/${count} — ${s.title}`}
                 aria-current={i === index}
-                className="group inline-flex h-11 w-8 items-center justify-center"
+                className="group inline-flex h-8 w-6 items-center justify-center"
               >
                 <span
-                  className={`block h-px w-full transition-colors duration-[var(--dur-micro)] ${
-                    i === index ? 'bg-[#1a1a1a]' : 'bg-[#cfc7ba] group-hover:bg-[#8a8175]'
+                  className={`block h-1.5 w-1.5 rounded-full transition-colors duration-[var(--dur-micro)] ${
+                    i === index ? 'bg-[#2C2C2C]' : 'bg-[#2C2C2C]/25 group-hover:bg-[#2C2C2C]/50'
                   }`}
                 />
               </button>

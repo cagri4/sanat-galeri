@@ -43,7 +43,7 @@ export default function LightboxViewer({ slides, thumbnails }: LightboxViewerPro
             key={i}
             onClick={() => setIndex(i)}
             aria-label={`${thumb.alt} — ${i + 1}/${thumbnails.length}`}
-            className={`media-zoom group relative aspect-[3/4] cursor-pointer overflow-hidden bg-[#f0ece4] ${
+            className={`media-zoom group relative aspect-[3/4] cursor-pointer overflow-hidden bg-[#f0efe9] ${
               i === 0 ? 'col-span-2 row-span-2' : ''
             }`}
           >
@@ -56,7 +56,7 @@ export default function LightboxViewer({ slides, thumbnails }: LightboxViewerPro
             />
             <div
               aria-hidden
-              className="absolute inset-0 bg-[#1a1a1a] opacity-0 transition-opacity duration-[var(--dur-micro)] group-hover:opacity-[0.06]"
+              className="absolute inset-0 bg-[#2C2C2C] opacity-0 transition-opacity duration-[var(--dur-micro)] group-hover:opacity-[0.06]"
             />
           </button>
         ))}

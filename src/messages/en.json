@@ -11,7 +11,9 @@
     "about": "About",
     "contact": "Contact",
     "exhibitions": "Exhibitions",
-    "technique": "Technique"
+    "technique": "Technique",
+    "collections": "Collections",
+    "commissions": "Commissions"
   },
   "gallery": {
     "title": "Gallery",
@@ -99,7 +101,9 @@
     "aboutLink": "About",
     "contactLink": "Contact",
     "address": "Boğazkent mah. 3.cad. 1/10\nKepez, Çanakkale 17100\nTürkiye",
-    "followUs": "Follow Us"
+    "followUs": "Follow Us",
+    "collectionsLink": "Collections",
+    "commissionsLink": "Commissions"
   },
   "exhibition": {
     "eyebrow": "Exhibition",
@@ -146,5 +150,18 @@
     "title": "Write to us",
     "close": "Close",
     "rateLimited": "Too many messages sent. Please try again in a few minutes."
+  },
+  "collectionsPage": {
+    "title": "Collections",
+    "lead": "Each collection carries a different face of the ancient ceramic tradition into the present. Forms are shaped on the wheel; surfaces are worked by hand in the terra sigillata technique.",
+    "viewCollection": "View collection",
+    "emptyNote": "The works in this collection are being prepared."
+  },
+  "commissions": {
+    "title": "Commissions",
+    "lead": "We create bespoke works for a particular space, form or mythological narrative. Each piece is shaped by hand; scale, surface and subject are decided together.",
+    "body": "A panel made for a specific space, a replica of a mythological scene you love, or a series of vessels — share your idea with us and let us interpret it together. This is not a checkout; it is the start of a conversation.",
+    "cta": "Enquire / Contact",
+    "note": "Price and timeline are clarified in conversation, according to the scope of the work."
   }
 }

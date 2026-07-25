@@ -61,7 +61,7 @@ export default async function BozcaadaPage({
         <p className="text-[11px] uppercase tracking-[0.15em] text-[#999]">
           {t('eyebrow')}
         </p>
-        <h1 className="mt-4 font-[family-name:var(--font-serif)] text-4xl font-light leading-[1.1] tracking-[-0.01em] text-[#1a1a1a] sm:text-5xl lg:text-6xl">
+        <h1 className="mt-4 text-4xl font-medium leading-[1.1] tracking-[-0.01em] text-[#2C2C2C] sm:text-5xl lg:text-6xl">
           {t('title')}
         </h1>
         <p className="mt-2 text-sm text-[#6b6b6b]">{t('venue')}</p>

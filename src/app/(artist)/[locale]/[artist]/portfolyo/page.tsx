@@ -51,7 +51,7 @@ export default async function PortfolioPage({
 
   return (
     <main className="py-14 sm:py-20">
-      <h1 className="font-[family-name:var(--font-serif)] text-3xl font-light tracking-[-0.01em] text-[#1a1a1a] sm:text-4xl">
+      <h1 className="text-3xl font-medium tracking-[-0.01em] text-[#2C2C2C] sm:text-4xl">
         {t('portfolioTitle')}
       </h1>
       <p className="mt-3 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#999]">
@@ -70,7 +70,7 @@ export default async function PortfolioPage({
             return (
               <Reveal key={item.id} delay={staggerDelay(i)}>
                 <Link href={`/${locale}/urun/${item.slug}`} className="media-zoom group block">
-                  <div className="aspect-[3/4] overflow-hidden bg-[#f0ece4]">
+                  <div className="aspect-[3/4] overflow-hidden bg-[#f0efe9]">
                     {image && (
                       <img
                         src={image.url}
@@ -80,7 +80,7 @@ export default async function PortfolioPage({
                       />
                     )}
                   </div>
-                  <h2 className="mt-4 font-[family-name:var(--font-serif)] text-lg font-light leading-snug text-[#1a1a1a]">
+                  <h2 className="mt-4 text-lg font-medium leading-snug text-[#2C2C2C]">
                     {title}
                   </h2>
                   {item.category && (
