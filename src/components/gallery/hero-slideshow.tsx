@@ -227,7 +227,7 @@ export default function HeroSlideshow({
           }
         }}
         // pan-y: dikey kaydirma tarayicida kalir, yatayi biz yonetiriz.
-        className={`relative h-[58vh] min-h-[360px] w-full touch-pan-y select-none overflow-hidden sm:h-[66vh] ${
+        className={`relative h-[64vh] min-h-[400px] w-full touch-pan-y select-none overflow-hidden sm:h-[78vh] ${
           count > 1 ? (dragging ? 'cursor-grabbing' : 'cursor-grab') : ''
         }`}
       >
@@ -249,7 +249,7 @@ export default function HeroSlideshow({
                 priority={i === 0}
                 draggable={false}
                 sizes="100vw"
-                className="pointer-events-none object-contain p-6 sm:p-10"
+                className="pointer-events-none object-contain p-4 sm:p-6"
               />
             </Link>
           ))}
