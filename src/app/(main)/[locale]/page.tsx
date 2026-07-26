@@ -42,21 +42,37 @@ export default async function HomePage({
   } catch {
     // DB not available
   }
-  const recentProducts = allProducts.slice(0, 6)
-
-  // Sanatci kartlari icin GECICI gorseller: figursuz geometrik eserler
-  // secildi — mitolojik figurlu eserler bir sanatciyi cagristirabilir,
-  // atama ise hala gecici. Portre/atolye fotografi gelince degisecek.
-  const artistPlaceholders = ['geometrik-donem-tabak', 'geometrik-donem-toren-kabi']
-    .map((slug) => allProducts.find((p) => p.slug === slug)?.images?.[0]?.url)
-    .filter(Boolean) as string[]
-
-  // Ana sayfa yerlesimleri artik ADMIN PANELINDEN secilir
-  // (/admin/ana-sayfa -> products.hero_order / instagram_order).
-  // Kodda sabit slug listesi YOK; panelde hic secim yapilmamissa gorunur
-  // eserlerin sirasina duserek bolum bos kalmaz.
+  // Ana sayfa bölümleri (Son Eserler / Instagram / Sanatçılar) tek koleksiyona
+  // sıkışmasın diye kategoriler arası DÖNÜŞÜMLÜ seçilir — "sadece bunu
+  // üretiyorlar" izlenimini kırar. Yalnızca mevcut gerçek eserler.
   const withImage = allProducts.filter((p) => p.images?.[0]?.url)
+  const CATS = ['Antik Dönem Replikaları', 'Resimli Seramikler', 'Mimari Duvar Panoları']
+  const byCat = (cat: string) => withImage.filter((p) => p.category === cat)
 
+  // Her kategoriden startIdx'ten perCat eser al, dönüşümlü diz (A, Z, M, A, Z, M…).
+  const pickDiverse = (startIdx: number, perCat: number) => {
+    const pools = CATS.map(byCat)
+    const out: typeof withImage = []
+    for (let i = startIdx; i < startIdx + perCat; i++) {
+      for (const pool of pools) if (pool[i]) out.push(pool[i])
+    }
+    return out
+  }
+
+  // Son Eserler: her koleksiyondan 2 eser (dönüşümlü) = 6.
+  const recentProducts = pickDiverse(0, 2)
+
+  // Sanatçı kartı GEÇİCİ görselleri artık her sanatçının ALANINI temsil eden
+  // farklı koleksiyonlardan: Melike → resimli seramik (Zamansız), Şeref → mimari
+  // pano. Atıf DOĞRULANMIŞ (kap altı imzası / pano dokümanları). alt="" dekoratif;
+  // gerçek portre/atölye fotoğrafı gelince değişecek.
+  const artistPlaceholders = [
+    byCat('Resimli Seramikler')[5]?.images?.[0]?.url,
+    byCat('Mimari Duvar Panoları')[5]?.images?.[0]?.url,
+  ].filter(Boolean) as string[]
+
+  // Hero seçimi ADMIN PANELINDEN de yönlendirilebilir (products.hero_order);
+  // seçim yoksa görünür eserlerin sırasına düşer, bölüm boş kalmaz.
   const pickSlots = (key: 'heroOrder' | 'instagramOrder', limit: number) => {
     const chosen = withImage
       .filter((p) => typeof p[key] === 'number' && p[key] !== null)
@@ -64,9 +80,15 @@ export default async function HomePage({
     return (chosen.length > 0 ? chosen : withImage).slice(0, limit)
   }
 
-  // Instagram: CANLI FEED DEGIL; bu gorsellerin belirli IG gonderileri oldugu
-  // iddia edilmiyor (bkz. instagram-section.tsx duruluk notu).
-  const instagramItems = pickSlots('instagramOrder', 9).map((p) => ({
+  // Instagram: CANLI FEED DEGIL (bkz. instagram-section.tsx). Admin
+  // instagram_order ayarlamışsa onu kullanır; yoksa kategoriler arası dönüşümlü
+  // 9 eser — "Son Eserler"den farklı index'lerden alınır (tekrar olmasın).
+  const instagramCurated = withImage
+    .filter((p) => typeof p.instagramOrder === 'number' && p.instagramOrder !== null)
+    .sort((a, b) => (a.instagramOrder as number) - (b.instagramOrder as number))
+  const instagramProducts =
+    instagramCurated.length > 0 ? instagramCurated.slice(0, 9) : pickDiverse(2, 3)
+  const instagramItems = instagramProducts.map((p) => ({
     src: p.images[0].url,
     alt: isTr ? p.titleTr : p.titleEn,
   }))
@@ -86,7 +108,6 @@ export default async function HomePage({
 
   // Koleksiyon teaser: her kategori icin ilk gorsel (varsa). Bos kategori
   // notr bir doku ile gosterilir — "yakinda" hissi, kirik gorunmez.
-  const CATS = ['Antik Dönem Replikaları', 'Resimli Seramikler', 'Mimari Duvar Panoları']
   const collectionBlocks = CATS.map((cat) => ({
     cat,
     label: tg.has(`categories.${cat}`) ? tg(`categories.${cat}`) : cat,
