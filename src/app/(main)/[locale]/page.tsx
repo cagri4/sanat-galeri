@@ -71,7 +71,9 @@ export default async function HomePage({
     alt: isTr ? p.titleTr : p.titleEn,
   }))
 
-  const heroSlides: HeroSlide[] = pickSlots('heroOrder', 5).map((p) => {
+  // Hero artik tek koleksiyondan degil; her koleksiyondan 2-3 eser dönüşümlü
+  // gosteriliyor (bkz. hero_order — Antik/Zamansız/Mimari sirali). 9 slot.
+  const heroSlides: HeroSlide[] = pickSlots('heroOrder', 9).map((p) => {
     const title = isTr ? p.titleTr : p.titleEn
     return {
       slug: p.slug,

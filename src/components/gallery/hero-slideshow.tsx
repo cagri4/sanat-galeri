@@ -5,7 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 /**
- * Ana sayfa hero slaytlari — 5 farkli seriden birer eser.
+ * Ana sayfa hero slaytlari — tum koleksiyonlardan cesitli eserler
+ * (Antik / Zamansız / Mimari donusumlu; bkz. hero_order).
  *
  * TASARIM KARARLARI
  * - object-contain: eserler duz zeminde fotograflanmis kaplar. object-cover
