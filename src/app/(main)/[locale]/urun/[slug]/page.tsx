@@ -49,16 +49,29 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
   const period = isTr ? eser.periodTr : eser.periodEn
   const subject = isTr ? eser.subjectTr : eser.subjectEn
   const artistName = eser.artist ? (isTr ? eser.artist.nameTr : eser.artist.nameEn) : null
-  // Esere özel "Replika Hakkında" metni panelden girilebilir; yoksa genel metin.
-  const aboutText = (isTr ? eser.aboutTr : eser.aboutEn) || t('aboutText')
+
+  // Katalog etiketleri kategoriye göre uyarlanır: antik replikalarda "Kap
+  // Formu / Mitolojik Konu / Koleksiyon", diğer kategorilerde "Tür / Tema /
+  // Konum". Böylece bir duvar panosu için "Kap Formu" gibi yanlış etiket çıkmaz.
+  const isReplica = eser.category === 'Antik Dönem Replikaları'
+  const isMimari = eser.category === 'Mimari Duvar Panoları'
+  const ownAbout = isTr ? eser.aboutTr : eser.aboutEn
+  // "Replika Hakkında" bloğu yalnızca replikalarda (ya da esere özel metin
+  // girilmişse) gösterilir; panolarda/resimli seramiklerde replika metni basılmaz.
+  const aboutText = ownAbout || (isReplica ? t('aboutText') : '')
 
   // Katalog satırları — sanatçının istediği sıra. Değeri olmayan alan gizlenir.
+  // Mimari panolarda `collection` alanı eserin kurulduğu KONUMU tutar (bu
+  // kategoride alt-koleksiyon kavramı yok), o yüzden etiketi "Konum" olur.
   const catalogRows = [
-    { label: t('collection'), value: eser.collection },
-    { label: t('form'), value: form },
+    {
+      label: isMimari ? t('location') : t('collection'),
+      value: eser.collection,
+    },
+    { label: isReplica ? t('form') : t('formType'), value: form },
     { label: t('period'), value: period },
     { label: t('medium'), value: medium },
-    { label: t('subject'), value: subject },
+    { label: isReplica ? t('subject') : t('theme'), value: subject },
     { label: t('dimensions'), value: dimensions },
     { label: t('year'), value: eser.year ? String(eser.year) : null },
   ].filter((r) => r.value)
@@ -148,20 +161,24 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
             <RichText
               text={String(description)}
               className="space-y-5"
-              paragraphClassName="max-w-[68ch] text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]"
+              // whitespace-pre-line: Zamansız Manzaralar serisinin şiir metinlerinde
+              // satır sonları korunur; düz nesir açıklamalarda etkisizdir.
+              paragraphClassName="max-w-[68ch] whitespace-pre-line text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]"
             />
           )}
 
-          {/* Replika Hakkında — panelden esere özel metin girilebilir; boşsa
-              sitedeki genel replika metnine düşer. */}
-          <div className="border-l border-[var(--rule)] pl-5">
-            <h2 className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{t('about')}</h2>
-            <RichText
-              text={aboutText}
-              className="mt-3 space-y-4"
-              paragraphClassName="max-w-[68ch] text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]"
-            />
-          </div>
+          {/* Replika Hakkında — yalnızca replikalarda ya da esere özel metin
+              girildiğinde gösterilir (aboutText boşsa hiç basılmaz). */}
+          {aboutText && (
+            <div className="border-l border-[var(--rule)] pl-5">
+              <h2 className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{t('about')}</h2>
+              <RichText
+                text={aboutText}
+                className="mt-3 space-y-4"
+                paragraphClassName="max-w-[68ch] text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]"
+              />
+            </div>
+          )}
 
 
           {/* İletişim + Özel sipariş — vitrin modeli: satın alma yok,
