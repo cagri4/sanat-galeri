@@ -6,7 +6,7 @@ export default function LoginPage() {
       <div className="w-full max-w-sm space-y-6">
         <div className="text-center">
           <h1 className="text-2xl font-light tracking-tight text-neutral-900">
-            U-Art Admin
+            Uarttasarım Admin
           </h1>
           <p className="mt-2 text-sm text-neutral-500">Yönetim paneline giriş yapın</p>
         </div>

@@ -21,7 +21,7 @@ export default async function Footer({ locale }: FooterProps) {
           {/* Brand */}
           <div className="md:col-span-1">
             <h3 className="text-lg font-medium tracking-tight text-[#2C2C2C]">
-              U-Art Tasarım
+              Uarttasarım
             </h3>
             {/* whitespace-pre-line: adres cok satirli */}
             <p className="mt-3 whitespace-pre-line text-[length:var(--text-meta)] leading-relaxed text-[#6b6b6b]">

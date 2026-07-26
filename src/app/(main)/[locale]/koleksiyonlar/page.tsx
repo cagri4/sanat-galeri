@@ -14,7 +14,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'collectionsPage' })
   const isTr = locale === 'tr'
   return {
-    title: `${t('title')} | ${isTr ? 'U-Art Tasarım' : 'U-Art Design'}`,
+    title: `${t('title')} | ${isTr ? 'Uarttasarım' : 'Uarttasarım'}`,
     description: t('lead'),
   }
 }

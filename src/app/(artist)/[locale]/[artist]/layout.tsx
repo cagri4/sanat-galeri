@@ -68,7 +68,7 @@ export default async function ArtistLayout({
               {name}
             </h1>
             <p className="mt-4 text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
-              U-Art Tasarım · Çanakkale
+              Uarttasarım · Çanakkale
             </p>
           </div>
         </header>

@@ -11,7 +11,7 @@ export async function generateMetadata({
   const { locale } = await params
   const isTr = locale === 'tr'
   return {
-    title: isTr ? 'İletişim | U-Art Tasarım' : 'Contact | U-Art Design',
+    title: isTr ? 'İletişim | Uarttasarım' : 'Contact | Uarttasarım',
     description: isTr ? 'Bizimle iletişime geçin' : 'Get in touch with us',
   }
 }

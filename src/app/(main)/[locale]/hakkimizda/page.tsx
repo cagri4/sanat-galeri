@@ -30,10 +30,10 @@ export async function generateMetadata({
   const { locale } = await params
   const isTr = locale === 'tr'
   return {
-    title: isTr ? 'Hakkımızda | U-Art Tasarım' : 'About | U-Art Design',
+    title: isTr ? 'Hakkımızda | Uarttasarım' : 'About | Uarttasarım',
     description: isTr
-      ? 'U-Art Tasarım sanat atölyesi hakkında'
-      : 'About U-Art Design art studio',
+      ? 'Uarttasarım sanat atölyesi hakkında'
+      : 'About Uarttasarım art studio',
   }
 }
 
@@ -45,6 +45,7 @@ export default async function AboutPage({
   const { locale } = await params
   const isTr = locale === 'tr'
   const tc = await getTranslations({ locale, namespace: 'collection' })
+  const ta = await getTranslations({ locale, namespace: 'about' })
 
   const MAIN_URL = process.env.NEXT_PUBLIC_MAIN_URL ?? ''
   const MELIKE_URL = process.env.NEXT_PUBLIC_MELIKE_URL ?? '#'
@@ -62,15 +63,17 @@ export default async function AboutPage({
         <h1 className="text-4xl font-medium leading-[1.1] tracking-[-0.01em] text-[#2C2C2C] sm:text-5xl lg:text-6xl">
           {isTr ? 'Hakkımızda' : 'About Us'}
         </h1>
+        {/* Sanatcinin kendi Hakkimizda metni (Drive: Hakkimizda.docx) — aynen. */}
         <p className="mt-8 max-w-[68ch] text-[length:var(--text-lead)] leading-[1.8] text-[#4a4a4a]">
-          {isTr
-            ? 'U-Art Tasarım, Melike Doğan ve Şeref Doğan’ın Çanakkale’deki sanat atölyesidir. Atölyede antik dönem seramiklerinin form, bezeme ve ikonografisi araştırılır; eserler terra sigillata tekniğiyle yeniden üretilir.'
-            : 'U-Art Design is the Çanakkale studio of Melike Doğan and Şeref Doğan. The studio researches the form, decoration and iconography of ancient ceramics, reproducing works in the terra sigillata technique.'}
+          {ta('lead')}
         </p>
-        {/* Koleksiyon tanitimi — sanatcinin kendi metni */}
-        <p className="mt-6 max-w-[68ch] text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]">
-          {tc('short')}
-        </p>
+        <div className="mt-6 max-w-[68ch] space-y-5">
+          {ta('body').split('\n\n').filter(Boolean).map((para, i) => (
+            <p key={i} className="text-[length:var(--text-body)] leading-[1.85] text-[#4a4a4a]">
+              {para}
+            </p>
+          ))}
+        </div>
         <div className="mt-8 flex flex-wrap gap-x-10 gap-y-2">
           <Link
             href={`/${locale}/teknik`}

@@ -1,10 +1,10 @@
 {
   "common": {
-    "siteTitle": "U-Art Design",
+    "siteTitle": "Uarttasarım",
     "loading": "Loading..."
   },
   "nav": {
-    "siteTitle": "U-Art Design",
+    "siteTitle": "Uarttasarım",
     "gallery": "Gallery",
     "artists": "Artists",
     "backToMain": "Home",
@@ -57,7 +57,7 @@
     "errorMessage": "The message could not be sent. Please try again."
   },
   "meta": {
-    "homeTitle": "U-Art Design",
+    "homeTitle": "Uarttasarım",
     "homeDesc": "Simple, gallery-quality art showcase.",
     "heroSubtitle": "Ancient-period ceramic replicas in the terra sigillata technique",
     "exploreGallery": "Explore Gallery",
@@ -65,9 +65,9 @@
     "viewPortfolio": "View Portfolio",
     "recentWorks": "Recent Works",
     "viewAll": "View All Works",
-    "galleryTitle": "Gallery | U-Art Design",
+    "galleryTitle": "Gallery | Uarttasarım",
     "galleryDesc": "Ancient-period ceramic replicas produced in the terra sigillata technique.",
-    "artistTitle": "{name} | U-Art Design",
+    "artistTitle": "{name} | Uarttasarım",
     "artistDesc": "{name} - artist portfolio and CV",
     "portfolioTitle": "Portfolio | {name}",
     "exhibitionsTitle": "Exhibitions | {name}",
@@ -96,7 +96,7 @@
     "bioPending": "The artist's personal biography has not been published yet; it will be added to this section once the artist's own text is available."
   },
   "footer": {
-    "copyright": "© {year} U-Art Design. All rights reserved.",
+    "copyright": "© {year} Uarttasarım. All rights reserved.",
     "galleryLink": "Gallery",
     "aboutLink": "About",
     "contactLink": "Contact",
@@ -164,5 +164,9 @@
     "body": "A panel made for a specific space, a replica of a mythological scene you love, or a series of vessels — share your idea with us and let us interpret it together. This is not a checkout; it is the start of a conversation.",
     "cta": "Enquire / Contact",
     "note": "Price and timeline are clarified in conversation, according to the scope of the work."
+  },
+  "about": {
+    "lead": "Uarttasarım is a ceramics studio that reinterprets the memory of the earth, the rhythm of nature and cultural heritage through a contemporary lens.",
+    "body": "Our work draws on the quiet details of the world around us; the relationship water forms with light, the traces of the wind, the turning of the seasons, the texture of ancient stone, and the thousands of years of cultural accumulation of the land we live in form the starting point of our work.\n\nEach piece is the result of a long process in which hand-shaped clay is patiently transformed. In an age where speed drives production, we value slowing down and the direct relationship established with the material. For we believe that handcraft is not merely a method of production; it is a creative language that gives objects character and soul.\n\nAt Uarttasarım, ceramics are not merely a functional object or a decorative form. Every work carries a story — sometimes an Anatolian tale, sometimes the memory of an ancient ceramic, sometimes the ever-changing cycle of nature. We believe the boundary between art and craft is permeable, and we see each piece as a space where aesthetics, history and narrative meet.\n\nOur collections include ancient-period ceramic replicas, original ceramic sculptures, wearable ceramic artworks, paintings, and functional ceramics inspired by nature. Each is a different expression of the same idea that brings together past and present, tradition and contemporary interpretation.\n\nFor us a ceramic work is not merely an object to be seen; it is a companion that is touched, used, lived with, and that gathers memories over time. Uarttasarım's aim is to produce works that carry aesthetic value, that one forms a personal bond with, and that accompany the natural flow of life.\n\nFor we believe that every form carries a story; and every story continues to live in the memory of the earth."
   }
 }

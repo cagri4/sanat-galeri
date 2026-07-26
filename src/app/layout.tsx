@@ -11,7 +11,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'U-Art Tasarim',
+  title: 'Uarttasarım',
   description: 'Sanat galerisi',
 }
 

@@ -83,7 +83,7 @@ export default async function Navbar({ locale }: NavbarProps) {
             className="h-9 w-9 shrink-0 sm:h-10 sm:w-10"
           />
           <span className="text-lg font-medium tracking-tight sm:text-xl">
-            U-Art Tasarım
+            Uarttasarım
           </span>
         </a>
 

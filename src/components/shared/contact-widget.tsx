@@ -153,7 +153,7 @@ export default function ContactWidget() {
             <div className="flex items-start justify-between gap-6">
               <div>
                 <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
-                  U-Art Tasarım
+                  Uarttasarım
                 </p>
                 <h2
                   id="contact-widget-title"

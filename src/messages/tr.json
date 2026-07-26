@@ -1,10 +1,10 @@
 {
   "common": {
-    "siteTitle": "U-Art Tasarım",
+    "siteTitle": "Uarttasarım",
     "loading": "Yukleniyor..."
   },
   "nav": {
-    "siteTitle": "U-Art Tasarım",
+    "siteTitle": "Uarttasarım",
     "gallery": "Galeri",
     "artists": "Sanatçılar",
     "backToMain": "Ana Sayfa",
@@ -57,7 +57,7 @@
     "errorMessage": "Mesaj gönderilemedi. Lütfen tekrar deneyin."
   },
   "meta": {
-    "homeTitle": "U-Art Tasarım",
+    "homeTitle": "Uarttasarım",
     "homeDesc": "Sade, galeri kalitesinde sanat vitrini.",
     "heroSubtitle": "Terra sigillata tekniğiyle antik dönem seramik replikaları",
     "exploreGallery": "Galeriyi Keşfet",
@@ -65,9 +65,9 @@
     "viewPortfolio": "Portfolyoyu Gör",
     "recentWorks": "Son Eserler",
     "viewAll": "Tüm Eserleri Gör",
-    "galleryTitle": "Galeri | U-Art Tasarım",
+    "galleryTitle": "Galeri | Uarttasarım",
     "galleryDesc": "Terra sigillata tekniğiyle üretilmiş antik dönem seramik replikaları.",
-    "artistTitle": "{name} | U-Art Tasarım",
+    "artistTitle": "{name} | Uarttasarım",
     "artistDesc": "{name} - sanatci portfolyosu ve CV",
     "portfolioTitle": "Portfolyo | {name}",
     "exhibitionsTitle": "Sergiler | {name}",
@@ -96,7 +96,7 @@
     "bioPending": "Sanatçının kişisel biyografisi henüz yayımlanmadı; kendisinden gelen metinle birlikte bu bölüme eklenecektir."
   },
   "footer": {
-    "copyright": "© {year} U-Art Tasarım. Tüm hakları saklıdır.",
+    "copyright": "© {year} Uarttasarım. Tüm hakları saklıdır.",
     "galleryLink": "Galeri",
     "aboutLink": "Hakkımızda",
     "contactLink": "İletişim",
@@ -164,5 +164,9 @@
     "body": "Bir mekâna özel bir pano, sevdiğiniz bir mitolojik sahnenin replikası ya da bir dizi kap — düşüncenizi bizimle paylaşın, birlikte yorumlayalım. Bu bir satış sistemi değil; bir başlangıç sohbetidir.",
     "cta": "Teklif / İletişim",
     "note": "Fiyat ve süre, işin kapsamına göre görüşmede netleşir."
+  },
+  "about": {
+    "lead": "Uarttasarım, toprağın hafızasını, doğanın ritmini ve kültürel mirası çağdaş bir bakışla yeniden yorumlayan bir seramik atölyesidir.",
+    "body": "Üretimlerimiz, çevremizdeki dünyanın sessiz ayrıntılarından beslenir; suyun ışıkla kurduğu ilişki, rüzgârın izleri, mevsimlerin dönüşümü, antik taşların dokusu ve yaşadığımız coğrafyanın binlerce yıllık kültürel birikimi çalışmalarımızın çıkış noktasını oluşturur.\n\nHer eser, elde şekillendirilen kilin sabırla dönüştüğü uzun bir sürecin sonucudur. Hızın üretime yön verdiği bir çağda, yavaşlamayı ve malzemeyle kurulan doğrudan ilişkiyi önemsiyoruz. Çünkü inanıyoruz ki, el emeği yalnızca bir üretim yöntemi değil; nesnelere karakter ve ruh kazandıran yaratıcı bir dildir.\n\nUarttasarım'da seramik; yalnızca işlevsel bir obje ya da dekoratif bir form değildir. Her çalışma, bir hikâye taşır. Kimi zaman bir Anadolu masalını, kimi zaman antik bir seramiğin belleğini, kimi zaman ise doğanın sürekli değişen döngüsünü anlatır. Sanat ile zanaat arasındaki sınırın geçirgen olduğuna inanıyor; her parçayı estetik, tarih ve anlatının buluştuğu bir alan olarak görüyoruz.\n\nKoleksiyonlarımız arasında antik dönem seramik replikaları, özgün seramik heykeller, giyilebilir seramik sanat eserleri, resimler ve doğadan ilham alan işlevsel seramikler yer almaktadır. Her biri, geçmiş ile bugünü, gelenek ile çağdaş yorumu buluşturan aynı düşüncenin farklı ifadeleridir.\n\nBizim için bir seramik eser, yalnızca görülen bir nesne değil; dokunulan, kullanılan, yaşanan ve zamanla anılar biriktiren bir yol arkadaşıdır. Uarttasarım'ın amacı, estetik değer taşıyan, kişisel bağ kurulan ve yaşamın doğal akışına eşlik eden eserler üretmektir.\n\nÇünkü inanıyoruz ki, her form bir hikâye taşır; her hikâye ise toprağın hafızasında yaşamaya devam eder."
   }
 }
