@@ -171,7 +171,9 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
               girildiğinde gösterilir (aboutText boşsa hiç basılmaz). */}
           {aboutText && (
             <div className="border-l border-[var(--rule)] pl-5">
-              <h2 className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{t('about')}</h2>
+              {/* Başlık kategoriye göre: replikada "Replika Hakkında", diğer
+                  kategorilerde nötr "Not" (ör. Güzel Bakış ortak-üretim notu). */}
+              <h2 className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{isReplica ? t('about') : t('note')}</h2>
               <RichText
                 text={aboutText}
                 className="mt-3 space-y-4"
