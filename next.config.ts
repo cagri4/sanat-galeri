@@ -16,6 +16,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: '*.public.blob.vercel-storage.com',
       },
+      {
+        // Eser görselleri Cloudinary'ye taşındı (hesap: df0henatz).
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
     ],
   },
 }
