@@ -1,6 +1,11 @@
 import { supabase } from '@/lib/db/supabase'
+import { isOnSite, type SiteKey } from '@/lib/site'
 
-export async function getProducts(category?: string) {
+/**
+ * `site` verilirse yalnızca o sitede yer alan kategoriler döner
+ * (ürün bazlı ayrım, bkz. lib/site.ts). Veri küçük; süzme JS tarafında.
+ */
+export async function getProducts(category?: string, site?: SiteKey) {
   let query = supabase
     .from('products')
     .select('*, images:product_images(*)')
@@ -15,12 +20,16 @@ export async function getProducts(category?: string) {
 
   const { data, error } = await query
   if (error) throw error
-  return (data ?? []).map(p => ({
+  const rows = site ? (data ?? []).filter((p) => isOnSite(p.category, site)) : (data ?? [])
+  return rows.map(p => ({
     ...p,
     titleTr: p.title_tr,
     titleEn: p.title_en,
     descriptionTr: p.description_tr,
     descriptionEn: p.description_en,
+    // Kolon henüz yoksa (migration 0006 uygulanmadıysa) undefined → null.
+    descriptionKurumsalTr: p.description_kurumsal_tr ?? null,
+    descriptionKurumsalEn: p.description_kurumsal_en ?? null,
     collection: p.collection,
     heroOrder: p.hero_order,
     instagramOrder: p.instagram_order,
@@ -58,6 +67,8 @@ export async function getProductBySlug(slug: string) {
     titleEn: data.title_en,
     descriptionTr: data.description_tr,
     descriptionEn: data.description_en,
+    descriptionKurumsalTr: data.description_kurumsal_tr ?? null,
+    descriptionKurumsalEn: data.description_kurumsal_en ?? null,
     mediumTr: data.medium_tr,
     mediumEn: data.medium_en,
     dimensionsTr: data.dimensions_tr,
@@ -90,7 +101,7 @@ export async function getProductBySlug(slug: string) {
   }
 }
 
-export async function getProductsByArtist(artistId: number, limit?: number) {
+export async function getProductsByArtist(artistId: number, limit?: number, site?: SiteKey) {
   let query = supabase
     .from('products')
     .select('*, images:product_images(*)')
@@ -99,11 +110,15 @@ export async function getProductsByArtist(artistId: number, limit?: number) {
     .order('sort_order', { ascending: true })
     .order('created_at', { ascending: false })
 
-  if (limit) query = query.limit(limit)
+  // Site süzgeci varken limit JS'te uygulanır (aksi halde süzülen kayıtlar
+  // limiti yer, sayfada eksik eser görünürdü).
+  if (limit && !site) query = query.limit(limit)
 
   const { data, error } = await query
   if (error) throw error
-  return (data ?? []).map(p => ({
+  let rows = site ? (data ?? []).filter((p) => isOnSite(p.category, site)) : (data ?? [])
+  if (limit && site) rows = rows.slice(0, limit)
+  return rows.map(p => ({
     ...p,
     titleTr: p.title_tr,
     titleEn: p.title_en,

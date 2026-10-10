@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { createProduct, deleteProduct, updateProduct } from '@/lib/actions/product'
 import { CATEGORIES, COLLECTIONS } from '@/lib/categories'
+import { isOnSite, isKurumsalOnly } from '@/lib/site'
 
 const productFormSchema = z.object({
   titleTr: z.string().min(1, 'Baslik (TR) zorunludur'),
@@ -17,6 +18,8 @@ const productFormSchema = z.object({
   sortOrder: z.number().optional(),
   descriptionTr: z.string().optional(),
   descriptionEn: z.string().optional(),
+  descriptionKurumsalTr: z.string().optional(),
+  descriptionKurumsalEn: z.string().optional(),
   price: z.string().optional(),
   currency: z.string().optional(),
   year: z.number().optional(),
@@ -50,6 +53,8 @@ interface ProductData {
   sortOrder: number | null
   descriptionTr: string | null
   descriptionEn: string | null
+  descriptionKurumsalTr?: string | null
+  descriptionKurumsalEn?: string | null
   price: string | null
   currency: string | null
   year: number | null
@@ -102,6 +107,8 @@ export default function ProductForm({ product, artists }: ProductFormProps) {
       sortOrder: product?.sortOrder ?? 0,
       descriptionTr: product?.descriptionTr ?? '',
       descriptionEn: product?.descriptionEn ?? '',
+      descriptionKurumsalTr: product?.descriptionKurumsalTr ?? '',
+      descriptionKurumsalEn: product?.descriptionKurumsalEn ?? '',
       price: product?.price ?? '',
       currency: product?.currency ?? 'TRY',
       year: product?.year ?? undefined,
@@ -323,6 +330,33 @@ export default function ProductForm({ product, artists }: ProductFormProps) {
             />
           </div>
         </div>
+
+        {/* Kurumsal açıklama — yalnız iki sitede birden yer alan kategorilerde
+            (seramik heykeller). Aynı eser, iki ayrı metin (KARARLAR-2026-10-10).
+            Panolarda tek metin zaten kurumsal dilde, ayrı alan gerekmez. */}
+        {selectedCategory && isOnSite(selectedCategory, 'kurumsal') && !isKurumsalOnly(selectedCategory) && (
+          <div className="rounded-md border border-sky-200 bg-sky-50/50 p-4">
+            <p className="mb-3 text-xs text-neutral-600">
+              Yukaridaki aciklama <strong>Uart Galeri</strong>de (hikaye, esin kaynagi). Asagidaki metin
+              <strong> Uart Kurumsal</strong>da gosterilir (olcu, malzeme, uygulama, mekana yerlesim).
+              Bos birakilirsa kurumsal sayfada yalnizca kunye gorunur — galeri metni KULLANILMAZ.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <textarea
+                {...register('descriptionKurumsalTr')}
+                rows={4}
+                className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400 resize-vertical"
+                placeholder="Kurumsal aciklama (Turkce)"
+              />
+              <textarea
+                {...register('descriptionKurumsalEn')}
+                rows={4}
+                className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400 resize-vertical"
+                placeholder="Corporate description (English)"
+              />
+            </div>
+          </div>
+        )}
 
         {/* Price + Currency + Year */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

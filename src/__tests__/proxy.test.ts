@@ -11,8 +11,10 @@ jest.mock('next-intl/middleware', () => ({ __esModule: true, default: jest.fn(()
 jest.mock('@/lib/i18n/routing', () => ({ routing: { locales: ['tr', 'en'], defaultLocale: 'tr' } }))
 
 const ENV = { ...process.env }
-function withDomains(galeri?: string, kurumsal?: string) {
+function withDomains(galeri?: string, kurumsal?: string, def?: string) {
   process.env = { ...ENV }
+  if (def) process.env.UART_SITE = def
+  else delete process.env.UART_SITE
   if (galeri) process.env.UART_GALERI_DOMAIN = galeri
   else delete process.env.UART_GALERI_DOMAIN
   if (kurumsal) process.env.UART_KURUMSAL_DOMAIN = kurumsal
@@ -113,6 +115,27 @@ describe('decideRoute — iki alan adı tanımlıyken', () => {
     expect(site.kurumsalPath('galeri.test', 'tr', '/projeler')).toBe('https://kurumsal.test/tr/projeler')
     expect(site.galeriPath('kurumsal.test', 'en', '/galeri')).toBe('https://galeri.test/en/galeri')
     expect(site.galeriPath('galeri.test', 'en', '/galeri')).toBe('/en/galeri')
+  })
+})
+
+describe('decideRoute — iki ayrı Vercel projesi (UART_SITE), alan adı yok', () => {
+  it('kurumsal projenin her adresi kurumsal siteyi açar', () => {
+    withDomains(undefined, undefined, 'kurumsal')
+    expect(decideRoute('uart-kurumsal-abc123.vercel.app', '/tr/projeler')).toEqual({
+      type: 'rewrite', pathname: '/tr/kurumsal/projeler', locale: 'tr',
+    })
+  })
+  it('galeri projesi normal next-intl akışı; /kurumsal yolu galeriye ait değil ama alan adı yoksa açık kalır', () => {
+    withDomains(undefined, undefined, 'galeri')
+    expect(decideRoute('uart-galeri.vercel.app', '/tr/galeri')).toEqual({ type: 'intl' })
+  })
+  it('alan adları env\'e girince (vercel.app adresleri dahil) çapraz bağlantı mutlak olur', () => {
+    withDomains('uart-galeri.vercel.app', 'uart-kurumsal.vercel.app', 'galeri')
+    expect(site.kurumsalPath('uart-galeri.vercel.app', 'tr', '/projeler'))
+      .toBe('https://uart-kurumsal.vercel.app/tr/projeler')
+    expect(decideRoute('uart-galeri.vercel.app', '/tr/kurumsal/surec')).toEqual({
+      type: 'redirect', location: 'https://uart-kurumsal.vercel.app/tr/surec',
+    })
   })
 })
 

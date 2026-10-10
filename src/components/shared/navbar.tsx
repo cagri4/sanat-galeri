@@ -2,6 +2,8 @@ import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import LanguageSwitcher from './language-switcher'
 import MobileMenu from './mobile-menu'
+import { headers } from 'next/headers'
+import { kurumsalPath } from '@/lib/site'
 
 export function buildDomainLink(baseUrl: string, path: string): string {
   try {
@@ -43,7 +45,6 @@ export function getCrossDomainLinks(
     about: buildDomainLink(mainUrl, `/${locale}/hakkimizda`),
     commissions: buildDomainLink(mainUrl, `/${locale}/ozel-siparis`),
     exhibition: buildDomainLink(mainUrl, `/${locale}/sergi/bozcaada-2010`),
-    technique: buildDomainLink(mainUrl, `/${locale}/teknik`),
     contact: buildDomainLink(mainUrl, `/${locale}/iletisim`),
     melike: buildArtistLink(mainUrl, melikeUrl, locale, 'melike'),
     seref: buildArtistLink(mainUrl, serefUrl, locale, 'seref'),
@@ -63,6 +64,15 @@ export default async function Navbar({ locale }: NavbarProps) {
   const SEREF_URL = process.env.NEXT_PUBLIC_SEREF_URL ?? 'https://seref.uarttasarim.com'
 
   const links = getCrossDomainLinks(locale, MAIN_URL, MELIKE_URL, SEREF_URL)
+  const ts = await getTranslations({ locale, namespace: 'site' })
+  const kurumsalHref = kurumsalPath((await headers()).get('host') ?? '', locale)
+  const items = [
+    { href: links.gallery, label: t('gallery') },
+    { href: links.collections, label: t('collections') },
+    { href: links.about, label: t('about') },
+    { href: links.commissions, label: t('commissions') },
+    { href: links.contact, label: t('contact') },
+  ]
 
   return (
     <header className="relative border-b border-[#e9e7e1]">
@@ -90,13 +100,7 @@ export default async function Navbar({ locale }: NavbarProps) {
         {/* Desktop nav — vitrin menusu (5 madde). Teknik/Sergiler artik
             Koleksiyonlar/Hakkinda icinden; sanatcilar footer'da. */}
         <div className="hidden items-center gap-8 sm:flex">
-          {[
-            { href: links.gallery, label: t('gallery') },
-            { href: links.collections, label: t('collections') },
-            { href: links.about, label: t('about') },
-            { href: links.commissions, label: t('commissions') },
-            { href: links.contact, label: t('contact') },
-          ].map((l) => (
+          {items.map((l) => (
             <a
               key={l.href}
               href={l.href}
@@ -105,14 +109,18 @@ export default async function Navbar({ locale }: NavbarProps) {
               {l.label}
             </a>
           ))}
+          {/* Diğer site: kurumsal projeler (ayrı alan adı ya da önizlemede yol) */}
+          <a
+            href={kurumsalHref}
+            className="inline-flex min-h-11 items-center border-l border-[var(--border)] pl-6 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#9a9a96] transition-colors duration-[var(--dur-micro)] hover:text-[#2C2C2C]"
+          >
+            {ts('kurumsal')} &rarr;
+          </a>
           <LanguageSwitcher />
         </div>
 
         {/* Mobile hamburger */}
-        <MobileMenu
-          links={{ gallery: links.gallery, collections: links.collections, about: links.about, commissions: links.commissions, contact: links.contact }}
-          labels={{ gallery: t('gallery'), collections: t('collections'), about: t('about'), commissions: t('commissions'), contact: t('contact') }}
-        />
+        <MobileMenu items={[...items, { href: kurumsalHref, label: ts('kurumsal') }]} />
       </nav>
     </header>
   )

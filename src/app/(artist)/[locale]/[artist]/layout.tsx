@@ -49,7 +49,7 @@ export default async function ArtistLayout({
           ogesi; `w-full` olmadan max-content genisligine buyuyor ve 390px'te
           52px yatay tasma olusuyordu (`overflow-x-hidden` bunu gizliyordu,
           o yuzden o da kaldirildi — gercek tasma bir daha maskelenmesin). */}
-      <div className="mx-auto w-full min-w-0 max-w-6xl px-6 sm:px-10 lg:px-16">
+      <div data-site="galeri" className="mx-auto w-full min-w-0 max-w-6xl px-6 sm:px-10 lg:px-16">
         <Navbar locale={locale} domain={artist as 'melike' | 'seref'} />
 
         <header className="full-bleed bg-[#f2f1ec]">

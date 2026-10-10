@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ---------------------------------------------------------------------------
    sevaceramics.com referansli redesign (2026-07-25, Cagri onayi):
@@ -48,8 +47,47 @@
   /* Tek aile: Inter. `--font-serif` adi geriye donuk uyumluluk icin duruyor
      (34 kullanim otomatik sans olur); serif YOK. Basliklar agir Inter +
      sikilastirilmis tracking ile ayrisir. */
-  --font-serif: 'Inter', system-ui, sans-serif;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: var(--font-inter), system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  /* İki site (2026-10-10): galeri başlıkları serif, kurumsal künye mono. */
+  --font-display: var(--font-newsreader), Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+/* ---------------------------------------------------------------------------
+   İKİ SİTE — ortak bileşenler, farklı tasarım dili (KARARLAR-2026-10-10).
+   Logo ikisinde de aynı; fark tipografi, renk, ızgara ve hareketten gelir.
+
+   GALERİ: 2026-07-25 kararı korunur (nötr aksan, renk fotoğraftan gelir).
+   Fark: başlıklar Newsreader serif — katalog/müze etiketi hissi.
+--------------------------------------------------------------------------- */
+/* Küçük büyük-harf künye etiketleri (text-label) sans kalır. */
+[data-site='galeri'] :is(h1, h2, h3):not([class*='--text-label']) {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+/* KURUMSAL: ölçülü, teknik. Soğuk zemin, petrol vurgu, sert ızgara, mono
+   künye, minimal hareket (zoom yok, kısa geçişler). */
+[data-site='kurumsal'] {
+  --background: #F5F6F5;
+  --foreground: #1E2226;
+  --muted: #5d6468;
+  --faint: #8b9296;
+  --border: #dde1e0;
+  --rule: #dde1e0;
+  --accent: #1F4E5A;
+  --dur-micro: 150ms;
+  --dur-image: 0ms;
+  --tracking-label: 0.12em;
+  background: var(--background);
+  color: var(--foreground);
+}
+[data-site='kurumsal'] :is(h1, h2, h3) {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 
 html {

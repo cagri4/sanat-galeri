@@ -1,6 +1,8 @@
 import { getTranslations } from 'next-intl/server'
 import { getCrossDomainLinks } from './navbar'
 import { SOCIAL } from '@/lib/social'
+import { headers } from 'next/headers'
+import { kurumsalPath } from '@/lib/site'
 
 interface FooterProps {
   locale: string
@@ -13,6 +15,8 @@ export default async function Footer({ locale }: FooterProps) {
   const MELIKE_URL = process.env.NEXT_PUBLIC_MELIKE_URL ?? '#'
   const SEREF_URL = process.env.NEXT_PUBLIC_SEREF_URL ?? '#'
   const links = getCrossDomainLinks(locale, MAIN_URL, MELIKE_URL, SEREF_URL)
+  const ts = await getTranslations({ locale, namespace: 'site' })
+  const kurumsalHref = kurumsalPath((await headers()).get('host') ?? '', locale)
 
   return (
     <footer className="border-t border-[#e9e7e1] mt-20">
@@ -66,6 +70,11 @@ export default async function Footer({ locale }: FooterProps) {
               <li>
                 <a href={links.contact} className="text-[13px] text-[#6b6b6b] hover:text-[#2C2C2C] transition-colors">
                   {t('contactLink')}
+                </a>
+              </li>
+              <li>
+                <a href={kurumsalHref} className="text-[13px] text-[#6b6b6b] hover:text-[#2C2C2C] transition-colors">
+                  {ts('kurumsal')} &rarr;
                 </a>
               </li>
             </ul>

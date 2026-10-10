@@ -22,6 +22,8 @@ const productSchema = z.object({
   collection: z.string().optional(),
   descriptionTr: z.string().optional(),
   descriptionEn: z.string().optional(),
+  descriptionKurumsalTr: z.string().optional(),
+  descriptionKurumsalEn: z.string().optional(),
   aboutTr: z.string().optional(),
   aboutEn: z.string().optional(),
   price: z.string().optional(),
@@ -88,6 +90,14 @@ function toRow(d: ProductInput) {
     description_en: nn(d.descriptionEn),
     about_tr: nn(d.aboutTr),
     about_en: nn(d.aboutEn),
+    // Kurumsal açıklama kolonları migration 0006 ile gelir. Boşken satıra
+    // HİÇ yazılmaz: kolon henüz yoksa bile mevcut kayıt akışı bozulmaz.
+    ...(nn(d.descriptionKurumsalTr) || nn(d.descriptionKurumsalEn)
+      ? {
+          description_kurumsal_tr: nn(d.descriptionKurumsalTr),
+          description_kurumsal_en: nn(d.descriptionKurumsalEn),
+        }
+      : {}),
     price: nn(d.price),
     currency: d.currency ?? 'TRY',
     year: d.year ?? null,

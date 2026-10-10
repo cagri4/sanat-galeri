@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import { getTranslations } from 'next-intl/server'
 import { getProducts } from '@/lib/queries/gallery'
 import { CATEGORIES } from '@/lib/categories'
+import { categoriesForSite } from '@/lib/site'
 import Link from 'next/link'
 import CategoryFilter from '@/components/gallery/category-filter'
 import ArtworkGrid from '@/components/gallery/artwork-grid'
@@ -24,16 +25,18 @@ interface GaleriPageProps {
 
 export default async function GaleriPage({ params, searchParams }: GaleriPageProps) {
   const { locale } = await params
-  const { category } = await searchParams
+  const { category: requested } = await searchParams
   const t = await getTranslations({ locale, namespace: 'gallery' })
   const tc = await getTranslations({ locale, namespace: 'collection' })
 
   // Kategori listesi sabit: bos kategoriler de filtrede gorunur (bkz. lib/categories).
-  const categories = [...CATEGORIES]
+  // Yalnız galeri kategorileri — panolar kurumsal sitede (lib/site.ts).
+  const categories = categoriesForSite('galeri', CATEGORIES)
+  const category = requested && categories.includes(requested) ? requested : undefined
   let products: Awaited<ReturnType<typeof getProducts>> = []
 
   try {
-    products = await getProducts(category)
+    products = await getProducts(category, 'galeri')
   } catch {
     // DB not available — show empty state
   }
@@ -47,7 +50,7 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
         {tc('jointProduction')}
       </p>
       <Link
-        href={`/${locale}/teknik`}
+        href={`/${locale}/koleksiyonlar/antik-donem-replikalari#terra-sigillata`}
         className="group inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#2C2C2C]"
       >
         {tc('techniqueCta')}

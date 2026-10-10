@@ -32,6 +32,10 @@ export const products = pgTable('products', {
   titleEn: text('title_en').notNull(),
   descriptionTr: text('description_tr'),
   descriptionEn: text('description_en'),
+  // Kurumsal sitedeki açıklama (ölçü, malzeme, uygulama, mekâna yerleşim).
+  // description_* = galeri metni. Bkz. drizzle/0006_kurumsal_description.sql
+  descriptionKurumsalTr: text('description_kurumsal_tr'),
+  descriptionKurumsalEn: text('description_kurumsal_en'),
   category: text('category').notNull(),
   price: numeric('price', { precision: 10, scale: 2 }),
   currency: text('currency').default('TRY'),

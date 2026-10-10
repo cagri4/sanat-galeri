@@ -119,19 +119,19 @@ Not: `melike.` ve `seref.` için bugün DNS kaydı yok. Yönlendirme, alan adlar
 
 | | Galeri | Kurumsal |
 |---|---|---|
-| Zemin / metin / vurgu | `#FAFAF8` / `#2C2C2C` / terra `#A4532F` | `#F5F6F5` / `#1E2226` / petrol `#1F4E5A` |
+| Zemin / metin / vurgu | `#FAFAF8` / `#2C2C2C` / **nötr** `#2C2C2C` (25.07 kararı korunur: renk fotoğraftan gelir) | `#F5F6F5` / `#1E2226` / petrol `#1F4E5A` |
 | Izgara | mevcut kare duvar, bol boşluk | katı 12 kolon, 4:3 kartlar, 01–NN numaralı projeler, ince çizgiler |
 | Künye | serif başlık + etiketler | mono rakamlı spec tablosu öne çıkar |
 | Hareket | mevcut yavaş fade/zoom (700ms) | 150ms opaklık, zoom yok |
 | CTA | "Bu eser hakkında bilgi al", "Özel sipariş" | "Proje görüşmesi talep et" |
 
-## 5. Adres planı → KARAR: iki ayrı alan adı
-Alan adları Çağrı'dan gelecek. Bağlama adımları:
-1. Vercel'e iki domain eklenir.
-2. `UART_GALERI_DOMAIN` ve `UART_KURUMSAL_DOMAIN` set edilir.
-3. DNS ikas'tan Vercel'e çevrilir.
+## 5. Adres planı → KARAR: iki ayrı alan adı, iki ayrı Vercel projesi
+Çağrı'nın 10.10 netleştirmesi: **şimdilik domain'e takılma.** İki site Vercel'de **iki ayrı proje** olarak durur ve vercel.app adresleriyle gösterilir. Domain bağlama en sona kalır. Muhtemel dağılım: `uarttasarim.com` → galeri; kurumsal için yeni alan adı.
 
-Kodda başka değişiklik gerekmez.
+- Projeler: `uart-galeri` (`UART_SITE=galeri`) ve `uart-kurumsal` (`UART_SITE=kurumsal`). Kod tabanı aynı.
+- Çapraz bağlantılar için her iki projede `UART_GALERI_DOMAIN` / `UART_KURUMSAL_DOMAIN` = ilgili vercel.app adresi.
+- Domain gelince: Vercel'de domain eklenir, bu iki değişken alan adıyla değiştirilir, DNS çevrilir. Kodda değişiklik yok.
+- Mevcut `sanat-galeri` projesine (eski tek-site demo) dokunulmadı.
 
 ## 6. Uygulama sırası
 1. **Kod (bu tur, `iki-site` dalı, push yok):**
@@ -153,4 +153,4 @@ Kodda başka değişiklik gerekmez.
 
 ## 7. Açık konular (sheet/kararlarla cevaplanmamış olanlar)
 - Masalın Hafızası'nın 6 alt-serisinde ve Anadolu Ekininde Güzeller'de eser bazında metin/künye yok. **Kurumsal metinler hiçbir heykel için yok**, yazılması gerekiyor (sanatçı/Çağrı).
-- TR açıklamada bir yerde "Truva" geçiyor. Karar "Troya" dediği için SQL'de o da "Troya"ya çevrildi; uygulamadan önce bakılabilir.
+- TR açıklamada "Truva Savaşı" geçiyor: sanatçının ifadesi, Troia/Troya kararının konusu değil — DOKUNULMADI.

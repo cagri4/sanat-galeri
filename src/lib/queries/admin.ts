@@ -7,6 +7,8 @@ function mapProduct(p: any) {
     titleEn: p.title_en,
     descriptionTr: p.description_tr,
     descriptionEn: p.description_en,
+    descriptionKurumsalTr: p.description_kurumsal_tr ?? null,
+    descriptionKurumsalEn: p.description_kurumsal_en ?? null,
     mediumTr: p.medium_tr,
     mediumEn: p.medium_en,
     dimensionsTr: p.dimensions_tr,

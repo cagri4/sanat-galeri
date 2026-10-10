@@ -7,6 +7,8 @@ import HeroSlideshow, { type HeroSlide } from '@/components/gallery/hero-slidesh
 import InstagramSection from '@/components/gallery/instagram-section'
 import { ARTIST_AVATARS, AVATAR_CLASS } from '@/lib/artist-avatars'
 import { getCrossDomainLinks } from '@/components/shared/navbar'
+import { CATEGORIES, CATEGORY_SLUGS } from '@/lib/categories'
+import { categoriesForSite, isOnSite } from '@/lib/site'
 
 export async function generateMetadata({
   params,
@@ -45,8 +47,10 @@ export default async function HomePage({
   // Ana sayfa bölümleri (Son Eserler / Instagram / Sanatçılar) tek koleksiyona
   // sıkışmasın diye kategoriler arası DÖNÜŞÜMLÜ seçilir — "sadece bunu
   // üretiyorlar" izlenimini kırar. Yalnızca mevcut gerçek eserler.
-  const withImage = allProducts.filter((p) => p.images?.[0]?.url)
-  const CATS = ['Antik Dönem Replikaları', 'Resimli Seramikler', 'Mimari Duvar Panoları']
+  // Galeri sitesi: yalnız galeri kategorileri (panolar kurumsalda, lib/site.ts).
+  const allWithImage = allProducts.filter((p) => p.images?.[0]?.url)
+  const withImage = allWithImage.filter((p) => isOnSite(p.category, 'galeri'))
+  const CATS = categoriesForSite('galeri', CATEGORIES)
   const byCat = (cat: string) => withImage.filter((p) => p.category === cat)
 
   // Her kategoriden startIdx'ten perCat eser al, dönüşümlü diz (A, Z, M, A, Z, M…).
@@ -68,7 +72,9 @@ export default async function HomePage({
   // gerçek portre/atölye fotoğrafı gelince değişecek.
   const artistPlaceholders = [
     byCat('Resimli Seramikler')[5]?.images?.[0]?.url,
-    byCat('Mimari Duvar Panoları')[5]?.images?.[0]?.url,
+    // Şeref'in atfı doğrulanmış işi panolar; pano kurumsal sitede olsa da
+    // dekoratif sanatçı görseli olarak buradan alınır (eser listelenmez).
+    allWithImage.filter((p) => p.category === 'Mimari Duvar Panoları')[5]?.images?.[0]?.url,
   ].filter(Boolean) as string[]
 
   // Hero seçimi ADMIN PANELINDEN de yönlendirilebilir (products.hero_order);
@@ -156,7 +162,7 @@ export default async function HomePage({
           {collectionBlocks.map(({ cat, label, cover }) => (
             <Link
               key={cat}
-              href={`/${locale}/galeri?category=${encodeURIComponent(cat)}`}
+              href={`/${locale}/koleksiyonlar/${CATEGORY_SLUGS[cat]}`}
               className="group relative block aspect-[4/5] overflow-hidden bg-[#eceae3]"
             >
               {cover && (

@@ -3,7 +3,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import { getProducts } from '@/lib/queries/gallery'
-import { CATEGORIES, COLLECTIONS } from '@/lib/categories'
+import { CATEGORIES, CATEGORY_SLUGS, COLLECTIONS } from '@/lib/categories'
+import { categoriesForSite } from '@/lib/site'
 
 export async function generateMetadata({
   params,
@@ -31,12 +32,13 @@ export default async function KoleksiyonlarPage({
 
   let products: Awaited<ReturnType<typeof getProducts>> = []
   try {
-    products = await getProducts()
+    products = await getProducts(undefined, 'galeri')
   } catch {
     // DB yoksa sessiz bos durum
   }
 
-  const blocks = CATEGORIES.map((cat) => {
+  // Yalnız galeri kategorileri; panolar kurumsal sitede.
+  const blocks = categoriesForSite('galeri', CATEGORIES).map((cat) => {
     const items = products.filter((p) => p.category === cat)
     return {
       cat,
@@ -60,7 +62,7 @@ export default async function KoleksiyonlarPage({
         {blocks.map(({ cat, label, cover, count, subCollections }, i) => (
           <Link
             key={cat}
-            href={`/${locale}/galeri?category=${encodeURIComponent(cat)}`}
+            href={`/${locale}/koleksiyonlar/${CATEGORY_SLUGS[cat]}`}
             // Ilk blok genis: gorsel duvarina ritim katar.
             className={`group relative block overflow-hidden bg-[#eceae3] ${
               i === 0 ? 'sm:col-span-2 aspect-[16/10]' : 'aspect-[4/5]'

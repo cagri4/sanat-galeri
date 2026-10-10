@@ -10,6 +10,7 @@
 export const CATEGORIES = [
   'Antik Dönem Replikaları',
   'Resimli Seramikler',
+  'Seramik Heykeller',
   'Mimari Duvar Panoları',
 ] as const
 
@@ -21,4 +22,16 @@ export type Category = (typeof CATEGORIES)[number]
  */
 export const COLLECTIONS: Record<string, { tr: string; en: string }[]> = {
   'Resimli Seramikler': [{ tr: 'Zamansız Manzaralar', en: 'Timeless Landscapes' }],
+}
+
+/** Kategori sayfası adresi (/koleksiyonlar/[slug]). */
+export const CATEGORY_SLUGS: Record<string, string> = {
+  'Antik Dönem Replikaları': 'antik-donem-replikalari',
+  'Resimli Seramikler': 'resimli-seramikler',
+  'Seramik Heykeller': 'seramik-heykeller',
+  'Mimari Duvar Panoları': 'mimari-duvar-panolari',
+}
+
+export function categoryBySlug(slug: string): string | null {
+  return Object.entries(CATEGORY_SLUGS).find(([, s]) => s === slug)?.[0] ?? null
 }

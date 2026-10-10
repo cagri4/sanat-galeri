@@ -1,4 +1,6 @@
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
+import { headers } from 'next/headers'
+import { isOnSite, kurumsalPath } from '@/lib/site'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
@@ -36,6 +38,12 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
 
   if (!eser) {
     notFound()
+  }
+
+  // Panolar yalnız kurumsal sitede: eski galeri bağlantısı proje sayfasına gider.
+  if (!isOnSite(eser.category, 'galeri')) {
+    const host = (await headers()).get('host') ?? ''
+    permanentRedirect(kurumsalPath(host, locale, `/projeler/${slug}`))
   }
 
   const t = await getTranslations({ locale, namespace: 'gallery' })

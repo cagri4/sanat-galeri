@@ -45,7 +45,7 @@ export default async function ArtistPage({
     data = await getArtistBySlug(artist)
     if (data?.id) {
       ;[works, exhibitions] = await Promise.all([
-        getProductsByArtist(data.id, 4),
+        getProductsByArtist(data.id, 4, 'galeri'),
         getArtistExhibitions(data.id),
       ])
     }
@@ -96,7 +96,7 @@ export default async function ArtistPage({
 
         <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
           <Link
-            href={`/${locale}/teknik`}
+            href={`/${locale}/koleksiyonlar/antik-donem-replikalari#terra-sigillata`}
             className="text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[var(--accent)] transition-colors duration-[var(--dur-micro)] hover:text-[#1f1f1f]"
           >
             {t('techniqueLink')} &rarr;

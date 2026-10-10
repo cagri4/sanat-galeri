@@ -46,6 +46,11 @@ export function isOnSite(category: string, site: SiteKey): boolean {
   return (CATEGORY_SITES[category] ?? ['galeri']).includes(site)
 }
 
+/** Bir sitede görünen kategoriler — kanonik sırayla. */
+export function categoriesForSite(site: SiteKey, all: readonly string[]): string[] {
+  return all.filter((c) => isOnSite(c, site))
+}
+
 /** Kategori yalnızca kurumsal sitede mi (ör. panolar)? */
 export function isKurumsalOnly(category: string): boolean {
   const sites = CATEGORY_SITES[category] ?? ['galeri']
@@ -55,12 +60,23 @@ export function isKurumsalOnly(category: string): boolean {
 /** Kurumsal sayfaların uygulama içindeki yolu (route group altında). */
 export const KURUMSAL_SEGMENT = 'kurumsal'
 
-/** Host hangi siteye ait? Bilinmeyen host (vercel.app, localhost) → null. */
+/**
+ * Bu deployment'ın varsayılan sitesi. İki site Vercel'de İKİ AYRI PROJE
+ * (Çağrı, 10.10.2026): her projede `UART_SITE=galeri|kurumsal` set edilir;
+ * böylece projenin tüm adresleri (vercel.app, hash'li deploy URL'leri) o
+ * siteyi açar. Boşsa (yerel geliştirme) yol bazlı önizleme: /tr ve /tr/kurumsal.
+ */
+export function defaultSite(): SiteKey | null {
+  const v = process.env.UART_SITE?.trim().toLowerCase()
+  return v === 'galeri' || v === 'kurumsal' ? v : null
+}
+
+/** Host hangi siteye ait? Alan adı eşleşmezse projenin varsayılanı. */
 export function siteForHost(host: string): SiteKey | null {
   const d = siteDomains()
   if (d.kurumsal && sameHost(host, d.kurumsal)) return 'kurumsal'
   if (d.galeri && sameHost(host, d.galeri)) return 'galeri'
-  return null
+  return defaultSite()
 }
 
 /**

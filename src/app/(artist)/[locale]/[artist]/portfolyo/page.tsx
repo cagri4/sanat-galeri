@@ -46,7 +46,7 @@ export default async function PortfolioPage({
   const data = await getArtistBySlug(artist)
   if (!data) notFound()
 
-  const items = await getProductsByArtist(data.id)
+  const items = await getProductsByArtist(data.id, undefined, 'galeri')
   const t = await getTranslations({ locale, namespace: 'cv' })
 
   return (
