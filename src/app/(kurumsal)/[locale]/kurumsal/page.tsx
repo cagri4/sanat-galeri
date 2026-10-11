@@ -37,7 +37,8 @@ export default async function KurumsalHome({ params }: { params: Promise<{ local
   const hero =
     [...withImage].filter((p) => p.heroOrder != null).sort((a, b) => (a.heroOrder as number) - (b.heroOrder as number))[0] ??
     withImage[0]
-  const stats = projectStats(projects)
+  // Rakamlar yalnız PANOLARDAN: heykeller "proje" değil, seri adları "mekân" değil.
+  const stats = projectStats(projects.filter((p) => p.category === 'Mimari Duvar Panoları'))
 
   // Proje türü sekmeleri (pano / heykel) — yalnız görünür eserler.
   const groups = categoriesForSite('kurumsal', CATEGORIES)

@@ -8,7 +8,7 @@ import { ARTIST_AVATARS, AVATAR_CLASS } from '@/lib/artist-avatars'
 import { getCrossDomainLinks } from '@/components/shared/navbar'
 import { CATEGORIES, CATEGORY_SLUGS } from '@/lib/categories'
 import { categoriesForSite, isOnSite } from '@/lib/site'
-import { yeniIcerikAcik, SERGI_KUNYE } from '@/lib/yeni-icerik'
+import { yeniIcerikAcik, SERGI_KUNYE, SERGI_AFISI } from '@/lib/yeni-icerik'
 import { getExhibitionPhotosBySlugs } from '@/lib/queries/exhibition-photos'
 import SeriesTabs from '@/components/shared/series-tabs'
 import CardRail from '@/components/shared/card-rail'
@@ -124,7 +124,7 @@ export default async function HomePage({
 
   // Sergiden kareler — fotoğraflar gizli içerikle birlikte açılır (lib/yeni-icerik).
   const sergiFotolari = yeniIcerikAcik()
-    ? await getExhibitionPhotosBySlugs(Object.keys(SERGI_KUNYE))
+    ? (await getExhibitionPhotosBySlugs(Object.keys(SERGI_KUNYE))).filter((f) => f.titleTr !== SERGI_AFISI)
     : []
 
   // Koleksiyon teaser: her kategori icin ilk gorsel (varsa). Bos kategori

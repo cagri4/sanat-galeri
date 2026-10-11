@@ -11,6 +11,13 @@ export function yeniIcerikAcik(): boolean {
 }
 
 /**
+ * Sergi afişleri exhibition_photos'ta title_tr = SERGI_AFISI ile işaretli
+ * (Çağrı 11.10: afiş silinmez, sergi kaydının kendi görseli olarak kalır;
+ * "Sergiden kareler" şeridi yalnız eser/mekân karesi gösterir).
+ */
+export const SERGI_AFISI = 'Sergi afişi'
+
+/**
  * Sergi künyeleri — Şeref Doğan özgeçmişindeki "Seçilmiş Kişisel Sergiler"
  * listesinden BİREBİR (Drive Studio/Özgeçmişler/ŞEREF DOĞAN ÖZGEÇMİŞ1.jpg).
  * Anahtar: exhibition_photos.exhibition_slug (scripts/data/drive-import-2026-10.json).
