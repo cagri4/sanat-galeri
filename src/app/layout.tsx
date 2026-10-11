@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Inter, Newsreader, IBM_Plex_Mono } from 'next/font/google'
+import { isIndexable } from '@/lib/seo'
 
 // İki site tipografisi (KARARLAR-2026-10-10 madde 4; test: preview-shots/
 // font-turkce-test.png — ğĞıİşŞçÇöÖüÜâÂîÎûÛ cmap'te tam).
@@ -39,6 +40,9 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'Uarttasarım',
   description: 'Sanat galerisi',
+  // Geçici adreste indeksleme yok (lib/seo.ts). Alt segmentler `robots`
+  // tanımlamadığı için bu değer tüm sayfalara geçer.
+  ...(isIndexable() ? {} : { robots: { index: false, follow: false, googleBot: { index: false, follow: false } } }),
 }
 
 export default function RootLayout({
