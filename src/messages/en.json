@@ -46,7 +46,8 @@
     "comingSoonBody": "The works in this section are being prepared. They will be here shortly.",
     "collectionsLabel": "Collection to appear in this section",
     "exhibitionsNav": "Exhibitions",
-    "collection": "Collection"
+    "collection": "Collection",
+    "exhibitionShot": "Photographs taken at the exhibition."
   },
   "contact": {
     "nameLabel": "Your name",
@@ -242,11 +243,30 @@
       }
     },
     "materialTitle": "Material and technique",
-    "materialBody": "Grogged clay, high relief, double firing and glazing.",
+    "materialBody": "Chamotte clay, high relief, double firing and glazing.",
     "processProjects": "Making and installation images will appear on the project pages.",
     "aboutTitle": "About",
     "artistsTitle": "Artists",
     "contactTitle": "Contact",
-    "contactLead": "Share your institution, type of space, approximate wall size and timeline, and we will get back to you."
+    "contactLead": "Share your institution, type of space, approximate wall size and timeline, and we will get back to you.",
+    "tabsLabel": "Project types",
+    "makingTitle": "From making and installation",
+    "makingProject": "Making and installation",
+    "referencesTitle": "Reference sites",
+    "processSummary": "Process",
+    "processMore": "See the process"
+  },
+  "home": {
+    "heroTitle": "The Memory of Clay",
+    "heroCta": "View the collection",
+    "highlights": "Collection highlights",
+    "highlightsTabs": "Series",
+    "fromExhibitions": "From the exhibitions",
+    "story": "Our story",
+    "storyCta": "About us",
+    "techniqueCta": "The terra sigillata technique",
+    "railPrev": "Previous",
+    "railNext": "Next",
+    "viewWork": "View work"
   }
 }

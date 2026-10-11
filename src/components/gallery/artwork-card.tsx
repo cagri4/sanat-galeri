@@ -44,7 +44,7 @@ export default async function ArtworkCard({ product, locale }: ArtworkCardProps)
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center px-4 text-center">
-            <span className="text-sm italic text-[#999]">{title}</span>
+            <span className="text-sm italic text-[var(--faint)]">{title}</span>
           </div>
         )}
 
@@ -62,7 +62,9 @@ export default async function ArtworkCard({ product, locale }: ArtworkCardProps)
         </div>
       </div>
 
-      <span className="sr-only">{title}</span>
+      {/* Dokunmatikte hover olmadığı için ad mobilde görselin altında görünür
+          (PLAN-TASARIM §2); sm ve üstünde hover katmanı yeterli. */}
+      <span className="mt-2 block text-[length:var(--text-meta)] leading-snug text-[var(--foreground)] sm:sr-only">{title}</span>
     </Link>
   )
 }

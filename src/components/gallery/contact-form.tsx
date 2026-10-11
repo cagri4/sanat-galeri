@@ -65,7 +65,7 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
           type="text"
           required
           placeholder={t('namePlaceholder')}
-          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder-[#bbb] focus:outline-none focus:border-[#2C2C2C] transition-colors"
+          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder:text-[var(--faint)] focus:outline-none focus:border-[#2C2C2C] transition-colors"
         />
       </div>
 
@@ -79,7 +79,7 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
           type="email"
           required
           placeholder={t('emailPlaceholder')}
-          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder-[#bbb] focus:outline-none focus:border-[#2C2C2C] transition-colors"
+          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder:text-[var(--faint)] focus:outline-none focus:border-[#2C2C2C] transition-colors"
         />
       </div>
 
@@ -93,7 +93,7 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
           required
           rows={5}
           placeholder={t('messagePlaceholder')}
-          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder-[#bbb] focus:outline-none focus:border-[#2C2C2C] transition-colors resize-none"
+          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder:text-[var(--faint)] focus:outline-none focus:border-[#2C2C2C] transition-colors resize-none"
         />
       </div>
 

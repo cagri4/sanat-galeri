@@ -44,7 +44,7 @@ export default function CategoryFilter({ categories, active }: CategoryFilterPro
   const state = (isActive: boolean) =>
     isActive
       ? 'text-[#2C2C2C] after:bg-[#2C2C2C] after:scale-x-100'
-      : 'text-[#999] hover:text-[#2C2C2C] after:bg-[#2C2C2C] after:scale-x-0 hover:after:scale-x-100'
+      : 'text-[var(--faint)] hover:text-[#2C2C2C] after:bg-[#2C2C2C] after:scale-x-0 hover:after:scale-x-100'
 
   return (
     // Mobilde tek satir + yatay kaydirma: 4 kategori alt alta dizilince

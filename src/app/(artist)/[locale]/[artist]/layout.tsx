@@ -49,8 +49,9 @@ export default async function ArtistLayout({
           ogesi; `w-full` olmadan max-content genisligine buyuyor ve 390px'te
           52px yatay tasma olusuyordu (`overflow-x-hidden` bunu gizliyordu,
           o yuzden o da kaldirildi — gercek tasma bir daha maskelenmesin). */}
-      <div data-site="galeri" className="mx-auto w-full min-w-0 max-w-6xl px-6 sm:px-10 lg:px-16">
-        <Navbar locale={locale} domain={artist as 'melike' | 'seref'} />
+      <div data-site="galeri" className="w-full min-w-0">
+      <Navbar locale={locale} domain={artist as 'melike' | 'seref'} />
+      <div className="mx-auto w-full min-w-0 max-w-6xl px-6 sm:px-10 lg:px-16">
 
         <header className="full-bleed bg-[#f2f1ec]">
           <div className="mx-auto flex max-w-6xl flex-col items-center px-6 py-14 text-center sm:px-10 sm:py-18 lg:px-16">
@@ -67,7 +68,7 @@ export default async function ArtistLayout({
             <h1 className="text-4xl font-medium tracking-[-0.01em] text-[#2C2C2C] sm:text-5xl lg:text-6xl">
               {name}
             </h1>
-            <p className="mt-4 text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
+            <p className="mt-4 text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
               Uarttasarım · Çanakkale
             </p>
           </div>
@@ -77,6 +78,7 @@ export default async function ArtistLayout({
 
         {children}
         <Footer locale={locale} />
+      </div>
       </div>
       {/* Ana sitedeki ile ayni sabit iletisim dugmesi + modal (/api/contact). */}
       <ContactWidget />

@@ -49,54 +49,98 @@
      sikilastirilmis tracking ile ayrisir. */
   --font-serif: var(--font-inter), system-ui, sans-serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
-  /* İki site (2026-10-10): galeri başlıkları serif, kurumsal künye mono. */
-  --font-display: var(--font-newsreader), Georgia, serif;
+  /* İki site: galeri başlık serif + gövde Jost; kurumsal Inter + mono künye. */
+  --font-display: var(--font-garamond), Georgia, serif;
+  --font-galeri: var(--font-jost), system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
 /* ---------------------------------------------------------------------------
-   İKİ SİTE — ortak bileşenler, farklı tasarım dili (KARARLAR-2026-10-10).
-   Logo ikisinde de aynı; fark tipografi, renk, ızgara ve hareketten gelir.
-
-   GALERİ: 2026-07-25 kararı korunur (nötr aksan, renk fotoğraftan gelir).
-   Fark: başlıklar Newsreader serif — katalog/müze etiketi hissi.
+   İKİ SİTE — aynı sistem, farklı uygulama (PLAN-TASARIM-2026-10-11.md).
+   Logo ikisinde aynı; fark tipografi, zemin, ızgara ve hareketten gelir.
+   Kontrastlar WCAG AA hesaplandı (plan §1).
 --------------------------------------------------------------------------- */
+
+/* GALERİ — sıcak editoryal minimalizm. Krem zemin (Spode'un gerçek zemini
+   #F7F4EF); 25.07 kararı korunur: AKSAN YOK, renk eser fotoğrafından gelir. */
+[data-site='galeri'] {
+  --background: #F7F4EF;
+  --foreground: #1C1B19;   /* 15.7:1 */
+  --muted: #5F5A52;        /* 6.2:1 */
+  --faint: #6B645A;        /* 5.3:1 — eski #999 (2.7:1) WCAG'ı geçmiyordu */
+  --border: #E4DED3;
+  --rule: #E4DED3;
+  --accent: #1C1B19;
+  font-family: var(--font-galeri);
+  color: var(--foreground);
+}
+body:has([data-site='galeri']) { background: #F7F4EF; }
 /* Küçük büyük-harf künye etiketleri (text-label) sans kalır. */
 [data-site='galeri'] :is(h1, h2, h3):not([class*='--text-label']) {
   font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.005em;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+/* Etiket boyutlu başlıklar ve h4 galeride gövde fontunda (global h kuralı Inter verirdi). */
+[data-site='galeri'] :is(h1, h2, h3)[class*='--text-label'],
+[data-site='galeri'] h4 {
+  font-family: var(--font-galeri);
+}
+/* Mobilde gövde metni 16px (ui-ux-pro-max: readable-font-size). */
+@media (max-width: 640px) {
+  [data-site='galeri'] { --text-body: 1rem; }
 }
 
-/* KURUMSAL: ölçülü, teknik. Soğuk zemin, petrol vurgu, sert ızgara, mono
-   künye, minimal hareket (zoom yok, kısa geçişler). */
+/* KURUMSAL — güven ve otorite, teknik föy. Soğuk zemin, petrol vurgu
+   (skill'in altın önerisi beyaz yazıyla 2.1:1 → reddedildi), mono künye,
+   minimal hareket. */
 [data-site='kurumsal'] {
   --background: #F5F6F5;
-  --foreground: #1E2226;
-  --muted: #5d6468;
-  --faint: #8b9296;
+  --foreground: #1E2226;   /* 14.8:1 */
+  --muted: #5D6468;        /* 5.6:1 */
+  --faint: #676E72;        /* 4.8:1 — eski #8B9296 (2.9:1) geçmiyordu */
   --border: #dde1e0;
   --rule: #dde1e0;
-  --accent: #1F4E5A;
+  --accent: #1F4E5A;       /* beyaz yazıyla 9.2:1 */
   --dur-micro: 150ms;
   --dur-image: 0ms;
   --tracking-label: 0.12em;
   background: var(--background);
   color: var(--foreground);
 }
+body:has([data-site='kurumsal']) { background: #F5F6F5; }
 [data-site='kurumsal'] :is(h1, h2, h3) {
   font-family: var(--font-sans);
   font-weight: 500;
   letter-spacing: -0.02em;
 }
 
+/* Buzlu yapışkan üst şerit (Spode deseni). backdrop-filter yoksa opak zemin. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  /* Dar konteynerin DIŞINDA durur (layout'lar) → doğal tam genişlik; vw hilesi
+     yok (kaydırma çubuğu/tam sayfa görüntüde kayıyordu). */
+  background: color-mix(in srgb, var(--background) 98%, transparent);
+}
+@supports (backdrop-filter: blur(8px)) {
+  .site-header {
+    background: color-mix(in srgb, var(--background) 90%, transparent);
+    backdrop-filter: blur(8px);
+  }
+}
+/* Yapışkan başlık altında kalmasın: çapa hedefleri için üst pay. */
+[data-site] [id] { scroll-margin-top: 6rem; }
+
 html {
-  overflow-x: hidden;
+  /* clip: hidden'ın aksine kaydırma kabı oluşturmaz → sticky başlık çalışır. */
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);

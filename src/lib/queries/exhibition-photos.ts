@@ -43,3 +43,19 @@ export async function getExhibitionPhotos(slug: string): Promise<ExhibitionPhoto
   }
   return (data ?? []).map(map)
 }
+
+/** Birden çok sergi/yapım anahtarının fotoğrafları (tek sorgu). */
+export async function getExhibitionPhotosBySlugs(slugs: string[]): Promise<ExhibitionPhoto[]> {
+  if (slugs.length === 0) return []
+  const { data, error } = await supabase
+    .from('exhibition_photos')
+    .select('*')
+    .in('exhibition_slug', slugs)
+    .order('sort_order', { ascending: true })
+    .order('id', { ascending: true })
+  if (error) {
+    console.error('getExhibitionPhotosBySlugs:', error)
+    return []
+  }
+  return (data ?? []).map(map)
+}

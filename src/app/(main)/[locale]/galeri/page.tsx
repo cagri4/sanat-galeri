@@ -99,7 +99,7 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
                     {heading(cat)}
                   </h2>
                   {items.length > 0 && (
-                    <span className="text-[length:var(--text-meta)] text-[#b5aea3]">
+                    <span className="text-[length:var(--text-meta)] text-[var(--faint)]">
                       {items.length}
                     </span>
                   )}

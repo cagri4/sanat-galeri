@@ -72,7 +72,7 @@ export default function ContactPageForm({ locale, labels }: ContactPageFormProps
           type="text"
           required
           placeholder={labels.namePlaceholder}
-          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder-[#bbb] focus:outline-none focus:border-[#2C2C2C] transition-colors"
+          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder:text-[var(--faint)] focus:outline-none focus:border-[#2C2C2C] transition-colors"
         />
       </div>
 
@@ -86,7 +86,7 @@ export default function ContactPageForm({ locale, labels }: ContactPageFormProps
           type="email"
           required
           placeholder={labels.emailPlaceholder}
-          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder-[#bbb] focus:outline-none focus:border-[#2C2C2C] transition-colors"
+          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder:text-[var(--faint)] focus:outline-none focus:border-[#2C2C2C] transition-colors"
         />
       </div>
 
@@ -100,7 +100,7 @@ export default function ContactPageForm({ locale, labels }: ContactPageFormProps
           required
           rows={6}
           placeholder={labels.messagePlaceholder}
-          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder-[#bbb] focus:outline-none focus:border-[#2C2C2C] transition-colors resize-none"
+          className="w-full px-4 py-3 bg-white border border-[#e9e7e1] text-[15px] text-[#2C2C2C] placeholder:text-[var(--faint)] focus:outline-none focus:border-[#2C2C2C] transition-colors resize-none"
         />
       </div>
 

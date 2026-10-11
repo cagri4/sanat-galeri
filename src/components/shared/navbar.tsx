@@ -75,8 +75,10 @@ export default async function Navbar({ locale }: NavbarProps) {
   ]
 
   return (
-    <header className="relative border-b border-[#e9e7e1]">
-      <nav className="flex items-center justify-between py-7">
+    // Buzlu yapışkan şerit (Spode deseni, PLAN-TASARIM §2): zemin tam genişlik,
+    // içerik sayfa konteyneriyle hizalı.
+    <header className="site-header border-b border-[var(--rule)]">
+      <nav aria-label="Ana menü" className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-5 sm:px-10 sm:py-6 lg:px-12">
         <a
           href={links.main}
           className="group inline-flex min-h-11 items-center gap-3 text-[#2C2C2C] transition-colors duration-[var(--dur-micro)] hover:text-[var(--accent)]"
@@ -112,7 +114,7 @@ export default async function Navbar({ locale }: NavbarProps) {
           {/* Diğer site: kurumsal projeler (ayrı alan adı ya da önizlemede yol) */}
           <a
             href={kurumsalHref}
-            className="inline-flex min-h-11 items-center border-l border-[var(--border)] pl-6 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#9a9a96] transition-colors duration-[var(--dur-micro)] hover:text-[#2C2C2C]"
+            className="inline-flex min-h-11 items-center border-l border-[var(--border)] pl-6 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)] transition-colors duration-[var(--dur-micro)] hover:text-[#2C2C2C]"
           >
             {ts('kurumsal')} &rarr;
           </a>

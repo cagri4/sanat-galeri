@@ -58,7 +58,7 @@ export default async function BozcaadaPage({
   return (
     <main className="py-16 sm:py-24">
       <Reveal as="section" className="max-w-2xl">
-        <p className="text-[11px] uppercase tracking-[0.15em] text-[#999]">
+        <p className="text-[11px] uppercase tracking-[0.15em] text-[var(--faint)]">
           {t('eyebrow')}
         </p>
         <h1 className="mt-4 text-4xl font-medium leading-[1.1] tracking-[-0.01em] text-[#2C2C2C] sm:text-5xl lg:text-6xl">
@@ -77,7 +77,7 @@ export default async function BozcaadaPage({
       )}
 
       {missingCaptions && (
-        <p className="mt-16 max-w-2xl border-l border-[var(--rule)] pl-5 text-[length:var(--text-meta)] leading-relaxed text-[#999]">
+        <p className="mt-16 max-w-2xl border-l border-[var(--rule)] pl-5 text-[length:var(--text-meta)] leading-relaxed text-[var(--faint)]">
           {t('captionNote')}
         </p>
       )}

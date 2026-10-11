@@ -50,7 +50,7 @@ export default async function OzelSiparisPage({
           {t('cta')}
         </Link>
 
-        <p className="mx-auto mt-6 max-w-[52ch] text-[length:var(--text-meta)] leading-relaxed text-[#999]">
+        <p className="mx-auto mt-6 max-w-[52ch] text-[length:var(--text-meta)] leading-relaxed text-[var(--faint)]">
           {t('note')}
         </p>
       </div>

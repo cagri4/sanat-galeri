@@ -34,8 +34,8 @@ export default async function KurumsalLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <div data-site="kurumsal" className="w-full min-w-0 flex-1">
+        <KurumsalNavbar locale={locale} />
         <div className="mx-auto w-full min-w-0 max-w-[1280px] px-6 sm:px-10">
-          <KurumsalNavbar locale={locale} />
           <div className="min-h-[60vh]">{children}</div>
           <KurumsalFooter locale={locale} />
         </div>

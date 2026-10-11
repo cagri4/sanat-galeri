@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { Inter, Newsreader, IBM_Plex_Mono } from 'next/font/google'
+import { Inter, EB_Garamond, Jost, IBM_Plex_Mono } from 'next/font/google'
 import { isIndexable } from '@/lib/seo'
 
-// İki site tipografisi (KARARLAR-2026-10-10 madde 4; test: preview-shots/
-// font-turkce-test.png — ğĞıİşŞçÇöÖüÜâÂîÎûÛ cmap'te tam).
-//  - Galeri başlıkları: Newsreader (editoryal serif, OFL)
-//  - Kurumsal künye/ölçü: IBM Plex Mono
+// İki site tipografisi — PLAN-TASARIM-2026-10-11.md §1 (ui-ux-pro-max, Çağrı onayı).
+//  - Galeri: başlık EB Garamond 500 (cmap tam + TRK locl), gövde Jost
+//  - Kurumsal: Inter (başlık+gövde) + IBM Plex Mono (künye/ölçü)
+// Hepsinde ğĞıİşŞçÇöÖüÜâÂîÎûÛ fontTools ile doğrulandı.
 // Türkçe ğ ı ş İ latin-ext'te; ikisi birlikte yüklenmeli.
 // Inter da next/font ile: globals.css'teki Google Fonts @import'u Tailwind v4
 // derlemesinde düşüyordu (dosya başında değil) → site Inter yerine sistem
@@ -16,9 +16,15 @@ const sans = Inter({
   variable: '--font-inter',
   display: 'swap',
 })
-const display = Newsreader({
+const display = EB_Garamond({
   subsets: ['latin', 'latin-ext'],
-  variable: '--font-newsreader',
+  weight: ['400', '500'],
+  variable: '--font-garamond',
+  display: 'swap',
+})
+const galeriSans = Jost({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-jost',
   display: 'swap',
 })
 const mono = IBM_Plex_Mono({
@@ -51,8 +57,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="tr" className={`${sans.variable} ${display.variable} ${mono.variable} h-full antialiased overflow-x-hidden`} style={{ colorScheme: 'light' }}>
-      <body className="min-h-full flex flex-col bg-[#FAFAF8] text-[#2C2C2C] overflow-x-hidden">{children}</body>
+    <html lang="tr" className={`${sans.variable} ${display.variable} ${galeriSans.variable} ${mono.variable} h-full antialiased [overflow-x:clip]`} style={{ colorScheme: 'light' }}>
+      <body className="min-h-full flex flex-col bg-[#FAFAF8] text-[#2C2C2C] [overflow-x:clip]">{children}</body>
     </html>
   )
 }

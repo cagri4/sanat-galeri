@@ -129,7 +129,7 @@ export default async function AboutPage({
           })}
         </div>
 
-        <p className="mt-12 max-w-[68ch] border-l border-[var(--rule)] pl-5 text-[length:var(--text-meta)] leading-relaxed text-[#999]">
+        <p className="mt-12 max-w-[68ch] border-l border-[var(--rule)] pl-5 text-[length:var(--text-meta)] leading-relaxed text-[var(--faint)]">
           {isTr
             ? 'Sanatçı biyografileri ve sergi geçmişi sanatçılardan geldikçe bu sayfaya eklenecektir.'
             : 'Artist biographies and exhibition histories will be added to this page as they are provided by the artists.'}

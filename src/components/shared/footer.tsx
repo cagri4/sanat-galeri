@@ -43,7 +43,7 @@ export default async function Footer({ locale }: FooterProps) {
 
           {/* Navigation */}
           <div>
-            <h4 className="text-[11px] uppercase tracking-[0.2em] text-[#999] mb-4">
+            <h4 className="text-[11px] uppercase tracking-[0.2em] text-[var(--faint)] mb-4">
               {locale === 'tr' ? 'Keşfet' : 'Explore'}
             </h4>
             <ul className="space-y-2.5">
@@ -82,7 +82,7 @@ export default async function Footer({ locale }: FooterProps) {
 
           {/* Artists */}
           <div>
-            <h4 className="text-[11px] uppercase tracking-[0.2em] text-[#999] mb-4">
+            <h4 className="text-[11px] uppercase tracking-[0.2em] text-[var(--faint)] mb-4">
               {locale === 'tr' ? 'Sanatçılar' : 'Artists'}
             </h4>
             <ul className="space-y-2.5">
@@ -102,7 +102,7 @@ export default async function Footer({ locale }: FooterProps) {
           {/* Sosyal — yalnizca GERCEK hesap (bkz. lib/social.ts).
               Facebook vb. dogrulanmis adres olmadigi icin eklenmedi. */}
           <div>
-            <h4 className="text-[11px] uppercase tracking-[0.2em] text-[#999] mb-4">
+            <h4 className="text-[11px] uppercase tracking-[0.2em] text-[var(--faint)] mb-4">
               {t('followUs')}
             </h4>
             <a
@@ -120,7 +120,7 @@ export default async function Footer({ locale }: FooterProps) {
         </div>
 
         <div className="mt-14 pt-6 border-t border-[#e9e7e1]">
-          <p className="text-[11px] text-[#999] tracking-wide text-center">
+          <p className="text-[11px] text-[var(--faint)] tracking-wide text-center">
             {t('copyright', { year: new Date().getFullYear().toString() })}
           </p>
         </div>

@@ -24,8 +24,8 @@ export default async function KurumsalNavbar({ locale }: { locale: string }) {
   const galeriHref = galeriPath(host, locale)
 
   return (
-    <header className="border-b border-[var(--rule)]">
-      <nav className="flex items-center justify-between py-5">
+    <header className="site-header border-b border-[var(--rule)]">
+      <nav aria-label="Ana menü" className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-4 sm:px-10">
         <a href={k()} className="inline-flex min-h-11 items-center gap-3 text-[var(--foreground)]">
           <Image src="/brand/uart-logo.png" alt="" width={150} height={150} priority className="h-9 w-9 shrink-0" />
           <span className="text-lg font-medium tracking-tight">Uarttasarım</span>

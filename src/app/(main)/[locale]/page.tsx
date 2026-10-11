@@ -3,12 +3,15 @@ import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getProducts } from '@/lib/queries/gallery'
-import HeroSlideshow, { type HeroSlide } from '@/components/gallery/hero-slideshow'
 import InstagramSection from '@/components/gallery/instagram-section'
 import { ARTIST_AVATARS, AVATAR_CLASS } from '@/lib/artist-avatars'
 import { getCrossDomainLinks } from '@/components/shared/navbar'
 import { CATEGORIES, CATEGORY_SLUGS } from '@/lib/categories'
 import { categoriesForSite, isOnSite } from '@/lib/site'
+import { yeniIcerikAcik, SERGI_KUNYE } from '@/lib/yeni-icerik'
+import { getExhibitionPhotosBySlugs } from '@/lib/queries/exhibition-photos'
+import SeriesTabs from '@/components/shared/series-tabs'
+import CardRail from '@/components/shared/card-rail'
 
 export async function generateMetadata({
   params,
@@ -27,10 +30,11 @@ export default async function HomePage({
 }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'meta' })
-  const tc = await getTranslations({ locale, namespace: 'collection' })
   const tg = await getTranslations({ locale, namespace: 'gallery' })
   const tcol = await getTranslations({ locale, namespace: 'collectionsPage' })
   const tcom = await getTranslations({ locale, namespace: 'commissions' })
+  const th = await getTranslations({ locale, namespace: 'home' })
+  const ta = await getTranslations({ locale, namespace: 'about' })
   const isTr = locale === 'tr'
 
   const MAIN_URL = process.env.NEXT_PUBLIC_MAIN_URL ?? ''
@@ -63,8 +67,6 @@ export default async function HomePage({
     return out
   }
 
-  // Son Eserler: her koleksiyondan 2 eser (dönüşümlü) = 6.
-  const recentProducts = pickDiverse(0, 2)
 
   // Sanatçı kartı GEÇİCİ görselleri artık her sanatçının ALANINI temsil eden
   // farklı koleksiyonlardan: Melike → resimli seramik (Zamansız), Şeref → mimari
@@ -99,18 +101,31 @@ export default async function HomePage({
     alt: isTr ? p.titleTr : p.titleEn,
   }))
 
-  // Hero artik tek koleksiyondan degil; her koleksiyondan 2-3 eser dönüşümlü
-  // gosteriliyor (bkz. hero_order — Antik/Zamansız/Mimari sirali). 9 slot.
-  const heroSlides: HeroSlide[] = pickSlots('heroOrder', 9).map((p) => {
-    const title = isTr ? p.titleTr : p.titleEn
-    return {
-      slug: p.slug,
-      title,
-      image: p.images[0].url,
-      alt: (isTr ? p.images[0].altTr : p.images[0].altEn) ?? title,
-      category: p.category,
-    }
-  })
+  // Hero: TEK görsel (PLAN-TASARIM §2 — slider yerine tek kısa serif cümle +
+  // tek eser). Admin'deki hero_order'ın ilki; yoksa görünür ilk eser.
+  // Eser fotoğrafları çoğunlukla kare/dik (tabak, kap): 16:9 kırpma eseri kesiyordu.
+  // Bu yüzden hero_order'ın ilk 3'ü 4:5 üçlü; mobilde yalnız ilki.
+  const heroes = pickSlots('heroOrder', 3)
+
+  // Koleksiyon seçkileri: SERİ bazlı sekmeler (Spode deseni). Seri = koleksiyon
+  // adının ana kısmı ("Masalın Hafızası — Anka Serisi" → "Masalın Hafızası");
+  // koleksiyonu olmayan eser kategorisiyle gruplanır. Yalnız görünür eserler —
+  // gizli heykeller açılınca sekmeleri kendiliğinden gelir.
+  const seriesMap = new Map<string, typeof withImage>()
+  for (const p of withImage) {
+    const key = p.collection ? p.collection.split(' — ')[0] : p.category
+    seriesMap.set(key, [...(seriesMap.get(key) ?? []), p])
+  }
+  const seriesGroups = [...seriesMap.entries()].map(([key, items]) => ({
+    key,
+    label: key === items[0].category && tg.has(`categories.${key}`) ? tg(`categories.${key}`) : key,
+    items: items.slice(0, 12),
+  }))
+
+  // Sergiden kareler — fotoğraflar gizli içerikle birlikte açılır (lib/yeni-icerik).
+  const sergiFotolari = yeniIcerikAcik()
+    ? await getExhibitionPhotosBySlugs(Object.keys(SERGI_KUNYE))
+    : []
 
   // Koleksiyon teaser: her kategori icin ilk gorsel (varsa). Bos kategori
   // notr bir doku ile gosterilir — "yakinda" hissi, kirik gorunmez.
@@ -118,36 +133,87 @@ export default async function HomePage({
     cat,
     label: tg.has(`categories.${cat}`) ? tg(`categories.${cat}`) : cat,
     cover: withImage.find((p) => p.category === cat)?.images[0]?.url ?? null,
-  }))
+  })).filter((b) => b.cover) // boş kategori ana sayfada "yakında" kutusu olarak durmaz
 
   return (
     <main>
-      {/* Hero — full-bleed, yazisiz slider */}
-      <HeroSlideshow slides={heroSlides} locale={locale} ctaLabel={tc('cta')} />
-
-      {/* Lirik giris — dar, ortali, bol bosluk */}
-      <section className="mx-auto max-w-2xl px-6 py-24 text-center sm:py-32">
-        <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
-          {tc('eyebrow')}
-        </p>
-        <h2 className="mt-5 text-3xl font-medium leading-tight text-[#2C2C2C] sm:text-4xl">
-          {tc('title')}
-        </h2>
-        <p className="mx-auto mt-8 max-w-[62ch] text-[length:var(--text-lead)] leading-[1.85] text-[#4a4a4a]">
-          {tc('short')}
-        </p>
-        <Link
-          href={`/${locale}/galeri`}
-          className="group mt-10 inline-flex min-h-11 items-center gap-2 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#2C2C2C]"
-        >
-          <span className="bg-[linear-gradient(var(--accent),var(--accent))] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-1 transition-[background-size] duration-[var(--dur-micro)] ease-out group-hover:bg-[length:100%_1px]">
-            {tc('cta')}
-          </span>
-          <span aria-hidden className="transition-transform duration-[var(--dur-micro)] group-hover:translate-x-1">→</span>
-        </Link>
+      {/* Hero — tek kısa serif cümle + tek eser görseli (Spode deseni). */}
+      <section className="pt-12 sm:pt-16">
+        <h1 className="text-center text-4xl leading-[1.1] text-[var(--foreground)] sm:text-6xl">
+          {th('heroTitle')}
+        </h1>
+        {heroes.length > 0 && (
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
+            {heroes.map((h, i) => (
+              <Link
+                key={h.id}
+                href={`/${locale}/urun/${h.slug}`}
+                className={`relative block aspect-[4/5] overflow-hidden bg-[#ece7de] ${i > 0 ? 'hidden sm:block' : ''}`}
+              >
+                <Image
+                  src={h.images[0].url}
+                  alt={(isTr ? h.images[0].altTr : h.images[0].altEn) ?? (isTr ? h.titleTr : h.titleEn)}
+                  fill
+                  priority={i === 0}
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                />
+              </Link>
+            ))}
+          </div>
+        )}
+        <div className="mt-8 text-center">
+          <Link
+            href={`/${locale}/koleksiyonlar`}
+            className="inline-flex min-h-11 items-center rounded-full border border-[var(--foreground)] px-6 text-[length:var(--text-meta)] text-[var(--foreground)] transition-colors duration-[var(--dur-micro)] hover:bg-[var(--foreground)] hover:text-[var(--background)]"
+          >
+            {th('heroCta')}
+          </Link>
+        </div>
       </section>
 
-      {/* Koleksiyonlar teaser — 3 buyuk blok, galeriye filtreli girer */}
+      {/* Koleksiyon seçkileri — seriler arası sekme + yatay kart şeridi */}
+      {seriesGroups.length > 0 && (
+        <section className="py-20 sm:py-24">
+          <h2 className="mb-8 text-center text-3xl text-[var(--foreground)] sm:text-4xl">{th('highlights')}</h2>
+          <SeriesTabs
+            label={th('highlightsTabs')}
+            groups={seriesGroups.map((g) => ({
+              key: g.key,
+              label: g.label,
+              content: (
+                <CardRail label={g.label} prevLabel={th('railPrev')} nextLabel={th('railNext')}>
+                  {g.items.map((p) => (
+                    <Link
+                      key={p.id}
+                      href={`/${locale}/urun/${p.slug}`}
+                      className="group w-[70%] shrink-0 snap-start sm:w-[calc((100%-3rem)/3)] lg:w-[calc((100%-4.5rem)/4)]"
+                    >
+                      <div className="media-zoom relative aspect-[4/5] overflow-hidden bg-[#ece7de]">
+                        <Image
+                          src={p.images[0].url}
+                          alt=""
+                          fill
+                          className="object-cover group-hover:scale-[1.02]"
+                          sizes="(max-width: 640px) 70vw, (max-width: 1024px) 33vw, 25vw"
+                        />
+                      </div>
+                      <h3 className="mt-3 text-lg leading-snug text-[var(--foreground)]">{isTr ? p.titleTr : p.titleEn}</h3>
+                      {p.isSold && (
+                        <span className="mt-1 inline-block text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--muted)]">
+                          {tg('sold')}
+                        </span>
+                      )}
+                    </Link>
+                  ))}
+                </CardRail>
+              ),
+            }))}
+          />
+        </section>
+      )}
+
+      {/* Koleksiyonlar — 2'li büyük blok (Spode deseni), koleksiyon sayfasına girer */}
       <section className="border-t border-[var(--border)] py-20 sm:py-24">
         <div className="mb-10 flex items-end justify-between gap-6">
           <h2 className="text-2xl font-medium text-[#2C2C2C] sm:text-3xl">{tcol('title')}</h2>
@@ -158,12 +224,12 @@ export default async function HomePage({
             {t('viewAll')} &rarr;
           </Link>
         </div>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-5">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
           {collectionBlocks.map(({ cat, label, cover }) => (
             <Link
               key={cat}
               href={`/${locale}/koleksiyonlar/${CATEGORY_SLUGS[cat]}`}
-              className="group relative block aspect-[4/5] overflow-hidden bg-[#eceae3]"
+              className="group relative block aspect-[4/3] overflow-hidden bg-[#ece7de]"
             >
               {cover && (
                 <Image
@@ -180,7 +246,7 @@ export default async function HomePage({
                   {tcol('comingSoonTag')}
                 </span>
               )}
-              <h3 className="absolute inset-x-0 bottom-0 p-5 text-lg font-medium text-white">
+              <h3 className="absolute inset-x-0 bottom-0 p-6 text-3xl text-white sm:p-8 sm:text-4xl">
                 {label}
               </h3>
             </Link>
@@ -188,50 +254,47 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* Son Eserler — ciplak kare grid, altyazi hover'da */}
-      <section className="border-t border-[var(--border)] py-20 sm:py-24">
-        <div className="mb-10 flex items-end justify-between gap-6">
-          <h2 className="text-2xl font-medium text-[#2C2C2C] sm:text-3xl">{t('recentWorks')}</h2>
-          <Link
-            href={`/${locale}/galeri`}
-            className="shrink-0 text-[13px] uppercase tracking-[0.15em] text-[#6b6b6b] transition-colors hover:text-[#2C2C2C]"
-          >
-            {t('viewAll')} &rarr;
-          </Link>
-        </div>
+      {/* Sergiden kareler — Spode "Sofralardan kareler"in karşılığı. Fotoğraflar
+          gizli içerikle birlikte açılır (UART_YENI_ICERIK). Künye: Şeref Doğan CV. */}
+      {sergiFotolari.length > 0 && (
+        <section className="border-t border-[var(--border)] py-20 sm:py-24">
+          <h2 className="mb-10 text-3xl text-[var(--foreground)] sm:text-4xl">{th('fromExhibitions')}</h2>
+          <CardRail label={th('fromExhibitions')} prevLabel={th('railPrev')} nextLabel={th('railNext')}>
+            {sergiFotolari.map((f) => {
+              const k = SERGI_KUNYE[f.exhibitionSlug]
+              return (
+                <figure key={f.id} className="w-[80%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-[#ece7de]">
+                    <Image src={f.url} alt={k ? `${k.title} — ${k.place}, ${k.year}` : ''} fill className="object-cover" sizes="(max-width: 640px) 80vw, 33vw" />
+                  </div>
+                  {k && (
+                    <figcaption className="mt-3 text-[length:var(--text-meta)] leading-relaxed text-[var(--muted)]">
+                      <span className="text-[var(--foreground)]">{k.title}</span> · {k.place} · {k.year}
+                    </figcaption>
+                  )}
+                </figure>
+              )
+            })}
+          </CardRail>
+        </section>
+      )}
 
-        {recentProducts.length > 0 ? (
-          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 lg:gap-6">
-            {recentProducts.map((product) => (
-              <Link
-                key={product.id}
-                href={`/${locale}/urun/${product.slug}`}
-                aria-label={isTr ? product.titleTr : product.titleEn}
-                className="media-zoom group relative block aspect-square overflow-hidden bg-[#f0efe9]"
-              >
-                {product.images?.[0] && (
-                  <img
-                    src={product.images[0].url}
-                    alt={isTr ? (product.images[0].altTr ?? product.titleTr) : (product.images[0].altEn ?? product.titleEn)}
-                    className="h-full w-full object-cover group-hover:scale-[1.02]"
-                  />
-                )}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-black/55 to-transparent px-4 pb-4 pt-10 opacity-0 transition-all duration-[var(--dur-micro)] ease-out group-hover:translate-y-0 group-hover:opacity-100"
-                >
-                  <h3 className="text-base font-medium text-white">
-                    {isTr ? product.titleTr : product.titleEn}
-                  </h3>
-                </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <p className="py-16 text-center text-[length:var(--text-meta)] text-[#999]">
-            {isTr ? 'Eserler yakında burada olacak.' : 'Works will appear here shortly.'}
+      {/* Hikâyemiz — mevcut, doğrulanmış metin (Hakkımızda girişi); yeni metin yok. */}
+      <section className="border-t border-[var(--border)] py-20 sm:py-24">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-3xl text-[var(--foreground)] sm:text-4xl">{th('story')}</h2>
+          <p className="mx-auto mt-8 max-w-[62ch] text-[length:var(--text-lead)] leading-[1.8] text-[#4a4a4a]">
+            {ta('lead')}
           </p>
-        )}
+          <div className="mt-10 flex flex-wrap justify-center gap-x-10 gap-y-3">
+            <Link href={`/${locale}/hakkimizda`} className="inline-flex min-h-11 items-center border-b border-[var(--foreground)] text-[length:var(--text-meta)] text-[var(--foreground)]">
+              {th('storyCta')}
+            </Link>
+            <Link href={`/${locale}/koleksiyonlar/antik-donem-replikalari#terra-sigillata`} className="inline-flex min-h-11 items-center text-[length:var(--text-meta)] text-[var(--muted)] hover:text-[var(--foreground)]">
+              {th('techniqueCta')} &rarr;
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* Instagram — curated (canli feed degil), "Son Eserler" sonrasi */}
@@ -330,7 +393,7 @@ export default async function HomePage({
           Ayrı sipariş sistemi DEĞİL (vitrin). */}
       <section className="full-bleed border-t border-[var(--border)] bg-[#f2f1ec]">
         <div className="mx-auto max-w-2xl px-6 py-20 text-center sm:py-24">
-          <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
+          <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
             {tcom('title')}
           </p>
           <p className="mx-auto mt-6 max-w-[58ch] text-[length:var(--text-lead)] leading-[1.85] text-[#4a4a4a]">

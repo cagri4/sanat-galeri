@@ -67,6 +67,13 @@ export default async function KoleksiyonPage({ params }: PageProps) {
   }
 
   const isAntik = category === ANTIK
+  // Seri = koleksiyonun ana adı ("Masalın Hafızası — Anka Serisi" → "Masalın Hafızası").
+  const seriMap = new Map<string, typeof products>()
+  for (const p of products) {
+    const k = p.collection ? p.collection.split(' — ')[0] : ''
+    seriMap.set(k, [...(seriMap.get(k) ?? []), p])
+  }
+  const seriler = [...seriMap.entries()].filter(([k]) => k)
   const terraSections = [
     { title: t('s1title'), body: t('s1body') },
     { title: t('s2title'), body: t('s2body') },
@@ -76,7 +83,7 @@ export default async function KoleksiyonPage({ params }: PageProps) {
 
   return (
     <main className="py-16 sm:py-24">
-      <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
+      <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
         {tcol('title')}
       </p>
       <h1 className="font-display mt-4 text-4xl leading-[1.1] tracking-[-0.01em] text-[#2C2C2C] sm:text-5xl lg:text-6xl">
@@ -91,15 +98,30 @@ export default async function KoleksiyonPage({ params }: PageProps) {
         </div>
       )}
 
-      <div className="mt-12">
-        <ArtworkGrid products={products} locale={locale} category={category} />
-      </div>
+      {/* Birden çok seri (ör. heykeller: Masalın Hafızası / Anadolu Ekininde
+          Güzeller) varsa seri başlıklarıyla; tek seride düz ızgara. */}
+      {seriler.length > 1 && products.every((p) => p.collection) ? (
+        <div className="mt-12 space-y-20">
+          {seriler.map(([seri, items]) => (
+            <section key={seri}>
+              <h2 className="text-2xl text-[var(--foreground)] sm:text-3xl">{seri}</h2>
+              <div className="mt-8">
+                <ArtworkGrid products={items} locale={locale} category={category} />
+              </div>
+            </section>
+          ))}
+        </div>
+      ) : (
+        <div className="mt-12">
+          <ArtworkGrid products={products} locale={locale} category={category} />
+        </div>
+      )}
 
       {isAntik && (
         // Eski /teknik sayfasının metni — kaybolmasın diye koleksiyona taşındı.
         <section id="terra-sigillata" className="mt-24 scroll-mt-24 border-t border-[var(--rule)] pt-16">
           <Reveal className="max-w-2xl">
-            <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
+            <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
               {t('eyebrow')}
             </p>
             <h2 className="font-display mt-4 text-3xl leading-[1.15] text-[#2C2C2C] sm:text-4xl">

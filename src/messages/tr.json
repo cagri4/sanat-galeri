@@ -46,7 +46,8 @@
     "comingSoonBody": "Bu bölümdeki eserler hazırlanıyor. Çok yakında burada olacak.",
     "collectionsLabel": "Bu bölümde yer alacak koleksiyon",
     "exhibitionsNav": "Sergiler",
-    "collection": "Koleksiyon"
+    "collection": "Koleksiyon",
+    "exhibitionShot": "Fotoğraflar sergi görüntüsüdür."
   },
   "contact": {
     "nameLabel": "Adınız",
@@ -247,6 +248,25 @@
     "aboutTitle": "Hakkımızda",
     "artistsTitle": "Sanatçılar",
     "contactTitle": "İletişim",
-    "contactLead": "Kurum, mekân türü, yaklaşık duvar ölçüsü ve takviminizi paylaşırsanız size dönüş yapalım."
+    "contactLead": "Kurum, mekân türü, yaklaşık duvar ölçüsü ve takviminizi paylaşırsanız size dönüş yapalım.",
+    "tabsLabel": "Proje türleri",
+    "makingTitle": "Yapım ve montajdan kareler",
+    "makingProject": "Yapım ve montaj",
+    "referencesTitle": "Referans mekânlar",
+    "processSummary": "Süreç",
+    "processMore": "Süreci incele"
+  },
+  "home": {
+    "heroTitle": "Toprağın Hafızası",
+    "heroCta": "Koleksiyonu incele",
+    "highlights": "Koleksiyon seçkileri",
+    "highlightsTabs": "Seriler",
+    "fromExhibitions": "Sergiden kareler",
+    "story": "Hikâyemiz",
+    "storyCta": "Hakkımızda",
+    "techniqueCta": "Terra sigillata tekniği",
+    "railPrev": "Önceki",
+    "railNext": "Sonraki",
+    "viewWork": "Eseri gör"
   }
 }

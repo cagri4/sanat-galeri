@@ -117,6 +117,10 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
         {slides.length > 0 && (
           <Reveal>
             <LightboxViewer slides={slides} thumbnails={thumbnails} />
+            {/* Sanatçı (11.10.2026): bu serinin fotoğrafları sergiden çekildi. */}
+            {eser.collection === 'Anadolu Ekininde Güzeller' && (
+              <p className="mt-3 text-[length:var(--text-meta)] text-[var(--muted)]">{t('exhibitionShot')}</p>
+            )}
           </Reveal>
         )}
 
@@ -130,7 +134,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
           <dl className="divide-y divide-[var(--rule)] border-y border-[var(--rule)]">
             {artistName && (
               <div className="grid grid-cols-[minmax(0,8rem)_1fr] gap-6 py-4">
-                <dt className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{t('artist')}</dt>
+                <dt className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">{t('artist')}</dt>
                 <dd className="text-[length:var(--text-body)] text-[#2C2C2C]">
                   {eser.artist?.slug ? (
                     <a
@@ -148,14 +152,14 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
 
             {catalogRows.map((row) => (
               <div key={row.label} className="grid grid-cols-[minmax(0,8rem)_1fr] gap-6 py-4">
-                <dt className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{row.label}</dt>
+                <dt className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">{row.label}</dt>
                 <dd className="text-[length:var(--text-body)] leading-relaxed text-[#2C2C2C]">{row.value}</dd>
               </div>
             ))}
 
             {(priceDisplay || eser.isSold) && (
               <div className="grid grid-cols-[minmax(0,8rem)_1fr] gap-6 py-4">
-                <dt className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{t('price')}</dt>
+                <dt className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">{t('price')}</dt>
                 <dd className="text-[length:var(--text-body)] text-[#2C2C2C]">
                   {eser.isSold ? <span className="text-[#8a6d3b]">{t('sold')}</span> : priceDisplay}
                 </dd>
@@ -181,7 +185,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
             <div className="border-l border-[var(--rule)] pl-5">
               {/* Başlık kategoriye göre: replikada "Replika Hakkında", diğer
                   kategorilerde nötr "Not" (ör. Güzel Bakış ortak-üretim notu). */}
-              <h2 className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">{isReplica ? t('about') : t('note')}</h2>
+              <h2 className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">{isReplica ? t('about') : t('note')}</h2>
               <RichText
                 text={aboutText}
                 className="mt-3 space-y-4"

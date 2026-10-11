@@ -65,7 +65,7 @@ export default async function ArtistPage({
           boylece sayfa bos ekranla karsilamaz. Biyografi DB'ye girildigi anda
           bu blok otomatik olarak asil metne birakir. */}
       <section className="py-14 sm:py-20">
-        <h2 className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
+        <h2 className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
           {t('bioTitle')}
         </h2>
 
@@ -112,7 +112,7 @@ export default async function ArtistPage({
 
       {statement && (
         <section className="border-t border-[var(--rule)] py-12">
-          <h2 className="mb-6 text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
+          <h2 className="mb-6 text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
             {t('statementTitle')}
           </h2>
           <blockquote className="max-w-3xl border-l-2 border-[var(--accent)] pl-6 text-xl font-medium italic leading-relaxed text-[#2C2C2C] sm:text-2xl">

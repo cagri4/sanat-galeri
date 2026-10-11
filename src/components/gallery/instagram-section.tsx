@@ -36,7 +36,7 @@ export default async function InstagramSection({
   return (
     <section className="border-t border-[#e9e7e1] py-20">
       <div className="text-center">
-        <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
+        <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
           Instagram
         </p>
         <h2 className="mt-3 text-3xl font-medium text-[#2C2C2C] sm:text-4xl">
@@ -85,7 +85,7 @@ export default async function InstagramSection({
           </svg>
           <span>{t('followCta')}</span>
         </a>
-        <p className="mt-3 text-[length:var(--text-meta)] text-[#999]">{IG_HANDLE}</p>
+        <p className="mt-3 text-[length:var(--text-meta)] text-[var(--faint)]">{IG_HANDLE}</p>
       </div>
     </section>
   )

@@ -23,10 +23,13 @@ export default async function MainLayout({
       {/* Konteyner genislikleri sevaceramics referansina yaklastirildi: galeri
           grid gorselleri ~430px (onceki ~325px). Metin bloklari zaten max-[68ch]
           ile kendini sinirliyor, okunabilirlik bozulmaz. */}
-      <div data-site="galeri" className="mx-auto w-full min-w-0 max-w-[1440px] px-6 sm:px-10 lg:px-12">
+      {/* data-site dış kapsayıcıda: tam genişlik yapışkan başlık da token'ları alır. */}
+      <div data-site="galeri" className="w-full min-w-0">
         <Navbar locale={locale} domain="main" />
-        <div className="min-h-[60vh]">{children}</div>
-        <Footer locale={locale} />
+        <div className="mx-auto w-full min-w-0 max-w-[1440px] px-6 sm:px-10 lg:px-12">
+          <div className="min-h-[60vh]">{children}</div>
+          <Footer locale={locale} />
+        </div>
       </div>
       {/* Sol altta sabit iletisim dugmesi + modal (mevcut /api/contact'e gider) */}
       <ContactWidget />

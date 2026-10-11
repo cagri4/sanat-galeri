@@ -51,7 +51,7 @@ export default async function ContactPage({
           <div className="space-y-6">
             {/* Atolye adresi — Cagri tarafindan verildi (dogrulanmis) */}
             <div>
-              <h2 className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999] mb-2">
+              <h2 className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)] mb-2">
                 {isTr ? 'Adres' : 'Address'}
               </h2>
               <p className="whitespace-pre-line text-[length:var(--text-body)] leading-relaxed text-[#2C2C2C]">
@@ -62,7 +62,7 @@ export default async function ContactPage({
             <div className="space-y-8">
               {artists.map((a: any) => (
                 <div key={a.slug}>
-                  <h2 className="text-[11px] uppercase tracking-[0.2em] text-[#999] mb-2">
+                  <h2 className="text-[11px] uppercase tracking-[0.2em] text-[var(--faint)] mb-2">
                     {a.nameTr}
                   </h2>
                   {a.email && (
@@ -81,7 +81,7 @@ export default async function ContactPage({
 
         {/* Right: Contact Form */}
         <div>
-          <h2 className="text-[11px] uppercase tracking-[0.2em] text-[#999] mb-6">
+          <h2 className="text-[11px] uppercase tracking-[0.2em] text-[var(--faint)] mb-6">
             {isTr ? 'Mesaj Gönderin' : 'Send a Message'}
           </h2>
           <ContactPageForm locale={locale} labels={{

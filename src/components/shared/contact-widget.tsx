@@ -108,7 +108,7 @@ export default function ContactWidget() {
   }
 
   const field =
-    'w-full border border-[var(--rule)] bg-white px-3 py-2.5 text-[length:var(--text-body)] text-[#2C2C2C] transition-colors duration-[var(--dur-micro)] placeholder:text-[#b5aea3] hover:border-[#cfc7ba] focus:border-[var(--accent)] focus:outline-none'
+    'w-full border border-[var(--rule)] bg-white px-3 py-2.5 text-[length:var(--text-body)] text-[#2C2C2C] transition-colors duration-[var(--dur-micro)] placeholder:text-[var(--faint)] hover:border-[#cfc7ba] focus:border-[var(--accent)] focus:outline-none'
 
   return (
     <>
@@ -119,7 +119,9 @@ export default function ContactWidget() {
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
         aria-expanded={open}
-        className="fixed bottom-5 left-5 z-40 inline-flex h-12 items-center gap-2.5 rounded-full border border-[var(--rule)] bg-[#FAFAF8]/95 px-4 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#2C2C2C] shadow-[0_2px_12px_rgba(26,26,26,0.08)] backdrop-blur transition-colors duration-[var(--dur-micro)] hover:border-[var(--accent)] hover:text-[var(--accent)] sm:h-12"
+        // Mobilde 44px yuvarlak ikon (metni daha az örter; skill touch-target ≥44px),
+        // masaüstünde etiketli hap.
+        className="fixed bottom-4 left-4 z-40 inline-flex h-11 w-11 cursor-pointer items-center justify-center gap-2.5 rounded-full border border-[var(--rule)] bg-[var(--background)] text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[var(--foreground)] shadow-[0_2px_12px_rgba(26,26,26,0.08)] transition-colors duration-[var(--dur-micro)] hover:border-[var(--accent)] hover:text-[var(--accent)] sm:bottom-5 sm:left-5 sm:h-12 sm:w-auto sm:px-4"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden className="h-5 w-5">
           <path
@@ -148,11 +150,11 @@ export default function ContactWidget() {
             aria-modal="true"
             aria-labelledby="contact-widget-title"
             // page-in: mevcut CSS keyframe'i; reduced-motion'da otomatik kapali
-            className="page-in relative m-0 w-full max-w-lg border border-[var(--rule)] bg-[#FAFAF8] p-6 shadow-[0_8px_40px_rgba(26,26,26,0.16)] sm:m-6 sm:p-8"
+            className="page-in relative m-0 w-full max-w-lg border border-[var(--rule)] bg-[var(--background)] p-6 shadow-[0_8px_40px_rgba(26,26,26,0.16)] sm:m-6 sm:p-8"
           >
             <div className="flex items-start justify-between gap-6">
               <div>
-                <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
+                <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
                   Uarttasarım
                 </p>
                 <h2
@@ -166,7 +168,7 @@ export default function ContactWidget() {
                 type="button"
                 onClick={close}
                 aria-label={t('close')}
-                className="-mr-2 -mt-2 inline-flex h-11 w-11 shrink-0 items-center justify-center text-[#999] transition-colors duration-[var(--dur-micro)] hover:text-[#2C2C2C]"
+                className="-mr-2 -mt-2 inline-flex h-11 w-11 shrink-0 items-center justify-center text-[var(--faint)] transition-colors duration-[var(--dur-micro)] hover:text-[#2C2C2C]"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden className="h-5 w-5">
                   <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
@@ -196,7 +198,7 @@ export default function ContactWidget() {
                 </div>
 
                 <div>
-                  <label htmlFor="cw-name" className="mb-1.5 block text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
+                  <label htmlFor="cw-name" className="mb-1.5 block text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
                     {tc('nameLabel')}
                   </label>
                   <input
@@ -214,7 +216,7 @@ export default function ContactWidget() {
                 </div>
 
                 <div>
-                  <label htmlFor="cw-email" className="mb-1.5 block text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
+                  <label htmlFor="cw-email" className="mb-1.5 block text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
                     {tc('emailLabel')}
                   </label>
                   <input
@@ -230,7 +232,7 @@ export default function ContactWidget() {
                 </div>
 
                 <div>
-                  <label htmlFor="cw-message" className="mb-1.5 block text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[#999]">
+                  <label htmlFor="cw-message" className="mb-1.5 block text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
                     {tc('messageLabel')}
                   </label>
                   <textarea

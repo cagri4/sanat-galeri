@@ -27,13 +27,13 @@ export default async function ArtworkGrid({ products, locale, category }: Artwor
           {category ? t('comingSoon') : t('emptyState')}
         </p>
         {category && (
-          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-[#999]">
+          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-[var(--faint)]">
             {t('comingSoonBody')}
           </p>
         )}
         {collections.length > 0 && (
           <div className="mt-8">
-            <p className="text-[11px] uppercase tracking-[0.15em] text-[#bbb]">
+            <p className="text-[11px] uppercase tracking-[0.15em] text-[var(--faint)]">
               {t('collectionsLabel')}
             </p>
             <ul className="mt-3 space-y-1">

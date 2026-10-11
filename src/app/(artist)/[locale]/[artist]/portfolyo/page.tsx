@@ -54,7 +54,7 @@ export default async function PortfolioPage({
       <h1 className="text-3xl font-medium tracking-[-0.01em] text-[#2C2C2C] sm:text-4xl">
         {t('portfolioTitle')}
       </h1>
-      <p className="mt-3 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#999]">
+      <p className="mt-3 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
         {t('workCount', { count: items.length })}
       </p>
 
