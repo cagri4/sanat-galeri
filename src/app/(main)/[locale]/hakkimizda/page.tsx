@@ -79,7 +79,7 @@ export default async function AboutPage({
             href={`/${locale}/koleksiyonlar/antik-donem-replikalari#terra-sigillata`}
             className="group inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#2C2C2C]"
           >
-            <span className="bg-[linear-gradient(var(--accent),var(--accent))] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-1 transition-[background-size] duration-[var(--dur-micro)] ease-out group-hover:bg-[length:100%_1px]">
+            <span className="bg-[linear-gradient(var(--accent),var(--accent))] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-1 transition-[background-size] duration-[var(--dur-micro)] ease-[var(--ease)] group-hover:bg-[length:100%_1px]">
               {tc('techniqueCta')}
             </span>
           </Link>

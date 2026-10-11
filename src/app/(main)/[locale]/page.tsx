@@ -12,6 +12,8 @@ import { yeniIcerikAcik, SERGI_KUNYE, SERGI_AFISI } from '@/lib/yeni-icerik'
 import { getExhibitionPhotosBySlugs } from '@/lib/queries/exhibition-photos'
 import SeriesTabs from '@/components/shared/series-tabs'
 import CardRail from '@/components/shared/card-rail'
+import Reveal from '@/components/motion/reveal'
+import { staggerDelay } from '@/lib/motion'
 
 export async function generateMetadata({
   params,
@@ -138,7 +140,7 @@ export default async function HomePage({
   return (
     <main>
       {/* Hero — tek kısa serif cümle + tek eser görseli (Spode deseni). */}
-      <section className="pt-12 sm:pt-16">
+      <Reveal as="section" className="pt-12 sm:pt-16">
         <h1 className="text-center text-4xl leading-[1.1] text-[var(--foreground)] sm:text-6xl">
           {th('heroTitle')}
         </h1>
@@ -148,7 +150,7 @@ export default async function HomePage({
               <Link
                 key={h.id}
                 href={`/${locale}/urun/${h.slug}`}
-                className={`relative block aspect-[4/5] overflow-hidden bg-[#ece7de] ${i > 0 ? 'hidden sm:block' : ''}`}
+                className={`hover-card hover-media relative block aspect-[4/5] overflow-hidden bg-[#ece7de] ${i > 0 ? 'hidden sm:block' : ''}`}
               >
                 <Image
                   src={h.images[0].url}
@@ -170,11 +172,11 @@ export default async function HomePage({
             {th('heroCta')}
           </Link>
         </div>
-      </section>
+      </Reveal>
 
       {/* Koleksiyon seçkileri — seriler arası sekme + yatay kart şeridi */}
       {seriesGroups.length > 0 && (
-        <section className="py-20 sm:py-24">
+        <Reveal as="section" className="py-20 sm:py-24">
           <h2 className="mb-8 text-center text-3xl text-[var(--foreground)] sm:text-4xl">{th('highlights')}</h2>
           <SeriesTabs
             label={th('highlightsTabs')}
@@ -183,38 +185,40 @@ export default async function HomePage({
               label: g.label,
               content: (
                 <CardRail label={g.label} prevLabel={th('railPrev')} nextLabel={th('railNext')}>
-                  {g.items.map((p) => (
-                    <Link
+                  {g.items.map((p, i) => (
+                    <Reveal
                       key={p.id}
-                      href={`/${locale}/urun/${p.slug}`}
-                      className="group w-[70%] shrink-0 snap-start sm:w-[calc((100%-3rem)/3)] lg:w-[calc((100%-4.5rem)/4)]"
+                      delay={staggerDelay(i)}
+                      className="w-[70%] shrink-0 snap-start sm:w-[calc((100%-3rem)/3)] lg:w-[calc((100%-4.5rem)/4)]"
                     >
-                      <div className="media-zoom relative aspect-[4/5] overflow-hidden bg-[#ece7de]">
+                    <Link href={`/${locale}/urun/${p.slug}`} className="hover-card group block">
+                      <div className="hover-media relative aspect-[4/5] overflow-hidden bg-[#ece7de]">
                         <Image
                           src={p.images[0].url}
                           alt=""
                           fill
-                          className="object-cover group-hover:scale-[1.02]"
+                          className="object-cover"
                           sizes="(max-width: 640px) 70vw, (max-width: 1024px) 33vw, 25vw"
                         />
                       </div>
-                      <h3 className="mt-3 text-lg leading-snug text-[var(--foreground)]">{isTr ? p.titleTr : p.titleEn}</h3>
+                      <h3 className="hover-title mt-3 text-lg leading-snug text-[var(--foreground)]">{isTr ? p.titleTr : p.titleEn}</h3>
                       {p.isSold && (
                         <span className="mt-1 inline-block text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--muted)]">
                           {tg('sold')}
                         </span>
                       )}
                     </Link>
+                    </Reveal>
                   ))}
                 </CardRail>
               ),
             }))}
           />
-        </section>
+        </Reveal>
       )}
 
       {/* Koleksiyonlar — 2'li büyük blok (Spode deseni), koleksiyon sayfasına girer */}
-      <section className="border-t border-[var(--border)] py-20 sm:py-24">
+      <Reveal as="section" className="border-t border-[var(--border)] py-20 sm:py-24">
         <div className="mb-10 flex items-end justify-between gap-6">
           <h2 className="text-2xl font-medium text-[#2C2C2C] sm:text-3xl">{tcol('title')}</h2>
           <Link
@@ -225,18 +229,18 @@ export default async function HomePage({
           </Link>
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
-          {collectionBlocks.map(({ cat, label, cover }) => (
+          {collectionBlocks.map(({ cat, label, cover }, i) => (
+            <Reveal key={cat} delay={staggerDelay(i)}>
             <Link
-              key={cat}
               href={`/${locale}/koleksiyonlar/${CATEGORY_SLUGS[cat]}`}
-              className="group relative block aspect-[4/3] overflow-hidden bg-[#ece7de]"
+              className="hover-card hover-media group relative block aspect-[4/3] overflow-hidden bg-[#ece7de]"
             >
               {cover && (
                 <Image
                   src={cover}
                   alt=""
                   fill
-                  className="object-cover transition-transform duration-[var(--dur-image)] group-hover:scale-[1.03]"
+                  className="object-cover"
                   sizes="(max-width: 640px) 100vw, 33vw"
                 />
               )}
@@ -250,20 +254,21 @@ export default async function HomePage({
                 {label}
               </h3>
             </Link>
+            </Reveal>
           ))}
         </div>
-      </section>
+      </Reveal>
 
       {/* Sergiden kareler — Spode "Sofralardan kareler"in karşılığı. Fotoğraflar
           gizli içerikle birlikte açılır (UART_YENI_ICERIK). Künye: Şeref Doğan CV. */}
       {sergiFotolari.length > 0 && (
-        <section className="border-t border-[var(--border)] py-20 sm:py-24">
+        <Reveal as="section" className="border-t border-[var(--border)] py-20 sm:py-24">
           <h2 className="mb-10 text-3xl text-[var(--foreground)] sm:text-4xl">{th('fromExhibitions')}</h2>
           <CardRail label={th('fromExhibitions')} prevLabel={th('railPrev')} nextLabel={th('railNext')}>
-            {sergiFotolari.map((f) => {
+            {sergiFotolari.map((f, i) => {
               const k = SERGI_KUNYE[f.exhibitionSlug]
               return (
-                <figure key={f.id} className="w-[80%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]">
+                <Reveal as="figure" key={f.id} delay={staggerDelay(i)} className="w-[80%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]">
                   <div className="relative aspect-[4/3] overflow-hidden bg-[#ece7de]">
                     <Image src={f.url} alt={k ? `${k.title} — ${k.place}, ${k.year}` : ''} fill className="object-cover" sizes="(max-width: 640px) 80vw, 33vw" />
                   </div>
@@ -272,15 +277,15 @@ export default async function HomePage({
                       <span className="text-[var(--foreground)]">{k.title}</span> · {k.place} · {k.year}
                     </figcaption>
                   )}
-                </figure>
+                </Reveal>
               )
             })}
           </CardRail>
-        </section>
+        </Reveal>
       )}
 
       {/* Hikâyemiz — mevcut, doğrulanmış metin (Hakkımızda girişi); yeni metin yok. */}
-      <section className="border-t border-[var(--border)] py-20 sm:py-24">
+      <Reveal as="section" className="border-t border-[var(--border)] py-20 sm:py-24">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl text-[var(--foreground)] sm:text-4xl">{th('story')}</h2>
           <p className="mx-auto mt-8 max-w-[62ch] text-[length:var(--text-lead)] leading-[1.8] text-[#4a4a4a]">
@@ -295,13 +300,13 @@ export default async function HomePage({
             </Link>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* Instagram — curated (canli feed degil), "Son Eserler" sonrasi */}
       <InstagramSection locale={locale} items={instagramItems} />
 
       {/* Artists — side by side with large images */}
-      <section className="py-20 border-t border-[var(--border)] sm:py-24">
+      <Reveal as="section" className="py-20 border-t border-[var(--border)] sm:py-24">
         <h2 className="mb-14 text-center text-2xl font-medium text-[#2C2C2C] sm:text-3xl">
           {t('meetArtists')}
         </h2>
@@ -323,7 +328,7 @@ export default async function HomePage({
                 src={artistPlaceholders[0]}
                 alt=""
                 fill
-                className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                className="object-cover group-hover:scale-[1.03] transition-transform duration-[var(--dur-move)]"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
@@ -361,7 +366,7 @@ export default async function HomePage({
                 src={artistPlaceholders[1]}
                 alt=""
                 fill
-                className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                className="object-cover group-hover:scale-[1.03] transition-transform duration-[var(--dur-move)]"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
@@ -387,11 +392,11 @@ export default async function HomePage({
             </div>
           </a>
         </div>
-      </section>
+      </Reveal>
 
       {/* Özel Sipariş bandı — hafif tanıtım + İletişim'e yönlendirme.
           Ayrı sipariş sistemi DEĞİL (vitrin). */}
-      <section className="full-bleed border-t border-[var(--border)] bg-[#f2f1ec]">
+      <Reveal as="section" className="full-bleed border-t border-[var(--border)] bg-[#f2f1ec]">
         <div className="mx-auto max-w-2xl px-6 py-20 text-center sm:py-24">
           <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
             {tcom('title')}
@@ -406,7 +411,7 @@ export default async function HomePage({
             {tcom('cta')}
           </Link>
         </div>
-      </section>
+      </Reveal>
     </main>
   )
 }

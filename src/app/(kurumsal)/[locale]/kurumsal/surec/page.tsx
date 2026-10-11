@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import { getTranslations } from 'next-intl/server'
 import { kurumsalPath } from '@/lib/site'
+import Reveal from '@/components/motion/reveal'
+import { staggerDelay } from '@/lib/motion'
 
 /**
  * Süreç. METİN KAYNAĞI: sanatçının pano dokümanlarındaki "Yapım Süreci"
@@ -31,11 +33,11 @@ export default async function SurecPage({ params }: { params: Promise<{ locale: 
 
       <ol className="mt-14 border-t border-[var(--foreground)]">
         {steps.map((s, i) => (
-          <li key={s.t} className="grid grid-cols-12 gap-4 border-b border-[var(--rule)] py-6">
+          <Reveal as="li" key={s.t} delay={staggerDelay(i)} className="grid grid-cols-12 gap-4 border-b border-[var(--rule)] py-6">
             <span className="col-span-2 font-mono text-[13px] text-[var(--accent)] sm:col-span-1">{String(i + 1).padStart(2, '0')}</span>
             <h2 className="col-span-10 text-lg sm:col-span-4">{s.t}</h2>
             <p className="col-span-12 text-[length:var(--text-body)] leading-[1.7] text-[var(--muted)] sm:col-span-7">{s.b}</p>
-          </li>
+          </Reveal>
         ))}
       </ol>
 

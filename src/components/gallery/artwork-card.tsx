@@ -31,15 +31,15 @@ export default async function ArtworkCard({ product, locale }: ArtworkCardProps)
     <Link
       href={`/${locale}/urun/${product.slug}`}
       aria-label={title}
-      className="group relative block cursor-pointer overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+      className="hover-card group relative block cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
     >
-      <div className="media-zoom relative aspect-square w-full overflow-hidden bg-[#f0efe9]">
+      <div className="hover-media relative aspect-square w-full overflow-hidden bg-[#ece7de]">
         {image?.url ? (
           <Image
             src={image.url}
             alt={locale === 'tr' ? (image.altTr ?? title) : (image.altEn ?? title)}
             fill
-            className="object-cover group-hover:scale-[1.02]"
+            className="object-cover"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         ) : (
@@ -53,7 +53,7 @@ export default async function ArtworkCard({ product, locale }: ArtworkCardProps)
             bilgi asagidaki sr-only'de + aria-label'de. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-black/55 via-black/20 to-transparent px-4 pb-4 pt-10 opacity-0 transition-all duration-[var(--dur-micro)] ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100"
+          className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-black/55 via-black/20 to-transparent px-4 pb-4 pt-10 opacity-0 transition-[opacity,transform] duration-[var(--dur-move)] ease-[var(--ease)] group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100"
         >
           <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-white/70">
             {categoryLabel}
@@ -64,7 +64,7 @@ export default async function ArtworkCard({ product, locale }: ArtworkCardProps)
 
       {/* Dokunmatikte hover olmadığı için ad mobilde görselin altında görünür
           (PLAN-TASARIM §2); sm ve üstünde hover katmanı yeterli. */}
-      <span className="mt-2 block text-[length:var(--text-meta)] leading-snug text-[var(--foreground)] sm:sr-only">{title}</span>
+      <span className="hover-title mt-2 block text-[length:var(--text-meta)] leading-snug text-[var(--foreground)] sm:sr-only">{title}</span>
     </Link>
   )
 }

@@ -6,6 +6,8 @@ import { CATEGORIES, CATEGORY_SLUGS, categoryBySlug } from '@/lib/categories'
 import { categoriesForSite, kurumsalPath } from '@/lib/site'
 import { projectNo } from '@/lib/kurumsal'
 import ProjectCard from '@/components/kurumsal/project-card'
+import Reveal from '@/components/motion/reveal'
+import { staggerDelay } from '@/lib/motion'
 
 interface PageProps {
   params: Promise<{ locale: string }>
@@ -68,14 +70,15 @@ export default async function ProjelerPage({ params, searchParams }: PageProps) 
       ) : (
         <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((p, i) => (
+            <Reveal key={p.id} delay={staggerDelay(i)}>
             <ProjectCard
-              key={p.id}
               href={k(`/projeler/${p.slug}`)}
               no={projectNo(i)}
               title={isTr ? p.titleTr : p.titleEn}
               image={p.images[0]?.url ?? null}
               meta={[p.year ? String(p.year) : null, p.collection, isTr ? p.dimensionsTr : p.dimensionsEn]}
             />
+            </Reveal>
           ))}
         </div>
       )}

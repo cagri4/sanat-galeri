@@ -69,10 +69,13 @@ interface RevealProps {
   /** Sirali giris icin gecikme (sn). Grid'lerde staggerDelay(i) ile. */
   delay?: number
   className?: string
-  as?: 'div' | 'section'
+  as?: 'div' | 'section' | 'li' | 'figure'
+  /** Beliriş süresi (sn). Varsayılan: öge 0.5s, bölüm (as="section") 0.7s —
+   *  spodeharmony'den ölçülen profil (GOREV-ANIMASYON-DUZELT.md). */
+  duration?: number
 }
 
-export default function Reveal({ children, delay = 0, className, as = 'div' }: RevealProps) {
+export default function Reveal({ children, delay = 0, className, as = 'div', duration }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -87,6 +90,7 @@ export default function Reveal({ children, delay = 0, className, as = 'div' }: R
     if (el.getBoundingClientRect().top < window.innerHeight * VISIBLE_RATIO) return
 
     el.style.setProperty('--reveal-delay', `${delay}s`)
+    el.style.setProperty('--reveal-dur', `${duration ?? (as === 'section' ? 0.7 : 0.5)}s`)
     el.dataset.reveal = 'hidden'
     pending.add(el)
     start()
@@ -95,7 +99,7 @@ export default function Reveal({ children, delay = 0, className, as = 'div' }: R
       pending.delete(el)
       if (pending.size === 0) stop()
     }
-  }, [delay])
+  }, [delay, duration, as])
 
   const Tag = as
   return (

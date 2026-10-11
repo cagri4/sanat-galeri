@@ -20,9 +20,9 @@ export default function MobileMenu({ items }: MobileMenuProps) {
         aria-label="Menu"
         aria-expanded={open}
       >
-        <span className={`block h-[1.5px] w-5 bg-[#2C2C2C] transition-transform duration-300 ${open ? 'translate-y-[6.5px] rotate-45' : ''}`} />
-        <span className={`block h-[1.5px] w-5 bg-[#2C2C2C] transition-opacity duration-300 ${open ? 'opacity-0' : ''}`} />
-        <span className={`block h-[1.5px] w-5 bg-[#2C2C2C] transition-transform duration-300 ${open ? '-translate-y-[6.5px] -rotate-45' : ''}`} />
+        <span className={`block h-[1.5px] w-5 bg-[#2C2C2C] transition-transform duration-[var(--dur-fast)] ${open ? 'translate-y-[6.5px] rotate-45' : ''}`} />
+        <span className={`block h-[1.5px] w-5 bg-[#2C2C2C] transition-opacity duration-[var(--dur-fast)] ${open ? 'opacity-0' : ''}`} />
+        <span className={`block h-[1.5px] w-5 bg-[#2C2C2C] transition-transform duration-[var(--dur-fast)] ${open ? '-translate-y-[6.5px] -rotate-45' : ''}`} />
       </button>
 
       {/* Dropdown */}

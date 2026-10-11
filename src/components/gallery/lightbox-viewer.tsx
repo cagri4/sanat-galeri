@@ -71,7 +71,7 @@ export default function LightboxViewer({ slides, thumbnails }: LightboxViewerPro
         render={{ slide: NextImageSlide }}
         /* Sakin acilis: varsayilan 250ms/500ms yerine daha yavas ve
            yumusak. Swipe suresi de uzatildi ki gecis "sicramasin". */
-        animation={{ fade: 400, swipe: 400, easing: { fade: 'ease-out', swipe: 'ease-out' } }}
+        animation={{ fade: 500, swipe: 500, easing: { fade: 'cubic-bezier(0.4, 0, 0.2, 1)', swipe: 'cubic-bezier(0.4, 0, 0.2, 1)' } }}
         /* Arka plan tam siyah degil: eserin sicak tonlarini bogmayan
            koyu murekkep tonu. */
         styles={{

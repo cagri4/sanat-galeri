@@ -10,6 +10,8 @@ import { yeniIcerikAcik } from '@/lib/yeni-icerik'
 import ProjectCard from '@/components/kurumsal/project-card'
 import SeriesTabs from '@/components/shared/series-tabs'
 import CardRail from '@/components/shared/card-rail'
+import Reveal from '@/components/motion/reveal'
+import { staggerDelay } from '@/lib/motion'
 
 /**
  * Kurumsal ana sayfa — PLAN-TASARIM-2026-10-11 §2. Stil: ui-ux-pro-max
@@ -67,7 +69,7 @@ export default async function KurumsalHome({ params }: { params: Promise<{ local
   return (
     <main>
       {/* Hero: metin solda, tek proje görseli sağda — 12 kolon */}
-      <section className="grid grid-cols-1 gap-10 py-14 md:grid-cols-12 md:py-20">
+      <Reveal as="section" className="grid grid-cols-1 gap-10 py-14 md:grid-cols-12 md:py-20">
         <div className="md:col-span-6 md:pr-6">
           <p className="font-mono text-[12px] uppercase tracking-[var(--tracking-label)] text-[var(--accent)]">
             {t('heroEyebrow')}
@@ -110,14 +112,14 @@ export default async function KurumsalHome({ params }: { params: Promise<{ local
           </a>
         </div>
         {hero && (
-          <a href={k(`/projeler/${hero.slug}`)} className="relative block aspect-[4/3] overflow-hidden bg-[#e6e9e8] md:col-span-6">
+          <a href={k(`/projeler/${hero.slug}`)} className="hover-card hover-media relative block aspect-[4/3] overflow-hidden bg-[#e6e9e8] md:col-span-6">
             <Image src={hero.images[0].url} alt={isTr ? hero.titleTr : hero.titleEn} fill priority className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
           </a>
         )}
-      </section>
+      </Reveal>
 
       {/* Seçili projeler — proje türü sekmeleri (Spode sekme deseni) */}
-      <section className="border-t border-[var(--rule)] py-16">
+      <Reveal as="section" className="border-t border-[var(--rule)] py-16">
         <div className="mb-8 flex items-end justify-between gap-6">
           <h2 className="text-2xl sm:text-3xl">{t('featured')}</h2>
           <a href={k('/projeler')} className="shrink-0 text-[length:var(--text-meta)] text-[var(--muted)] hover:text-[var(--accent)]">
@@ -132,56 +134,59 @@ export default async function KurumsalHome({ params }: { params: Promise<{ local
             content: (
               <div className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
                 {g.items.map((p, i) => (
+                  <Reveal key={p.id} delay={staggerDelay(i)}>
                   <ProjectCard
-                    key={p.id}
                     href={k(`/projeler/${p.slug}`)}
                     no={projectNo(i)}
                     title={isTr ? p.titleTr : p.titleEn}
                     image={p.images[0]?.url ?? null}
                     meta={[p.year ? String(p.year) : null, p.collection, isTr ? p.dimensionsTr : p.dimensionsEn]}
                   />
+                  </Reveal>
                 ))}
               </div>
             ),
           }))}
         />
-      </section>
+      </Reveal>
 
       {/* Yapım ve montajdan kareler — Spode "Sofralardan kareler"in kurumsal
           karşılığı; gizli içerikle birlikte açılır. */}
       {yapim.length > 0 && (
-        <section className="border-t border-[var(--rule)] py-16">
+        <Reveal as="section" className="border-t border-[var(--rule)] py-16">
           <h2 className="mb-8 text-2xl sm:text-3xl">{t('makingTitle')}</h2>
           <CardRail label={t('makingTitle')} prevLabel={th('railPrev')} nextLabel={th('railNext')}>
-            {yapim.map((f) => {
+            {yapim.map((f, i) => {
               const p = projeAdi.get(f.exhibitionSlug)
               return (
-                <a key={f.id} href={p ? k(`/projeler/${p.slug}`) : undefined} className="w-[80%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]">
-                  <div className="relative aspect-[4/3] overflow-hidden bg-[#e6e9e8]">
+                <Reveal key={f.id} delay={staggerDelay(i)} className="w-[80%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]">
+                <a href={p ? k(`/projeler/${p.slug}`) : undefined} className="hover-card block">
+                  <div className="hover-media relative aspect-[4/3] overflow-hidden bg-[#e6e9e8]">
                     <Image src={f.url} alt={p ? `${isTr ? p.titleTr : p.titleEn} — ${t('makingProject')}` : ''} fill className="object-cover" sizes="(max-width: 640px) 80vw, 33vw" />
                   </div>
-                  {p && <p className="mt-3 font-mono text-[12px] text-[var(--muted)]">{isTr ? p.titleTr : p.titleEn}</p>}
+                  {p && <p className="hover-title mt-3 font-mono text-[12px] text-[var(--muted)]">{isTr ? p.titleTr : p.titleEn}</p>}
                 </a>
+                </Reveal>
               )
             })}
           </CardRail>
-        </section>
+        </Reveal>
       )}
 
       {/* Referans mekânlar — kurum ADLARI, logosuz */}
       {mekanlar.length > 0 && (
-        <section className="grid grid-cols-1 gap-8 border-t border-[var(--rule)] py-16 md:grid-cols-12">
+        <Reveal as="section" className="grid grid-cols-1 gap-8 border-t border-[var(--rule)] py-16 md:grid-cols-12">
           <h2 className="text-2xl sm:text-3xl md:col-span-4">{t('referencesTitle')}</h2>
           <ul className="border-t border-[var(--foreground)] md:col-span-8">
-            {mekanlar.map((m) => (
-              <li key={m} className="border-b border-[var(--rule)] py-3 text-[length:var(--text-body)]">{m}</li>
+            {mekanlar.map((m, i) => (
+              <Reveal as="li" key={m} delay={staggerDelay(i)} className="border-b border-[var(--rule)] py-3 text-[length:var(--text-body)]">{m}</Reveal>
             ))}
           </ul>
-        </section>
+        </Reveal>
       )}
 
       {/* Süreç özeti — 5 adım (sanatçının "Yapım Süreci" metinlerinden) */}
-      <section className="border-t border-[var(--rule)] py-16">
+      <Reveal as="section" className="border-t border-[var(--rule)] py-16">
         <div className="mb-8 flex items-end justify-between gap-6">
           <h2 className="text-2xl sm:text-3xl">{t('processSummary')}</h2>
           <a href={k('/surec')} className="shrink-0 text-[length:var(--text-meta)] text-[var(--muted)] hover:text-[var(--accent)]">
@@ -190,13 +195,13 @@ export default async function KurumsalHome({ params }: { params: Promise<{ local
         </div>
         <ol className="grid grid-cols-1 gap-px bg-[var(--rule)] sm:grid-cols-5">
           {steps.map((s, i) => (
-            <li key={s.t} className="bg-[var(--background)] py-5 pr-4 sm:px-4 sm:first:pl-0">
+            <Reveal as="li" key={s.t} delay={staggerDelay(i)} className="bg-[var(--background)] py-5 pr-4 sm:px-4 sm:first:pl-0">
               <span className="font-mono text-[12px] text-[var(--accent)]">{String(i + 1).padStart(2, '0')}</span>
               <p className="mt-2 text-[length:var(--text-meta)] leading-snug">{s.t}</p>
-            </li>
+            </Reveal>
           ))}
         </ol>
-      </section>
+      </Reveal>
     </main>
   )
 }

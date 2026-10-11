@@ -64,7 +64,7 @@ export default async function KoleksiyonlarPage({
             key={cat}
             href={`/${locale}/koleksiyonlar/${CATEGORY_SLUGS[cat]}`}
             // Ilk blok genis: gorsel duvarina ritim katar.
-            className={`group relative block overflow-hidden bg-[#eceae3] ${
+            className={`hover-card hover-media group relative block overflow-hidden bg-[#ece7de] ${
               i === 0 ? 'sm:col-span-2 aspect-[16/10]' : 'aspect-[4/5]'
             }`}
           >
@@ -74,7 +74,7 @@ export default async function KoleksiyonlarPage({
                 alt=""
                 fill
                 priority={i === 0}
-                className="object-cover transition-transform duration-[var(--dur-image)] group-hover:scale-[1.03]"
+                className="object-cover"
                 sizes={i === 0 ? '(max-width: 640px) 100vw, 100vw' : '(max-width: 640px) 100vw, 50vw'}
               />
             )}

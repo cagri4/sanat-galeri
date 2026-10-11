@@ -34,11 +34,16 @@
   --space-section: 7.5rem;   /* bolumler arasi (~120px) */
   --space-block: 3.5rem;     /* blok ici buyuk ayrim */
 
-  /* ---- Hareket --------------------------------------------------------
-     Galeri sukuneti: giriste ease-out, kisa ve tek yonlu.               */
-  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-micro: 200ms;        /* hover/focus mikro etkilesim */
-  --dur-image: 700ms;        /* gorsel zoom — bilincli olarak yavas */
+  /* ---- Hareket — spodeharmony.com'dan ÖLÇÜLEN profil (GOREV-ANIMASYON-DUZELT.md)
+     Kütüphane yok, saf CSS. Üç hız + TEK eğri, her yerde bu token'lar.  */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 150ms;         /* küçük tepkiler: renk, kenarlık, gölge, buton, bağlantı */
+  --dur-move: 500ms;         /* büyük hareketler: beliriş, kayma, ölçek, görsel */
+  --dur-section: 700ms;      /* bölüm düzeyinde büyük belirişler */
+  /* Eski adlar yeni profile bağlı (bileşenlerde kullanılıyorlar). */
+  --ease-out-soft: var(--ease);
+  --dur-micro: var(--dur-fast);
+  --dur-image: var(--dur-move);
 }
 
 @theme inline {
@@ -102,8 +107,6 @@ body:has([data-site='galeri']) { background: #F7F4EF; }
   --border: #dde1e0;
   --rule: #dde1e0;
   --accent: #1F4E5A;       /* beyaz yazıyla 9.2:1 */
-  --dur-micro: 150ms;
-  --dur-image: 0ms;
   --tracking-label: 0.12em;
   background: var(--background);
   color: var(--foreground);
@@ -171,11 +174,54 @@ h1, h2, h3 {
   border-radius: 2px;
 }
 
-/* Gorsel gecisleri artik GLOBAL DEGIL: yalnizca .media-zoom kapsayicisi
-   icindeki gorsellere uygulanir (artwork-card, lightbox thumbnail). */
+/* ---- Geçiş katmanı (Spode yoğunluğu) -----------------------------------
+   Etkileşime giren HER öge küçük tepki verir (0.15s). :where() → özgüllük 0:
+   bileşendeki Tailwind transition sınıfları her zaman öncelikli kalır.
+   Yalnız renk/kenarlık/gölge/opaklık/transform — layout tetikleyen yok. */
+:where(a, button, [role='tab'], [role='button'], input, textarea, select, summary, label, figcaption) {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: var(--dur-fast);
+  transition-timing-function: var(--ease);
+}
+/* Görseller büyük hareket: ölçek + opaklık 0.5s. */
+:where(img) {
+  transition-property: transform, opacity;
+  transition-duration: var(--dur-move);
+  transition-timing-function: var(--ease);
+}
 .media-zoom img {
-  transition: transform var(--dur-image) var(--ease-out-soft);
+  transition: transform var(--dur-move) var(--ease);
   will-change: transform;
+}
+
+/* Kart hover'ı: görsel hafif büyür, gölge derinleşir, başlık rengi değişir.
+   Eser fotoğrafını SUNAR — dönme/zıplama yok. */
+:is(.hover-card .hover-media, .hover-card.hover-media) {
+  transition: box-shadow var(--dur-move) var(--ease);
+}
+:is(.hover-card .hover-media, .hover-card.hover-media) img {
+  transition: transform var(--dur-move) var(--ease);
+}
+.hover-card:is(:hover, :focus-visible) :is(.hover-media),
+.hover-card.hover-media:is(:hover, :focus-visible) {
+  box-shadow: 0 18px 40px -18px rgba(28, 27, 25, 0.45);
+}
+.hover-card:is(:hover, :focus-visible) .hover-media img,
+.hover-card.hover-media:is(:hover, :focus-visible) img {
+  transform: scale(1.04);
+}
+[data-site='kurumsal'] .hover-card:is(:hover, :focus-visible) .hover-media img,
+[data-site='kurumsal'] .hover-card.hover-media:is(:hover, :focus-visible) img {
+  transform: scale(1.02); /* kurumsal daha ölçülü */
+}
+.hover-card .hover-title {
+  transition: color var(--dur-fast) var(--ease);
+}
+.hover-card:hover .hover-title {
+  color: var(--muted);
+}
+[data-site='kurumsal'] .hover-card:hover .hover-title {
+  color: var(--accent);
 }
 
 /* ---- Scroll-reveal ---------------------------------------------------
@@ -184,14 +230,15 @@ h1, h2, h3 {
    Boylece JS yoksa hicbir icerik gizlenmez.                              */
 [data-reveal='hidden'] {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(16px);
 }
+/* Öge belirişi 0.5s; bölüm belirişi 0.7s (Reveal as="section" → --reveal-dur). */
 [data-reveal='in'] {
   opacity: 1;
   transform: none;
   transition:
-    opacity 0.5s var(--ease-out-soft) var(--reveal-delay, 0s),
-    transform 0.5s var(--ease-out-soft) var(--reveal-delay, 0s);
+    opacity var(--reveal-dur, var(--dur-move)) var(--ease) var(--reveal-delay, 0s),
+    transform var(--reveal-dur, var(--dur-move)) var(--ease) var(--reveal-delay, 0s);
 }
 
 /* ---- Sayfa girisi ----------------------------------------------------
@@ -201,7 +248,7 @@ h1, h2, h3 {
   to   { opacity: 1; transform: none; }
 }
 .page-in {
-  animation: page-in 0.35s var(--ease-out-soft) both;
+  animation: page-in var(--dur-move) var(--ease) both;
 }
 
 /* Yatay kaydirilan filtre satiri: kaydirma cubugu gizli, kaydirma calisir.
@@ -253,13 +300,16 @@ h1, h2, h3 {
   html {
     scroll-behavior: auto;
   }
+  /* Tamamen kapalı (0.01ms değil): hareket YOK, geçiş sayısı 0 ölçülür. */
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation: none !important;
+    transition: none !important;
     scroll-behavior: auto !important;
+  }
+  .hover-card img {
+    transform: none !important;
   }
   .media-zoom img {
     transition: none;

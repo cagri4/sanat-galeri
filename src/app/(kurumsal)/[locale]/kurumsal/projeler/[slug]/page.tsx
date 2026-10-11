@@ -11,6 +11,8 @@ import SpecTable from '@/components/kurumsal/spec-table'
 import Image from 'next/image'
 import { getExhibitionPhotos } from '@/lib/queries/exhibition-photos'
 import { yeniIcerikAcik } from '@/lib/yeni-icerik'
+import Reveal from '@/components/motion/reveal'
+import { staggerDelay } from '@/lib/motion'
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>
@@ -127,16 +129,16 @@ export default async function ProjeDetay({ params }: PageProps) {
       </div>
 
       {yapim.length > 0 && (
-        <section className="mt-20 border-t border-[var(--rule)] pt-12">
+        <Reveal as="section" className="mt-20 border-t border-[var(--rule)] pt-12">
           <h2 className="mb-8 text-2xl sm:text-3xl">{t('makingProject')}</h2>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {yapim.map((f, i) => (
-              <div key={f.id} className="relative aspect-[4/3] overflow-hidden bg-[#e6e9e8]">
+              <Reveal key={f.id} delay={staggerDelay(i)} className="relative aspect-[4/3] overflow-hidden bg-[#e6e9e8]">
                 <Image src={f.url} alt={`${title} — ${t('makingProject')} ${i + 1}`} fill className="object-cover" sizes="(max-width: 640px) 50vw, 25vw" />
-              </div>
+              </Reveal>
             ))}
           </div>
-        </section>
+        </Reveal>
       )}
     </main>
   )

@@ -106,7 +106,7 @@ export default async function Navbar({ locale }: NavbarProps) {
             <a
               key={l.href}
               href={l.href}
-              className="relative inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#2C2C2C] after:absolute after:inset-x-0 after:bottom-2.5 after:h-px after:origin-left after:scale-x-0 after:bg-[#2C2C2C] after:transition-transform after:duration-[var(--dur-micro)] after:ease-out hover:after:scale-x-100"
+              className="relative inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#2C2C2C] after:absolute after:inset-x-0 after:bottom-2.5 after:h-px after:origin-left after:scale-x-0 after:bg-[#2C2C2C] after:transition-transform after:duration-[var(--dur-micro)] after:ease-[var(--ease)] hover:after:scale-x-100"
             >
               {l.label}
             </a>

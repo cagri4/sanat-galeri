@@ -39,7 +39,7 @@ export default function CategoryFilter({ categories, active }: CategoryFilterPro
   // dili. Aktif olan koyu + alt cizgili, digerleri sessiz.
   // min-h-11 (44px) => dokunmatik hedef boyutu korunur.
   const base =
-    'relative inline-flex min-h-11 shrink-0 cursor-pointer items-center whitespace-nowrap px-1 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] transition-colors duration-[var(--dur-micro)] after:absolute after:inset-x-0 after:bottom-2 after:h-px after:origin-left after:transition-transform after:duration-[var(--dur-micro)] after:ease-out'
+    'relative inline-flex min-h-11 shrink-0 cursor-pointer items-center whitespace-nowrap px-1 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] transition-colors duration-[var(--dur-micro)] after:absolute after:inset-x-0 after:bottom-2 after:h-px after:origin-left after:transition-transform after:duration-[var(--dur-micro)] after:ease-[var(--ease)]'
 
   const state = (isActive: boolean) =>
     isActive
