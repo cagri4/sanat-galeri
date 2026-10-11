@@ -29,6 +29,7 @@ export default async function ProjelerPage({ params, searchParams }: PageProps) 
 
   // Kurumsal kategoriler: panolar + heykeller (lib/site.ts)
   const cats = categoriesForSite('kurumsal', CATEGORIES)
+    .sort((a, b) => Number(b === 'Mimari Duvar Panoları') - Number(a === 'Mimari Duvar Panoları'))
   const requested = tur ? categoryBySlug(tur) : null
   const active = requested && cats.includes(requested) ? requested : null
 
