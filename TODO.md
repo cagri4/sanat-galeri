@@ -56,13 +56,12 @@
 - [x] Anadolu Ekininde Güzeller: durum raporu + ayırma planı Çağrı'ya sunuldu
 - [~] Anadolu Ekininde Güzeller: ayırma ve fotoğraf güncellemesi uygulandı - Çağrı onayı bekleniyor
 - [x] Ara soru: admin dışı düzenleme denetimi yapıldı (salt okuma; iz alanı yok, dış düzenleme belirtisi yok)
-- [~] product_images.is_visible şema değişikliği - Çağrı onayı gerekli (Anadolu + temas tablosu)
 - [~] Anadolu serisinin adı/metni/eser bazında bölünmesi - sanatçıya sorulacak (ad: Ekininde Güzeller mi Anadolu Güzelleri mi)
-- [ ] product_images.is_visible alanı eklendi (migration + geri alma), sorgular gizlileri dışarıda bırakıyor
-- [ ] Kurumsal Heykeller sekmesi ve /galeri seri başlıklarıyla gruplandı (A)
-- [ ] Anadolu serisinin 17 yeni fotoğrafı Cloudinary'ye yüklendi
-- [ ] Anadolu veri SQL'i hazırlandı (yeni 17 ekle, eski 9 gizle, eski 9'u 2008 Nüve sergisine ekle) + geri alma
-- [ ] Ana giriş görseli incelendi: hangi görsel, neden orada
-- [ ] Atölye fotoğrafı arandı (Drive + 87 yapım/montaj karesi)
-- [ ] Ana giriş için alternatifler ekran görüntüsüyle Çağrı'ya sunuldu
+- [x] product_images.is_visible alanı eklendi (migration + geri alma), sorgular gizlileri dışarıda bırakıyor
+- [x] Kurumsal Heykeller sekmesi ve /galeri seri başlıklarıyla gruplandı (A)
+- [x] Anadolu serisinin 17 yeni fotoğrafı Cloudinary'ye yüklendi
+- [x] Anadolu veri SQL'i hazırlandı (yeni 17 ekle, eski 9 gizle, eski 9'u 2008 Nüve sergisine ekle) + geri alma
+- [x] Ana giriş görseli incelendi: hangi görsel, neden orada
+- [x] Atölye fotoğrafı arandı (Drive + 87 yapım/montaj karesi)
+- [x] Ana giriş için alternatifler ekran görüntüsüyle Çağrı'ya sunuldu
 - [~] Anadolu + ana giriş değişiklikleri canlıya alındı - ekran görüntüsü onayı bekleniyor
