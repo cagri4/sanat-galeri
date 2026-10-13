@@ -50,4 +50,4 @@
 - [x] A listesi uart-galeri ve uart-kurumsal'a deploy edildi
 - [x] vercel-bekle.sh ile iki deploy doğrulandı
 - [x] Canlıda menü, banner, Instagram konumu ve 301'ler kontrol edildi
-- [ ] master push edildi (eski sanat-galeri demosu otomatik deploy)
+- [x] master push edildi; eski sanat-galeri demosu e7f150c ile READY (noindex)
