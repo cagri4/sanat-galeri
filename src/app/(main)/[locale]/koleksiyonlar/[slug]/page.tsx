@@ -40,12 +40,21 @@ function resolveCollection(slug: string): { category: string; series: string | n
 
 /**
  * Seri sayfası banner'ı sanatçının seçtiği fotoğraf (yoksa sayfanın kendi eserlerinden).
- * Masalın Hafızası: sanatçı 13 Eki 21:25 "kaf dağından gelenler" adlı fotoğrafı
- * istedi; Drive'da o adla dosya YOK. Aynı klasöre aynı akşam eklenen geniş sergi
- * karesi ("Masalın Hafızası: Anadolu'dan Günümüze Seramik Bedenler") ADAY —
- * Çağrı/sanatçı teyidi olmadan canlıya alınmaz.
+ * Masalın Hafızası: "Masalın Hafızası: Anadolu'dan Günümüze Seramik Bedenler"
+ * (sanatçı teyidi 13 Eki 23:47).
  */
+/**
+ * Seri banner'ının üst satırı. Varsayılan: kategori adı ("Seramik Heykeller").
+ * Masalın Hafızası: sanatçı 14 Eki 00:03 — "seramik heykeller yerine Anadolu'dan
+ * günümüze seramik bedenler yazsın" (serinin tam adı, Drive klasörü/belgesi).
+ */
+const SERIES_EYEBROWS: Record<string, { tr: string; en: string }> = {
+  'masalin-hafizasi': { tr: 'Anadolu’dan Günümüze Seramik Bedenler', en: 'Ceramic Bodies from Anatolia to the Present' },
+}
+
 const SERIES_BANNERS: Record<string, string> = {
+  // Sanatçı 13 Eki 23:47'de teyit etti: "Masalın Hafızası: Anadolu'dan Günümüze
+  // Seramik Bedenler" (Drive ID 1QUU6qrd…, aynı dosya).
   'masalin-hafizasi': 'https://res.cloudinary.com/df0henatz/image/upload/v1791921809/uarttasarim/koleksiyon/masalin-hafizasi-banner-2026-10.jpg',
 }
 
@@ -106,7 +115,13 @@ export default async function KoleksiyonPage({ params }: PageProps) {
   return (
     <main className="pb-16 pt-8 sm:pb-24 sm:pt-10">
       <PageBanner
-        eyebrow={series ? (tg.has(`categories.${category}`) ? tg(`categories.${category}`) : category) : tcol('title')}
+        eyebrow={
+          SERIES_EYEBROWS[slug]
+            ? SERIES_EYEBROWS[slug][locale === 'tr' ? 'tr' : 'en']
+            : series
+              ? (tg.has(`categories.${category}`) ? tg(`categories.${category}`) : category)
+              : tcol('title')
+        }
         title={series ?? (tg.has(`categories.${category}`) ? tg(`categories.${category}`) : category)}
         image={
           SERIES_BANNERS[slug]

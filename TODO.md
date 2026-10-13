@@ -79,3 +79,9 @@
 - [x] Önizleme ekran görüntüleri Çağrı'ya onaya sunuldu
 - [x] Atölye + seriler + aday banner deploy edildi, vercel-bekle.sh ile hash doğrulandı
 - [x] Canlıda kontrol (iki heykel sayfası, 301, banner, atölye, Şeref kartı) + ekran görüntüleri
+- [ ] Banner dosyası Drive'da doğrulandı (dünkü adayla aynı mı)
+- [ ] Masalın Hafızası banner üst yazısı "Anadolu'dan Günümüze Seramik Bedenler" oldu
+- [ ] Şahmaran klasörü Drive ↔ DB karşılaştırıldı
+- [ ] Şahmaran belgesi okundu, açıklamalar hazırlandı
+- [ ] Şahmaran güncellemesi (yeni foto ekle / eski gizle / açıklama) SQL + yedek + geri alma hazırlandı
+- [ ] Önizleme ekran görüntüleri Çağrı'ya onaya sunuldu
