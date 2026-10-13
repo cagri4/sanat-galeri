@@ -21,5 +21,11 @@
 - [x] hanna-miadzvedzeva.com fon renkleri ve tipografisi ölçüldü
 - [x] Mevcut sayfa/menü envanteri çıkarıldı (yeni menüye eşleme için)
 - [x] PLAN-DUZELTMELER-2026-10-13.md yazıldı (A/B/C + renkler + Çağrı'ya sorular)
-- [~] Tek site / iki site kararı verildi - 10 Eki kararını değiştirir; B1 seçenekleri PLAN-DUZELTMELER'de, karar Çağrı'da
+- [x] Tek site / iki site kararı verildi (13 Eki 10:52: iki site, sanatçı bırakarak kabul etti)
 - [~] Sanatçıya C1–C7 soruları iletildi - soruları Çağrı iletecek
+- [x] PLAN-DUZELTMELER B1 (iki site kalıyor) ve bağlı maddelerle güncellendi
+- [x] Sitedeki satışa dönük öğeler (fiyat, sepet, sipariş çağrısı) tarandı
+- [x] İki kitle için pazarlama stratejisi yazıldı (PAZARLAMA-STRATEJISI-2026-10-13.md)
+- [~] Pazarlama stratejisindeki 13 soru cevaplandı - kanal seçimi ve bütçe Çağrı'nın cevaplarına bağlı
+- [~] Ölçüm altyapısı (analytics, piksel, messages kaynak alanı) kuruldu - kod + veri modeli değişikliği, ayrı onay gerekli
+- [~] A1–A4 (Instagram, banner, özel sipariş, süreç) uygulandı - Çağrı'nın başla onayı bekleniyor

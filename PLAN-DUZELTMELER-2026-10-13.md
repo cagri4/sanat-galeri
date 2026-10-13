@@ -1,8 +1,44 @@
-# PLAN — Sanatçı düzeltmeleri (WA, 11 Eki) · 13 Ekim 2026
+# PLAN — Sanatçı düzeltmeleri (WA, 11 Eki) · 13 Ekim 2026 · **güncellendi 13 Eki öğleden sonra**
 
-> **Kaynak:** `GOREV-SANATCI-DUZELTMELER-2026-10-13.md`
+> **Kaynaklar:**
+> - `GOREV-SANATCI-DUZELTMELER-2026-10-13.md`: 11 Ekim mesajları
+> - `GOREV-PAZARLAMA-STRATEJISI-2026-10-13.md`: 13 Ekim Çağrı ↔ sanatçı konuşması
+>
 > **Durum:** Yalnızca plan. Kod, veri ya da deploy değişmedi.
-> **Önce Çağrı karar verecek:** B1 (tek site mi, iki site mi). A listesinin büyük kısmı bu karara göre şekil alır.
+
+## Güncelleme — 13 Ekim konuşmasının etkisi
+
+**B1 kapandı: iki site kalıyor.**
+- 10:52'de sanatçı şöyle dedi: *"tamam neyse, eğer sen iki farklı site yapmak istiyorsan öyle yapalım"*.
+- Sanatçı iki siteyi **istemedi**; Çağrı'nın gerekçesine karşı **bırakarak kabul etti** (öncesinde 10:36 "galeri modunda olsun", 10:50 "sadece mimarlar gelmesin").
+- Pratik sonuç:
+  - Karar uygulanır, 10 Ekim yapısı (iki alan adı, ürün bazlı ayrım) geçerli kalır.
+  - Ama sanatçı ikna olmuş değil. Bu yüzden iki sitenin farkı, sanatçının gördüğü ilk ekranlarda kendini açıklamalı. Bkz. `PAZARLAMA-STRATEJISI-2026-10-13.md`.
+  - Sanatçının "bireysel taraf kapanmasın" kaygısı galeri sitesiyle karşılanıyor. Bunu kendisine bu şekilde göstermek, kararı sağlamlaştırır.
+
+**Yeni bilgi: "buradan satış olmayacak" (10:36).**
+- Site vitrin, dükkân değil. Sitede satışa dönük öğeler tarandı (§2b).
+
+**Süreç ve özel sipariş kalkıyor (10:54).**
+- Sanatçının cümlesi: *"yaptığımız işi çok detaylı anlatmak zorunda değiliz, o yüzden süreç ve özel sipariş kısımlarını kaldıralım"*.
+- A3 (özel sipariş) teyit edildi.
+- A4 değişti: süreç artık **kısaltılmıyor, kaldırılıyor**.
+
+**Etkilenen maddeler:**
+
+| Madde | Önce | Şimdi |
+|---|---|---|
+| B1 tek/iki site | Karar bekliyor | **Kapandı: iki site** (bırakarak kabul) |
+| B2 hangi tasarım dili | Tek site ise sorulacaktı | **Düştü.** İki dil de kalıyor |
+| B4 heykel metni | Tek site ise sorulacaktı | **Düştü.** İki metin 10 Eki §2'deki gibi, her site kendi metnini gösterir |
+| B5 sanatçı siteleri | Tek sitenin parçasıydı | **Ertelendi.** Sanatçı sayfaları galeri içinde kalır; ayrı alan adı ayrı karar |
+| B6 eski demo | Açık | **Duruyor**, B1'e bağlı değildi |
+| B3 koyu fon | Açık | **Duruyor.** Hangi siteye uygulanacağı yeni soru (B3) |
+| A4 süreç | Kısalt | **Kaldır** (10:54) |
+| A5 pano ile açılış | B1'e bağlıydı | Kurumsal zaten panoyla açılıyor (ilk hero: *Gönül Gözü*, mimari pano). Galeri için yeni karar (B7) |
+| A6 menü | B1'e bağlıydı | İki siteye bölünmüş haliyle (§2) |
+| C1 "kurumsal" çelişkisi | Açık soru | **Düştü.** Sorunun cevabı artık bir şey değiştirmiyor; anlamı kesinleşmedi, karar onu gereksiz kıldı |
+| C5 üretim süreçleri fotoğrafı | Açık | **Değişti.** Süreç kalktığı için foto sorusu yerine yeni bir çelişki (C9) |
 
 ## 0. Önce bilinmesi gerekenler (ölçüldü)
 
@@ -75,238 +111,222 @@
 
 **Not:** Sanatçı yalnızca **fon rengi** dedi; kopyalanacak olan bu. Mevcut tasarım krem (#F7F4EF) ve açık gri (#F5F6F5) üstüne kurulu. Koyu fona geçiş renk değişikliğinden büyük bir iş, ayrıntısı B3'te.
 
-## 2. Sayfa envanteri ve yeni menüye eşleme
+## 2. Sayfa envanteri ve menü — iki siteye bölünmüş hali
 
-Sanatçının menüsü (22:37):
-- **Galeri** → Mimari Duvar Panoları · Resimli Seramikler · Heykeller
-- **Object** → Antik dönem replikaları · (özel tasarım objeler)
-- **Studio** → Hakkımızda · Üretim süreçleri · Sergiler
-- **İletişim** + Instagram
+**Sanatçının 22:37 menüsü** tek site varsayımıyla yazılmıştı:
+- Galeri: Panolar · Resimli · Heykeller
+- Object
+- Studio: Hakkımızda · Üretim süreçleri · Sergiler
+- İletişim + Instagram
 
-| Mevcut adres | Site | Yeni yeri | İşlem |
+İki siteye, 10 Ekim ürün ayrımı bozulmadan bölünmüş önerisi:
+
+**Uart Galeri** (bireysel / sanat):
+- **Galeri** ▾ → Resimli Seramikler · Heykeller · *Mimari Duvar Panoları ↗*
+  - Panolar galeri sitesinde gösterilmez. Menüde kurumsal siteye giden dış link olarak yer alır.
+  - Böylece sanatçının "Galeri altında panolar" isteği karşılanır, ayrım da bozulmaz.
+  - Bu bir öneri; B7 ile birlikte Çağrı karar verir.
+- **Object** ▾ → Antik Dönem Replikaları (kaşık koleksiyonu fotoğraflar gelince)
+- **Studio** ▾ → Hakkımızda · Sergiler (· Üretim süreçleri? → C9)
+- **İletişim** + Instagram ikonu (sağ üst)
+
+**Uart Kurumsal** (mimar / kurum):
+- **Projeler** (Panolar · Heykeller sekmeleri)
+- **Hakkımızda**
+- **İletişim** + Instagram ikonu
+- ~~Süreç~~ kalkar (10:54).
+- Galeriye çapraz link durur.
+
+| Mevcut adres | Site | Yeni durum | İşlem |
 |---|---|---|---|
-| `/` ana sayfa | galeri | Ana sayfa (panoyla açılır) | Yeniden kurulur |
-| `/kurumsal` (kurumsal ana) | kurumsal | Ana sayfaya birleşir (B1'e bağlı) | 301 → `/` |
-| `/galeri` (tüm eserler) | galeri | Galeri | Kalır, panolar da girer |
-| `/koleksiyonlar` | galeri | Galeri / Object açılır menüsü | 301 → `/galeri` |
-| `/koleksiyonlar/mimari-…` · `resimli-…` · `seramik-heykeller` | galeri | Galeri alt başlıkları | Kalır (adres aynı) |
-| `/koleksiyonlar/antik-donem-replikalari` | galeri | Object | Kalır |
-| `/kurumsal/projeler` + `/projeler/[slug]` | kurumsal | Galeri → Mimari Duvar Panoları (proje künyesiyle) | 301 → pano koleksiyonu / `/urun/[slug]` |
-| `/urun/[slug]` | galeri | Eser sayfası | Kalır |
+| `/` | galeri | Ana sayfa | Kalır; özel sipariş ve Instagram bölümleri çıkar |
+| `/galeri` | galeri | Galeri (tümü) | Kalır |
+| `/koleksiyonlar` | galeri | Menü açılırları karşılar | 301 → `/galeri` (ya da kalır, B8) |
+| `/koleksiyonlar/[slug]` | galeri | Galeri / Object alt başlıkları | Kalır |
+| `/urun/[slug]` | galeri | Eser sayfası | Kalır; "Özel sipariş →" linki çıkar |
 | `/hakkimizda` | galeri | Studio → Hakkımızda | Kalır |
-| `/kurumsal/hakkimizda` | kurumsal | Birleşir | 301 → `/hakkimizda` |
-| `/kurumsal/surec` | kurumsal | Studio → Üretim süreçleri (kısaltılmış) | Yeni adres `/uretim` + 301 |
-| `/sergi/bozcaada-2010` | galeri | Studio → Sergiler (detay) | Kalır |
-| — (yok) | | Studio → **Sergiler listesi** | **Yeni sayfa** `/sergiler`. Veri `exhibitions` tablosunda hazır |
-| `/ozel-siparis` | galeri | **Kalkar** (A3) | 301 → `/iletisim` |
-| `/iletisim` + `/kurumsal/iletisim` | ikisi | İletişim | Tekilleşir, 301 |
-| `/teknik` | | | Zaten 301 (antik koleksiyon) |
-| `/[melike\|seref]/…` | galeri | Sanatçı siteleri (ayrı alan adı, B5) | Bugünkü 301'ler yön değiştirir |
+| — | galeri | Studio → **Sergiler listesi** | **Yeni** `/sergiler` (veri `exhibitions` tablosunda) |
+| `/sergi/bozcaada-2010` | galeri | Sergiler detayı | Kalır |
+| `/ozel-siparis` | galeri | **Kalkar** | 301 → `/iletisim` |
+| `/` (kurumsal) | kurumsal | Ana sayfa | Kalır; "Süreç" özet bölümü çıkar |
+| `/projeler`, `/projeler/[slug]` | kurumsal | Projeler | Kalır |
+| `/surec` | kurumsal | **Kalkar** | 301 → `/projeler` |
+| `/hakkimizda`, `/iletisim` | kurumsal | | Kalır |
+| `/[melike\|seref]/…` | galeri | Sanatçı sayfaları | Kalır (B5 ertelendi) |
 
-**Kaşık koleksiyonu:** Fotoğraf yok → **menüye girmez, boş bölüm açılmaz.** Fotoğraflar gelince "Object" altına yeni bir kategori olarak eklenir; bunun için veri modeline bir kategori satırı yeterli.
+**Kaşık koleksiyonu:** Fotoğraf yok → **menüye girmez, boş bölüm açılmaz.**
 
-**SEO kuralı:** Yukarıdaki her "301" satırı `src/lib/site-routing.ts` içinde test edilerek eklenir.
-- Mevcut 20 testin yanına her yönlendirme için bir test gelir.
-- `src/app/sitemap.ts` bugün **yok**. Yeni yapıyla birlikte yazılır (SEO-GECIS-KONTROL §4).
-- noindex olduğu sürece sitemap zarar vermez; `robots.txt` Disallow kalır.
+**SEO kuralı:**
+- Her yeni 301 (`/ozel-siparis`, `/surec`, varsa `/koleksiyonlar`) `src/lib/site-routing.ts` içinde, testiyle eklenir.
+- `src/app/sitemap.ts` bugün **yok**; site başına kendi sayfalarını listeleyecek şekilde yazılır (SEO-GECIS-KONTROL §4).
+- noindex sürer.
 
-## A) Hemen yapılabilir — karar gerektirmeyen, net istekler
+## 2b. Satışa dönük öğeler taraması ("buradan satış olmayacak", 10:36)
 
-> **Sıra:** A1–A3 ve A5, B1'den bağımsız; önce bunlar yapılabilir. A4 ve A6, B1/B2 kararından sonra yapılırsa iş iki kez yapılmaz.
+Ölçüm tarihi: 13 Eki, kod + veritabanı (salt okuma).
+
+| Öğe | Durum | Öneri |
+|---|---|---|
+| Sepet / ödeme / satın al | **Yok.** Hiç kurulmadı (10 Eki: e-ticaret yok) | — |
+| Fiyat | `products.price` alanı var, **0 eserde dolu**. Eser sayfası fiyat yoksa satırı hiç göstermiyor | Değişiklik yok; alan admin'de kalabilir. Görünürde fiyat yok |
+| "Satıldı" etiketi | `is_sold` **0 eserde** işaretli | Değişiklik yok |
+| "Özel Sipariş" menü linki, footer linki, ana sayfa bölümü, eser sayfasındaki "Özel sipariş →" linki, `/ozel-siparis` sayfası ("Teklif / İletişim" düğmesi) | Var | **Kalkar** (A3) |
+| Eser sayfasındaki iletişim formu (`ContactForm productSlug`) | Var | **Kalır.** Satış değil, soru/ilgi kanalı; pazarlama ölçüsü buna dayanıyor (strateji §5) |
+| Kurumsal "Proje görüşmesi talep et" düğmesi | Var | **Kalır.** Kurumsal işte teklif/görüşme talebi satış değil, iş başlangıcı. Strateji bunu ana ölçü olarak kullanıyor |
+| `currency` sütunu (TRY varsayılan) | Var, kullanılmıyor | Dokunulmaz (veri modeli değişikliği gerekmez) |
+
+## A) Yapılacaklar — net istekler (karar beklemeyenler)
 
 **A1. Instagram üst sağ köşeye (22:24)**
-- **Ne değişir:**
-  - Header'ın sağına Instagram ikonu eklenir (dil seçicinin yanına, 44px dokunma alanı, `aria-label`).
-  - Ana sayfanın ortasındaki Instagram bölümü kalkar. Bileşen ve admin alanı silinmez, yalnızca ana sayfadan çıkar.
-- **Dosyalar:** `src/components/shared/navbar.tsx`, `kurumsal/kurumsal-navbar.tsx`, `mobile-menu.tsx`, `src/app/(main)/[locale]/page.tsx` (satır ~305).
-- **İş:** ~1 saat.
-- **Risk:** Düşük. Instagram adresi kodda var (`src/lib/social.ts`).
+- Header'ın sağına Instagram ikonu eklenir, iki sitede de (44px dokunma alanı, `aria-label`).
+- Galeri ana sayfasının ortasındaki Instagram bölümü kalkar. Bileşen ve admin alanı silinmez.
+- **Dosyalar:** `navbar.tsx`, `kurumsal-navbar.tsx`, `mobile-menu.tsx`, `(main)/[locale]/page.tsx`. Adres `src/lib/social.ts`'te.
+- **İş:** ~1 saat. **Risk:** Düşük.
 
-**A2. Sayfa başlıklarına görselli banner (21:55, "çok boş")**
-- **Ne değişir:**
-  - İç sayfaların `<h1>` alanı tam genişlikte, görselli bir başlık bandına döner.
-  - Görsel o sayfanın kendi eserlerinden seçilir; yeni fotoğraf gerekmez.
-  - Başlık görselin üstünde, okunurluk için alttan karartma ile durur.
-  - Ortak bir `PageBanner` bileşeni yazılır.
-- **Dosyalar:** Yeni `src/components/shared/page-banner.tsx`. Kullanan sayfalar: galeri, koleksiyonlar/[slug], hakkimizda, iletisim, sergi, projeler, surec.
-- **İş:** ~3–4 saat.
-- **Risk:** Düşük-orta.
-  - Görsel seçimi zevk işi; ilk seçimi ben yaparım, ekran görüntüsüyle onaya sunarım.
-  - LCP (ilk görsel) için `priority` + uygun boyut gerekir.
+**A2. Sayfa başlıklarına görselli banner (21:55)**
+- Ortak `PageBanner` bileşeni yazılır, iki sitenin iç sayfalarında kullanılır.
+- Görsel sayfanın kendi eserlerinden seçilir. İlk seçimi ben yaparım, ekran görüntüsüyle onaya sunarım.
+- **İş:** ~3–4 saat. **Risk:** Düşük-orta (görsel seçimi, LCP).
 
-**A3. Özel sipariş bölümü kalkar (21:55)**
-- **Ne değişir:**
-  - `/ozel-siparis` sayfası, menü linki ve ana sayfadaki "özel sipariş" bölümü kalkar.
-  - `/ozel-siparis` → `/iletisim` 301.
-  - Metin kaybolmasın: mevcut TR/EN metin bu plana ek olarak repoda `docs/kaldirilan-metinler/` altına arşivlenir.
-- **Dosyalar:** `src/app/(main)/[locale]/ozel-siparis/`, `navbar.tsx` (commissions linki), `page.tsx` (ana sayfa bölümü), `src/messages/*.json`, `site-routing.ts` + test.
-- **İş:** ~1 saat.
-- **Risk:** Düşük. Formdan gelen mesajlar `messages` tablosunda; tablo silinmez.
+**A3. Özel sipariş kalkar (21:55, teyit 10:54)**
+- Kalkacaklar:
+  - `/ozel-siparis` sayfası
+  - Galeri menü linki
+  - Footer linki
+  - Ana sayfa bölümü
+  - Eser sayfasındaki "Özel sipariş →" linki
+- `/ozel-siparis` → `/iletisim` 301.
+- Metin `docs/kaldirilan-metinler/` altına arşivlenir.
+- **Dosyalar:** `(main)/[locale]/ozel-siparis/`, `navbar.tsx`, `footer.tsx`, `(main)/[locale]/page.tsx`, `urun/[slug]/page.tsx`, `src/messages/*.json`, `site-routing.ts` + test.
+- **İş:** ~1 saat. **Risk:** Düşük; gelen mesajlar `messages` tablosunda kalır.
 
-**A4. Üretim süreci sadeleşir (21:55, "bu kadar ayrıntılı gerek yok")**
-- **Ne değişir:**
-  - `/kurumsal/surec` beş adımlı uzun anlatım kısalır: adım başına 1–2 cümle, tek ekran.
-  - Yapım/montaj fotoğraflarından (87 adet, mevcut) birkaçı eşlik eder.
-  - Yeni bilgi yazılmaz, mevcut metin kısaltılır.
-  - Kısaltılmış metin önce Çağrı'ya gösterilir.
-- **Dosyalar:** `src/app/(kurumsal)/[locale]/kurumsal/surec/page.tsx`, `src/messages/{tr,en}.json` (`steps.s1–s5`).
-- **İş:** ~2 saat.
-- **Risk:** Düşük.
-- **Bağımlılık:** B1'e göre sayfanın adresi değişir (`/uretim`), içerik değişmez.
+**A4. Süreç kalkar (10:54)** — *dün "kısalt" idi, artık "kaldır"*
+- Kalkacaklar:
+  - Kurumsal `/surec` sayfası
+  - Menü linki
+  - Footer linki
+  - Ana sayfadaki "Süreç" özet bölümü ve "Süreci incele →" linki
+- `/surec` → `/projeler` 301.
+- Proje sayfalarındaki **"Yapım ve montaj" fotoğrafları kalır.** Onlar süreç anlatımı değil, işin kanıtı (strateji §3).
+- Metin (adımlar s1–s5, TR/EN) `docs/kaldirilan-metinler/` altına arşivlenir.
+- **Dosyalar:** `(kurumsal)/[locale]/kurumsal/surec/`, `kurumsal-navbar.tsx`, `kurumsal-footer.tsx`, `kurumsal/page.tsx` (~satır 189), `src/messages/*.json`, `site-routing.ts` + test.
+- **İş:** ~1 saat. **Risk:** Düşük.
 
-**A5. Ana sayfa bir seramik pano görseliyle açılır (21:55 + 22:24)**
-- **Ne değişir:**
-  - Hero'nun ilk görseli bir mimari pano olur. Bugün galeri hero'sunda pano yok (panolar yalnızca kurumsalda).
-  - Hangi pano: ilk seçimi ben yaparım, en güçlü "mekânda" kare. Ekran görüntüsüyle onay.
-- **Dosyalar:** `src/app/(main)/[locale]/page.tsx` (hero), `src/lib/site.ts` (pano kategorisi galeriye açılırsa).
-- **İş:** ~1–2 saat.
-- **Risk:** **B1'e bağlı.**
-  - İki site kalırsa panoyu galeri hero'suna koymak, 10 Ekim ayrımıyla çelişir ("panolar kurumsalda").
-  - Tek site kararında doğal olarak çözülür.
-  - → A'da duruyor, ama B1'den sonra yapılmalı.
+**A6. Menü (22:37), iki siteye bölünmüş haliyle (§2)**
+- Galeri'de açılır menüler: Galeri ▾ · Object ▾ · Studio ▾.
+- Yeni `/sergiler` listesi.
+- 301'ler + testler, `sitemap.ts`.
+- **İş:** ~1 gün. **Risk:** Orta (iç linkler, kırık link taraması şart).
+- **Bağımlılık:** C6 (menü adları), C9 (Studio'da süreç var mı) ve B7 (panolar galeri menüsünde dış link mi). Bunlar gelmeden menü iskeleti kurulabilir, etiketler sonra.
 
-**A6. Yeni menü (22:37)**
-- **Ne değişir:** §2'deki yapı. Açılır alt menüler (Galeri ▾, Object ▾, Studio ▾), mobilde akordeon.
-- **Dosyalar:** `navbar.tsx`, `mobile-menu.tsx`, `kurumsal-navbar.tsx` (B1'e göre kalkabilir), `src/messages/*.json`, yeni `/sergiler` sayfası, `site-routing.ts` 301'leri + testler, yeni `sitemap.ts`.
-- **İş:** ~1–1,5 gün (sergiler sayfası ve 301 testleri dahil).
-- **Risk:**
-  - Orta. Bütün iç linkler değişir; kırık link taraması (crawl) şart.
-  - İçerik net, ama **hangi sitede** kurulacağı B1'e bağlı. "Galeri" menüsü panoları içerdiği için bu menü iki site yapısında galeri sitesine oturmaz.
-  - → B1'den sonra.
+## B) Çağrı'nın kararı gerekiyor
 
-## B) Çağrı'nın kararı gerekiyor — yapıyı/stratejiyi değiştirenler
+**~~B1. Tek site / iki site~~ → KAPANDI: iki site.**
+- 10:52, sanatçı Çağrı'ya bırakarak kabul etti; ayrıntı yukarıdaki "Güncelleme" bölümünde.
 
-**B1. Tek site mi, iki site mi? (22:14 — 10 Ekim kararını değiştirir)**
+**~~B2. Tasarım dili~~ → DÜŞTÜ.** İki site, iki dil (10 Eki).
 
-- **Sanatçının cümlesi:** "İki site olmasın bence, sanatçı bu sadece kurumsal bir site olsun. Sanatçı siteleri ayrı olarak yapılabilir."
-- **Bugünkü karar:** KARARLAR-2026-10-10 §1, "iki ayrı alan adı, ürün bazlı".
-- Bunu ben değiştiremem. Seçenekler:
+**B3. Koyu fon (21:55 + 21:59) — DURUYOR, kapsamı daraldı**
+- Referans: #2F2E2E antrasit, #232323 iç kutu, #DBDBDB metin (§1).
+- Referans site bir **sanatçı** sitesi; bireysel tarafa, yani **galeriye** daha yakın.
+- Seçenekler:
+  - (a) Yalnızca galeri koyu
+  - (b) İki site koyu
+  - (c) Galeri kısmen koyu (header/hero/footer)
+  - (d) Krem kalır
+- Bedel ve riskler dünkü gibi:
+  - Token'lar ters döner.
+  - 13 dosyada sabit renk var.
+  - Kurumsal vurgu #1F4E5A koyu fonda 1.48:1, yeni renk gerekir.
+  - Logo koyu fonda test edilmeli.
+  - Açık fonda çekilmiş eser fotoğrafları kontrol edilmeli.
+- Galeri için ~1 gün.
+- Önce iki örnek ekran görüntüsü öneririm.
 
-| | Seçenek 1 — **Tek Uart sitesi** (sanatçının menüsüyle) + sanatçı siteleri ayrı | Seçenek 2 — **İki site kalır**, her birine sanatçının istekleri uygulanır | Seçenek 3 — **Tek site, ama "Mimari" bölümü proje diliyle** (kurumsal sayfaların proje künyesi/yapım akışı korunur, ayrı alan adı olmaz) |
-|---|---|---|---|
-| Sanatçının mesajına uyum | Tam | 22:14 ile çelişir | Tam |
-| Alan adı | 1 (Uart) + sanatçılar için 2 (melikedogan.com / serefdogan.com, B5) | 2 | 1 + 2 |
-| Vercel | `uart-galeri` kalır; `uart-kurumsal` emekli (vercel.app 301) | İkisi de kalır | Seçenek 1 ile aynı |
-| Heykel çift metni (10 Eki §2) | Tek metin seçilmeli (B4) | Aynen kalır | Heykel sayfasında iki metin yan yana olabilir (B4) |
-| Kurumsal sayfalar (projeler, yapım kareleri, künye tablosu) | Pano eser sayfalarına taşınır, sayfalar 301 | Kalır | Pano sayfaları "proje" formatını korur |
-| İş | ~3–4 gün (menü + birleştirme + 301 + sitemap + testler) | ~1,5 gün (yalnızca A listesi) | ~4 gün |
-| SEO | Bugün ucuz (noindex, alan adı yok). 301'ler `uart-kurumsal.vercel.app` ve eski yollar için | Değişmez | Seçenek 1 ile aynı |
-| Kaybolan | Ayrı "mimar/kurum" kapısı, kurumsal tasarım dili (Inter + petrol mavisi) | Hiçbir şey | Az: kurumsal dil bölüm içinde yaşar |
+**~~B4. Heykel metni~~ → DÜŞTÜ.** Her site kendi metnini gösteriyor (bugünkü hali).
 
-- **Benim notum, karar değil:**
-  - Drive'daki klasör yapısı (3 Ekim) ve 22:37 menüsü tek siteyi işaret ediyor.
-  - 21:55 ile 22:14 arasındaki çelişki (C1) netleşmeden kod yazmamak gerekir.
-  - "Kurumsal" kelimesi iki anlama da gelebiliyor.
+**B5. Sanatçı siteleri — ERTELENDİ**
+- "Ayrı yapılabilir" önerisi tek site fikrinin parçasıydı.
+- Sanatçı sayfaları galeri içinde kalır.
+- Ayrı alan adına (`melikedogan.com` / `serefdogan.com`) bağlamak bağımsız bir karar; bu turda değil.
 
-**B2. Hangi tasarım dili kalır? (B1 = tek site ise)**
-- Galeri dili: EB Garamond + Jost, krem.
-- Kurumsal dil: Inter + IBM Plex Mono, açık gri, petrol mavisi.
-- Sanatçı "sadece kurumsal bir site olsun" diyor ama referans olarak koyu, tırnaksız fontlu bir sanatçı sitesi verdi.
-- **Seçenekler:**
-  - (a) Galeri dili + koyu fon
-  - (b) Kurumsal dil + koyu fon
-  - (c) Galeri başlık fontu + kurumsal gövde fontu
-- Hangisi seçilirse seçilsin, Türkçe karakter testi tekrar yapılır.
+**B6. Eski `sanat-galeri.vercel.app` demosu — DURUYOR**
+- Kapatılsın mı, galeriye mi yönlensin?
 
-**B3. Fon rengi: koyuya geçilecek mi? (21:55 + 21:59)**
-- **Bugün:**
-  - Krem (#F7F4EF) ve açık gri (#F5F6F5).
-  - Krem fon tasarım turunda Çağrı onayıyla seçildi (onay 2 / 5).
-- **Referans:** #2F2E2E (antrasit), #232323 iç kutular, #DBDBDB metin.
-- **Seçenekler:**
-  - (a) Tam koyu site.
-  - (b) Koyu header/hero/footer + açık içerik bölümleri. Referanstaki activity sayfası da açık gri bant kullanıyor.
-  - (c) Krem kalır, yalnızca bazı bölümler koyu.
-- **Bedel (a için):**
-  - Bütün renk token'ları ters döner (`globals.css`).
-  - Elle yazılmış `text-[#2C2C2C]` gibi sabit renkler (13 dosyada) token'a çevrilmeli.
-  - Kurumsal vurgu rengi koyu fonda 1.48:1 → yeni vurgu rengi gerekir.
-  - Logo koyu fonda test edilmeli (açık sürümü var mı?).
-  - Admin paneli etkilenmez.
-  - ~1 gün + görsel kontrol.
-- **Risk:** Orta. Ürün fotoğraflarının bir kısmı beyaz/krem fonda çekilmiş; koyu sayfada "kutu" gibi durabilirler. Ekran görüntüsüyle karşılaştırma önerilir.
+**B7. Galeri ana sayfası panoyla mı açılsın? (22:24) — YENİ**
+- Sanatçı bunu tek site varsayımıyla söyledi.
+- Kurumsal site zaten panoyla açılıyor.
+- Galeri için seçenekler:
+  - (a) Galeri kendi eserleriyle açılır. Panolar yalnızca menüdeki dış linkte görünür.
+  - (b) Galeri hero'sunda bir pano karesi + "Mimari projeler →" kurumsal linki.
+- (b), 10 Ekim ayrımını hafifçe deler ama sanatçının isteğine yakın.
+- Benim önerim **(a)**. Gerekçe: Strateji §2'deki "ilk 10 saniyede tek şey" kuralı; bireysel ziyaretçiye ilk ekranda mimari pano göstermek, onu kurumsal tarafa yönlendirir.
+- Karar Çağrı'nın.
 
-**B4. Heykel metni (B1 = tek site ise)**
-- 10 Ekim §2: her heykelin iki metni var (galeri: hikâye, kurumsal: ölçü/mekân).
-- Tek sitede hangisi gösterilir? Seçenekler:
-  - Galeri metni
-  - Kurumsal metin
-  - İkisi alt alta ("Eser" + "Mekânda uygulama")
-- Veri silinmez, yalnızca gösterim kararı.
+**B8. `/koleksiyonlar` sayfası kalsın mı? — YENİ, küçük**
+- Açılır menü koleksiyonları zaten gösteriyor.
+- Seçenekler: sayfa kalır, ya da `/galeri`'ye 301.
 
-**B5. Sanatçı siteleri (22:14 "ayrı olarak yapılabilir")**
-- Kodda hazır sayfalar var; ayrı alan adlarına bağlanmaları gerekir.
-  - Hangi alan adları? `melikedogan.com` / `serefdogan.com` kodda eski adres olarak tanımlı.
-  - Hangi Vercel projesi?
-- Kapsam ve zamanlama Çağrı'nın. Bu turun işi mi, sonraki tur mu?
-- **Not:** Melike'nin ortak sergileri sorusu (TODO'da açık) burada yeniden önem kazanıyor.
+## C) Sanatçıya sorulacaklar (soruları Çağrı iletecek)
 
-**B6. Eski `sanat-galeri.vercel.app` demosu** (TODO'da açık): B1 kararıyla birlikte kapatılabilir.
+**~~C1. "Kurumsal" çelişkisi~~ → DÜŞTÜ.**
+- İki site kararı soruyu gereksiz kıldı.
+- Not: Hangi anlamın kastedildiği hâlâ bilinmiyor; bunu "çözüldü" diye değil, "gereksizleşti" diye kaydediyorum.
 
-## C) Belirsiz — sanatçıya sorulmalı (soruları Çağrı iletecek)
+**C2. Fon rengi ne kadar koyu? — DURUYOR** (B3 ile birlikte)
+> "Örnek sitedeki koyu gri fonu galeri sitesinin **tamamında** mı istiyorsunuz, yoksa giriş/üst kısımda mı? Mimar/kurum sitesinde de olsun mu? Önce bir ekran görüntüsüyle gösterelim mi?"
 
-**C1. Çelişki: 21:55 "kurumsal diye ayırmasak mı" ↔ 22:14 "bu sadece kurumsal bir site olsun"**
-- Kendi yorumumu gerçek gibi sunmuyorum.
-- İki okuma da mümkün:
-  - (i) "Kurumsal" = **şirket sitesi** (Uart'ın kendisi), yani ayrı bir "kurumsal bölüm" olmasın, tek şirket sitesi olsun.
-  - (ii) "Kurumsal" = **mimari panolar sitesi**, yani galeri kalksın, yalnızca panolar kalsın.
-- 22:37 menüsü resimli seramik, heykel ve antik replikaları da içerdiği için (i) daha tutarlı görünüyor, ama doğrulanmalı.
+**C3. Fotoğraf azaltma — DURUYOR**
+> "Fotoğrafları azaltma isteği **hangi sayfalar** için? Size her eser için benzer kareleri yan yana gösteren bir sayfa hazırlayalım, çıkarılacakları işaretleyin."
+
+- Ölçüm: Resimli Seramikler'de eser başına en çok 24 fotoğraf. Silme yok, gizleme var.
+
+**C4. Hakkımızda: atölye fotoğrafları — DURUYOR**
+> "Atölyede çalışırken fotoğrafları Drive'daki **Studio → Hakkımızda** klasörüne yükleyebilir misiniz?"
+
+- Strateji açısından önemi arttı: bireysel tarafın ana içeriği bu (strateji §4).
+
+**~~C5. Üretim süreçleri fotoğrafı~~ → C9'a dönüştü.**
+
+**C6. Menü adları: "Object" / "Studio" — DURUYOR**
+> "Türkçe sayfada 'Object' ve 'Studio' İngilizce mi kalsın, 'Objeler' / 'Stüdyo' mu olsun?"
+
+**C7. Açılışta tek pano mu, birkaç pano mu — kapsamı değişti**
+- Yalnızca kurumsal ana sayfa için geçerli.
+- Galeri için karar B7.
+
+**C8. Kaşık koleksiyonu** — Hatırlatma; fotoğraflar gelince eklenir.
+
+**C9. "Süreç kaldırılsın" ↔ menüde "Studio → Üretim süreçleri" — YENİ**
+- 10:54 (13 Eki): *"süreç ve özel sipariş kısımlarını kaldıralım"*.
+- 22:37 (11 Eki) menüsünde ise Studio altında "Üretim süreçleri" başlığı var. Drive'da da `Studio/Üretim süreçleri` klasörü var (boş).
+- Yeni mesaj eskisini geçersiz kılıyor olabilir. Ya da kalkan şey kurumsaldaki uzun süreç sayfasıdır, Studio'da kısa bir "üretim" sayfası istenmeye devam ediyordur.
+- Kendi başıma karar vermiyorum.
+- **Varsayılan, cevap gelene kadar:** Süreç sayfası kalkar, Studio menüsünde "Üretim süreçleri" **yer almaz**. Boş bölüm açmama kuralıyla da tutarlı.
 - **Soru:**
-  > "Hocam, 'iki site olmasın, sadece kurumsal olsun' derken: bütün eserlerin (panolar, resimli seramikler, heykeller, antik replikalar) **tek bir Uart sitesinde**, gönderdiğiniz menüyle (Galeri / Object / Studio) durmasını mı kastediyorsunuz? Yoksa sitede **yalnızca mimari panolar** mı kalsın?"
-
-**C2. Fon rengi ne kadar koyu? (21:55 + 21:59)**
-> "Örnek sitedeki koyu gri fonu **sitenin tamamında** mı istiyorsunuz, yoksa yalnızca giriş/üst kısımda mı? Eser fotoğraflarının bir kısmı açık fonda çekildi; koyu sayfada nasıl durduğunu bir ekran görüntüsüyle göstermemizi ister misiniz?"
-
-**C3. "Bazı resimler azaltılabilir, benzer fotoğraflar bir arada" (21:55)**
-- Hangi sayfa, hangi eser belli değil.
-- Ölçülen yoğunluk:
-  - Resimli Seramikler'de eser başına ortalama 17, en çok **24** fotoğraf.
-  - Panolarda en çok 18.
-- **Öneri:** Benzer kareleri gruplayan bir temas tablosu (contact sheet) hazırlarım, sanatçı silinecekleri işaretler. Hiçbir fotoğraf silinmez, `is_visible`/sıra ile gizlenir.
-- **Soru:**
-  > "Fotoğrafları azaltma isteği **hangi sayfalar** için? Eser sayfalarındaki fotoğraf galerisi mi, yoksa ana sayfadaki 'Sergiden kareler' / 'Yapımdan kareler' şeritleri mi? Size her eser için benzer kareleri yan yana gösteren bir sayfa hazırlayalım, çıkarılacakları işaretleyin."
-
-**C4. Hakkımızda: atölye fotoğrafları (22:07)**
-- Drive'da `Studio/Hakkımızda` klasöründe yalnızca iki özgeçmiş görseli var; **atölyede çalışırken fotoğraf yok.**
-- Uydurma/stok görsel konamaz.
-- **Soru:**
-  > "Atölyede çalışırken fotoğrafları Drive'daki **Studio → Hakkımızda** klasörüne yükleyebilir misiniz? Gelene kadar Hakkımızda sayfası bugünkü haliyle kalacak."
-
-**C5. Üretim süreçleri: fotoğraf ve kapsam**
-- `Studio/Üretim süreçleri` klasörü **boş**.
-- Elimizde yalnızca panoların yapım/montaj fotoğrafları var (87).
-- **Soru:**
-  > "Üretim süreçleri sayfası için klasöre fotoğraf koyacak mısınız? Koymayacaksanız pano yapım/montaj fotoğraflarıyla kısa bir anlatım (4–5 adım, adım başına bir-iki cümle) yeterli mi?"
-
-**C6. Menü adları: "Object" / "Studio"**
-- TR sayfada İngilizce mi kalsın ("Object", "Studio"), Türkçe mi olsun ("Objeler", "Stüdyo")?
-- Drive klasörleri "Objects" ve "Studio".
-- **Soru:**
-  > "Menüde Türkçe sayfada 'Object' ve 'Studio' İngilizce mi kalsın, yoksa 'Objeler' / 'Stüdyo' mu yazalım?"
-
-**C7. "Sayfa açıldığında ilk nasıl açılacak" (21:55)**
-- 22:24 mesajı "seramik panolardan bir görselle başlayabilir" diyerek bunu büyük ölçüde cevaplıyor (A5).
-- Tek açık nokta: Tek görsel mi, yoksa birkaç pano görselinin sırayla geçtiği bir giriş mi?
-- **Soru:**
-  > "Açılışta tek bir büyük pano fotoğrafı mı olsun, yoksa birkaç pano sırayla mı geçsin?"
-
-**C8. Kaşık koleksiyonu (22:37)** — Soru değil, hatırlatma: fotoğraflar `Objects/` altına yeni bir klasörle gelince eklenir. O zamana kadar menüde görünmez.
+  > "Süreç kısmını kaldırıyoruz. Gönderdiğiniz menüde 'Studio' altında 'Üretim süreçleri' başlığı da vardı; o da tamamen kalksın mı, yoksa ileride atölye/üretim fotoğraflarıyla kısa bir sayfa mı olsun?"
 
 ## 3. Önerilen sıra
 
-1. **Çağrı:** B1 (+ B2, B3, B4) kararları. C1–C7 soruları sanatçıya iletilir.
-2. **Kararı beklemeden yapılabilecekler:** A1 (Instagram), A2 (banner bileşeni), A3 (özel sipariş). Hepsi iki yapıda da geçerli.
-3. **B1'den sonra:**
+1. **Hemen (karar beklemeyen):**
+   - A3 (özel sipariş)
+   - A4 (süreç)
+   - A1 (Instagram)
+   - A2 (banner)
+2. **Çağrı:** B3, B6, B7, B8. Sanatçıya C2, C3, C4, C6, C7, C9.
+3. **Sonra:**
    - A6 (menü + `/sergiler` + 301 + sitemap)
-   - A5 (pano hero)
-   - A4 (süreç kısaltma)
-   - B3'e göre renk geçişi
-4. **Her adım sonunda:** testler, kırık link taraması, iki ekran genişliğinde (390 / 1440) ekran görüntüsü. noindex kalır. Deploy Çağrı onayıyla.
+   - B3'e göre renk
+4. **Her adım sonunda:**
+   - Testler
+   - Kırık link taraması
+   - 390 / 1440 ekran görüntüsü
+   - noindex kalır; deploy Çağrı onayıyla.
 
 ## 4. Çağrı'ya sorular (özet)
 
-1. **B1:** Tek site mi (Seçenek 1/3), iki site mi (Seçenek 2)? C1 cevabı gelmeden mi karar verilsin, gelince mi?
-2. **B3:** Koyu fona geçiş: tam mı, kısmi mi? Önce örnek ekran görüntüsü ister misin?
-3. **B4:** Tek sitede heykel metni: galeri, kurumsal, ikisi birden?
-4. **B5:** Sanatçı siteleri bu turda mı? Alan adları hangileri?
-5. **Başlangıç:** A1–A3'e (Instagram, banner, özel sipariş) B1'i beklemeden başlayayım mı?
+1. **A1–A4'e başlayayım mı?** Kararla çelişen bir tarafı kalmadı.
+2. **B3:** Koyu fon: yalnızca galeri mi, ikisi mi, kısmi mi? Önce örnek ekran ister misin?
+3. **B7:** Galeri ana sayfası panoyla mı açılsın, kendi eserleriyle mi? (Önerim: kendi eserleri.)
+4. **B6:** Eski demo kapatılsın mı?
+5. **B8:** `/koleksiyonlar` sayfası kalsın mı?
