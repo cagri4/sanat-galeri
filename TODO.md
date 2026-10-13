@@ -42,9 +42,9 @@
 - [x] Strateji §7.1 "sanatçıya sorulmayacak" notuyla kapatıldı
 - [x] Türkçe karakter kontrolü yapıldı (menü + banner)
 - [x] Mobil 390 px kontrolü yapıldı
-- [ ] Ekran görüntüleri kanıt dosyasına konup Çağrı'ya onaya sunuldu
+- [x] Ekran görüntüleri kanıt dosyasına konup Çağrı'ya onaya sunuldu (preview-shots/a-listesi/KANIT.md)
 - [~] Hakkımızda atölye fotoğrafları eklendi - sanatçıdan gelecek; gelmezse sayfa bugünkü haliyle kalır, bekleme sebebi değil
 - [x] Heykel künyelerinde eksik yıl (16/16) ve ölçü (11/16) listesi çıkarıldı
 - [~] Temas tablosundan işaretlenen fotoğraflar sitede gizlendi - sanatçının işaretlemesi bekleniyor; ayrıca product_images'ta is_visible alanı YOK, gizlemek için şema değişikliği (Çağrı onayı) gerekli
-- [ ] Değişiklikler commit edildi (deploy YOK)
+- [x] Değişiklikler commit edildi (deploy YOK)
 - [~] İki siteye deploy edildi - ekran görüntüsü onayı bekleniyor (Çağrı)
