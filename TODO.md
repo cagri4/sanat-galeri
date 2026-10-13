@@ -73,15 +73,17 @@
 - [x] Şeref'in kartı gerçek atölye fotoğrafıyla değişti
 - [x] Hakkımızda sayfası atölye fotoğraflarıyla güncellendi
 - [x] Masalın Hafızası banner'ı aday kareyle canlıda (Çağrı onayı)
-- [~] Banner adayının sanatçının kastettiği "kaf dağından gelenler" olduğu teyit edildi - Çağrı sanatçıya soracak
+- [x] Banner adayı sanatçı tarafından teyit edildi (13 Eki 23:47)
 - [x] Heykeller iki ayrı sayfa (Masalın Hafızası / Anadolu Ekininde Güzeller), menü Galeri altında iki başlık
 - [x] Heykel adresleri için 301'ler testleriyle, sitemap güncellendi
 - [x] Önizleme ekran görüntüleri Çağrı'ya onaya sunuldu
 - [x] Atölye + seriler + aday banner deploy edildi, vercel-bekle.sh ile hash doğrulandı
 - [x] Canlıda kontrol (iki heykel sayfası, 301, banner, atölye, Şeref kartı) + ekran görüntüleri
-- [ ] Banner dosyası Drive'da doğrulandı (dünkü adayla aynı mı)
-- [ ] Masalın Hafızası banner üst yazısı "Anadolu'dan Günümüze Seramik Bedenler" oldu
-- [ ] Şahmaran klasörü Drive ↔ DB karşılaştırıldı
-- [ ] Şahmaran belgesi okundu, açıklamalar hazırlandı
-- [ ] Şahmaran güncellemesi (yeni foto ekle / eski gizle / açıklama) SQL + yedek + geri alma hazırlandı
-- [ ] Önizleme ekran görüntüleri Çağrı'ya onaya sunuldu
+- [x] Banner dosyası Drive'da doğrulandı (dünkü adayla aynı mı)
+- [x] Masalın Hafızası banner üst yazısı "Anadolu'dan Günümüze Seramik Bedenler" oldu
+- [x] Şahmaran klasörü Drive ↔ DB karşılaştırıldı
+- [x] Şahmaran belgesi okundu, açıklamalar hazırlandı
+- [x] Şahmaran güncellemesi (yeni foto ekle / eski gizle / açıklama) SQL + yedek + geri alma hazırlandı
+- [x] Önizleme ekran görüntüleri Çağrı'ya onaya sunuldu
+- [~] Şahmaran SQL'i + banner yazısı canlıya alındı - Çağrı onayı bekleniyor
+- [~] Şahmaran III biçim satırı ve V'teki "cansab" teyit edildi - sanatçıya sorulacak
