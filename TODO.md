@@ -47,4 +47,7 @@
 - [x] Heykel künyelerinde eksik yıl (16/16) ve ölçü (11/16) listesi çıkarıldı
 - [~] Temas tablosundan işaretlenen fotoğraflar sitede gizlendi - sanatçının işaretlemesi bekleniyor; ayrıca product_images'ta is_visible alanı YOK, gizlemek için şema değişikliği (Çağrı onayı) gerekli
 - [x] Değişiklikler commit edildi (deploy YOK)
-- [~] İki siteye deploy edildi - ekran görüntüsü onayı bekleniyor (Çağrı)
+- [x] A listesi uart-galeri ve uart-kurumsal'a deploy edildi
+- [x] vercel-bekle.sh ile iki deploy doğrulandı
+- [x] Canlıda menü, banner, Instagram konumu ve 301'ler kontrol edildi
+- [ ] master push edildi (eski sanat-galeri demosu otomatik deploy)
