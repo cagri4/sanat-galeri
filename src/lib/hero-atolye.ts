@@ -14,11 +14,11 @@ export const HERO_ATOLYE: { slug: string; file: string; eser: string }[] = [
 
 /**
  * Ana sayfa "Sanatçılarımız" Şeref Doğan kartının GEÇİCİ görseli (Çağrı 13 Eki):
- * pano yerine atölyeden, KİŞİ GÖRÜNMEYEN bir kare — fırın raflarında Çanakkale
+ * pano yerine atölyeden, KİŞİ GÖRÜNMEYEN bir kare — fırının içi, raflarda Çanakkale
  * Şehitleri Anısına panosunun parçaları. Kişili kare seçilmedi: kartta "bu kişi
  * Şeref" izlenimi verir, kim olduğu doğrulanmadı. Gerçek portre gelince değişir.
  */
-export const SEREF_KART_ATOLYE = { slug: 'yapim-canakkale-sehitleri-anisina', file: 'canakkale-sehitleri-anisina-2' }
+export const SEREF_KART_ATOLYE = { slug: 'yapim-canakkale-sehitleri-anisina', file: 'canakkale-sehitleri-anisina-1' }
 
 function matches(p: { exhibitionSlug: string; url: string }, h: { slug: string; file: string }) {
   return p.exhibitionSlug === h.slug && new RegExp(`/${h.file}\\.[a-z]+$`).test(p.url)

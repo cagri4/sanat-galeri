@@ -3,8 +3,8 @@ import { HERO_ATOLYE, SEREF_KART_ATOLYE, pickAtolye, pickOne } from '@/lib/hero-
 const f = (slug: string, file: string, id = 1) => ({ id, exhibitionSlug: slug, url: `https://res.cloudinary.com/x/image/upload/v1/uarttasarim/mimari-yapim/${file}.jpg` })
 
 describe('atölye kareleri', () => {
-  it('dosya adıyla birebir eşler (-2 ile -20 karışmaz)', () => {
-    const photos = [f(SEREF_KART_ATOLYE.slug, 'canakkale-sehitleri-anisina-20', 1), f(SEREF_KART_ATOLYE.slug, 'canakkale-sehitleri-anisina-2', 2)]
+  it('dosya adıyla birebir eşler (-1 ile -10 karışmaz)', () => {
+    const photos = [f(SEREF_KART_ATOLYE.slug, 'canakkale-sehitleri-anisina-10', 1), f(SEREF_KART_ATOLYE.slug, 'canakkale-sehitleri-anisina-1', 2)]
     expect(pickOne(photos, SEREF_KART_ATOLYE)?.id).toBe(2)
   })
   it('hero sırası korunur, bulunmayan atlanır', () => {
