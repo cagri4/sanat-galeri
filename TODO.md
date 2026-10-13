@@ -86,6 +86,6 @@
 - [x] Şahmaran güncellemesi (yeni foto ekle / eski gizle / açıklama) SQL + yedek + geri alma hazırlandı
 - [x] Önizleme ekran görüntüleri Çağrı'ya onaya sunuldu
 - [~] Şahmaran III biçim satırı ve V'teki "cansab" teyit edildi - sanatçıya sorulacak
-- [ ] Banner yazısı + Şahmaran deploy edildi, vercel-bekle.sh ile hash doğrulandı
-- [ ] Şahmaran SQL'i uygulandı
-- [ ] Canlıda kontrol (banner görseli, yazısı, Şahmaran foto/açıklama) + ekran görüntüleri
+- [x] Banner yazısı + Şahmaran deploy edildi, vercel-bekle.sh ile hash doğrulandı
+- [x] Şahmaran SQL'i uygulandı
+- [x] Canlıda kontrol (banner görseli, yazısı, Şahmaran foto/açıklama) + ekran görüntüleri
