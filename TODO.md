@@ -76,4 +76,5 @@
 - [x] Heykeller iki ayrı sayfa (Masalın Hafızası / Anadolu Ekininde Güzeller), menü Galeri altında iki başlık
 - [x] Heykel adresleri için 301'ler testleriyle, sitemap güncellendi
 - [x] Önizleme ekran görüntüleri Çağrı'ya onaya sunuldu
-- [~] Atölye + seriler + banner canlıya alındı - Çağrı onayı ve banner teyidi bekleniyor
+- [ ] Atölye + seriler + aday banner deploy edildi, vercel-bekle.sh ile hash doğrulandı
+- [ ] Canlıda kontrol (iki heykel sayfası, 301, banner, atölye, Şeref kartı) + ekran görüntüleri
