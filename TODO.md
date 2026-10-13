@@ -51,3 +51,10 @@
 - [x] vercel-bekle.sh ile iki deploy doğrulandı
 - [x] Canlıda menü, banner, Instagram konumu ve 301'ler kontrol edildi
 - [x] master push edildi; eski sanat-galeri demosu e7f150c ile READY (noindex)
+- [x] Anadolu Ekininde Güzeller: DB'deki mevcut yapı çıkarıldı
+- [x] Anadolu Ekininde Güzeller: Drive ↔ DB fotoğraf karşılaştırması yapıldı
+- [x] Anadolu Ekininde Güzeller: durum raporu + ayırma planı Çağrı'ya sunuldu
+- [~] Anadolu Ekininde Güzeller: ayırma ve fotoğraf güncellemesi uygulandı - Çağrı onayı bekleniyor
+- [x] Ara soru: admin dışı düzenleme denetimi yapıldı (salt okuma; iz alanı yok, dış düzenleme belirtisi yok)
+- [~] product_images.is_visible şema değişikliği - Çağrı onayı gerekli (Anadolu + temas tablosu)
+- [~] Anadolu serisinin adı/metni/eser bazında bölünmesi - sanatçıya sorulacak (ad: Ekininde Güzeller mi Anadolu Güzelleri mi)
