@@ -72,9 +72,10 @@
 - [x] Ana giriş üçlüsü gerçek atölye fotoğraflarıyla değişti
 - [x] Şeref'in kartı gerçek atölye fotoğrafıyla değişti
 - [x] Hakkımızda sayfası atölye fotoğraflarıyla güncellendi
-- [~] "Masalın hafızası kaf dağından gelenler" fotoğrafı bulundu, Masalın Hafızası banner'ı yapıldı - o adla dosya Drive'da yok; aynı akşam eklenen geniş sergi karesi ADAY olarak önizlemede, teyit gerekli
+- [x] Masalın Hafızası banner'ı aday kareyle canlıda (Çağrı onayı)
+- [~] Banner adayının sanatçının kastettiği "kaf dağından gelenler" olduğu teyit edildi - Çağrı sanatçıya soracak
 - [x] Heykeller iki ayrı sayfa (Masalın Hafızası / Anadolu Ekininde Güzeller), menü Galeri altında iki başlık
 - [x] Heykel adresleri için 301'ler testleriyle, sitemap güncellendi
 - [x] Önizleme ekran görüntüleri Çağrı'ya onaya sunuldu
-- [ ] Atölye + seriler + aday banner deploy edildi, vercel-bekle.sh ile hash doğrulandı
-- [ ] Canlıda kontrol (iki heykel sayfası, 301, banner, atölye, Şeref kartı) + ekran görüntüleri
+- [x] Atölye + seriler + aday banner deploy edildi, vercel-bekle.sh ile hash doğrulandı
+- [x] Canlıda kontrol (iki heykel sayfası, 301, banner, atölye, Şeref kartı) + ekran görüntüleri
