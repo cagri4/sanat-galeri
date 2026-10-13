@@ -230,7 +230,9 @@
     "techniqueCta": "The terra sigillata technique",
     "railPrev": "Previous",
     "railNext": "Next",
-    "viewWork": "View work"
+    "viewWork": "View work",
+    "fromStudio": "From the studio",
+    "making": "{work}, in the making"
   },
   "exhibitionsPage": {
     "title": "Exhibitions",

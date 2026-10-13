@@ -7,6 +7,7 @@ import { categoriesForSite } from '@/lib/site'
 import Link from 'next/link'
 import CategoryFilter from '@/components/gallery/category-filter'
 import PageBanner, { bannerFromProducts } from '@/components/shared/page-banner'
+import { groupBySeries, SERIES_CATEGORY } from '@/lib/series'
 import ArtworkGrid from '@/components/gallery/artwork-grid'
 
 export async function generateMetadata({
@@ -62,6 +63,26 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
   const heading = (cat: string) =>
     t.has(`categories.${cat}`) ? t(`categories.${cat}`) : cat
 
+  // Heykeller seri alt başlıklarıyla (sanatçı 13 Eki: Anadolu Ekininde
+  // Güzeller Masalın Hafızası'ndan ayrı görünsün); diğer kategoriler düz ızgara.
+  const seriesAwareGrid = (items: typeof products, cat: string) => {
+    const groups = cat === SERIES_CATEGORY ? groupBySeries(items) : []
+    if (groups.length < 2) return <ArtworkGrid products={items} locale={locale} category={cat} />
+    return (
+      <div className="space-y-14">
+        {groups.map((g) => (
+          <div key={g.series ?? '-'}>
+            <h3 className="mb-6 flex items-baseline gap-3 text-xl text-[var(--foreground)] sm:text-2xl">
+              {g.series}
+              <span className="text-[length:var(--text-meta)] text-[var(--faint)]">{g.items.length}</span>
+            </h3>
+            <ArtworkGrid products={g.items} locale={locale} category={cat} />
+          </div>
+        ))}
+      </div>
+    )
+  }
+
   return (
     <main className="pb-16 pt-8 sm:pb-24 sm:pt-10">
       {/* Görselli başlık bandı — görsel bu sayfadaki eserlerden (admin hero sırası). */}
@@ -81,7 +102,7 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
           </h2>
           {category === 'Antik Dönem Replikaları' && antikIntro}
           <div className="mt-10">
-            <ArtworkGrid products={products} locale={locale} category={category} />
+            {seriesAwareGrid(products, category)}
           </div>
         </section>
       ) : (
@@ -104,7 +125,7 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
                 </div>
                 {cat === 'Antik Dönem Replikaları' && antikIntro}
                 <div className="mt-10">
-                  <ArtworkGrid products={items} locale={locale} category={cat} />
+                  {seriesAwareGrid(items, cat)}
                 </div>
               </section>
             )

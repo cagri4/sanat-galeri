@@ -85,6 +85,8 @@ export const productImages = pgTable('product_images', {
   altTr: text('alt_tr'),
   altEn: text('alt_en'),
   sortOrder: integer('sort_order').default(0),
+  // 0007: gizlenen (silinmeyen) fotoğraf — sitede gösterilmez.
+  isVisible: boolean('is_visible').default(true).notNull(),
 })
 
 export const portfolioItems = pgTable('portfolio_items', {

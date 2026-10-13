@@ -15,6 +15,8 @@ interface ImageData {
   altTr: string | null
   altEn: string | null
   sortOrder: number | null
+  /** false = sitede gizli (silinmedi). */
+  isVisible?: boolean
 }
 
 interface ImageUploaderProps {
@@ -92,6 +94,14 @@ export default function ImageUploader({ productId, existingImages }: ImageUpload
     }
   }
 
+  // Gizle/göster: silmeden siteden kaldırmanın yolu. Sanatçı fotoğraf
+  // yenilediğinde eski kareler buradan gizlenir, gerekirse geri açılır.
+  const handleVisibility = async (id: number, isVisible: boolean) => {
+    const result = await updateProductImage(id, { isVisible })
+    if (result.success) router.refresh()
+    else setUploadError(result.error ?? 'Görünürlük değiştirilemedi.')
+  }
+
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files ?? [])
     if (files.length === 0) return
@@ -165,7 +175,10 @@ export default function ImageUploader({ productId, existingImages }: ImageUpload
           {existingImages
             .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
             .map((image) => (
-              <li key={image.id} className="rounded-md border border-neutral-200 p-3">
+              <li
+                key={image.id}
+                className={`rounded-md border p-3 ${image.isVisible === false ? 'border-amber-300 bg-amber-50/60' : 'border-neutral-200'}`}
+              >
                 <form
                   onSubmit={(e) => {
                     e.preventDefault()
@@ -179,9 +192,14 @@ export default function ImageUploader({ productId, existingImages }: ImageUpload
                       src={image.url}
                       alt={image.altTr ?? 'Ürün görseli'}
                       fill
-                      className="object-cover"
+                      className={`object-cover ${image.isVisible === false ? 'opacity-50' : ''}`}
                       sizes="96px"
                     />
+                    {image.isVisible === false && (
+                      <span className="absolute left-1 top-1 rounded bg-amber-500 px-1.5 py-0.5 text-[11px] font-medium text-white">
+                        Gizli
+                      </span>
+                    )}
                   </div>
                   <div className="flex-1 grid grid-cols-1 gap-2 sm:grid-cols-2">
                     <input
@@ -209,6 +227,14 @@ export default function ImageUploader({ productId, existingImages }: ImageUpload
                     {savedAltId === image.id && (
                       <span className="text-sm font-medium text-green-600">✓</span>
                     )}
+                    <button
+                      type="button"
+                      onClick={() => handleVisibility(image.id, image.isVisible === false)}
+                      className="rounded-md border border-neutral-300 px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-50 transition-colors"
+                      aria-label={image.isVisible === false ? 'Görseli sitede göster' : 'Görseli sitede gizle'}
+                    >
+                      {image.isVisible === false ? 'Göster' : 'Gizle'}
+                    </button>
                     <button
                       type="button"
                       onClick={() => handleDelete(image.id)}

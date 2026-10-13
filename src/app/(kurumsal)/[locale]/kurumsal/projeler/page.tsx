@@ -8,6 +8,7 @@ import { projectNo } from '@/lib/kurumsal'
 import ProjectCard from '@/components/kurumsal/project-card'
 import Reveal from '@/components/motion/reveal'
 import PageBanner, { bannerFromProducts } from '@/components/shared/page-banner'
+import { groupBySeries, SERIES_CATEGORY } from '@/lib/series'
 import { staggerDelay } from '@/lib/motion'
 
 interface PageProps {
@@ -69,18 +70,46 @@ export default async function ProjelerPage({ params, searchParams }: PageProps) 
       {projects.length === 0 ? (
         <p className="py-20 text-[length:var(--text-meta)] text-[var(--muted)]">{t('empty')}</p>
       ) : (
-        <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((p, i) => (
-            <Reveal key={p.id} delay={staggerDelay(i)}>
-            <ProjectCard
-              href={k(`/projeler/${p.slug}`)}
-              no={projectNo(i)}
-              title={isTr ? p.titleTr : p.titleEn}
-              image={p.images[0]?.url ?? null}
-              meta={[p.year ? String(p.year) : null, p.collection, isTr ? p.dimensionsTr : p.dimensionsEn]}
-            />
-            </Reveal>
-          ))}
+        // Panolar tek blok; heykeller SERİ başlıklarıyla (Masalın Hafızası /
+        // Anadolu Ekininde Güzeller — sanatçı 13 Eki). Numara her blokta 01'den.
+        // Tek blok varsa (ör. yalnız panolar) başlık çizilmez — sekme zaten söylüyor.
+        <div className="mt-12 space-y-20">
+          {(() => {
+            const blocks = [
+              ...(() => {
+                const panolar = projects.filter((p) => p.category !== SERIES_CATEGORY)
+                return panolar.length ? [{ key: 'panolar', title: label('Mimari Duvar Panoları'), items: panolar }] : []
+              })(),
+              ...groupBySeries(projects.filter((p) => p.category === SERIES_CATEGORY)).map((g) => ({
+                key: g.series ?? 'heykel',
+                title: g.series ?? label(SERIES_CATEGORY),
+                items: g.items,
+              })),
+            ]
+            return blocks.map((b) => (
+              <section key={b.key} aria-labelledby={blocks.length > 1 ? `blok-${b.key}` : undefined}>
+                {blocks.length > 1 && (
+                  <div className="mb-8 flex items-baseline gap-4 border-b border-[var(--rule)] pb-3">
+                    <h2 id={`blok-${b.key}`} className="text-2xl sm:text-3xl">{b.title}</h2>
+                    <span className="font-mono text-[12px] text-[var(--muted)]">{b.items.length}</span>
+                  </div>
+                )}
+                <div className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+                  {b.items.map((p, i) => (
+                    <Reveal key={p.id} delay={staggerDelay(i)}>
+                    <ProjectCard
+                      href={k(`/projeler/${p.slug}`)}
+                      no={projectNo(i)}
+                      title={isTr ? p.titleTr : p.titleEn}
+                      image={p.images[0]?.url ?? null}
+                      meta={[p.year ? String(p.year) : null, p.collection, isTr ? p.dimensionsTr : p.dimensionsEn]}
+                    />
+                    </Reveal>
+                  ))}
+                </div>
+              </section>
+            ))
+          })()}
         </div>
       )}
     </main>

@@ -3,11 +3,11 @@ import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getProducts } from '@/lib/queries/gallery'
-import { headers } from 'next/headers'
 import { ARTIST_AVATARS, AVATAR_CLASS } from '@/lib/artist-avatars'
 import { getCrossDomainLinks } from '@/components/shared/navbar'
 import { CATEGORIES, CATEGORY_SLUGS } from '@/lib/categories'
-import { categoriesForSite, isOnSite, kurumsalPath } from '@/lib/site'
+import { categoriesForSite, isOnSite } from '@/lib/site'
+import { HERO_ATOLYE, pickAtolye } from '@/lib/hero-atolye'
 import { yeniIcerikAcik, SERGI_KUNYE, SERGI_AFISI } from '@/lib/yeni-icerik'
 import { getExhibitionPhotosBySlugs } from '@/lib/queries/exhibition-photos'
 import SeriesTabs from '@/components/shared/series-tabs'
@@ -69,16 +69,20 @@ export default async function HomePage({
     allWithImage.filter((p) => p.category === 'Mimari Duvar Panoları')[5]?.images?.[0]?.url,
   ].filter(Boolean) as string[]
 
-  // Hero: seramik panodan TEK büyük görsel (sanatçı 11 Eki 22:24, Çağrı 13 Eki).
-  // Pano kurumsal sitede listelenir; burada yalnız açılış görseli olarak durur ve
-  // kurumsaldaki proje sayfasına bağlanır. Seçim admin'deki hero_order'a göre
-  // (panolar içinde ilk), yoksa ilk pano. Eserin kendisi galeride listelenmez.
-  const panels = allWithImage.filter((p) => p.category === 'Mimari Duvar Panoları')
-  const heroPanel =
-    [...panels].filter((p) => p.heroOrder != null).sort((a, b) => (a.heroOrder as number) - (b.heroOrder as number))[0] ??
-    panels[0]
-  const host = (await headers()).get('host') ?? ''
-  const heroHref = heroPanel ? kurumsalPath(host, locale, `/projeler/${heroPanel.slug}`) : null
+  // Hero: ATÖLYEDEN üç kare (sanatçı 13 Eki: girişteki pano görseli "çok
+  // ilgisiz", "atölyeden görünüşler" konsun — 11 Eki'deki pano isteğinin yerine).
+  // Seçim lib/hero-atolye.ts; kareler yapım/montaj fotoğraflarından, gizli
+  // içerikle birlikte açılır. Kare yoksa sade başlık + eser üçlüsü (hero_order).
+  const atolye = yeniIcerikAcik()
+    ? pickAtolye(await getExhibitionPhotosBySlugs(HERO_ATOLYE.map((h) => h.slug)))
+    : []
+  const eserAdi = (slug: string) => {
+    const p = allWithImage.find((x) => x.slug === slug)
+    return p ? (isTr ? p.titleTr : p.titleEn) : null
+  }
+  const heroEserler = atolye.length
+    ? []
+    : [...withImage].filter((p) => p.heroOrder != null).sort((a, b) => (a.heroOrder as number) - (b.heroOrder as number)).slice(0, 3)
 
   // Koleksiyon seçkileri: SERİ bazlı sekmeler (Spode deseni). Seri = koleksiyon
   // adının ana kısmı ("Masalın Hafızası — Anka Serisi" → "Masalın Hafızası");
@@ -110,36 +114,56 @@ export default async function HomePage({
 
   return (
     <main>
-      {/* Hero — tek kısa serif cümle + seramik panodan tek büyük görsel. */}
+      {/* Hero — tek kısa serif cümle + atölyeden üç kare (mobilde ilki). */}
       <Reveal as="section" className="pt-12 sm:pt-16">
         <h1 className="text-center text-4xl leading-[1.1] text-[var(--foreground)] sm:text-6xl">
           {th('heroTitle')}
         </h1>
-        {heroPanel && heroHref && (
-          <figure className="mt-10">
-            <a
-              href={heroHref}
-              className="hover-card hover-media relative block aspect-[4/3] overflow-hidden bg-[#ece7de] sm:aspect-[3/2]"
-            >
-              <Image
-                src={heroPanel.images[0].url}
-                alt={(isTr ? heroPanel.images[0].altTr : heroPanel.images[0].altEn) ?? (isTr ? heroPanel.titleTr : heroPanel.titleEn)}
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 1440px) 100vw, 1344px"
-              />
-            </a>
-            <figcaption className="mt-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 text-[length:var(--text-meta)] text-[var(--muted)]">
-              <span>
-                <span className="text-[var(--foreground)]">{isTr ? heroPanel.titleTr : heroPanel.titleEn}</span>
-                {heroPanel.collection ? ` · ${heroPanel.collection}` : ''}
-              </span>
-              <a href={heroHref} className="inline-flex min-h-11 items-center hover:text-[var(--foreground)]">
-                {tg('categories.Mimari Duvar Panoları')} <span aria-hidden="true" className="ml-1">↗</span>
-              </a>
-            </figcaption>
-          </figure>
+        {atolye.length > 0 && (
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
+            {atolye.map((f, i) => {
+              const ad = eserAdi(f.eser)
+              const alt = ad ? `${th('fromStudio')} — ${th('making', { work: ad })}` : th('fromStudio')
+              return (
+                <figure key={f.id} className={i > 0 ? 'hidden sm:block' : ''}>
+                  <div className="relative aspect-[4/5] overflow-hidden bg-[#ece7de]">
+                    <Image
+                      src={f.url}
+                      alt={alt}
+                      fill
+                      priority={i === 0}
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, 33vw"
+                    />
+                  </div>
+                  <figcaption className="mt-3 text-[length:var(--text-meta)] text-[var(--muted)]">
+                    {th('fromStudio')}
+                    {ad && <> · <span className="text-[var(--foreground)]">{th('making', { work: ad })}</span></>}
+                  </figcaption>
+                </figure>
+              )
+            })}
+          </div>
+        )}
+        {heroEserler.length > 0 && (
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
+            {heroEserler.map((h, i) => (
+              <Link
+                key={h.id}
+                href={`/${locale}/urun/${h.slug}`}
+                className={`hover-card hover-media relative block aspect-[4/5] overflow-hidden bg-[#ece7de] ${i > 0 ? 'hidden sm:block' : ''}`}
+              >
+                <Image
+                  src={h.images[0].url}
+                  alt={(isTr ? h.images[0].altTr : h.images[0].altEn) ?? (isTr ? h.titleTr : h.titleEn)}
+                  fill
+                  priority={i === 0}
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                />
+              </Link>
+            ))}
+          </div>
         )}
         <div className="mt-6 text-center">
           <Link

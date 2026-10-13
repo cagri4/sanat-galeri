@@ -230,7 +230,9 @@
     "techniqueCta": "Terra sigillata tekniği",
     "railPrev": "Önceki",
     "railNext": "Sonraki",
-    "viewWork": "Eseri gör"
+    "viewWork": "Eseri gör",
+    "fromStudio": "Atölyeden",
+    "making": "{work} yapım aşamasında"
   },
   "exhibitionsPage": {
     "title": "Sergiler",

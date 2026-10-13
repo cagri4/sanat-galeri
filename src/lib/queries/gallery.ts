@@ -5,6 +5,24 @@ import { isOnSite, type SiteKey } from '@/lib/site'
  * `site` verilirse yalnızca o sitede yer alan kategoriler döner
  * (ürün bazlı ayrım, bkz. lib/site.ts). Veri küçük; süzme JS tarafında.
  */
+/**
+ * Sitede gösterilecek görseller: gizlenenler (is_visible=false, 0007) dışarıda,
+ * sanatçının sırası (sort_order, eşitlikte id). Kolon yoksa (eski DB) hepsi görünür.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function publicImages(images: any[] | null | undefined) {
+  return (images ?? [])
+    .filter((img) => img.is_visible !== false)
+    .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0) || a.id - b.id)
+    .map((img) => ({
+      ...img,
+      altTr: img.alt_tr,
+      altEn: img.alt_en,
+      sortOrder: img.sort_order,
+      productId: img.product_id,
+    }))
+}
+
 export async function getProducts(category?: string, site?: SiteKey) {
   let query = supabase
     .from('products')
@@ -41,13 +59,7 @@ export async function getProducts(category?: string, site?: SiteKey) {
     isVisible: p.is_visible,
     isSold: p.is_sold,
     createdAt: p.created_at,
-    images: (p.images ?? []).map((img: any) => ({
-      ...img,
-      altTr: img.alt_tr,
-      altEn: img.alt_en,
-      sortOrder: img.sort_order,
-      productId: img.product_id,
-    })),
+    images: publicImages(p.images),
   }))
 }
 
@@ -86,13 +98,7 @@ export async function getProductBySlug(slug: string) {
     isVisible: data.is_visible,
     isSold: data.is_sold,
     createdAt: data.created_at,
-    images: (data.images ?? []).map((img: any) => ({
-      ...img,
-      altTr: img.alt_tr,
-      altEn: img.alt_en,
-      sortOrder: img.sort_order,
-      productId: img.product_id,
-    })),
+    images: publicImages(data.images),
     artist: data.artist ? {
       ...data.artist,
       nameTr: data.artist.name_tr,
@@ -130,13 +136,7 @@ export async function getProductsByArtist(artistId: number, limit?: number, site
     isVisible: p.is_visible,
     isSold: p.is_sold,
     createdAt: p.created_at,
-    images: (p.images ?? []).map((img: any) => ({
-      ...img,
-      altTr: img.alt_tr,
-      altEn: img.alt_en,
-      sortOrder: img.sort_order,
-      productId: img.product_id,
-    })),
+    images: publicImages(p.images),
   }))
 }
 

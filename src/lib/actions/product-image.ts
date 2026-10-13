@@ -36,7 +36,7 @@ export async function addProductImage(data: {
 
 export async function updateProductImage(
   id: number,
-  data: { altTr?: string; altEn?: string; sortOrder?: number }
+  data: { altTr?: string; altEn?: string; sortOrder?: number; isVisible?: boolean }
 ): Promise<{ success: boolean; error?: string }> {
   const session = await auth()
   if (!session) return { success: false, error: 'Unauthorized' }
@@ -45,6 +45,8 @@ export async function updateProductImage(
   if (data.altTr !== undefined) patch.alt_tr = data.altTr.trim() || null
   if (data.altEn !== undefined) patch.alt_en = data.altEn.trim() || null
   if (data.sortOrder !== undefined) patch.sort_order = data.sortOrder
+  // Gizle/göster: dosya ve satır kalır, yalnız sitede görünmez (0007).
+  if (data.isVisible !== undefined) patch.is_visible = data.isVisible
 
   const { error } = await supabase.from('product_images').update(patch).eq('id', id)
   if (error) {

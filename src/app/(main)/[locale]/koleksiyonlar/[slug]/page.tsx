@@ -103,8 +103,11 @@ export default async function KoleksiyonPage({ params }: PageProps) {
       {seriler.length > 1 && products.every((p) => p.collection) ? (
         <div className="mt-12 space-y-20">
           {seriler.map(([seri, items]) => (
-            <section key={seri}>
-              <h2 className="text-2xl text-[var(--foreground)] sm:text-3xl">{seri}</h2>
+            <section key={seri} className="border-t border-[var(--border)] pt-10 first:border-t-0 first:pt-0">
+              <h2 className="flex items-baseline gap-4 text-2xl text-[var(--foreground)] sm:text-3xl">
+                {seri}
+                <span className="text-[length:var(--text-meta)] text-[var(--faint)]">{items.length}</span>
+              </h2>
               <div className="mt-8">
                 <ArtworkGrid products={items} locale={locale} category={category} />
               </div>

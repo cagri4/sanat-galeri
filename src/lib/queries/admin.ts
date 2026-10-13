@@ -34,6 +34,7 @@ function mapProduct(p: any) {
       altEn: img.alt_en,
       sortOrder: img.sort_order,
       productId: img.product_id,
+      isVisible: img.is_visible !== false,
     })),
     artist: p.artist ? { ...p.artist, nameTr: p.artist.name_tr, nameEn: p.artist.name_en } : null,
   }
