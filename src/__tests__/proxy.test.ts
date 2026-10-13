@@ -219,3 +219,31 @@ describe('13 Eki kaldırılan sayfalar — 301 (GOREV-A-LISTESI-UYGULA)', () => 
     })
   })
 })
+
+describe('13 Eki heykeller iki sayfa — eski tek sayfa 301', () => {
+  it('galeri: /koleksiyonlar/seramik-heykeller → /koleksiyonlar', () => {
+    withDomains('galeri.test', 'kurumsal.test')
+    expect(decideRoute('galeri.test', '/tr/koleksiyonlar/seramik-heykeller')).toEqual({ type: 'redirect', location: '/tr/koleksiyonlar' })
+    expect(decideRoute('galeri.test', '/en/koleksiyonlar/seramik-heykeller/')).toEqual({ type: 'redirect', location: '/en/koleksiyonlar' })
+  })
+  it('yeni seri sayfaları ve diğer koleksiyonlar etkilenmez', () => {
+    withDomains('galeri.test', 'kurumsal.test')
+    expect(decideRoute('galeri.test', '/tr/koleksiyonlar/masalin-hafizasi')).toEqual({ type: 'intl' })
+    expect(decideRoute('galeri.test', '/tr/koleksiyonlar/anadolu-ekininde-guzeller')).toEqual({ type: 'intl' })
+    expect(decideRoute('galeri.test', '/tr/koleksiyonlar/seramik-heykeller-x')).toEqual({ type: 'intl' })
+  })
+  it('kurumsal alan adında istenirse galeriye (tek adım); alan adı yokken yerel', () => {
+    withDomains('galeri.test', 'kurumsal.test')
+    expect(decideRoute('kurumsal.test', '/tr/koleksiyonlar/seramik-heykeller')).toEqual({
+      type: 'redirect', location: 'https://galeri.test/tr/koleksiyonlar',
+    })
+    withDomains()
+    expect(decideRoute('localhost:3000', '/tr/koleksiyonlar/seramik-heykeller')).toEqual({ type: 'redirect', location: '/tr/koleksiyonlar' })
+  })
+  it('proxy 301 döner', () => {
+    withDomains('galeri.test', 'kurumsal.test')
+    const res = proxy(req('http://galeri.test/tr/koleksiyonlar/seramik-heykeller', 'galeri.test'))
+    expect(res.status).toBe(301)
+    expect(res.headers.get('location')).toBe('http://galeri.test/tr/koleksiyonlar')
+  })
+})

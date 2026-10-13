@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import type { SiteKey } from '@/lib/site'
 import { CATEGORY_SLUGS } from '@/lib/categories'
+import { galleryCollections } from '@/lib/series'
 
 const LOCALES = ['tr', 'en'] as const
 
@@ -23,7 +24,8 @@ export function sitemapEntries(
           '',
           '/galeri',
           '/koleksiyonlar',
-          ...data.categories.map((c) => `/koleksiyonlar/${CATEGORY_SLUGS[c]}`),
+          // Heykeller iki seri sayfası; eski /koleksiyonlar/seramik-heykeller 301.
+          ...galleryCollections(data.categories, CATEGORY_SLUGS).map((c) => `/koleksiyonlar/${c.slug}`),
           ...data.productSlugs.map((s) => `/urun/${s}`),
           '/hakkimizda',
           '/sergiler',

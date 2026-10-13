@@ -5,7 +5,8 @@ import { getTranslations } from 'next-intl/server'
 import { getCrossDomainLinks } from '@/components/shared/navbar'
 import { ARTIST_AVATARS, AVATAR_CLASS } from '@/lib/artist-avatars'
 import PageBanner from '@/components/shared/page-banner'
-import { sergiBanner } from '@/lib/banner-images'
+import { atolyeFotolari } from '@/lib/banner-images'
+import { staggerDelay } from '@/lib/motion'
 import Reveal from '@/components/motion/reveal'
 
 /**
@@ -53,7 +54,10 @@ export default async function AboutPage({
   const MELIKE_URL = process.env.NEXT_PUBLIC_MELIKE_URL ?? '#'
   const SEREF_URL = process.env.NEXT_PUBLIC_SEREF_URL ?? '#'
   const domainLinks = getCrossDomainLinks(locale, MAIN_URL, MELIKE_URL, SEREF_URL)
-  const banner = await sergiBanner(0)
+  // Banner + "Atölyeden" ızgarası: sanatçının atölye fotoğrafları (11 Eki 22:07
+  // isteği, 13 Eki 21:25'te yüklendi). Kişiler adlandırılmaz.
+  const { photos: atolye, banner } = await atolyeFotolari()
+  const ta2 = await getTranslations({ locale, namespace: 'home' })
 
   const artists = [
     { slug: 'melike', name: 'Melike Doğan', href: domainLinks.melike },
@@ -92,6 +96,26 @@ export default async function AboutPage({
           </Link>
         </div>
       </Reveal>
+
+      {atolye.length > 0 && (
+        <Reveal as="section" className="mt-24 border-t border-[var(--rule)] pt-16">
+          <h2 className="text-3xl font-medium text-[#2C2C2C] sm:text-4xl">{ta2('fromStudio')}</h2>
+          {/* Sabit oranlı ızgara: yüklenirken kayma yok (CLS). */}
+          <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+            {atolye.map((f, i) => (
+              <Reveal as="li" key={f.id} delay={staggerDelay(i % 8)} className="relative aspect-[4/5] overflow-hidden bg-[#ece7de]">
+                <Image
+                  src={f.url}
+                  alt={ta2('studioAlt')}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                />
+              </Reveal>
+            ))}
+          </ul>
+        </Reveal>
+      )}
 
       {/* Sanatcilar — biyografi metni sanatcidan gelene kadar YAZILMIYOR;
           yalnizca ad, gercek atolye gorseli ve portfolyo baglantisi. */}

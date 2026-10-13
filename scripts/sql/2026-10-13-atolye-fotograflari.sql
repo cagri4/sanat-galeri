@@ -1,0 +1,19 @@
+-- Üretildi: scripts/atolye-ve-banner-2026-10-13.py — atölye fotoğrafları (Drive Hakkımızda/Atölyeden fotolar).
+-- Yalnız EKLEME. Geri alma: 2026-10-13-atolye-fotograflari-GERI-AL.sql
+BEGIN;
+DO $$ BEGIN IF EXISTS (select 1 from exhibition_photos where exhibition_slug='atolye') THEN RAISE EXCEPTION 'atolye satırları zaten var'; END IF; END $$;
+INSERT INTO exhibition_photos (exhibition_slug, url, title_tr, title_en, sort_order) VALUES ('atolye', 'https://res.cloudinary.com/df0henatz/image/upload/v1791921748/uarttasarim/atolye/atolye-2026-10-1.jpg', 'Atölye', 'Studio', 0); -- 123033.jpg
+INSERT INTO exhibition_photos (exhibition_slug, url, title_tr, title_en, sort_order) VALUES ('atolye', 'https://res.cloudinary.com/df0henatz/image/upload/v1791921751/uarttasarim/atolye/atolye-2026-10-2.jpg', 'Atölye', 'Studio', 1); -- 123133.jpg
+INSERT INTO exhibition_photos (exhibition_slug, url, title_tr, title_en, sort_order) VALUES ('atolye', 'https://res.cloudinary.com/df0henatz/image/upload/v1791921754/uarttasarim/atolye/atolye-2026-10-3.jpg', 'Atölye', 'Studio', 2); -- 123200.jpg
+INSERT INTO exhibition_photos (exhibition_slug, url, title_tr, title_en, sort_order) VALUES ('atolye', 'https://res.cloudinary.com/df0henatz/image/upload/v1791921757/uarttasarim/atolye/atolye-2026-10-4.jpg', 'Atölye', 'Studio', 3); -- 123204.jpg
+INSERT INTO exhibition_photos (exhibition_slug, url, title_tr, title_en, sort_order) VALUES ('atolye', 'https://res.cloudinary.com/df0henatz/image/upload/v1791921760/uarttasarim/atolye/atolye-2026-10-5.jpg', 'Atölye', 'Studio', 4); -- 123215.jpg
+INSERT INTO exhibition_photos (exhibition_slug, url, title_tr, title_en, sort_order) VALUES ('atolye', 'https://res.cloudinary.com/df0henatz/image/upload/v1791921764/uarttasarim/atolye/atolye-2026-10-6.jpg', 'Atölye', 'Studio', 5); -- 123248.jpg
+INSERT INTO exhibition_photos (exhibition_slug, url, title_tr, title_en, sort_order) VALUES ('atolye', 'https://res.cloudinary.com/df0henatz/image/upload/v1791921769/uarttasarim/atolye/atolye-2026-10-7.jpg', 'Atölye', 'Studio', 6); -- 123353.jpg
+INSERT INTO exhibition_photos (exhibition_slug, url, title_tr, title_en, sort_order) VALUES ('atolye', 'https://res.cloudinary.com/df0henatz/image/upload/v1791921776/uarttasarim/atolye/atolye-2026-10-8.jpg', 'Atölye', 'Studio', 7); -- 123405.jpg
+INSERT INTO exhibition_photos (exhibition_slug, url, title_tr, title_en, sort_order) VALUES ('atolye', 'https://res.cloudinary.com/df0henatz/image/upload/v1791921781/uarttasarim/atolye/atolye-2026-10-9.jpg', 'Atölye', 'Studio', 8); -- 123445.jpg
+INSERT INTO exhibition_photos (exhibition_slug, url, title_tr, title_en, sort_order) VALUES ('atolye', 'https://res.cloudinary.com/df0henatz/image/upload/v1791921787/uarttasarim/atolye/atolye-2026-10-10.jpg', 'Atölye', 'Studio', 9); -- 123455.jpg
+INSERT INTO exhibition_photos (exhibition_slug, url, title_tr, title_en, sort_order) VALUES ('atolye', 'https://res.cloudinary.com/df0henatz/image/upload/v1791921792/uarttasarim/atolye/atolye-2026-10-11.jpg', 'Atölye', 'Studio', 10); -- 123521.jpg
+INSERT INTO exhibition_photos (exhibition_slug, url, title_tr, title_en, sort_order) VALUES ('atolye', 'https://res.cloudinary.com/df0henatz/image/upload/v1791921798/uarttasarim/atolye/atolye-2026-10-12.jpg', 'Atölye', 'Studio', 11); -- 123546.jpg
+INSERT INTO exhibition_photos (exhibition_slug, url, title_tr, title_en, sort_order) VALUES ('atolye', 'https://res.cloudinary.com/df0henatz/image/upload/v1791921803/uarttasarim/atolye/atolye-2026-10-13.jpg', 'Atölye', 'Studio', 12); -- 123559.jpg
+INSERT INTO exhibition_photos (exhibition_slug, url, title_tr, title_en, sort_order) VALUES ('atolye', 'https://res.cloudinary.com/df0henatz/image/upload/v1791921805/uarttasarim/atolye/atolye-2026-10-14.jpg', 'Atölye', 'Studio', 13); -- 123639.jpg
+COMMIT;

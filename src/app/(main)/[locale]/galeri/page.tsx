@@ -7,7 +7,7 @@ import { categoriesForSite } from '@/lib/site'
 import Link from 'next/link'
 import CategoryFilter from '@/components/gallery/category-filter'
 import PageBanner, { bannerFromProducts } from '@/components/shared/page-banner'
-import { groupBySeries, SERIES_CATEGORY } from '@/lib/series'
+import { groupBySeries, SERIES_CATEGORY, seriesSlug } from '@/lib/series'
 import ArtworkGrid from '@/components/gallery/artwork-grid'
 
 export async function generateMetadata({
@@ -73,7 +73,13 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
         {groups.map((g) => (
           <div key={g.series ?? '-'}>
             <h3 className="mb-6 flex items-baseline gap-3 text-xl text-[var(--foreground)] sm:text-2xl">
-              {g.series}
+              {seriesSlug(g.series) ? (
+                <Link href={`/${locale}/koleksiyonlar/${seriesSlug(g.series)}`} className="hover:underline hover:underline-offset-4">
+                  {g.series}
+                </Link>
+              ) : (
+                g.series
+              )}
               <span className="text-[length:var(--text-meta)] text-[var(--faint)]">{g.items.length}</span>
             </h3>
             <ArtworkGrid products={g.items} locale={locale} category={cat} />

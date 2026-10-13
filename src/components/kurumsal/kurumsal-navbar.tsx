@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server'
 import LanguageSwitcher from '@/components/shared/language-switcher'
 import MobileMenu from '@/components/shared/mobile-menu'
 import { DesktopNav, InstagramLink, type NavItem } from '@/components/shared/nav-menu'
+import { SERIES_PAGES } from '@/lib/series'
 import { galeriPath, kurumsalPath } from '@/lib/site'
 
 /**
@@ -29,7 +30,8 @@ export default async function KurumsalNavbar({ locale }: { locale: string }) {
       label: t('nav.projects'),
       children: [
         { href: k('/projeler?tur=mimari-duvar-panolari'), label: tc('Mimari Duvar Panoları') },
-        { href: k('/projeler?tur=seramik-heykeller'), label: tn('sculptures') },
+        // Heykeller iki seri (sanatçı 13 Eki 21:29), galeriyle aynı ayrım.
+        ...SERIES_PAGES.map((sp) => ({ href: k(`/projeler?tur=seramik-heykeller&seri=${sp.slug}`), label: sp.series })),
       ],
     },
     {

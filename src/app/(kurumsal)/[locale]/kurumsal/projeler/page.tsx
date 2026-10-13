@@ -8,12 +8,12 @@ import { projectNo } from '@/lib/kurumsal'
 import ProjectCard from '@/components/kurumsal/project-card'
 import Reveal from '@/components/motion/reveal'
 import PageBanner, { bannerFromProducts } from '@/components/shared/page-banner'
-import { groupBySeries, SERIES_CATEGORY } from '@/lib/series'
+import { groupBySeries, itemsFor, SERIES_CATEGORY, SERIES_PAGES, seriesPageBySlug } from '@/lib/series'
 import { staggerDelay } from '@/lib/motion'
 
 interface PageProps {
   params: Promise<{ locale: string }>
-  searchParams: Promise<{ tur?: string }>
+  searchParams: Promise<{ tur?: string; seri?: string }>
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProjelerPage({ params, searchParams }: PageProps) {
   const { locale } = await params
-  const { tur } = await searchParams
+  const { tur, seri } = await searchParams
   const isTr = locale === 'tr'
   const t = await getTranslations({ locale, namespace: 'kurumsal' })
   const tg = await getTranslations({ locale, namespace: 'gallery' })
@@ -37,9 +37,14 @@ export default async function ProjelerPage({ params, searchParams }: PageProps) 
   const requested = tur ? categoryBySlug(tur) : null
   const active = requested && cats.includes(requested) ? requested : null
 
+  // Heykel serisi (?seri=): heykeller iki ayrı liste (13 Eki). Seri yoksa heykeller
+  // seri başlıklarıyla birlikte (eski ?tur=seramik-heykeller adresi geçerli kalır).
+  const activeSeries = active === SERIES_CATEGORY && seri ? seriesPageBySlug(seri) : null
+
   let projects: Awaited<ReturnType<typeof getProducts>> = []
   try {
     projects = await getProducts(active ?? undefined, 'kurumsal')
+    if (activeSeries) projects = itemsFor(projects, activeSeries)
   } catch {
     // DB yoksa boş durum
   }
@@ -51,9 +56,15 @@ export default async function ProjelerPage({ params, searchParams }: PageProps) 
 
       {/* Filtre: sade sekme çizgisi */}
       <nav className="mt-10 flex flex-wrap gap-x-8 border-b border-[var(--rule)]">
-        {[{ href: k('/projeler'), text: t('filterAll'), on: !active }, ...cats.map((c) => ({
-          href: k(`/projeler?tur=${CATEGORY_SLUGS[c]}`), text: label(c), on: active === c,
-        }))].map((f) => (
+        {[{ href: k('/projeler'), text: t('filterAll'), on: !active }, ...cats.flatMap((c) =>
+          c === SERIES_CATEGORY
+            ? SERIES_PAGES.map((sp) => ({
+                href: k(`/projeler?tur=${CATEGORY_SLUGS[c]}&seri=${sp.slug}`),
+                text: sp.series,
+                on: active === c && activeSeries?.slug === sp.slug,
+              }))
+            : [{ href: k(`/projeler?tur=${CATEGORY_SLUGS[c]}`), text: label(c), on: active === c }],
+        )].map((f) => (
           <a
             key={f.href}
             href={f.href}

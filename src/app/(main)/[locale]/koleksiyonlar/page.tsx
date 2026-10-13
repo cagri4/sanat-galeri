@@ -5,6 +5,7 @@ import { getTranslations } from 'next-intl/server'
 import { getProducts } from '@/lib/queries/gallery'
 import { CATEGORIES, CATEGORY_SLUGS, COLLECTIONS } from '@/lib/categories'
 import PageBanner, { bannerFromProducts } from '@/components/shared/page-banner'
+import { galleryCollections, itemsFor } from '@/lib/series'
 import { categoriesForSite } from '@/lib/site'
 
 export async function generateMetadata({
@@ -38,15 +39,16 @@ export default async function KoleksiyonlarPage({
     // DB yoksa sessiz bos durum
   }
 
-  // Yalnız galeri kategorileri; panolar kurumsal sitede.
-  const blocks = categoriesForSite('galeri', CATEGORIES).map((cat) => {
-    const items = products.filter((p) => p.category === cat)
+  // Yalnız galeri kategorileri (panolar kurumsalda); heykeller iki seri sayfası.
+  const blocks = galleryCollections(categoriesForSite('galeri', CATEGORIES), CATEGORY_SLUGS).map((c) => {
+    const items = itemsFor(products, c)
     return {
-      cat,
-      label: tg.has(`categories.${cat}`) ? tg(`categories.${cat}`) : cat,
+      cat: c.slug,
+      slug: c.slug,
+      label: c.series ?? (tg.has(`categories.${c.category}`) ? tg(`categories.${c.category}`) : c.category),
       cover: items.find((p) => p.images?.[0]?.url)?.images[0]?.url ?? null,
       count: items.length,
-      subCollections: (COLLECTIONS[cat] ?? []).map((c) => (isTr ? c.tr : c.en)),
+      subCollections: c.series ? [] : (COLLECTIONS[c.category] ?? []).map((x) => (isTr ? x.tr : x.en)),
     }
   })
 
@@ -58,13 +60,14 @@ export default async function KoleksiyonlarPage({
       </p>
 
       <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6">
-        {blocks.map(({ cat, label, cover, count, subCollections }, i) => (
+        {blocks.map(({ cat, slug, label, cover, count, subCollections }, i) => (
           <Link
             key={cat}
-            href={`/${locale}/koleksiyonlar/${CATEGORY_SLUGS[cat]}`}
-            // Ilk blok genis: gorsel duvarina ritim katar.
+            href={`/${locale}/koleksiyonlar/${slug}`}
+            // Blok sayısı tekse ilk blok geniş (ritim); çiftse 2×2 düz ızgara
+            // (heykeller iki seri olunca 4 blok — sonda yalnız blok kalmasın).
             className={`hover-card hover-media group relative block overflow-hidden bg-[#ece7de] ${
-              i === 0 ? 'sm:col-span-2 aspect-[16/10]' : 'aspect-[4/5]'
+              i === 0 && blocks.length % 2 === 1 ? 'sm:col-span-2 aspect-[16/10]' : 'aspect-[4/5]'
             }`}
           >
             {cover && (
@@ -74,7 +77,7 @@ export default async function KoleksiyonlarPage({
                 fill
                 priority={i === 0}
                 className="object-cover"
-                sizes={i === 0 ? '(max-width: 640px) 100vw, 100vw' : '(max-width: 640px) 100vw, 50vw'}
+                sizes={i === 0 && blocks.length % 2 === 1 ? '100vw' : '(max-width: 640px) 100vw, 50vw'}
               />
             )}
             <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />

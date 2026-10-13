@@ -7,12 +7,13 @@ import { ARTIST_AVATARS, AVATAR_CLASS } from '@/lib/artist-avatars'
 import { getCrossDomainLinks } from '@/components/shared/navbar'
 import { CATEGORIES, CATEGORY_SLUGS } from '@/lib/categories'
 import { categoriesForSite, isOnSite } from '@/lib/site'
-import { HERO_ATOLYE, SEREF_KART_ATOLYE, pickAtolye, pickOne } from '@/lib/hero-atolye'
+import { ATOLYE_SLUG, SEREF_KART_ATOLYE, pickAtolye, pickOne } from '@/lib/hero-atolye'
 import { yeniIcerikAcik, SERGI_KUNYE, SERGI_AFISI } from '@/lib/yeni-icerik'
 import { getExhibitionPhotosBySlugs } from '@/lib/queries/exhibition-photos'
 import SeriesTabs from '@/components/shared/series-tabs'
 import CardRail from '@/components/shared/card-rail'
 import Reveal from '@/components/motion/reveal'
+import { galleryCollections, itemsFor } from '@/lib/series'
 import { staggerDelay } from '@/lib/motion'
 
 export async function generateMetadata({
@@ -59,27 +60,24 @@ export default async function HomePage({
   const byCat = (cat: string) => withImage.filter((p) => p.category === cat)
 
 
-  // Hero: ATÖLYEDEN üç kare (sanatçı 13 Eki: girişteki pano görseli "çok
-  // ilgisiz", "atölyeden görünüşler" konsun — 11 Eki'deki pano isteğinin yerine).
-  // Seçim lib/hero-atolye.ts; kareler yapım/montaj fotoğraflarından, gizli
-  // içerikle birlikte açılır. Kare yoksa sade başlık + eser üçlüsü (hero_order).
-  const atolyeFotolari = yeniIcerikAcik()
-    ? await getExhibitionPhotosBySlugs([...new Set([...HERO_ATOLYE.map((h) => h.slug), SEREF_KART_ATOLYE.slug])])
-    : []
+  // Hero: ATÖLYEDEN üç kare. Sanatçı 13 Eki 21:25 gerçek atölye fotoğraflarını
+  // Drive Hakkımızda/"Atölyeden fotolar"a yükledi (exhibition_photos 'atolye');
+  // seçim lib/hero-atolye.ts. Kare yoksa sade başlık + eser üçlüsü (hero_order).
+  let atolyeFotolari: Awaited<ReturnType<typeof getExhibitionPhotosBySlugs>> = []
+  try {
+    atolyeFotolari = await getExhibitionPhotosBySlugs([ATOLYE_SLUG])
+  } catch {
+    // DB yoksa eser üçlüsü
+  }
   const atolye = pickAtolye(atolyeFotolari)
 
-  // Sanatçı kartı GEÇİCİ görselleri (gerçek portre/atölye fotoğrafı gelince
-  // değişecek; alt="" dekoratif). Melike → resimli seramik (Zamansız, atıf kap
-  // altı imzasıyla doğrulanmış). Şeref → atölyeden kişisiz kare (13 Eki, pano
-  // görseli "ilgisiz" bulundu); kare yoksa ilk heykel — pano değil.
+  // Sanatçı kartı görselleri (alt="" dekoratif; gerçek portre gelince değişir).
+  // Melike → resimli seramik (Zamansız, atıf kap altı imzasıyla doğrulanmış).
+  // Şeref → atölye karesi, heykel formları görünen (13 Eki); yoksa ilk heykel.
   const artistPlaceholders = [
     byCat('Resimli Seramikler')[5]?.images?.[0]?.url,
     pickOne(atolyeFotolari, SEREF_KART_ATOLYE)?.url ?? byCat('Seramik Heykeller')[0]?.images?.[0]?.url,
   ].filter(Boolean) as string[]
-  const eserAdi = (slug: string) => {
-    const p = allWithImage.find((x) => x.slug === slug)
-    return p ? (isTr ? p.titleTr : p.titleEn) : null
-  }
   const heroEserler = atolye.length
     ? []
     : [...withImage].filter((p) => p.heroOrder != null).sort((a, b) => (a.heroOrder as number) - (b.heroOrder as number)).slice(0, 3)
@@ -106,10 +104,11 @@ export default async function HomePage({
 
   // Koleksiyon teaser: her kategori icin ilk gorsel (varsa). Bos kategori
   // notr bir doku ile gosterilir — "yakinda" hissi, kirik gorunmez.
-  const collectionBlocks = CATS.map((cat) => ({
-    cat,
-    label: tg.has(`categories.${cat}`) ? tg(`categories.${cat}`) : cat,
-    cover: withImage.find((p) => p.category === cat)?.images[0]?.url ?? null,
+  // Heykeller iki seri sayfası olarak (13 Eki) → 4 blok, 2×2.
+  const collectionBlocks = galleryCollections(CATS, CATEGORY_SLUGS).map((c) => ({
+    cat: c.slug,
+    label: c.series ?? (tg.has(`categories.${c.category}`) ? tg(`categories.${c.category}`) : c.category),
+    cover: itemsFor(withImage, c)[0]?.images[0]?.url ?? null,
   })).filter((b) => b.cover) // boş kategori ana sayfada "yakında" kutusu olarak durmaz
 
   return (
@@ -120,30 +119,23 @@ export default async function HomePage({
           {th('heroTitle')}
         </h1>
         {atolye.length > 0 && (
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
-            {atolye.map((f, i) => {
-              const ad = eserAdi(f.eser)
-              const alt = ad ? `${th('fromStudio')} — ${th('making', { work: ad })}` : th('fromStudio')
-              return (
-                <figure key={f.id} className={i > 0 ? 'hidden sm:block' : ''}>
-                  <div className="relative aspect-[4/5] overflow-hidden bg-[#ece7de]">
-                    <Image
-                      src={f.url}
-                      alt={alt}
-                      fill
-                      priority={i === 0}
-                      className="object-cover"
-                      sizes="(max-width: 640px) 100vw, 33vw"
-                    />
-                  </div>
-                  <figcaption className="mt-3 text-[length:var(--text-meta)] text-[var(--muted)]">
-                    {th('fromStudio')}
-                    {ad && <> · <span className="text-[var(--foreground)]">{th('making', { work: ad })}</span></>}
-                  </figcaption>
-                </figure>
-              )
-            })}
-          </div>
+          <figure className="mt-10">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
+              {atolye.map((f, i) => (
+                <div key={f.id} className={`relative aspect-[4/5] overflow-hidden bg-[#ece7de] ${i > 0 ? 'hidden sm:block' : ''}`}>
+                  <Image
+                    src={f.url}
+                    alt={th('studioAlt')}
+                    fill
+                    priority={i === 0}
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                  />
+                </div>
+              ))}
+            </div>
+            <figcaption className="mt-3 text-[length:var(--text-meta)] text-[var(--muted)]">{th('fromStudio')}</figcaption>
+          </figure>
         )}
         {heroEserler.length > 0 && (
           <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
@@ -233,7 +225,7 @@ export default async function HomePage({
           {collectionBlocks.map(({ cat, label, cover }, i) => (
             <Reveal key={cat} delay={staggerDelay(i)}>
             <Link
-              href={`/${locale}/koleksiyonlar/${CATEGORY_SLUGS[cat]}`}
+              href={`/${locale}/koleksiyonlar/${cat}`}
               className="hover-card hover-media group relative block aspect-[4/3] overflow-hidden bg-[#ece7de]"
             >
               {cover && (

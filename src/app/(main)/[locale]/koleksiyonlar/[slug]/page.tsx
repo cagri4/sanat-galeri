@@ -6,6 +6,7 @@ import { categoryBySlug } from '@/lib/categories'
 import { isOnSite } from '@/lib/site'
 import ArtworkGrid from '@/components/gallery/artwork-grid'
 import PageBanner, { bannerFromProducts } from '@/components/shared/page-banner'
+import { SERIES_CATEGORY, itemsFor, seriesPageBySlug } from '@/lib/series'
 import Reveal from '@/components/motion/reveal'
 
 /**
@@ -23,18 +24,37 @@ interface PageProps {
 
 const ANTIK = 'Antik Dönem Replikaları'
 
-function galleryCategory(slug: string): string | null {
+/**
+ * Sayfa kaynağı: galeri kategorisi YA DA heykel seri sayfası (13 Eki: heykeller
+ * iki ayrı sayfa). Heykel kategorisinin eski tek sayfası artık yok — 301
+ * /koleksiyonlar'a (lib/site-routing).
+ */
+function resolveCollection(slug: string): { category: string; series: string | null } | null {
+  const seri = seriesPageBySlug(slug)
+  if (seri) return { category: seri.category, series: seri.series }
   const cat = categoryBySlug(slug)
   // Yalnız galeride yer alan kategoriler; panolar kurumsal sitededir.
-  return cat && isOnSite(cat, 'galeri') ? cat : null
+  if (!cat || !isOnSite(cat, 'galeri') || cat === SERIES_CATEGORY) return null
+  return { category: cat, series: null }
+}
+
+/**
+ * Seri sayfası banner'ı sanatçının seçtiği fotoğraf (yoksa sayfanın kendi eserlerinden).
+ * Masalın Hafızası: sanatçı 13 Eki 21:25 "kaf dağından gelenler" adlı fotoğrafı
+ * istedi; Drive'da o adla dosya YOK. Aynı klasöre aynı akşam eklenen geniş sergi
+ * karesi ("Masalın Hafızası: Anadolu'dan Günümüze Seramik Bedenler") ADAY —
+ * Çağrı/sanatçı teyidi olmadan canlıya alınmaz.
+ */
+const SERIES_BANNERS: Record<string, string> = {
+  'masalin-hafizasi': 'https://res.cloudinary.com/df0henatz/image/upload/v1791921809/uarttasarim/koleksiyon/masalin-hafizasi-banner-2026-10.jpg',
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params
-  const cat = galleryCategory(slug)
-  if (!cat) return {}
+  const c = resolveCollection(slug)
+  if (!c) return {}
   const tg = await getTranslations({ locale, namespace: 'gallery' })
-  return { title: tg.has(`categories.${cat}`) ? tg(`categories.${cat}`) : cat }
+  return { title: c.series ?? (tg.has(`categories.${c.category}`) ? tg(`categories.${c.category}`) : c.category) }
 }
 
 /** Çoklu paragrafı ayrı <p>'lere bölerek okunur tutar. */
@@ -52,8 +72,9 @@ function Paragraphs({ text }: { text: string }) {
 
 export default async function KoleksiyonPage({ params }: PageProps) {
   const { locale, slug } = await params
-  const category = galleryCategory(slug)
-  if (!category) notFound()
+  const resolved = resolveCollection(slug)
+  if (!resolved) notFound()
+  const { category, series } = resolved
 
   const tg = await getTranslations({ locale, namespace: 'gallery' })
   const tc = await getTranslations({ locale, namespace: 'collection' })
@@ -62,7 +83,7 @@ export default async function KoleksiyonPage({ params }: PageProps) {
 
   let products: Awaited<ReturnType<typeof getProducts>> = []
   try {
-    products = await getProducts(category, 'galeri')
+    products = itemsFor(await getProducts(category, 'galeri'), resolved)
   } catch {
     // DB yoksa sakin boş durum
   }
@@ -85,9 +106,13 @@ export default async function KoleksiyonPage({ params }: PageProps) {
   return (
     <main className="pb-16 pt-8 sm:pb-24 sm:pt-10">
       <PageBanner
-        eyebrow={tcol('title')}
-        title={tg.has(`categories.${category}`) ? tg(`categories.${category}`) : category}
-        image={bannerFromProducts(products, locale)}
+        eyebrow={series ? (tg.has(`categories.${category}`) ? tg(`categories.${category}`) : category) : tcol('title')}
+        title={series ?? (tg.has(`categories.${category}`) ? tg(`categories.${category}`) : category)}
+        image={
+          SERIES_BANNERS[slug]
+            ? { src: SERIES_BANNERS[slug], alt: series ?? '' }
+            : bannerFromProducts(products, locale)
+        }
       />
 
       {isAntik && (
@@ -98,8 +123,8 @@ export default async function KoleksiyonPage({ params }: PageProps) {
         </div>
       )}
 
-      {/* Birden çok seri (ör. heykeller: Masalın Hafızası / Anadolu Ekininde
-          Güzeller) varsa seri başlıklarıyla; tek seride düz ızgara. */}
+      {/* Birden çok seri varsa seri başlıklarıyla; tek seride düz ızgara.
+          (Heykeller artık seri başına ayrı sayfa — burada tek seri kalır.) */}
       {seriler.length > 1 && products.every((p) => p.collection) ? (
         <div className="mt-12 space-y-20">
           {seriler.map(([seri, items]) => (

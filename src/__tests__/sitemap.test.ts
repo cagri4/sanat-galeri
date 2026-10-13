@@ -15,6 +15,10 @@ describe('sitemapEntries — her site kendi sayfaları', () => {
     expect(urls(galeri)).toContain('https://galeri.test/tr/koleksiyonlar/resimli-seramikler')
     expect(urls(galeri)).toContain('https://galeri.test/en/urun/afrodit-ve-kaz')
     expect(urls(galeri)).toContain('https://galeri.test/tr/sergiler')
+    // heykeller iki seri sayfası, eski tek sayfa yok
+    expect(urls(galeri)).toContain('https://galeri.test/tr/koleksiyonlar/masalin-hafizasi')
+    expect(urls(galeri)).toContain('https://galeri.test/en/koleksiyonlar/anadolu-ekininde-guzeller')
+    expect(urls(galeri).some((u) => u.endsWith('/seramik-heykeller'))).toBe(false)
     expect(urls(galeri).some((u) => /ozel-siparis|surec|teknik|kurumsal|projeler/.test(u))).toBe(false)
   })
   it('kurumsal: /kurumsal öneki yok, projeler var, galeri sayfası yok', () => {

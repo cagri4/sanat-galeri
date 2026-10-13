@@ -5,6 +5,7 @@ import MobileMenu from './mobile-menu'
 import { DesktopNav, InstagramLink, type NavItem } from './nav-menu'
 import { headers } from 'next/headers'
 import { kurumsalPath } from '@/lib/site'
+import { SERIES_PAGES } from '@/lib/series'
 import { CATEGORY_SLUGS } from '@/lib/categories'
 
 export function buildDomainLink(baseUrl: string, path: string): string {
@@ -49,6 +50,7 @@ export function getCrossDomainLinks(
     exhibitions: buildDomainLink(mainUrl, `/${locale}/sergiler`),
     collection: (category: string) =>
       buildDomainLink(mainUrl, `/${locale}/koleksiyonlar/${CATEGORY_SLUGS[category]}`),
+    collectionSlug: (slug: string) => buildDomainLink(mainUrl, `/${locale}/koleksiyonlar/${slug}`),
     contact: buildDomainLink(mainUrl, `/${locale}/iletisim`),
     melike: buildArtistLink(mainUrl, melikeUrl, locale, 'melike'),
     seref: buildArtistLink(mainUrl, serefUrl, locale, 'seref'),
@@ -85,7 +87,8 @@ export default async function Navbar({ locale }: NavbarProps) {
           external: true,
         },
         { href: links.collection('Resimli Seramikler'), label: tc('Resimli Seramikler') },
-        { href: links.collection('Seramik Heykeller'), label: t('sculptures') },
+        // Heykeller iki ayrı sayfa (sanatçı 13 Eki 21:29).
+        ...SERIES_PAGES.map((sp) => ({ href: links.collectionSlug(sp.slug), label: sp.series })),
       ],
     },
     {

@@ -16,6 +16,9 @@ export const TEKNIK_TARGET = 'koleksiyonlar/antik-donem-replikalari#terra-sigill
 /** 13 Eki kaldırılanlar (GOREV-A-LISTESI-UYGULA): özel sipariş → iletişim,
  *  süreç anlatısı → kurumsal projeler (sade künye proje sayfalarında). */
 export const OZEL_SIPARIS_TARGET = 'iletisim'
+/** 13 Eki: heykeller iki seri sayfası; eski tek sayfa → iki serinin yan yana durduğu /koleksiyonlar. */
+export const HEYKELLER_ESKI = 'koleksiyonlar/seramik-heykeller'
+export const HEYKELLER_HEDEF = 'koleksiyonlar'
 export const SUREC_TARGET = '/projeler'
 
 function splitLocale(pathname: string): { locale: string | null; rest: string } {
@@ -61,6 +64,13 @@ export function decideRoute(host: string, pathname: string, search = ''): RouteD
       if (site === 'kurumsal') return { type: 'redirect', location: `/${loc}${SUREC_TARGET}` }
       if (domains.kurumsal) return { type: 'redirect', location: `https://${domains.kurumsal}/${loc}${SUREC_TARGET}` }
       return { type: 'redirect', location: `/${loc}/${KURUMSAL_SEGMENT}${SUREC_TARGET}` }
+    }
+
+    // 3c. Eski heykel koleksiyonu (tek sayfa) → /koleksiyonlar (301). Galeri sayfası;
+    //     kurumsal alan adında istenirse galeriye gönderilir.
+    if (inner.replace(/\/$/, '') === `/${HEYKELLER_ESKI}`) {
+      const base = site === 'kurumsal' && domains.galeri ? `https://${domains.galeri}` : ''
+      return { type: 'redirect', location: `${base}/${loc}/${HEYKELLER_HEDEF}` }
     }
 
     // 3b. /ozel-siparis → aynı sitenin iletişim sayfası (301).

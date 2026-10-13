@@ -19,3 +19,24 @@ describe('heykel serileri', () => {
     ])
   })
 })
+
+import { galleryCollections, itemsFor, seriesPageBySlug } from '@/lib/series'
+
+describe('heykeller iki ayrı sayfa', () => {
+  const SLUGS = { 'Resimli Seramikler': 'resimli-seramikler', 'Seramik Heykeller': 'seramik-heykeller', 'Antik Dönem Replikaları': 'antik-donem-replikalari' }
+  it('heykel kategorisi yerine iki seri sayfası, sıra korunur', () => {
+    expect(galleryCollections(['Resimli Seramikler', 'Seramik Heykeller', 'Antik Dönem Replikaları'], SLUGS).map((c) => c.slug)).toEqual([
+      'resimli-seramikler', 'masalin-hafizasi', 'anadolu-ekininde-guzeller', 'antik-donem-replikalari',
+    ])
+  })
+  it('seri sayfası yalnız kendi eserlerini alır (alt seriler dahil)', () => {
+    const items = [
+      { id: 1, category: 'Seramik Heykeller', collection: 'Masalın Hafızası — Anka Serisi' },
+      { id: 2, category: 'Seramik Heykeller', collection: 'Anadolu Ekininde Güzeller' },
+      { id: 3, category: 'Resimli Seramikler', collection: 'Masalın Hafızası' },
+    ]
+    expect(itemsFor(items, seriesPageBySlug('masalin-hafizasi')!).map((p) => p.id)).toEqual([1])
+    expect(itemsFor(items, seriesPageBySlug('anadolu-ekininde-guzeller')!).map((p) => p.id)).toEqual([2])
+    expect(seriesPageBySlug('seramik-heykeller')).toBeNull()
+  })
+})
