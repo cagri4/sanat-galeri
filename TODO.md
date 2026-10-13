@@ -54,7 +54,7 @@
 - [x] Anadolu Ekininde Güzeller: DB'deki mevcut yapı çıkarıldı
 - [x] Anadolu Ekininde Güzeller: Drive ↔ DB fotoğraf karşılaştırması yapıldı
 - [x] Anadolu Ekininde Güzeller: durum raporu + ayırma planı Çağrı'ya sunuldu
-- [~] Anadolu Ekininde Güzeller: ayırma ve fotoğraf güncellemesi uygulandı - Çağrı onayı bekleniyor
+- [x] Anadolu Ekininde Güzeller: ayırma (A) ve fotoğraf güncellemesi canlıda
 - [x] Ara soru: admin dışı düzenleme denetimi yapıldı (salt okuma; iz alanı yok, dış düzenleme belirtisi yok)
 - [~] Anadolu serisinin adı/metni/eser bazında bölünmesi - sanatçıya sorulacak (ad: Ekininde Güzeller mi Anadolu Güzelleri mi)
 - [x] product_images.is_visible alanı eklendi (migration + geri alma), sorgular gizlileri dışarıda bırakıyor
@@ -64,8 +64,7 @@
 - [x] Ana giriş görseli incelendi: hangi görsel, neden orada
 - [x] Atölye fotoğrafı arandı (Drive + 87 yapım/montaj karesi)
 - [x] Ana giriş için alternatifler ekran görüntüsüyle Çağrı'ya sunuldu
-- [~] Anadolu + ana giriş değişiklikleri canlıya alındı - ekran görüntüsü onayı bekleniyor
-- [ ] Şeref'in kartındaki geçici pano görseli atölye karesiyle değiştirildi
-- [ ] Anadolu + giriş + kart deploy edildi, vercel-bekle.sh ile hash doğrulandı
-- [ ] Anadolu SQL'i uygulandı (17 yeni, 9 gizli, 8 sergiye)
-- [ ] Canlıda kontrol + ekran görüntüleri; geri alma scriptleri teyit edildi
+- [x] Şeref'in kartındaki geçici pano görseli atölye karesiyle değiştirildi
+- [x] Anadolu + giriş + kart deploy edildi, vercel-bekle.sh ile hash doğrulandı
+- [x] Anadolu SQL'i uygulandı (17 yeni, 9 gizli, 8 sergiye)
+- [x] Canlıda kontrol + ekran görüntüleri; geri alma scriptleri teyit edildi
