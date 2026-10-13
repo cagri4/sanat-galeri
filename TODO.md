@@ -43,7 +43,6 @@
 - [x] Türkçe karakter kontrolü yapıldı (menü + banner)
 - [x] Mobil 390 px kontrolü yapıldı
 - [x] Ekran görüntüleri kanıt dosyasına konup Çağrı'ya onaya sunuldu (preview-shots/a-listesi/KANIT.md)
-- [~] Hakkımızda atölye fotoğrafları eklendi - sanatçıdan gelecek; gelmezse sayfa bugünkü haliyle kalır, bekleme sebebi değil
 - [x] Heykel künyelerinde eksik yıl (16/16) ve ölçü (11/16) listesi çıkarıldı
 - [~] Temas tablosundan işaretlenen fotoğraflar sitede gizlendi - sanatçının işaretlemesi bekleniyor; ayrıca product_images'ta is_visible alanı YOK, gizlemek için şema değişikliği (Çağrı onayı) gerekli
 - [x] Değişiklikler commit edildi (deploy YOK)
@@ -68,3 +67,13 @@
 - [x] Anadolu + giriş + kart deploy edildi, vercel-bekle.sh ile hash doğrulandı
 - [x] Anadolu SQL'i uygulandı (17 yeni, 9 gizli, 8 sergiye)
 - [x] Canlıda kontrol + ekran görüntüleri; geri alma scriptleri teyit edildi
+- [x] Drive Hakkımızda klasörü tarandı, yeni atölye fotoğrafları listelendi
+- [x] Atölye fotoğrafları Cloudinary'ye yüklendi (DB'ye yazmadan önce yedek + geri alma)
+- [x] Ana giriş üçlüsü gerçek atölye fotoğraflarıyla değişti
+- [x] Şeref'in kartı gerçek atölye fotoğrafıyla değişti
+- [x] Hakkımızda sayfası atölye fotoğraflarıyla güncellendi
+- [~] "Masalın hafızası kaf dağından gelenler" fotoğrafı bulundu, Masalın Hafızası banner'ı yapıldı - o adla dosya Drive'da yok; aynı akşam eklenen geniş sergi karesi ADAY olarak önizlemede, teyit gerekli
+- [x] Heykeller iki ayrı sayfa (Masalın Hafızası / Anadolu Ekininde Güzeller), menü Galeri altında iki başlık
+- [x] Heykel adresleri için 301'ler testleriyle, sitemap güncellendi
+- [x] Önizleme ekran görüntüleri Çağrı'ya onaya sunuldu
+- [~] Atölye + seriler + banner canlıya alındı - Çağrı onayı ve banner teyidi bekleniyor
