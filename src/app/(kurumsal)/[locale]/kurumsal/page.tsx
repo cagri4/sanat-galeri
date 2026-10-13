@@ -64,7 +64,6 @@ export default async function KurumsalHome({ params }: { params: Promise<{ local
     : []
   const projeAdi = new Map(withImage.map((p) => [`yapim-${p.slug}`, p]))
 
-  const steps = Object.values(t.raw('steps') as Record<string, { t: string; b: string }>)
 
   return (
     <main>
@@ -185,23 +184,6 @@ export default async function KurumsalHome({ params }: { params: Promise<{ local
         </Reveal>
       )}
 
-      {/* Süreç özeti — 5 adım (sanatçının "Yapım Süreci" metinlerinden) */}
-      <Reveal as="section" className="border-t border-[var(--rule)] py-16">
-        <div className="mb-8 flex items-end justify-between gap-6">
-          <h2 className="text-2xl sm:text-3xl">{t('processSummary')}</h2>
-          <a href={k('/surec')} className="shrink-0 text-[length:var(--text-meta)] text-[var(--muted)] hover:text-[var(--accent)]">
-            {t('processMore')} &rarr;
-          </a>
-        </div>
-        <ol className="grid grid-cols-1 gap-px bg-[var(--rule)] sm:grid-cols-5">
-          {steps.map((s, i) => (
-            <Reveal as="li" key={s.t} delay={staggerDelay(i)} className="bg-[var(--background)] py-5 pr-4 sm:px-4 sm:first:pl-0">
-              <span className="font-mono text-[12px] text-[var(--accent)]">{String(i + 1).padStart(2, '0')}</span>
-              <p className="mt-2 text-[length:var(--text-meta)] leading-snug">{s.t}</p>
-            </Reveal>
-          ))}
-        </ol>
-      </Reveal>
     </main>
   )
 }

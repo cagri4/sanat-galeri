@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { getCrossDomainLinks } from '@/components/shared/navbar'
 import { ARTIST_AVATARS, AVATAR_CLASS } from '@/lib/artist-avatars'
+import PageBanner from '@/components/shared/page-banner'
+import { sergiBanner } from '@/lib/banner-images'
 import Reveal from '@/components/motion/reveal'
 
 /**
@@ -51,6 +53,7 @@ export default async function AboutPage({
   const MELIKE_URL = process.env.NEXT_PUBLIC_MELIKE_URL ?? '#'
   const SEREF_URL = process.env.NEXT_PUBLIC_SEREF_URL ?? '#'
   const domainLinks = getCrossDomainLinks(locale, MAIN_URL, MELIKE_URL, SEREF_URL)
+  const banner = await sergiBanner(0)
 
   const artists = [
     { slug: 'melike', name: 'Melike Doğan', href: domainLinks.melike },
@@ -58,13 +61,11 @@ export default async function AboutPage({
   ]
 
   return (
-    <main className="py-16 sm:py-24">
-      <Reveal as="section" className="max-w-2xl">
-        <h1 className="text-4xl font-medium leading-[1.1] tracking-[-0.01em] text-[#2C2C2C] sm:text-5xl lg:text-6xl">
-          {isTr ? 'Hakkımızda' : 'About Us'}
-        </h1>
+    <main className="pb-16 pt-8 sm:pb-24 sm:pt-10">
+      <PageBanner title={isTr ? 'Hakkımızda' : 'About Us'} image={banner} />
+      <Reveal as="section" className="mt-12 max-w-2xl">
         {/* Sanatcinin kendi Hakkimizda metni (Drive: Hakkimizda.docx) — aynen. */}
-        <p className="mt-8 max-w-[68ch] text-[length:var(--text-lead)] leading-[1.8] text-[#4a4a4a]">
+        <p className="max-w-[68ch] text-[length:var(--text-lead)] leading-[1.8] text-[#4a4a4a]">
           {ta('lead')}
         </p>
         <div className="mt-6 max-w-[68ch] space-y-5">

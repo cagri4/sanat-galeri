@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import { getProducts } from '@/lib/queries/gallery'
 import { CATEGORIES, CATEGORY_SLUGS, COLLECTIONS } from '@/lib/categories'
+import PageBanner, { bannerFromProducts } from '@/components/shared/page-banner'
 import { categoriesForSite } from '@/lib/site'
 
 export async function generateMetadata({
@@ -50,11 +51,9 @@ export default async function KoleksiyonlarPage({
   })
 
   return (
-    <main className="py-16 sm:py-24">
-      <h1 className="text-4xl font-medium tracking-[-0.015em] text-[#2C2C2C] sm:text-5xl lg:text-6xl">
-        {t('title')}
-      </h1>
-      <p className="mt-6 max-w-[62ch] text-[length:var(--text-lead)] leading-[1.85] text-[#4a4a4a]">
+    <main className="pb-16 pt-8 sm:pb-24 sm:pt-10">
+      <PageBanner title={t('title')} image={bannerFromProducts(products, locale, 1)} />
+      <p className="mt-10 max-w-[62ch] text-[length:var(--text-lead)] leading-[1.85] text-[#4a4a4a]">
         {t('lead')}
       </p>
 

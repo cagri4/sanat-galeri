@@ -13,6 +13,11 @@ export type RouteDecision =
 /** /teknik kaldırıldı (Edit Talepleri satır 11); metni antik koleksiyon sayfasında. */
 export const TEKNIK_TARGET = 'koleksiyonlar/antik-donem-replikalari#terra-sigillata'
 
+/** 13 Eki kaldırılanlar (GOREV-A-LISTESI-UYGULA): özel sipariş → iletişim,
+ *  süreç anlatısı → kurumsal projeler (sade künye proje sayfalarında). */
+export const OZEL_SIPARIS_TARGET = 'iletisim'
+export const SUREC_TARGET = '/projeler'
+
 function splitLocale(pathname: string): { locale: string | null; rest: string } {
   const seg = pathname.split('/')[1] ?? ''
   if ((routing.locales as readonly string[]).includes(seg)) {
@@ -46,6 +51,27 @@ export function decideRoute(host: string, pathname: string, search = ''): RouteD
   }
 
   const kurumsalPrefix = new RegExp(`^/${KURUMSAL_SEGMENT}(?=/|$)`)
+
+  if (locale) {
+    const prefixed = kurumsalPrefix.test(rest)
+    const inner = prefixed ? rest.replace(kurumsalPrefix, '') : rest
+
+    // 3a. /surec (her iki sitede, /kurumsal önekli ya da değil) → kurumsal projeler (301).
+    if (/^\/surec\/?$/.test(inner)) {
+      if (site === 'kurumsal') return { type: 'redirect', location: `/${loc}${SUREC_TARGET}` }
+      if (domains.kurumsal) return { type: 'redirect', location: `https://${domains.kurumsal}/${loc}${SUREC_TARGET}` }
+      return { type: 'redirect', location: `/${loc}/${KURUMSAL_SEGMENT}${SUREC_TARGET}` }
+    }
+
+    // 3b. /ozel-siparis → aynı sitenin iletişim sayfası (301).
+    if (/^\/ozel-siparis\/?$/.test(inner)) {
+      let base = `/${loc}`
+      if (prefixed && site !== 'kurumsal') {
+        base = domains.kurumsal ? `https://${domains.kurumsal}/${loc}` : `/${loc}/${KURUMSAL_SEGMENT}`
+      }
+      return { type: 'redirect', location: `${base}/${OZEL_SIPARIS_TARGET}` }
+    }
+  }
 
   // 3. Kurumsal alan adı: URL'de /kurumsal görünmez.
   if (site === 'kurumsal') {

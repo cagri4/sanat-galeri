@@ -63,8 +63,8 @@ export default async function Footer({ locale }: FooterProps) {
                 </a>
               </li>
               <li>
-                <a href={links.commissions} className="text-[13px] text-[#6b6b6b] hover:text-[#2C2C2C] transition-colors">
-                  {t('commissionsLink')}
+                <a href={links.exhibitions} className="text-[13px] text-[#6b6b6b] hover:text-[#2C2C2C] transition-colors">
+                  {t('exhibitionsLink')}
                 </a>
               </li>
               <li>

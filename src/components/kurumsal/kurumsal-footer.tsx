@@ -22,7 +22,6 @@ export default async function KurumsalFooter({ locale }: { locale: string }) {
         <ul className="space-y-2 md:col-span-4">
           {[
             { href: k('/projeler'), label: t('nav.projects') },
-            { href: k('/surec'), label: t('nav.process') },
             { href: k('/hakkimizda'), label: t('nav.about') },
             { href: k('/iletisim'), label: t('nav.contact') },
           ].map((l) => (

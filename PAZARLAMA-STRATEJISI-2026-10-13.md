@@ -43,7 +43,7 @@
 | İletişim formu mesajları `messages` tablosuna düşüyor, ama **hangi siteden / hangi reklamdan geldiği kaydedilmiyor** (alan yok). Bugüne kadar 0 mesaj; siteler henüz yayında değil, noindex | DB şeması |
 | Ziyaretçilerin çoğu sayfayı 10–20 saniyede terk eder. İlk 10 saniye kalma kararında belirleyici; değer önerisi bu sürede net anlatılırsa dikkat uzar | [Nielsen Norman Group, "How Long Do Users Stay on Web Pages?"](https://www.nngroup.com/articles/how-long-do-users-stay-on-web-pages/). Çağrı'nın "10–15 saniye" kuralını destekliyor |
 
-**Bu tablodan çıkan en önemli şey:** Kurumsal tarafın bilinen müşterileri **kamu kurumları ve Çanakkale yerel ölçeği** (hastane, müze, anma alanları). Yani "mimarlar" tek başına doğru hedef değil. Kararı veren çoğu zaman bir kurum, mimar ise o kararın içindeki kişi. Bu işlerin **nasıl geldiği** (ihale mi, doğrudan davet mi, mimar önerisi mi, tanıdık mı) bilinmiyor. Stratejinin en çok güveneceği veri bu olurdu → §7, soru 1.
+**Bu tablodan çıkan en önemli şey:** Kurumsal tarafın bilinen müşterileri **kamu kurumları ve Çanakkale yerel ölçeği** (hastane, müze, anma alanları). Yani "mimarlar" tek başına doğru hedef değil. Kararı veren çoğu zaman bir kurum, mimar ise o kararın içindeki kişi. Bu işlerin **nasıl geldiği** (ihale mi, doğrudan davet mi, mimar önerisi mi, tanıdık mı) bilinmiyor. Stratejinin en çok güveneceği veri bu olurdu; Çağrı kararıyla sanatçıya sorulmayacak (§7.1).
 
 ## 2. KİTLE A — Kurumsal (Uart Kurumsal: mimari panolar + heykel)
 
@@ -263,7 +263,7 @@ Galeri bu kişilere seslenmemeli. Seslenirse Çağrı'nın uyarısı tam gerçek
 
 ## 7. Çağrı'ya sorulacaklar (bilmediğim, varsaymadığım)
 
-1. **Geçmiş 11 pano işi nasıl geldi?** İhale, doğrudan davet, mimar önerisi, tanıdık? *(Stratejinin en kritik verisi. Kurumsal kanal seçimi buna göre değişir.)*
+1. ~~**Geçmiş 11 pano işi nasıl geldi?**~~ **Kapandı:** Çağrı'nın kararıyla (13 Eki, GOREV-A-LISTESI-UYGULA madde 7) sanatçıya **sorulmayacak**. Kurumsal kanal seçimi bu veri olmadan, §2'deki gerekçelerle yapılır.
 2. Hangi kurumların adı sitede ve reklamda **referans olarak kullanılabilir?** (İzin.)
 3. Kamu ihalelerine girme kapasiteleri var mı (şirket türü, belgeler)? EKAP takibi anlamlı mı?
 4. Müteahhitler müşteri mi, aracı mı?

@@ -2,8 +2,10 @@ import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import LanguageSwitcher from './language-switcher'
 import MobileMenu from './mobile-menu'
+import { DesktopNav, InstagramLink, type NavItem } from './nav-menu'
 import { headers } from 'next/headers'
 import { kurumsalPath } from '@/lib/site'
+import { CATEGORY_SLUGS } from '@/lib/categories'
 
 export function buildDomainLink(baseUrl: string, path: string): string {
   try {
@@ -43,8 +45,10 @@ export function getCrossDomainLinks(
     gallery: buildDomainLink(mainUrl, `/${locale}/galeri`),
     collections: buildDomainLink(mainUrl, `/${locale}/koleksiyonlar`),
     about: buildDomainLink(mainUrl, `/${locale}/hakkimizda`),
-    commissions: buildDomainLink(mainUrl, `/${locale}/ozel-siparis`),
     exhibition: buildDomainLink(mainUrl, `/${locale}/sergi/bozcaada-2010`),
+    exhibitions: buildDomainLink(mainUrl, `/${locale}/sergiler`),
+    collection: (category: string) =>
+      buildDomainLink(mainUrl, `/${locale}/koleksiyonlar/${CATEGORY_SLUGS[category]}`),
     contact: buildDomainLink(mainUrl, `/${locale}/iletisim`),
     melike: buildArtistLink(mainUrl, melikeUrl, locale, 'melike'),
     seref: buildArtistLink(mainUrl, serefUrl, locale, 'seref'),
@@ -64,13 +68,39 @@ export default async function Navbar({ locale }: NavbarProps) {
   const SEREF_URL = process.env.NEXT_PUBLIC_SEREF_URL ?? 'https://seref.uarttasarim.com'
 
   const links = getCrossDomainLinks(locale, MAIN_URL, MELIKE_URL, SEREF_URL)
-  const ts = await getTranslations({ locale, namespace: 'site' })
-  const kurumsalHref = kurumsalPath((await headers()).get('host') ?? '', locale)
-  const items = [
-    { href: links.gallery, label: t('gallery') },
-    { href: links.collections, label: t('collections') },
-    { href: links.about, label: t('about') },
-    { href: links.commissions, label: t('commissions') },
+  const tc = await getTranslations({ locale, namespace: 'gallery.categories' })
+  const host = (await headers()).get('host') ?? ''
+
+  // Menü (sanatçının 11 Eki yapısı, Çağrı 13 Eki: Türkçe adlar).
+  // Panolar kurumsal sitede yaşar: Galeri altında kurumsal siteye giden bağlantı.
+  // "Üretim süreçleri" galeri sitesinde YOK (GOREV-A-LISTESI karar 5).
+  const items: NavItem[] = [
+    {
+      href: links.gallery,
+      label: t('gallery'),
+      children: [
+        {
+          href: kurumsalPath(host, locale, '/projeler?tur=mimari-duvar-panolari'),
+          label: tc('Mimari Duvar Panoları'),
+          external: true,
+        },
+        { href: links.collection('Resimli Seramikler'), label: tc('Resimli Seramikler') },
+        { href: links.collection('Seramik Heykeller'), label: t('sculptures') },
+      ],
+    },
+    {
+      href: links.collection('Antik Dönem Replikaları'),
+      label: t('objects'),
+      children: [{ href: links.collection('Antik Dönem Replikaları'), label: tc('Antik Dönem Replikaları') }],
+    },
+    {
+      href: links.about,
+      label: t('studio'),
+      children: [
+        { href: links.about, label: t('about') },
+        { href: links.exhibitions, label: t('exhibitions') },
+      ],
+    },
     { href: links.contact, label: t('contact') },
   ]
 
@@ -99,30 +129,17 @@ export default async function Navbar({ locale }: NavbarProps) {
           </span>
         </a>
 
-        {/* Desktop nav — vitrin menusu (5 madde). Teknik/Sergiler artik
-            Koleksiyonlar/Hakkinda icinden; sanatcilar footer'da. */}
-        <div className="hidden items-center gap-8 sm:flex">
-          {items.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="relative inline-flex min-h-11 items-center text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#2C2C2C] after:absolute after:inset-x-0 after:bottom-2.5 after:h-px after:origin-left after:scale-x-0 after:bg-[#2C2C2C] after:transition-transform after:duration-[var(--dur-micro)] after:ease-[var(--ease)] hover:after:scale-x-100"
-            >
-              {l.label}
-            </a>
-          ))}
-          {/* Diğer site: kurumsal projeler (ayrı alan adı ya da önizlemede yol) */}
-          <a
-            href={kurumsalHref}
-            className="inline-flex min-h-11 items-center border-l border-[var(--border)] pl-6 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)] transition-colors duration-[var(--dur-micro)] hover:text-[#2C2C2C]"
-          >
-            {ts('kurumsal')} &rarr;
-          </a>
-          <LanguageSwitcher />
+        {/* Masaüstü: Galeri · Objeler · Stüdyo · İletişim, en sağda Instagram + dil.
+            Kurumsal siteye geçiş Galeri ▾ Mimari Duvar Panoları ↗ ve footer'da. */}
+        <div className="hidden items-center gap-6 md:flex">
+          <DesktopNav items={items} submenuLabel={t('submenu')} />
+          <div className="flex items-center gap-2 border-l border-[var(--border)] pl-4">
+            <InstagramLink label={t('instagram')} />
+            <LanguageSwitcher />
+          </div>
         </div>
 
-        {/* Mobile hamburger */}
-        <MobileMenu items={[...items, { href: kurumsalHref, label: ts('kurumsal') }]} />
+        <MobileMenu items={items} menuLabel={t('menu')} instagramLabel={t('instagram')} />
       </nav>
     </header>
   )

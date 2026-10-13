@@ -3,6 +3,7 @@ import { headers } from 'next/headers'
 import { getTranslations } from 'next-intl/server'
 import LanguageSwitcher from '@/components/shared/language-switcher'
 import MobileMenu from '@/components/shared/mobile-menu'
+import { DesktopNav, InstagramLink, type NavItem } from '@/components/shared/nav-menu'
 import { galeriPath, kurumsalPath } from '@/lib/site'
 
 /**
@@ -15,13 +16,32 @@ export default async function KurumsalNavbar({ locale }: { locale: string }) {
   const host = (await headers()).get('host') ?? ''
   const k = (path = '') => kurumsalPath(host, locale, path)
 
-  const items = [
-    { href: k('/projeler'), label: t('nav.projects') },
-    { href: k('/surec'), label: t('nav.process') },
-    { href: k('/hakkimizda'), label: t('nav.about') },
+  const tn = await getTranslations({ locale, namespace: 'nav' })
+  const tc = await getTranslations({ locale, namespace: 'gallery.categories' })
+  const galeriHref = galeriPath(host, locale)
+
+  // Galeriyle aynı düzen (Türkçe adlar, Stüdyo grubu, sağ üstte Instagram),
+  // ama kurumsalın kendi içeriğiyle: Projeler · Stüdyo · İletişim.
+  // Süreç anlatısı kalktı (13 Eki); Sergiler galeri sitesinde yaşar.
+  const items: NavItem[] = [
+    {
+      href: k('/projeler'),
+      label: t('nav.projects'),
+      children: [
+        { href: k('/projeler?tur=mimari-duvar-panolari'), label: tc('Mimari Duvar Panoları') },
+        { href: k('/projeler?tur=seramik-heykeller'), label: tn('sculptures') },
+      ],
+    },
+    {
+      href: k('/hakkimizda'),
+      label: tn('studio'),
+      children: [
+        { href: k('/hakkimizda'), label: t('nav.about') },
+        { href: galeriPath(host, locale, '/sergiler'), label: tn('exhibitions'), external: true },
+      ],
+    },
     { href: k('/iletisim'), label: t('nav.contact') },
   ]
-  const galeriHref = galeriPath(host, locale)
 
   return (
     <header className="site-header border-b border-[var(--rule)]">
@@ -35,27 +55,22 @@ export default async function KurumsalNavbar({ locale }: { locale: string }) {
         </a>
 
         <div className="hidden items-center gap-7 md:flex">
-          {items.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="inline-flex min-h-11 items-center text-[length:var(--text-meta)] text-[var(--muted)] transition-colors duration-[var(--dur-micro)] hover:text-[var(--accent)]"
-            >
-              {l.label}
-            </a>
-          ))}
+          <DesktopNav items={items} submenuLabel={tn('submenu')} tone="kurumsal" />
           <a
             href={galeriHref}
             className="inline-flex min-h-11 items-center border-l border-[var(--rule)] pl-6 text-[length:var(--text-meta)] text-[var(--faint)] transition-colors duration-[var(--dur-micro)] hover:text-[var(--foreground)]"
           >
             {ts('galeri')} &rarr;
           </a>
+          <InstagramLink label={tn('instagram')} />
           <LanguageSwitcher />
         </div>
 
-        <div className="md:hidden">
-          <MobileMenu items={[...items, { href: galeriHref, label: ts('galeri') }]} />
-        </div>
+        <MobileMenu
+          items={[...items, { href: galeriHref, label: ts('galeri'), external: true }]}
+          menuLabel={tn('menu')}
+          instagramLabel={tn('instagram')}
+        />
       </nav>
     </header>
   )

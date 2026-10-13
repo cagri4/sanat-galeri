@@ -13,7 +13,12 @@
     "exhibitions": "Sergiler",
     "technique": "Teknik",
     "collections": "Koleksiyonlar",
-    "commissions": "Özel Sipariş"
+    "objects": "Objeler",
+    "studio": "Stüdyo",
+    "sculptures": "Heykeller",
+    "instagram": "Instagram’da Uarttasarım",
+    "menu": "Menü",
+    "submenu": "alt menü"
   },
   "gallery": {
     "title": "Galeri",
@@ -26,7 +31,7 @@
     "price": "Fiyat",
     "contactForPrice": "Fiyat için iletişime geçin",
     "sold": "Satıldı",
-    "contactTitle": "Bilgi Al",
+    "contactTitle": "Bu eser hakkında yazın",
     "categories": {
       "Antik Dönem Replikaları": "Antik Dönem Replikaları",
       "Resimli Seramikler": "Resimli Seramikler",
@@ -109,7 +114,7 @@
     "address": "Boğazkent mah. 3.cad. 1/10\nKepez, Çanakkale 17100\nTürkiye",
     "followUs": "Bizi Takip Edin",
     "collectionsLink": "Koleksiyonlar",
-    "commissionsLink": "Özel Sipariş"
+    "exhibitionsLink": "Sergiler"
   },
   "exhibition": {
     "eyebrow": "Sergi",
@@ -164,13 +169,6 @@
     "emptyNote": "Bu koleksiyonun eserleri hazırlanıyor.",
     "comingSoonTag": "Yakında"
   },
-  "commissions": {
-    "title": "Özel Sipariş",
-    "lead": "Belirli bir mekân, form ya da mitolojik anlatı için özel çalışmalar üretiyoruz. Her eser elde biçimlenir; ölçü, yüzey ve konu birlikte kararlaştırılır.",
-    "body": "Bir mekâna özel bir pano, sevdiğiniz bir mitolojik sahnenin replikası ya da bir dizi kap — düşüncenizi bizimle paylaşın, birlikte yorumlayalım. Bu bir satış sistemi değil; bir başlangıç sohbetidir.",
-    "cta": "Teklif / İletişim",
-    "note": "Fiyat ve süre, işin kapsamına göre görüşmede netleşir."
-  },
   "about": {
     "lead": "Uarttasarım, toprağın hafızasını, doğanın ritmini ve kültürel mirası çağdaş bir bakışla yeniden yorumlayan bir seramik atölyesidir.",
     "body": "Üretimlerimiz, çevremizdeki dünyanın sessiz ayrıntılarından beslenir; suyun ışıkla kurduğu ilişki, rüzgârın izleri, mevsimlerin dönüşümü, antik taşların dokusu ve yaşadığımız coğrafyanın binlerce yıllık kültürel birikimi çalışmalarımızın çıkış noktasını oluşturur.\n\nHer eser, elde şekillendirilen kilin sabırla dönüştüğü uzun bir sürecin sonucudur. Hızın üretime yön verdiği bir çağda, yavaşlamayı ve malzemeyle kurulan doğrudan ilişkiyi önemsiyoruz. Çünkü inanıyoruz ki, el emeği yalnızca bir üretim yöntemi değil; nesnelere karakter ve ruh kazandıran yaratıcı bir dildir.\n\nUarttasarım'da seramik; yalnızca işlevsel bir obje ya da dekoratif bir form değildir. Her çalışma, bir hikâye taşır. Kimi zaman bir Anadolu masalını, kimi zaman antik bir seramiğin belleğini, kimi zaman ise doğanın sürekli değişen döngüsünü anlatır. Sanat ile zanaat arasındaki sınırın geçirgen olduğuna inanıyor; her parçayı estetik, tarih ve anlatının buluştuğu bir alan olarak görüyoruz.\n\nKoleksiyonlarımız arasında antik dönem seramik replikaları, özgün seramik heykeller, giyilebilir seramik sanat eserleri, resimler ve doğadan ilham alan işlevsel seramikler yer almaktadır. Her biri, geçmiş ile bugünü, gelenek ile çağdaş yorumu buluşturan aynı düşüncenin farklı ifadeleridir.\n\nBizim için bir seramik eser, yalnızca görülen bir nesne değil; dokunulan, kullanılan, yaşanan ve zamanla anılar biriktiren bir yol arkadaşıdır. Uarttasarım'ın amacı, estetik değer taşıyan, kişisel bağ kurulan ve yaşamın doğal akışına eşlik eden eserler üretmektir.\n\nÇünkü inanıyoruz ki, her form bir hikâye taşır; her hikâye ise toprağın hafızasında yaşamaya devam eder."
@@ -186,7 +184,6 @@
     "nav": {
       "home": "Ana Sayfa",
       "projects": "Projeler",
-      "process": "Süreç",
       "about": "Hakkımızda",
       "contact": "İletişim"
     },
@@ -206,45 +203,12 @@
     "specLocation": "Konum",
     "specYear": "Yıl",
     "specSize": "Ölçü",
-    "specMedium": "Teknik ve malzeme",
-    "specType": "Tür",
-    "specTheme": "Tema",
     "specArtist": "Sanatçı",
-    "specCollection": "Seri",
     "descPending": "Bu eserin kurumsal açıklaması (ölçü, uygulama, mekâna yerleşim) henüz eklenmedi.",
     "ctaTitle": "Proje görüşmesi",
     "ctaLead": "Mekânınız için bir seramik pano ya da heykel düşünüyorsanız; mekân türünü, duvar ölçüsünü ve takviminizi yazın.",
     "ctaButton": "Proje görüşmesi talep et",
     "galeriLink": "Bu eser Uart Galeri'de",
-    "processEyebrow": "Nasıl çalışıyoruz",
-    "processTitle": "Mekândan yüzeye: yapım ve uygulama süreci",
-    "processLead": "Her pano, uygulanacağı duvarın ölçüleri ve mimari özellikleri dikkate alınarak modüler parçalar hâlinde tasarlanır.",
-    "processSource": "Süreç adımları sanatçının proje dokümanlarındaki \"Yapım Süreci\" bölümlerinden derlenmiştir.",
-    "steps": {
-      "s1": {
-        "t": "Mekân ve ölçü",
-        "b": "Tasarım, mimari alanın ölçüleri ve izlenme mesafesi göz önünde bulundurularak yapılır."
-      },
-      "s2": {
-        "t": "Modüler tasarım",
-        "b": "Kompozisyon, uygulama ölçülerine uygun şekilde bölümlere ve modüler seramik parçalara ayrılır."
-      },
-      "s3": {
-        "t": "Elle şekillendirme",
-        "b": "Rölyef bölümler, semboller ve doku katmanları ayrı ayrı elle biçimlendirilir."
-      },
-      "s4": {
-        "t": "Kurutma, pişirim, sırlama",
-        "b": "Parçalar kontrollü kurutma, pişirim, renklendirme ve sırlama aşamalarından geçer."
-      },
-      "s5": {
-        "t": "Yerinde montaj",
-        "b": "Tamamlanan parçalar, hazırlanan yerleşim planına göre bir araya getirilerek duvar yüzeyine uygulanır."
-      }
-    },
-    "materialTitle": "Malzeme ve teknik",
-    "materialBody": "Şamotlu çamur, yüksek rölyef, çift pişirim ve sırlama.",
-    "processProjects": "Yapım ve montaj görüntüleri proje sayfalarında yer alacak.",
     "aboutTitle": "Hakkımızda",
     "artistsTitle": "Sanatçılar",
     "contactTitle": "İletişim",
@@ -253,8 +217,7 @@
     "makingTitle": "Yapım ve montajdan kareler",
     "makingProject": "Yapım ve montaj",
     "referencesTitle": "Referans mekânlar",
-    "processSummary": "Süreç",
-    "processMore": "Süreci incele"
+    "specName": "Eser adı"
   },
   "home": {
     "heroTitle": "Toprağın Hafızası",
@@ -268,5 +231,12 @@
     "railPrev": "Önceki",
     "railNext": "Sonraki",
     "viewWork": "Eseri gör"
+  },
+  "exhibitionsPage": {
+    "title": "Sergiler",
+    "eyebrow": "Stüdyo",
+    "metaDesc": "Uarttasarım sanatçılarının sergileri.",
+    "detail": "Sergi sayfası",
+    "photosLabel": "sergiden kareler"
   }
 }

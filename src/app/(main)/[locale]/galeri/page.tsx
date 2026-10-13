@@ -6,6 +6,7 @@ import { CATEGORIES } from '@/lib/categories'
 import { categoriesForSite } from '@/lib/site'
 import Link from 'next/link'
 import CategoryFilter from '@/components/gallery/category-filter'
+import PageBanner, { bannerFromProducts } from '@/components/shared/page-banner'
 import ArtworkGrid from '@/components/gallery/artwork-grid'
 
 export async function generateMetadata({
@@ -62,12 +63,9 @@ export default async function GaleriPage({ params, searchParams }: GaleriPagePro
     t.has(`categories.${cat}`) ? t(`categories.${cat}`) : cat
 
   return (
-    <main className="py-16 sm:py-24">
-      {/* Baslik olcegi buyutuldu ve tracking sikilastirildi: iri + ince
-          serif, "Exaggerated Minimalism" dilinin sakin yorumu. */}
-      <h1 className="text-4xl font-medium leading-[1.1] tracking-[-0.01em] text-[#2C2C2C] sm:text-5xl lg:text-6xl">
-        {t('title')}
-      </h1>
+    <main className="pb-16 pt-8 sm:pb-24 sm:pt-10">
+      {/* Görselli başlık bandı — görsel bu sayfadaki eserlerden (admin hero sırası). */}
+      <PageBanner title={t('title')} image={bannerFromProducts(products, locale)} />
 
       {categories.length > 0 && (
         <Suspense fallback={<div className="h-12" />}>

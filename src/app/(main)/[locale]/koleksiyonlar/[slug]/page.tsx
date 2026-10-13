@@ -5,6 +5,7 @@ import { getProducts } from '@/lib/queries/gallery'
 import { categoryBySlug } from '@/lib/categories'
 import { isOnSite } from '@/lib/site'
 import ArtworkGrid from '@/components/gallery/artwork-grid'
+import PageBanner, { bannerFromProducts } from '@/components/shared/page-banner'
 import Reveal from '@/components/motion/reveal'
 
 /**
@@ -82,13 +83,12 @@ export default async function KoleksiyonPage({ params }: PageProps) {
   ]
 
   return (
-    <main className="py-16 sm:py-24">
-      <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
-        {tcol('title')}
-      </p>
-      <h1 className="font-display mt-4 text-4xl leading-[1.1] tracking-[-0.01em] text-[#2C2C2C] sm:text-5xl lg:text-6xl">
-        {tg.has(`categories.${category}`) ? tg(`categories.${category}`) : category}
-      </h1>
+    <main className="pb-16 pt-8 sm:pb-24 sm:pt-10">
+      <PageBanner
+        eyebrow={tcol('title')}
+        title={tg.has(`categories.${category}`) ? tg(`categories.${category}`) : category}
+        image={bannerFromProducts(products, locale)}
+      />
 
       {isAntik && (
         <div className="mt-6 max-w-[68ch]">

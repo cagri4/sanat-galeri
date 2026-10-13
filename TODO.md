@@ -28,4 +28,23 @@
 - [x] İki kitle için pazarlama stratejisi yazıldı (PAZARLAMA-STRATEJISI-2026-10-13.md)
 - [~] Pazarlama stratejisindeki 13 soru cevaplandı - kanal seçimi ve bütçe Çağrı'nın cevaplarına bağlı
 - [~] Ölçüm altyapısı (analytics, piksel, messages kaynak alanı) kuruldu - kod + veri modeli değişikliği, ayrı onay gerekli
-- [~] A1–A4 (Instagram, banner, özel sipariş, süreç) uygulandı - Çağrı'nın başla onayı bekleniyor
+- [x] A1–A4 için Çağrı onayı alındı (13 Eki, GOREV-A-LISTESI-UYGULA)
+- [x] Menü Türkçe yeni yapıya çevrildi (Galeri/Objeler/Stüdyo/İletişim)
+- [x] Instagram ikonu header sağ üste alındı, ana sayfa ortasındaki bölüm kaldırıldı
+- [x] Ana sayfa seramik panodan tek büyük görselle açılıyor
+- [x] PageBanner bileşeni iç sayfa başlıklarına uygulandı
+- [x] /ozel-siparis kaldırıldı, 301 → /iletisim
+- [x] Süreç kaldırıldı (301 → /projeler), proje künyesi sade 5 alana indi (ad, yer, yıl, ölçü, yapan)
+- [x] /sergiler liste sayfası yapıldı
+- [x] Tüm yeni 301'ler site-routing.ts'e testleriyle eklendi
+- [x] sitemap.ts yazıldı (noindex ve Disallow korunarak)
+- [x] Fotoğraf azaltma temas tablosu üretildi
+- [x] Strateji §7.1 "sanatçıya sorulmayacak" notuyla kapatıldı
+- [x] Türkçe karakter kontrolü yapıldı (menü + banner)
+- [x] Mobil 390 px kontrolü yapıldı
+- [ ] Ekran görüntüleri kanıt dosyasına konup Çağrı'ya onaya sunuldu
+- [~] Hakkımızda atölye fotoğrafları eklendi - sanatçıdan gelecek; gelmezse sayfa bugünkü haliyle kalır, bekleme sebebi değil
+- [x] Heykel künyelerinde eksik yıl (16/16) ve ölçü (11/16) listesi çıkarıldı
+- [~] Temas tablosundan işaretlenen fotoğraflar sitede gizlendi - sanatçının işaretlemesi bekleniyor; ayrıca product_images'ta is_visible alanı YOK, gizlemek için şema değişikliği (Çağrı onayı) gerekli
+- [ ] Değişiklikler commit edildi (deploy YOK)
+- [~] İki siteye deploy edildi - ekran görüntüsü onayı bekleniyor (Çağrı)

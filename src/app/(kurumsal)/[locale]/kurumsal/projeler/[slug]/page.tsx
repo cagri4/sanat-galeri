@@ -84,13 +84,14 @@ export default async function ProjeDetay({ params }: PageProps) {
             <h2 className="mb-3 text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--muted)]">{t('specTitle')}</h2>
             <SpecTable
               rows={[
-                // Panolarda `collection` kurulduğu KONUMU tutar; heykellerde seridir.
-                { label: isPanel ? t('specLocation') : t('specCollection'), value: p.collection },
+                // SADE künye (Çağrı 13 Eki, GOREV-A-LISTESI düzeltme): ad · yer · yıl ·
+                // ölçü · yapan kişi. Fazlası yok. Boş değer satırı gösterilmez.
+                // Panolarda `collection` uygulama YERİNİ tutar; heykellerde seri adıdır,
+                // yer değildir → heykelde yer satırı boş kalır (uydurulmaz).
+                { label: t('specName'), value: title },
+                { label: t('specLocation'), value: isPanel ? p.collection : null },
                 { label: t('specYear'), value: p.year ? String(p.year) : null },
                 { label: t('specSize'), value: isTr ? p.dimensionsTr : p.dimensionsEn },
-                { label: t('specMedium'), value: isTr ? p.mediumTr : p.mediumEn },
-                { label: t('specType'), value: isTr ? p.formTr : p.formEn },
-                { label: t('specTheme'), value: isTr ? p.subjectTr : p.subjectEn },
                 { label: t('specArtist'), value: artistName },
               ]}
             />

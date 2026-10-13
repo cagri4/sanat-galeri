@@ -3,11 +3,11 @@ import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getProducts } from '@/lib/queries/gallery'
-import InstagramSection from '@/components/gallery/instagram-section'
+import { headers } from 'next/headers'
 import { ARTIST_AVATARS, AVATAR_CLASS } from '@/lib/artist-avatars'
 import { getCrossDomainLinks } from '@/components/shared/navbar'
 import { CATEGORIES, CATEGORY_SLUGS } from '@/lib/categories'
-import { categoriesForSite, isOnSite } from '@/lib/site'
+import { categoriesForSite, isOnSite, kurumsalPath } from '@/lib/site'
 import { yeniIcerikAcik, SERGI_KUNYE, SERGI_AFISI } from '@/lib/yeni-icerik'
 import { getExhibitionPhotosBySlugs } from '@/lib/queries/exhibition-photos'
 import SeriesTabs from '@/components/shared/series-tabs'
@@ -34,7 +34,6 @@ export default async function HomePage({
   const t = await getTranslations({ locale, namespace: 'meta' })
   const tg = await getTranslations({ locale, namespace: 'gallery' })
   const tcol = await getTranslations({ locale, namespace: 'collectionsPage' })
-  const tcom = await getTranslations({ locale, namespace: 'commissions' })
   const th = await getTranslations({ locale, namespace: 'home' })
   const ta = await getTranslations({ locale, namespace: 'about' })
   const isTr = locale === 'tr'
@@ -59,17 +58,6 @@ export default async function HomePage({
   const CATS = categoriesForSite('galeri', CATEGORIES)
   const byCat = (cat: string) => withImage.filter((p) => p.category === cat)
 
-  // Her kategoriden startIdx'ten perCat eser al, dönüşümlü diz (A, Z, M, A, Z, M…).
-  const pickDiverse = (startIdx: number, perCat: number) => {
-    const pools = CATS.map(byCat)
-    const out: typeof withImage = []
-    for (let i = startIdx; i < startIdx + perCat; i++) {
-      for (const pool of pools) if (pool[i]) out.push(pool[i])
-    }
-    return out
-  }
-
-
   // Sanatçı kartı GEÇİCİ görselleri artık her sanatçının ALANINI temsil eden
   // farklı koleksiyonlardan: Melike → resimli seramik (Zamansız), Şeref → mimari
   // pano. Atıf DOĞRULANMIŞ (kap altı imzası / pano dokümanları). alt="" dekoratif;
@@ -81,33 +69,16 @@ export default async function HomePage({
     allWithImage.filter((p) => p.category === 'Mimari Duvar Panoları')[5]?.images?.[0]?.url,
   ].filter(Boolean) as string[]
 
-  // Hero seçimi ADMIN PANELINDEN de yönlendirilebilir (products.hero_order);
-  // seçim yoksa görünür eserlerin sırasına düşer, bölüm boş kalmaz.
-  const pickSlots = (key: 'heroOrder' | 'instagramOrder', limit: number) => {
-    const chosen = withImage
-      .filter((p) => typeof p[key] === 'number' && p[key] !== null)
-      .sort((a, b) => (a[key] as number) - (b[key] as number))
-    return (chosen.length > 0 ? chosen : withImage).slice(0, limit)
-  }
-
-  // Instagram: CANLI FEED DEGIL (bkz. instagram-section.tsx). Admin
-  // instagram_order ayarlamışsa onu kullanır; yoksa kategoriler arası dönüşümlü
-  // 9 eser — "Son Eserler"den farklı index'lerden alınır (tekrar olmasın).
-  const instagramCurated = withImage
-    .filter((p) => typeof p.instagramOrder === 'number' && p.instagramOrder !== null)
-    .sort((a, b) => (a.instagramOrder as number) - (b.instagramOrder as number))
-  const instagramProducts =
-    instagramCurated.length > 0 ? instagramCurated.slice(0, 9) : pickDiverse(2, 3)
-  const instagramItems = instagramProducts.map((p) => ({
-    src: p.images[0].url,
-    alt: isTr ? p.titleTr : p.titleEn,
-  }))
-
-  // Hero: TEK görsel (PLAN-TASARIM §2 — slider yerine tek kısa serif cümle +
-  // tek eser). Admin'deki hero_order'ın ilki; yoksa görünür ilk eser.
-  // Eser fotoğrafları çoğunlukla kare/dik (tabak, kap): 16:9 kırpma eseri kesiyordu.
-  // Bu yüzden hero_order'ın ilk 3'ü 4:5 üçlü; mobilde yalnız ilki.
-  const heroes = pickSlots('heroOrder', 3)
+  // Hero: seramik panodan TEK büyük görsel (sanatçı 11 Eki 22:24, Çağrı 13 Eki).
+  // Pano kurumsal sitede listelenir; burada yalnız açılış görseli olarak durur ve
+  // kurumsaldaki proje sayfasına bağlanır. Seçim admin'deki hero_order'a göre
+  // (panolar içinde ilk), yoksa ilk pano. Eserin kendisi galeride listelenmez.
+  const panels = allWithImage.filter((p) => p.category === 'Mimari Duvar Panoları')
+  const heroPanel =
+    [...panels].filter((p) => p.heroOrder != null).sort((a, b) => (a.heroOrder as number) - (b.heroOrder as number))[0] ??
+    panels[0]
+  const host = (await headers()).get('host') ?? ''
+  const heroHref = heroPanel ? kurumsalPath(host, locale, `/projeler/${heroPanel.slug}`) : null
 
   // Koleksiyon seçkileri: SERİ bazlı sekmeler (Spode deseni). Seri = koleksiyon
   // adının ana kısmı ("Masalın Hafızası — Anka Serisi" → "Masalın Hafızası");
@@ -139,32 +110,38 @@ export default async function HomePage({
 
   return (
     <main>
-      {/* Hero — tek kısa serif cümle + tek eser görseli (Spode deseni). */}
+      {/* Hero — tek kısa serif cümle + seramik panodan tek büyük görsel. */}
       <Reveal as="section" className="pt-12 sm:pt-16">
         <h1 className="text-center text-4xl leading-[1.1] text-[var(--foreground)] sm:text-6xl">
           {th('heroTitle')}
         </h1>
-        {heroes.length > 0 && (
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
-            {heroes.map((h, i) => (
-              <Link
-                key={h.id}
-                href={`/${locale}/urun/${h.slug}`}
-                className={`hover-card hover-media relative block aspect-[4/5] overflow-hidden bg-[#ece7de] ${i > 0 ? 'hidden sm:block' : ''}`}
-              >
-                <Image
-                  src={h.images[0].url}
-                  alt={(isTr ? h.images[0].altTr : h.images[0].altEn) ?? (isTr ? h.titleTr : h.titleEn)}
-                  fill
-                  priority={i === 0}
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, 33vw"
-                />
-              </Link>
-            ))}
-          </div>
+        {heroPanel && heroHref && (
+          <figure className="mt-10">
+            <a
+              href={heroHref}
+              className="hover-card hover-media relative block aspect-[4/3] overflow-hidden bg-[#ece7de] sm:aspect-[3/2]"
+            >
+              <Image
+                src={heroPanel.images[0].url}
+                alt={(isTr ? heroPanel.images[0].altTr : heroPanel.images[0].altEn) ?? (isTr ? heroPanel.titleTr : heroPanel.titleEn)}
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1440px) 100vw, 1344px"
+              />
+            </a>
+            <figcaption className="mt-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 text-[length:var(--text-meta)] text-[var(--muted)]">
+              <span>
+                <span className="text-[var(--foreground)]">{isTr ? heroPanel.titleTr : heroPanel.titleEn}</span>
+                {heroPanel.collection ? ` · ${heroPanel.collection}` : ''}
+              </span>
+              <a href={heroHref} className="inline-flex min-h-11 items-center hover:text-[var(--foreground)]">
+                {tg('categories.Mimari Duvar Panoları')} <span aria-hidden="true" className="ml-1">↗</span>
+              </a>
+            </figcaption>
+          </figure>
         )}
-        <div className="mt-8 text-center">
+        <div className="mt-6 text-center">
           <Link
             href={`/${locale}/koleksiyonlar`}
             className="inline-flex min-h-11 items-center rounded-full border border-[var(--foreground)] px-6 text-[length:var(--text-meta)] text-[var(--foreground)] transition-colors duration-[var(--dur-micro)] hover:bg-[var(--foreground)] hover:text-[var(--background)]"
@@ -302,9 +279,6 @@ export default async function HomePage({
         </div>
       </Reveal>
 
-      {/* Instagram — curated (canli feed degil), "Son Eserler" sonrasi */}
-      <InstagramSection locale={locale} items={instagramItems} />
-
       {/* Artists — side by side with large images */}
       <Reveal as="section" className="py-20 border-t border-[var(--border)] sm:py-24">
         <h2 className="mb-14 text-center text-2xl font-medium text-[#2C2C2C] sm:text-3xl">
@@ -394,24 +368,6 @@ export default async function HomePage({
         </div>
       </Reveal>
 
-      {/* Özel Sipariş bandı — hafif tanıtım + İletişim'e yönlendirme.
-          Ayrı sipariş sistemi DEĞİL (vitrin). */}
-      <Reveal as="section" className="full-bleed border-t border-[var(--border)] bg-[#f2f1ec]">
-        <div className="mx-auto max-w-2xl px-6 py-20 text-center sm:py-24">
-          <p className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
-            {tcom('title')}
-          </p>
-          <p className="mx-auto mt-6 max-w-[58ch] text-[length:var(--text-lead)] leading-[1.85] text-[#4a4a4a]">
-            {tcom('lead')}
-          </p>
-          <Link
-            href={`/${locale}/ozel-siparis`}
-            className="mt-9 inline-flex min-h-11 items-center border border-[#2C2C2C] px-7 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#2C2C2C] transition-colors duration-[var(--dur-micro)] hover:bg-[#2C2C2C] hover:text-white"
-          >
-            {tcom('cta')}
-          </Link>
-        </div>
-      </Reveal>
     </main>
   )
 }

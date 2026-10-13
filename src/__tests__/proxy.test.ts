@@ -81,8 +81,8 @@ describe('decideRoute — iki alan adı tanımlıyken', () => {
     expect(decideRoute('kurumsal.test', '/')).toEqual({ type: 'intl' })
   })
   it('kurumsal alan adında /kurumsal öneki 301 ile atılır', () => {
-    expect(decideRoute('kurumsal.test', '/tr/kurumsal/surec')).toEqual({
-      type: 'redirect', location: '/tr/surec',
+    expect(decideRoute('kurumsal.test', '/tr/kurumsal/hakkimizda')).toEqual({
+      type: 'redirect', location: '/tr/hakkimizda',
     })
   })
   it('galeri alan adında /kurumsal → kurumsal alan adı (301)', () => {
@@ -133,8 +133,8 @@ describe('decideRoute — iki ayrı Vercel projesi (UART_SITE), alan adı yok', 
     withDomains('uart-galeri.vercel.app', 'uart-kurumsal.vercel.app', 'galeri')
     expect(site.kurumsalPath('uart-galeri.vercel.app', 'tr', '/projeler'))
       .toBe('https://uart-kurumsal.vercel.app/tr/projeler')
-    expect(decideRoute('uart-galeri.vercel.app', '/tr/kurumsal/surec')).toEqual({
-      type: 'redirect', location: 'https://uart-kurumsal.vercel.app/tr/surec',
+    expect(decideRoute('uart-galeri.vercel.app', '/tr/kurumsal/hakkimizda')).toEqual({
+      type: 'redirect', location: 'https://uart-kurumsal.vercel.app/tr/hakkimizda',
     })
   })
 })
@@ -162,5 +162,60 @@ describe('proxy', () => {
   it('önizleme hostunda next-intl çalışır', () => {
     proxy(req('http://localhost/tr/kurumsal', 'localhost'))
     expect(mockIntl).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('13 Eki kaldırılan sayfalar — 301 (GOREV-A-LISTESI-UYGULA)', () => {
+  describe('iki alan adı tanımlıyken', () => {
+    beforeEach(() => withDomains('galeri.test', 'kurumsal.test'))
+    it('galeri /ozel-siparis → /iletisim', () => {
+      expect(decideRoute('galeri.test', '/tr/ozel-siparis')).toEqual({ type: 'redirect', location: '/tr/iletisim' })
+      expect(decideRoute('galeri.test', '/en/ozel-siparis/')).toEqual({ type: 'redirect', location: '/en/iletisim' })
+    })
+    it('kurumsal /ozel-siparis → kurumsal /iletisim', () => {
+      expect(decideRoute('kurumsal.test', '/tr/ozel-siparis')).toEqual({ type: 'redirect', location: '/tr/iletisim' })
+    })
+    it('kurumsal /surec → kurumsal projeler', () => {
+      expect(decideRoute('kurumsal.test', '/tr/surec')).toEqual({ type: 'redirect', location: '/tr/projeler' })
+      expect(decideRoute('kurumsal.test', '/en/kurumsal/surec')).toEqual({ type: 'redirect', location: '/en/projeler' })
+    })
+    it('galeri /surec ve /kurumsal/surec → kurumsal alan adındaki projeler (tek adım)', () => {
+      expect(decideRoute('galeri.test', '/tr/surec')).toEqual({
+        type: 'redirect', location: 'https://kurumsal.test/tr/projeler',
+      })
+      expect(decideRoute('galeri.test', '/tr/kurumsal/surec')).toEqual({
+        type: 'redirect', location: 'https://kurumsal.test/tr/projeler',
+      })
+    })
+    it('galeri /kurumsal/ozel-siparis → kurumsal alan adındaki iletişim', () => {
+      expect(decideRoute('galeri.test', '/tr/kurumsal/ozel-siparis')).toEqual({
+        type: 'redirect', location: 'https://kurumsal.test/tr/iletisim',
+      })
+    })
+    it('benzer adlı sayfalar etkilenmez', () => {
+      expect(decideRoute('galeri.test', '/tr/surecler')).toEqual({ type: 'intl' })
+      expect(decideRoute('kurumsal.test', '/tr/projeler/surec-pano')).toEqual({
+        type: 'rewrite', pathname: '/tr/kurumsal/projeler/surec-pano', locale: 'tr',
+      })
+    })
+    it('proxy 301 + Location başlığı', () => {
+      const res = proxy(req('http://kurumsal.test/tr/surec', 'kurumsal.test'))
+      expect(res.status).toBe(301)
+      expect(res.headers.get('location')).toBe('http://kurumsal.test/tr/projeler')
+    })
+  })
+  describe('alan adı yokken (önizleme / tek proje)', () => {
+    beforeEach(() => withDomains())
+    it('/ozel-siparis → /iletisim, /kurumsal/surec → /kurumsal/projeler', () => {
+      expect(decideRoute('localhost:3000', '/tr/ozel-siparis')).toEqual({ type: 'redirect', location: '/tr/iletisim' })
+      expect(decideRoute('localhost:3000', '/tr/kurumsal/surec')).toEqual({ type: 'redirect', location: '/tr/kurumsal/projeler' })
+      expect(decideRoute('localhost:3000', '/tr/kurumsal/ozel-siparis')).toEqual({
+        type: 'redirect', location: '/tr/kurumsal/iletisim',
+      })
+    })
+    it('kurumsal projesi (UART_SITE=kurumsal) /surec → /projeler', () => {
+      withDomains(undefined, undefined, 'kurumsal')
+      expect(decideRoute('uart-kurumsal.vercel.app', '/tr/surec')).toEqual({ type: 'redirect', location: '/tr/projeler' })
+    })
   })
 })

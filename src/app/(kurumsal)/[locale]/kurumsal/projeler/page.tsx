@@ -7,6 +7,7 @@ import { categoriesForSite, kurumsalPath } from '@/lib/site'
 import { projectNo } from '@/lib/kurumsal'
 import ProjectCard from '@/components/kurumsal/project-card'
 import Reveal from '@/components/motion/reveal'
+import PageBanner, { bannerFromProducts } from '@/components/shared/page-banner'
 import { staggerDelay } from '@/lib/motion'
 
 interface PageProps {
@@ -44,8 +45,8 @@ export default async function ProjelerPage({ params, searchParams }: PageProps) 
   const label = (c: string) => (tg.has(`categories.${c}`) ? tg(`categories.${c}`) : c)
 
   return (
-    <main className="py-16 sm:py-20">
-      <h1 className="text-4xl sm:text-5xl">{t('nav.projects')}</h1>
+    <main className="pb-16 pt-8 sm:pb-20 sm:pt-10">
+      <PageBanner title={t('nav.projects')} image={bannerFromProducts(projects, locale)} />
 
       {/* Filtre: sade sekme çizgisi */}
       <nav className="mt-10 flex flex-wrap gap-x-8 border-b border-[var(--rule)]">

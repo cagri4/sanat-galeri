@@ -13,7 +13,12 @@
     "exhibitions": "Exhibitions",
     "technique": "Technique",
     "collections": "Collections",
-    "commissions": "Commissions"
+    "objects": "Objects",
+    "studio": "Studio",
+    "sculptures": "Sculptures",
+    "instagram": "Uarttasarım on Instagram",
+    "menu": "Menu",
+    "submenu": "submenu"
   },
   "gallery": {
     "title": "Gallery",
@@ -26,7 +31,7 @@
     "price": "Price",
     "contactForPrice": "Contact for price",
     "sold": "Sold",
-    "contactTitle": "Get in Touch",
+    "contactTitle": "Ask about this work",
     "categories": {
       "Antik Dönem Replikaları": "Ancient Period Replicas",
       "Resimli Seramikler": "Painted Ceramics",
@@ -109,7 +114,7 @@
     "address": "Boğazkent mah. 3.cad. 1/10\nKepez, Çanakkale 17100\nTürkiye",
     "followUs": "Follow Us",
     "collectionsLink": "Collections",
-    "commissionsLink": "Commissions"
+    "exhibitionsLink": "Exhibitions"
   },
   "exhibition": {
     "eyebrow": "Exhibition",
@@ -164,13 +169,6 @@
     "emptyNote": "The works in this collection are being prepared.",
     "comingSoonTag": "Coming soon"
   },
-  "commissions": {
-    "title": "Commissions",
-    "lead": "We create bespoke works for a particular space, form or mythological narrative. Each piece is shaped by hand; scale, surface and subject are decided together.",
-    "body": "A panel made for a specific space, a replica of a mythological scene you love, or a series of vessels — share your idea with us and let us interpret it together. This is not a checkout; it is the start of a conversation.",
-    "cta": "Enquire / Contact",
-    "note": "Price and timeline are clarified in conversation, according to the scope of the work."
-  },
   "about": {
     "lead": "Uarttasarım is a ceramics studio that reinterprets the memory of the earth, the rhythm of nature and cultural heritage through a contemporary lens.",
     "body": "Our work draws on the quiet details of the world around us; the relationship water forms with light, the traces of the wind, the turning of the seasons, the texture of ancient stone, and the thousands of years of cultural accumulation of the land we live in form the starting point of our work.\n\nEach piece is the result of a long process in which hand-shaped clay is patiently transformed. In an age where speed drives production, we value slowing down and the direct relationship established with the material. For we believe that handcraft is not merely a method of production; it is a creative language that gives objects character and soul.\n\nAt Uarttasarım, ceramics are not merely a functional object or a decorative form. Every work carries a story — sometimes an Anatolian tale, sometimes the memory of an ancient ceramic, sometimes the ever-changing cycle of nature. We believe the boundary between art and craft is permeable, and we see each piece as a space where aesthetics, history and narrative meet.\n\nOur collections include ancient-period ceramic replicas, original ceramic sculptures, wearable ceramic artworks, paintings, and functional ceramics inspired by nature. Each is a different expression of the same idea that brings together past and present, tradition and contemporary interpretation.\n\nFor us a ceramic work is not merely an object to be seen; it is a companion that is touched, used, lived with, and that gathers memories over time. Uarttasarım's aim is to produce works that carry aesthetic value, that one forms a personal bond with, and that accompany the natural flow of life.\n\nFor we believe that every form carries a story; and every story continues to live in the memory of the earth."
@@ -186,7 +184,6 @@
     "nav": {
       "home": "Home",
       "projects": "Projects",
-      "process": "Process",
       "about": "About",
       "contact": "Contact"
     },
@@ -206,45 +203,12 @@
     "specLocation": "Location",
     "specYear": "Year",
     "specSize": "Dimensions",
-    "specMedium": "Technique & material",
-    "specType": "Type",
-    "specTheme": "Theme",
     "specArtist": "Artist",
-    "specCollection": "Series",
     "descPending": "The corporate description of this work (dimensions, application, placement) has not been added yet.",
     "ctaTitle": "Project enquiry",
     "ctaLead": "If you are considering a ceramic panel or sculpture for your space, tell us the type of space, the wall dimensions and your timeline.",
     "ctaButton": "Request a project meeting",
     "galeriLink": "This work at Uart Gallery",
-    "processEyebrow": "How we work",
-    "processTitle": "From space to surface: making and installation",
-    "processLead": "Each panel is designed in modular pieces, taking into account the dimensions and architectural features of the wall it will be applied to.",
-    "processSource": "The steps are compiled from the \"Making Process\" sections of the artist's project documents.",
-    "steps": {
-      "s1": {
-        "t": "Space and measurements",
-        "b": "The design takes into account the dimensions of the architectural space and the viewing distance."
-      },
-      "s2": {
-        "t": "Modular design",
-        "b": "The composition is divided into sections and modular ceramic pieces to suit the application dimensions."
-      },
-      "s3": {
-        "t": "Shaped by hand",
-        "b": "Relief sections, symbols and textured layers are each shaped by hand."
-      },
-      "s4": {
-        "t": "Drying, firing, glazing",
-        "b": "The pieces go through controlled drying, firing, colouring and glazing."
-      },
-      "s5": {
-        "t": "On-site installation",
-        "b": "The finished pieces are assembled according to a prepared layout plan and applied to the wall surface."
-      }
-    },
-    "materialTitle": "Material and technique",
-    "materialBody": "Chamotte clay, high relief, double firing and glazing.",
-    "processProjects": "Making and installation images will appear on the project pages.",
     "aboutTitle": "About",
     "artistsTitle": "Artists",
     "contactTitle": "Contact",
@@ -253,8 +217,7 @@
     "makingTitle": "From making and installation",
     "makingProject": "Making and installation",
     "referencesTitle": "Reference sites",
-    "processSummary": "Process",
-    "processMore": "See the process"
+    "specName": "Work"
   },
   "home": {
     "heroTitle": "The Memory of Clay",
@@ -268,5 +231,12 @@
     "railPrev": "Previous",
     "railNext": "Next",
     "viewWork": "View work"
+  },
+  "exhibitionsPage": {
+    "title": "Exhibitions",
+    "eyebrow": "Studio",
+    "metaDesc": "Exhibitions by Uarttasarım artists.",
+    "detail": "Exhibition page",
+    "photosLabel": "exhibition photographs"
   }
 }

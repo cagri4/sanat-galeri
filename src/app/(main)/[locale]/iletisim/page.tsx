@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import ContactPageForm from '@/components/shared/contact-page-form'
+import PageBanner, { bannerFromProducts } from '@/components/shared/page-banner'
+import { getProducts } from '@/lib/queries/gallery'
 import { getAllArtists } from '@/lib/queries/artist'
 
 export async function generateMetadata({
@@ -24,6 +26,14 @@ export default async function ContactPage({
   const { locale } = await params
   const isTr = locale === 'tr'
   const t = await getTranslations({ locale, namespace: 'contact' })
+  // Banner: galeri eserlerinden (admin hero sırasının 3.'sü — ana sayfa ve
+  // galeri banner'ıyla aynı kare tekrarlanmasın).
+  let banner = null
+  try {
+    banner = bannerFromProducts(await getProducts(undefined, 'galeri'), locale, 2)
+  } catch {
+    // DB yoksa sade başlık
+  }
 
   // Ana sitede her iki sanatçının kendi iletişim bilgisi listelenir.
   let artists: Awaited<ReturnType<typeof getAllArtists>> = []
@@ -34,11 +44,9 @@ export default async function ContactPage({
   }
 
   return (
-    <main className="py-12 sm:py-16 lg:py-20">
-      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-wide text-[#2C2C2C]">
-        {isTr ? 'İletişim' : 'Contact'}
-      </h1>
-      <p className="mt-4 text-[15px] text-[#6b6b6b] max-w-2xl">
+    <main className="pb-12 pt-8 sm:pb-16 sm:pt-10 lg:pb-20">
+      <PageBanner title={isTr ? 'İletişim' : 'Contact'} image={banner} />
+      <p className="mt-10 text-[15px] text-[#6b6b6b] max-w-2xl">
         {isTr
           ? 'Eserler, sergiler veya iş birliği teklifleri hakkında bizimle iletişime geçin.'
           : 'Get in touch about artworks, exhibitions, or collaboration proposals.'}

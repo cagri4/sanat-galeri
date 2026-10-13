@@ -195,18 +195,10 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
           )}
 
 
-          {/* İletişim + Özel sipariş — vitrin modeli: satın alma yok,
-              bilgi/özel üretim için iletişim. */}
+          {/* "Bu eser hakkında yazın" — vitrin modeli: satış yok, tek hedef
+              eser sorusu (PAZARLAMA-STRATEJISI §6). Özel sipariş linki 13 Eki kalktı. */}
           <div className="border-t border-[#e9e7e1] pt-6">
-            <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-              <h2 className="text-xl font-medium text-[#2C2C2C]">{t('contactTitle')}</h2>
-              <Link
-                href={`/${locale}/ozel-siparis`}
-                className="text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] hover:text-[#2C2C2C]"
-              >
-                {isTr ? 'Özel sipariş' : 'Commissions'} &rarr;
-              </Link>
-            </div>
+            <h2 className="mb-4 text-xl font-medium text-[#2C2C2C]">{t('contactTitle')}</h2>
             <ContactForm productSlug={slug} />
           </div>
         </Reveal>

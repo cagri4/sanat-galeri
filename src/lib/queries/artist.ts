@@ -99,3 +99,24 @@ export async function getArtistPressItems(artistId: number) {
   if (error) throw error
   return (data ?? []).map(mapPress)
 }
+
+/** Stüdyo → Sergiler: tüm sanatçıların sergileri (ödüller hariç), yeniden eskiye. */
+export async function getAllExhibitions() {
+  const { data, error } = await supabase
+    .from('exhibitions')
+    .select('*')
+    .neq('type', 'odul')
+    .order('year', { ascending: false })
+    .order('sort_order', { ascending: true })
+
+  if (error) throw error
+  return (data ?? []).map(mapExhibition) as {
+    id: number
+    artistId: number | null
+    type: string
+    titleTr: string
+    titleEn: string
+    location: string | null
+    year: number | null
+  }[]
+}

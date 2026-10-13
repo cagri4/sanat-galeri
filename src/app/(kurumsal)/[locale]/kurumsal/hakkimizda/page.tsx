@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import { getTranslations } from 'next-intl/server'
+import PageBanner, { bannerFromProducts } from '@/components/shared/page-banner'
+import { getProducts } from '@/lib/queries/gallery'
 import { galeriPath } from '@/lib/site'
 
 /**
@@ -19,13 +21,18 @@ export default async function KurumsalHakkimizda({ params }: { params: Promise<{
   const t = await getTranslations({ locale, namespace: 'kurumsal' })
   const ta = await getTranslations({ locale, namespace: 'about' })
   const host = (await headers()).get('host') ?? ''
+  // Banner: kurumsalın kendi işi — mimari panolardan (admin hero sırası).
+  let banner = null
+  try {
+    banner = bannerFromProducts(await getProducts('Mimari Duvar Panoları', 'kurumsal'), locale, 1)
+  } catch {
+    // DB yoksa sade başlık
+  }
 
   return (
-    <main className="grid grid-cols-1 gap-12 py-16 sm:py-20 md:grid-cols-12">
-      <div className="md:col-span-4">
-        <h1 className="text-4xl sm:text-5xl">{t('aboutTitle')}</h1>
-      </div>
-      <div className="space-y-5 md:col-span-8">
+    <main className="pb-16 pt-8 sm:pb-20 sm:pt-10">
+      <PageBanner title={t('aboutTitle')} image={banner} />
+      <div className="mt-12 max-w-3xl space-y-5">
         <p className="text-[length:var(--text-lead)] leading-[1.7]">{ta('lead')}</p>
         {ta('body').split('\n\n').filter(Boolean).map((para, i) => (
           <p key={i} className="max-w-[68ch] text-[length:var(--text-body)] leading-[1.8] text-[var(--muted)]">{para}</p>
