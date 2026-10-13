@@ -17,3 +17,9 @@
 - [~] Eksik heykel künyeleri tamamlandı - Şahmaran ve 6 figürün ölçü/teknik/yılı, Anka'nın yılı Drive'da yok; sanatçıdan bilgi gerekli
 - [~] Gerçek alan adına geçildi - alan adı kararı ve DNS onayı Çağrı'da; geçişte SEO-GECIS-KONTROL.md uygulanacak
 - [~] Eski sanat-galeri.vercel.app demosunun akıbeti belirlendi - kapatılsın mı yönlensin mi, karar Çağrı'da
+- [x] Sanatçı düzeltme listesi okundu ve maddelere ayrıldı
+- [x] hanna-miadzvedzeva.com fon renkleri ve tipografisi ölçüldü
+- [x] Mevcut sayfa/menü envanteri çıkarıldı (yeni menüye eşleme için)
+- [x] PLAN-DUZELTMELER-2026-10-13.md yazıldı (A/B/C + renkler + Çağrı'ya sorular)
+- [~] Tek site / iki site kararı verildi - 10 Eki kararını değiştirir; B1 seçenekleri PLAN-DUZELTMELER'de, karar Çağrı'da
+- [~] Sanatçıya C1–C7 soruları iletildi - soruları Çağrı iletecek
