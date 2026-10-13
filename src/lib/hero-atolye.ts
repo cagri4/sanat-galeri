@@ -12,10 +12,27 @@ export const HERO_ATOLYE: { slug: string; file: string; eser: string }[] = [
   { slug: 'yapim-troia-yili-anisina-1915', file: 'troia-yili-anisina-1915-1', eser: 'troia-yili-anisina-1915' },
 ]
 
+/**
+ * Ana sayfa "Sanatçılarımız" Şeref Doğan kartının GEÇİCİ görseli (Çağrı 13 Eki):
+ * pano yerine atölyeden, KİŞİ GÖRÜNMEYEN bir kare — fırın raflarında Çanakkale
+ * Şehitleri Anısına panosunun parçaları. Kişili kare seçilmedi: kartta "bu kişi
+ * Şeref" izlenimi verir, kim olduğu doğrulanmadı. Gerçek portre gelince değişir.
+ */
+export const SEREF_KART_ATOLYE = { slug: 'yapim-canakkale-sehitleri-anisina', file: 'canakkale-sehitleri-anisina-2' }
+
+function matches(p: { exhibitionSlug: string; url: string }, h: { slug: string; file: string }) {
+  return p.exhibitionSlug === h.slug && new RegExp(`/${h.file}\\.[a-z]+$`).test(p.url)
+}
+
+/** Tek kare bul (yoksa null). */
+export function pickOne<T extends { exhibitionSlug: string; url: string }>(photos: T[], h: { slug: string; file: string }): T | null {
+  return photos.find((p) => matches(p, h)) ?? null
+}
+
 /** Fotoğraf listesinden seçili atölye karelerini sırasıyla döndürür; bulunmayan atlanır. */
 export function pickAtolye<T extends { exhibitionSlug: string; url: string }>(photos: T[]): (T & { eser: string })[] {
   return HERO_ATOLYE.flatMap((h) => {
-    const f = photos.find((p) => p.exhibitionSlug === h.slug && new RegExp(`/${h.file}\\.[a-z]+$`).test(p.url))
+    const f = photos.find((p) => matches(p, h))
     return f ? [{ ...f, eser: h.eser }] : []
   })
 }

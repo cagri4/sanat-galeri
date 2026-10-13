@@ -65,3 +65,7 @@
 - [x] Atölye fotoğrafı arandı (Drive + 87 yapım/montaj karesi)
 - [x] Ana giriş için alternatifler ekran görüntüsüyle Çağrı'ya sunuldu
 - [~] Anadolu + ana giriş değişiklikleri canlıya alındı - ekran görüntüsü onayı bekleniyor
+- [ ] Şeref'in kartındaki geçici pano görseli atölye karesiyle değiştirildi
+- [ ] Anadolu + giriş + kart deploy edildi, vercel-bekle.sh ile hash doğrulandı
+- [ ] Anadolu SQL'i uygulandı (17 yeni, 9 gizli, 8 sergiye)
+- [ ] Canlıda kontrol + ekran görüntüleri; geri alma scriptleri teyit edildi

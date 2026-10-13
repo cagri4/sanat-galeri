@@ -7,7 +7,7 @@ import { ARTIST_AVATARS, AVATAR_CLASS } from '@/lib/artist-avatars'
 import { getCrossDomainLinks } from '@/components/shared/navbar'
 import { CATEGORIES, CATEGORY_SLUGS } from '@/lib/categories'
 import { categoriesForSite, isOnSite } from '@/lib/site'
-import { HERO_ATOLYE, pickAtolye } from '@/lib/hero-atolye'
+import { HERO_ATOLYE, SEREF_KART_ATOLYE, pickAtolye, pickOne } from '@/lib/hero-atolye'
 import { yeniIcerikAcik, SERGI_KUNYE, SERGI_AFISI } from '@/lib/yeni-icerik'
 import { getExhibitionPhotosBySlugs } from '@/lib/queries/exhibition-photos'
 import SeriesTabs from '@/components/shared/series-tabs'
@@ -58,24 +58,24 @@ export default async function HomePage({
   const CATS = categoriesForSite('galeri', CATEGORIES)
   const byCat = (cat: string) => withImage.filter((p) => p.category === cat)
 
-  // Sanatçı kartı GEÇİCİ görselleri artık her sanatçının ALANINI temsil eden
-  // farklı koleksiyonlardan: Melike → resimli seramik (Zamansız), Şeref → mimari
-  // pano. Atıf DOĞRULANMIŞ (kap altı imzası / pano dokümanları). alt="" dekoratif;
-  // gerçek portre/atölye fotoğrafı gelince değişecek.
-  const artistPlaceholders = [
-    byCat('Resimli Seramikler')[5]?.images?.[0]?.url,
-    // Şeref'in atfı doğrulanmış işi panolar; pano kurumsal sitede olsa da
-    // dekoratif sanatçı görseli olarak buradan alınır (eser listelenmez).
-    allWithImage.filter((p) => p.category === 'Mimari Duvar Panoları')[5]?.images?.[0]?.url,
-  ].filter(Boolean) as string[]
 
   // Hero: ATÖLYEDEN üç kare (sanatçı 13 Eki: girişteki pano görseli "çok
   // ilgisiz", "atölyeden görünüşler" konsun — 11 Eki'deki pano isteğinin yerine).
   // Seçim lib/hero-atolye.ts; kareler yapım/montaj fotoğraflarından, gizli
   // içerikle birlikte açılır. Kare yoksa sade başlık + eser üçlüsü (hero_order).
-  const atolye = yeniIcerikAcik()
-    ? pickAtolye(await getExhibitionPhotosBySlugs(HERO_ATOLYE.map((h) => h.slug)))
+  const atolyeFotolari = yeniIcerikAcik()
+    ? await getExhibitionPhotosBySlugs([...new Set([...HERO_ATOLYE.map((h) => h.slug), SEREF_KART_ATOLYE.slug])])
     : []
+  const atolye = pickAtolye(atolyeFotolari)
+
+  // Sanatçı kartı GEÇİCİ görselleri (gerçek portre/atölye fotoğrafı gelince
+  // değişecek; alt="" dekoratif). Melike → resimli seramik (Zamansız, atıf kap
+  // altı imzasıyla doğrulanmış). Şeref → atölyeden kişisiz kare (13 Eki, pano
+  // görseli "ilgisiz" bulundu); kare yoksa ilk heykel — pano değil.
+  const artistPlaceholders = [
+    byCat('Resimli Seramikler')[5]?.images?.[0]?.url,
+    pickOne(atolyeFotolari, SEREF_KART_ATOLYE)?.url ?? byCat('Seramik Heykeller')[0]?.images?.[0]?.url,
+  ].filter(Boolean) as string[]
   const eserAdi = (slug: string) => {
     const p = allWithImage.find((x) => x.slug === slug)
     return p ? (isTr ? p.titleTr : p.titleEn) : null
