@@ -97,12 +97,12 @@
 - [x] Masal metin + Dev + Şehzade SQL'leri uygulandı (16 Eki, Çağrı onayı)
 - [x] Canlıda tüm değişiklikler doğrulandı, ekran görüntüleri alındı; geri alma uygulanmış veride denendi
 - [x] Şahmaran V yılı (2012), II teknik ve III biçimi sanatçıdan cevaplandı (16 Eki; III değişmeyecek)
-- [~] Padişah, Anka V ve Şahmaran eser belgelerini al — BEKLİYOR: sanatçı — Çağrı sordu (16 Eki)
-- [~] Şehzade fotoğraflarının gerçek çekim olduğunu/büyük boyutunu teyit et — BEKLİYOR: sanatçı — Çağrı sordu (16 Eki)
-- [ ] Drive'dan güncel Şahmaran belgesini, Padişah belgesini ve yeni Şehzade fotoğraflarını çek
-- [ ] Şahmaran V (yıl 2012, biçim, teknik, metin) ve II düzeltmelerini belgeden birebir uygula
-- [ ] Padişah künyesi ve metnini işle
-- [ ] Şehzade fotoğraflarını yenileriyle değiştir (eskiler gizlenir)
-- [ ] Ana girişten "Toprağın Hafızası" yazısını kaldır
-- [ ] SQL + yedek + geri alma hazırla, uygula, deploy et
-- [ ] Canlıda doğrula, ekran görüntüsü al
+- [~] Anka V belgesini al — BEKLİYOR: sanatçı — Padişah geldi, Anka V yok (16 Eki)
+- [x] Şehzade fotoğrafları sanatçı tarafından Drive'da değiştirildi (16 Eki)
+- [x] Drive'dan güncel Şahmaran belgesi, Padişah belgesi ve yeni Şehzade fotoğrafları çekildi
+- [x] Şahmaran V yılı 2012 oldu; biçim, teknik, metin ve II zaten belgeyle aynıydı
+- [x] Padişah künyesi (2009, 45 × 50 cm, Raku) ve metni işlendi
+- [x] Şehzade fotoğrafları Drive'daki gerçek karelerle değişti; sahnelenmiş 3 kare gizlendi
+- [x] Ana girişten görünür "Toprağın Hafızası" başlığı kaldırıldı
+- [x] SQL + yedek + geri alma hazırlandı; deploy (0859ac9) ve SQL uygulandı
+- [x] Canlıda doğrulandı, ekran görüntüleri alındı; geri alma uygulanmış veride denendi
