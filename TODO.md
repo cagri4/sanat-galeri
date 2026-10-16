@@ -14,7 +14,6 @@
 - [x] iki-site dalı master'a birleştirildi ve push edildi
 - [x] Animasyon profili iki siteye uygulandı (galeri 296, kurumsal 424 geçişli öge)
 - [~] Yolculuk afişlerindeki Melike ortak sergilerini kaydet — BEKLİYOR: Çağrı — afiş "Şeref & Melike", CV "kişisel" diyor (12 Eki)
-- [~] Padişah ve Anka V künyesini tamamla — BEKLİYOR: sanatçı — Padişah belgesi ve Anka V belgesi yok ("diğerlerini yazıyorum") (16 Eki)
 - [~] Gerçek alan adına geç — BEKLİYOR: Çağrı — alan adı kararı ve DNS onayı; geçişte SEO-GECIS-KONTROL.md (12 Eki)
 - [~] Eski sanat-galeri.vercel.app demosunun akıbetini belirle — BEKLİYOR: Çağrı — kapatılsın mı yönlensin mi (12 Eki)
 - [x] Sanatçı düzeltme listesi okundu ve maddelere ayrıldı
@@ -86,7 +85,6 @@
 - [x] Şahmaran güncellemesi (yeni foto ekle / eski gizle / açıklama) SQL + yedek + geri alma hazırlandı
 - [x] Önizleme ekran görüntüleri Çağrı'ya onaya sunuldu
 - [x] Şahmaran V "cansab" teyit edildi: Cemşab (sanatçı, 16 Eki)
-- [~] Şahmaran III biçim, II teknik ve V yılını teyit et — BEKLİYOR: sanatçı — III biçimi hâlâ eski II satırı; II'de iki Teknik; V'te Yıl 2012 ve 2011 birlikte (16 Eki)
 - [x] Banner yazısı + Şahmaran deploy edildi, vercel-bekle.sh ile hash doğrulandı
 - [x] Şahmaran SQL'i uygulandı
 - [x] Canlıda kontrol (banner görseli, yazısı, Şahmaran foto/açıklama) + ekran görüntüleri
@@ -96,5 +94,8 @@
 - [x] Metin + Dev fotoğraf + Şehzade fotoğraf SQL'leri, yedek ve geri alma hazırlandı, transaction'da denendi
 - [x] Önizleme ekran görüntüleri hazırlandı (preview-shots/masal-belgeler)
 - [x] Bekleyen 10 madde gözden geçirildi
-- [~] Masal metin SQL'ini uygula ve yayınla — BEKLİYOR: Çağrı — önizleme onayı (16 Eki)
-- [~] Dev ve Şehzade fotoğraf SQL'lerini uygula — BEKLİYOR: Çağrı — Şehzade kareleri sahnelenmiş/küçük görünüyor, teyit (16 Eki)
+- [x] Masal metin + Dev + Şehzade SQL'leri uygulandı (16 Eki, Çağrı onayı)
+- [x] Canlıda tüm değişiklikler doğrulandı, ekran görüntüleri alındı; geri alma uygulanmış veride denendi
+- [~] Şahmaran V yılını, II teknik satırını, III biçimini teyit et — BEKLİYOR: sanatçı — Çağrı 5 soruyu iletti (16 Eki)
+- [~] Padişah, Anka V ve Şahmaran eser belgelerini al — BEKLİYOR: sanatçı — Çağrı sordu (16 Eki)
+- [~] Şehzade fotoğraflarının gerçek çekim olduğunu/büyük boyutunu teyit et — BEKLİYOR: sanatçı — Çağrı sordu (16 Eki)
