@@ -113,13 +113,12 @@ export default async function HomePage({
 
   return (
     <main>
-      {/* Hero — tek kısa serif cümle + atölyeden üç kare (mobilde ilki). */}
+      {/* Hero — atölyeden üç kare (mobilde ilki). Görünür başlık sanatçının isteğiyle
+          kaldırıldı (16 Eki); h1 ekran okuyucular için site adı olarak kalır. */}
       <Reveal as="section" className="pt-12 sm:pt-16">
-        <h1 className="text-center text-4xl leading-[1.1] text-[var(--foreground)] sm:text-6xl">
-          {th('heroTitle')}
-        </h1>
+        <h1 className="sr-only">{th('heroTitle')}</h1>
         {atolye.length > 0 && (
-          <figure className="mt-10">
+          <figure>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
               {atolye.map((f, i) => (
                 <div key={f.id} className={`relative aspect-[4/5] overflow-hidden bg-[#ece7de] ${i > 0 ? 'hidden sm:block' : ''}`}>

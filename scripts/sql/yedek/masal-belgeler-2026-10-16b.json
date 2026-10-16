@@ -1,0 +1,63 @@
+{
+ "products": [
+  {
+   "id": 54,
+   "slug": "padisah",
+   "year": null,
+   "medium_tr": null,
+   "medium_en": null,
+   "dimensions_tr": null,
+   "dimensions_en": null,
+   "description_tr": "Anadolu’nun sözlü kültüründe kuşaktan kuşağa aktarılan masallar; yalnızca düşsel hikâyeler değil, toplumun korkularını, umutlarını, dönüşümlerini ve ortak belleğini taşıyan anlatılardır.\n\n“Masalın Hafızası”; Şahmaran, Zümrüdüanka, Keloğlan, dev, dev anası, padişah ve prens gibi karakterleri çağdaş seramik heykel diliyle yeniden yorumlar.\n\nElle biçimlendirilen her figür, geleneksel anlatıdaki görünümünün ötesine geçerek kendi simgesel anlamını ve hikâyesini taşıyan özgün bir sanat eserine dönüşür.",
+   "description_en": "Passed down from generation to generation in Anatolia’s oral culture, folk tales are not merely fantastical stories; they carry a society’s fears, hopes, transformations and shared memory.\n\n“The Memory of Tales” reinterprets characters such as Şahmaran, the Zümrüdüanka, Keloğlan, the giant, the giant’s mother, the sultan and the prince in the language of contemporary ceramic sculpture.\n\nShaped by hand, each figure goes beyond its appearance in the traditional tale and becomes an original work of art carrying its own symbolic meaning and story."
+  },
+  {
+   "id": 62,
+   "slug": "sahmaran-v-karsilasma",
+   "year": 2011,
+   "medium_tr": "Serbest şekillendirme, şamotlu çamur ve sırlı pişirim",
+   "medium_en": "Free-formed grogged clay, glaze firing",
+   "dimensions_tr": "40 × 65 cm",
+   "dimensions_en": "40 × 65 cm",
+   "description_tr": "Şahmaran’ın Cemşab ile karşılaşmasını sembolize eder. Simetrik U formundaki beden, iki doğanın dengeye geldiği, ikiliğin bütünlüğe dönüştüğü andır.\n\nŞahmaran, Anadolu'nun sözlü kültüründe yüzyıllardır yaşayan; bilgelik, doğa, şifa, sır ve dönüşüm kavramlarıyla ilişkilendirilen kadim bir anlatının izlerinden doğan seramik heykel serisidir.\n\nBu seride Şahmaran, geleneksel anlatılardaki yarı insan yarı yılan biçiminin doğrudan bir temsili olarak ele alınmaz. İnsan yüzü, yılansı beden ve organik formlar birbirine eklenen ayrı parçalar olmaktan çıkar; kıvrılan, bölünen, yeniden birleşen ve sürekli dönüşen tek bir varlığa dönüşür. Böylece Şahmaran, belirli bir figürden çok insan ile doğa arasındaki sınırda yaşayan bir varoluş biçimi olarak yeniden yorumlanır.\n\nHeykellerde tekrar eden spiral hareketler, iç boşluklar, karşı karşıya gelen insan ve yılan biçimleri; eşik, dönüşüm, ikilik, içsel bilgelik ve özlem kavramlarını görünür kılar. Boşluk ise yalnızca heykelin biçimsel bir unsuru değildir; yerüstü ile yeraltı, bilinen ile bilinmeyen, insan ile doğa arasındaki geçişi çağrıştıran sembolik bir alana dönüşür.\n\nSerinin her parçası Şahmaran'ın başka bir hâlini taşır. Kimi zaman insan ve yılan aynı bedende birbirine dönüşür, kimi zaman figür kendi içine kıvrılır; kimi zaman ise insan yüzü ile doğasal beden arasındaki mesafe bir sessizlik ve özlem duygusu yaratır. Bu farklı biçimler boyunca Şahmaran'ın bilgeliği, dışarıdan edinilen bir bilgi olmaktan çok toprağın, suyun ve canlılığın içinde saklanan kadim bir hafıza olarak düşünülür.\n\nŞahmaran Heykel Serisi, masalı yeniden anlatmak yerine onun bellekte bıraktığı izlerin peşinden gider; Şahmaran'ı geçmişten gelen mitolojik bir karakter olarak değil, doğa, insan ve hafıza arasındaki ilişkinin bugün de dönüşmeye devam eden simgesel bir varlığı olarak ele alır.",
+   "description_en": "It symbolises Şahmaran’s encounter with Cemşab. The body, in its symmetrical U form, is the moment when two natures come into balance and duality becomes wholeness.\n\nŞahmaran is a series of ceramic sculptures born from the traces of an ancient narrative that has lived for centuries in Anatolia’s oral culture and is associated with wisdom, nature, healing, secrecy and transformation.\n\nIn this series Şahmaran is not treated as a direct representation of the half-human, half-serpent form of the traditional tales. The human face, the serpentine body and organic forms cease to be separate parts joined together and become a single being that coils, divides, reunites and constantly transforms. Şahmaran is thus reinterpreted less as a particular figure than as a mode of existence living on the border between human and nature.\n\nThe recurring spiral movements, inner voids and facing human and serpent forms in the sculptures make the concepts of threshold, transformation, duality, inner wisdom and longing visible. The void is not merely a formal element of the sculpture; it becomes a symbolic space evoking the passage between the world above and the world below, the known and the unknown, the human and nature.\n\nEach piece in the series carries another state of Şahmaran. Sometimes human and serpent turn into one another in the same body, sometimes the figure coils into itself; at other times the distance between the human face and the natural body creates a feeling of silence and longing. Across these different forms, Şahmaran’s wisdom is conceived not as knowledge acquired from outside but as an ancient memory hidden within earth, water and living things.\n\nRather than retelling the tale, the Şahmaran Sculpture Series follows the traces it has left in memory; it approaches Şahmaran not as a mythological character from the past but as a symbolic being of the relationship between nature, the human and memory that continues to transform today."
+  }
+ ],
+ "product_images": [
+  {
+   "id": 588,
+   "product_id": 55,
+   "url": "https://res.cloudinary.com/df0henatz/image/upload/v1791725033/uarttasarim/heykel/sehzade-1.jpg",
+   "sort_order": 0,
+   "is_visible": false
+  },
+  {
+   "id": 589,
+   "product_id": 55,
+   "url": "https://res.cloudinary.com/df0henatz/image/upload/v1791725035/uarttasarim/heykel/sehzade-2.jpg",
+   "sort_order": 1,
+   "is_visible": false
+  },
+  {
+   "id": 671,
+   "product_id": 55,
+   "url": "https://res.cloudinary.com/df0henatz/image/upload/v1792135635/uarttasarim/heykel/sehzade-2026-10-1.jpg",
+   "sort_order": 2,
+   "is_visible": true
+  },
+  {
+   "id": 672,
+   "product_id": 55,
+   "url": "https://res.cloudinary.com/df0henatz/image/upload/v1792135637/uarttasarim/heykel/sehzade-2026-10-2.jpg",
+   "sort_order": 3,
+   "is_visible": true
+  },
+  {
+   "id": 673,
+   "product_id": 55,
+   "url": "https://res.cloudinary.com/df0henatz/image/upload/v1792135638/uarttasarim/heykel/sehzade-2026-10-3.jpg",
+   "sort_order": 4,
+   "is_visible": true
+  }
+ ]
+}
