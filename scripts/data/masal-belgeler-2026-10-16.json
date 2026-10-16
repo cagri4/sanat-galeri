@@ -1,0 +1,122 @@
+{
+ "_kaynak": "Drive Masalın Hafızası (1TXPsDv7I78HS51a9GL5QFCbpxRknLZnC): Anka Serisi/Anka-*.docx (15 Eki 17:32–17:39), Derviş/Dev/Devanası/Keloğlan/Şehzade .docx (15 Eki), Şahmaran/Şahmaran.docx (14 Eki 14:37, yeniden düzenlenmiş). TR metinler BİREBİR; EN: Claude çevirisi (metne sadık).",
+ "_duzeltmeler": [
+  "Teknik satırlarında cümle ortasındaki büyük harfler küçültüldü ('Şamotlu Çamur' → 'şamotlu çamur'); Raku özel ad olarak büyük kaldı",
+  "Ölçüler sitedeki biçime çevrildi ('30x45 cm' → '30 × 45 cm', '40cm' → '40 cm')",
+  "Şahmaran V: 'Şahmaran’nın cemşab' → 'Şahmaran’ın Cemşab' (sanatçı: Cemşab yazılacak)",
+  "Şahmaran IV: metin sanatçının yeni hâliyle ('…yılan yüzü geriye bakar.', 'Tıpkı özlem gibi keskin değil…')",
+  "Şahmaran II: belgede iki Teknik satırı var; diğer dördüyle aynı kalıptaki ikincisi alındı ('Kırmızı kilden…' satırı eski kalıntı sayıldı) — sanatçıya teyit",
+  "Şahmaran V: belgede iki Yıl var (2012 künye bloğunda, 2011 metnin başında) — yıl DEĞİŞTİRİLMEDİ (2011 kalır), sanatçıya sorulacak",
+  "Şahmaran III: Biçim satırı hâlâ 'iki yön, iki baş, kesişme, ortak beden' (eski II biçimi; III metni 'artık ikiye ayrılmaz' diyor) — boş kalır, sorulacak. II'nin belgedeki Biçim'i artık metnin ilk cümlesi; II'nin mevcut biçim alanına dokunulmadı",
+  "Dev Anası: belgedeki 'Eser Adı: Dev Anası' — başlık 'Devanası' → 'Dev Anası' (slug aynı kalır)",
+  "Figürlerin ölçüsü belgede tek sayı ('53 cm'); yükseklik olduğu yazmadığı için 'Y.' eklenmedi"
+ ],
+ "anka": [
+  {
+   "slug": "anka-i-ates-ve-donusum",
+   "year": 2012
+  },
+  {
+   "slug": "anka-ii-karanliktan-yukselis",
+   "year": 2012
+  },
+  {
+   "slug": "anka-iii-yasama-donus",
+   "year": 2012
+  },
+  {
+   "slug": "anka-iv-ozgurlesme",
+   "year": 2009,
+   "dimensions": "40 × 55 cm"
+  }
+ ],
+ "sahmaran": [
+  {
+   "slug": "sahmaran-i-donusum",
+   "year": 2009,
+   "medium_tr": "Serbest şekillendirme, şamotlu çamur ve Raku pişirimi",
+   "medium_en": "Free-formed grogged clay, raku firing",
+   "dimensions": "30 × 45 cm"
+  },
+  {
+   "slug": "sahmaran-ii-iki-doga",
+   "year": 2009,
+   "medium_tr": "Serbest şekillendirme, şamotlu çamur ve Raku pişirimi",
+   "medium_en": "Free-formed grogged clay, raku firing",
+   "dimensions": "35 × 55 cm"
+  },
+  {
+   "slug": "sahmaran-iii-icsel-bilgelik",
+   "year": 2010,
+   "medium_tr": "Serbest şekillendirme, şamotlu çamur ve Raku pişirimi",
+   "medium_en": "Free-formed grogged clay, raku firing",
+   "dimensions": "35 × 50 cm"
+  },
+  {
+   "slug": "sahmaran-iv-ozlem",
+   "year": 2012,
+   "medium_tr": "Serbest şekillendirme, şamotlu çamur ve lüsterli pişirim",
+   "medium_en": "Free-formed grogged clay, lustre firing",
+   "dimensions": "35 × 45 cm",
+   "text_tr": "İki baş aynı bedenden doğar ama aynı yöne bakmaz. İnsan yüzü uzağa, yılan yüzü geriye bakar. Arada kalan boşluk özlemin kendisidir. Yüzey pürüzsüz, akışkan ve parlak. Tıpkı özlem gibi keskin değil, yumuşak ama derin.",
+   "text_en": "Two heads are born from the same body but do not look in the same direction. The human face looks into the distance, the serpent face looks back. The void left between them is longing itself. The surface is smooth, flowing and glossy. Just like longing, it is not sharp but soft and deep."
+  },
+  {
+   "slug": "sahmaran-v-karsilasma",
+   "medium_tr": "Serbest şekillendirme, şamotlu çamur ve sırlı pişirim",
+   "medium_en": "Free-formed grogged clay, glaze firing",
+   "dimensions": "40 × 65 cm",
+   "text_tr": "Şahmaran’ın Cemşab ile karşılaşmasını sembolize eder. Simetrik U formundaki beden, iki doğanın dengeye geldiği, ikiliğin bütünlüğe dönüştüğü andır.",
+   "text_en": "It symbolises Şahmaran’s encounter with Cemşab. The body, in its symmetrical U form, is the moment when two natures come into balance and duality becomes wholeness."
+  }
+ ],
+ "figurler": [
+  {
+   "slug": "dervis",
+   "year": 2009,
+   "medium_tr": "Serbest şekillendirme, şamotlu çamur ve beyaz opak sır pişirimi",
+   "medium_en": "Free-formed grogged clay, white opaque glaze firing",
+   "dimensions": "53 cm",
+   "text_tr": "Türk kültürü içerisinde dini temele dayalı bir özellik taşıyan Derviş tipi, Türk masal anlatıları içerisinde kahramanların en önemli yardımcısı olan manevi kişilerdir. Bu kişiler zor durumda kalan ve yardıma ihtiyacı olan masal kahramanlarının karşısına çıkarak ona yardımcı olurlar ve dileklerini gerçekleştirirler.\n\nMasallarda en sık görülen motif, çocuğu olmayan kahramanın dileğinin yerine getirilmesidir. Derviş, kahramana bir elma vererek onun çocuk sahibi olmasını sağlar. Elma, hem bereketin hem de neslin devamının simgesidir.\n\nBenim şekillendirdiğim derviş karakterinde de bu özellik öne çıkarılır. Derviş, avuçlarında iki kırmızı elmayı uzatır biçimde tasvir edilmiştir. Oldukça yalın ve sade bir duruşu vardır. Çıplak ayaklıdır, dünya nimetlerinden uzaktır. Beyaz opak sırlı pişirimin verdiği açık, saf yüzey onun arınmışlığını vurgular.\n\nElbisesinin önündeki pencere şeklindeki niş içinden görünen bebek kabartması ise heykelin en güçlü sembolüdür. Bu, dervişin kendisinin değil, kahramanın düşlediği çocuk hayalinin ta kendisidir. Derviş, bir aracıdır; mucizeyi verir ama mucizenin sahibi değildir.",
+   "text_en": "In Turkish culture the dervish type has a religious foundation; in Turkish folk tales dervishes are spiritual figures, the heroes’ most important helpers. They appear before tale heroes who are in trouble and in need of help, assist them and make their wishes come true.\n\nThe most frequent motif in the tales is the granting of the wish of a hero who has no child. The dervish gives the hero an apple and so enables them to have a child. The apple is a symbol both of abundance and of the continuation of the line.\n\nThis quality is brought to the fore in the dervish character I have shaped as well. The dervish is depicted holding out two red apples in his palms. His bearing is very plain and simple. He is barefoot, far removed from worldly goods. The light, pure surface given by the white opaque glaze firing emphasises his purity.\n\nThe relief of a baby seen through the window-shaped niche at the front of his robe is the sculpture’s most powerful symbol. It is not the dervish himself but the very dream of the child the hero longs for. The dervish is an intermediary; he grants the miracle but is not its owner."
+  },
+  {
+   "slug": "dev",
+   "year": 2009,
+   "medium_tr": "Serbest şekillendirme, şamotlu çamur, isli pişirim",
+   "medium_en": "Free-formed grogged clay, smoke firing",
+   "dimensions": "70 cm",
+   "text_tr": "Eski topluluklar, korktukları, karşısında çaresiz kaldıkları ve tanımlayamadıkları tabiat olaylarını tanrısallaştırmışlardır. Bu olaylar zamanla mitlerde ve masallarda ete kemiğe bürünerek dev karakterine dönüşmüştür. İnsanoğlu aşamadığı güçlükleri büyüterek, baş edilmesi güç olağanüstü bir varlığa dönüştürmüştür.\n\nMasallarda dev, ürkütücü boyutlarda geniş kollara, bacaklara ve gövdeye sahip, iri yapılı bir varlıktır. İnsanlara kötülük eder, önüne engeller koyar. Aslında bu geniş yapısının içinde çabuk kandırılabilen küçük bir zekası vardır. Kahraman bu zayıflığı keşfettiğinde onu zekasıyla yener.\n\nÇağımızda teknoloji sayesinde sorunlar çok kolay çözülür hale gelmiştir. Ancak her şeyi kolay elde edebilme durumu, insanı bencilleştirmiş ve yabancılaştırmıştır. İnsan her şeyi bilinçsizce tüketmekte ve dünyanın sonunu hazırlamaktadır. Birkaç yüzyıl önce dev gibi duran korkular yok olmuş, şimdi her şeyi bir dev gibi yok eden insanın kendisidir.\n\nBenim biçimlendirdiğim dev karakteri, bu eski korkuların ve kaygıların temsilidir. Artık eski gücünü kaybetmiştir. Sopa yere düşmüş, beden zayıflamış, yüzde hüzünlü bir ifade belirmiştir. Yaşlanmış ve güçsüz bir dev olarak, çağımızın asıl devinin kim olduğunu sorgulatır.",
+   "text_en": "Early communities deified the natural phenomena they feared, felt helpless before and could not define. Over time these phenomena took on flesh and blood in myths and tales and turned into the character of the giant. Humankind magnified the difficulties it could not overcome and turned them into an extraordinary being that is hard to contend with.\n\nIn the tales the giant is a huge being with arms, legs and a body of frightening size. He harms people and puts obstacles in their way. Yet inside this vast frame lies a small mind that is easily fooled. When the hero discovers this weakness, he defeats him with his wits.\n\nIn our age technology has made problems very easy to solve. But being able to obtain everything easily has made people selfish and estranged. People consume everything unthinkingly and are preparing the end of the world. The fears that loomed like giants a few centuries ago have disappeared; now it is humans themselves who destroy everything like a giant.\n\nThe giant character I have shaped represents these old fears and anxieties. He has now lost his former strength. The club has fallen to the ground, the body has weakened, and a sorrowful expression has appeared on the face. As an aged and powerless giant, he makes us ask who the real giant of our age is."
+  },
+  {
+   "slug": "devanasi",
+   "year": 2009,
+   "medium_tr": "Serbest şekillendirme, şamotlu çamur, isli pişirim",
+   "medium_en": "Free-formed grogged clay, smoke firing",
+   "dimensions": "50 cm",
+   "title_tr": "Dev Anası",
+   "title_en": "Dev Anası (The Giant’s Mother)",
+   "text_tr": "Masallarda Dev Anası, devler gibi iri yapılı, çirkin ve korkunçtur. Fakat bu korkutucu bedenin içinde devlerden farklı olarak merhametli ve anaç bir kişilik taşır. Masalın en kritik eşiğidir. Kahraman onun arkasından dolaşıp sütünü emdiğinde, artık onun evladı sayılır; Dev Anası onu korur ve diğer devlerin zarar vermesine engel olur.\n\nBu motif, Anadolu masallarının en kadim anaerkil izlerinden biridir. Korkulan ama aynı zamanda sığınılan bir anadır.\n\nBenim biçimlendirdiğim Dev Anası, bu özelliklere uygun olarak çirkin, korkunç ve ilkel bir görünüştedir. Elinde bir kepçe tutar, önündeki kazanla yemek yapar konumda durur. Bu kazan, sadece yamyamlığın değil, aynı zamanda bereketin de kabıdır. İçinde tüm dünyanın nimetlerini kaynatır. İsli pişirimin verdiği yanık, topraksı doku, onun çağlar öncesinden gelen ilkel gücünü vurgular. Kazan, bu çirkinliğin ardındaki sonsuz anaçlığın ve merhametin simgesidir.",
+   "text_en": "In the tales the Giant’s Mother is huge like the giants, ugly and frightening. Yet inside this frightening body, unlike the giants, she carries a merciful and motherly character. She is the tale’s most critical threshold. When the hero comes up behind her and suckles her milk, he is counted as her child from then on; the Giant’s Mother protects him and keeps the other giants from harming him.\n\nThis motif is one of the most ancient matriarchal traces in Anatolian tales. She is a mother who is feared but in whom one also takes refuge.\n\nThe Giant’s Mother I have shaped is, in keeping with these qualities, ugly, frightening and primitive in appearance. She holds a ladle in her hand and stands as if cooking at the cauldron before her. This cauldron is the vessel not only of cannibalism but also of abundance. In it she boils the bounty of the whole world. The burnt, earthy texture given by smoke firing emphasises her primeval power, coming from ages past. The cauldron is the symbol of the boundless motherliness and mercy behind this ugliness."
+  },
+  {
+   "slug": "keloglan",
+   "year": 2009,
+   "medium_tr": "Serbest şekillendirme, şamotlu çamur ve Raku pişirimi",
+   "medium_en": "Free-formed grogged clay, raku firing",
+   "dimensions": "50 cm",
+   "text_tr": "Türk masal geleneğinin en önemli karakterlerinden Keloğlan, bu heykelde yaşamı bir oyun gibi algılayan, sorunlar karşısında kaygıya kapılmak yerine zekâsıyla kendi oyununu kuran bir karakter olarak yorumlanır. Yaşamın zorluklarını kendine dert edinmeden, pratik zekâsı ve kendine özgü yaklaşımıyla aşan Keloğlan, dünyayı farklı bir bakış açısıyla kavramanın simgesine dönüşür.\n\nHeykelin kostümünde yer alan yamalar, karakterin yoksulluğuna gönderme yaparken; seramik yüzeydeki çatlaklı, gri ve beyaz tonlar onun saflığını ve masalsı kimliğini ifade eder. Malzemenin dokusu ve yüzeydeki izler, figürün karakteristik özelliklerini biçimsel anlatımla bütünleştirir.\n\nKeloğlan, bu yorumda yalnızca yoksul bir masal kahramanı değil, yaşamın güçlükleri karşısında kendi çözüm yollarını geliştiren, olaylara oyunbaz bir zekâyla yaklaşan bir karakterdir. Heykel, geleneksel masal anlatısının taşıdığı kültürel belleği çağdaş bir seramik heykel diliyle yeniden ele alır.",
+   "text_en": "Keloğlan, one of the most important characters of the Turkish folk-tale tradition, is interpreted in this sculpture as a character who perceives life as a game and, rather than giving in to anxiety in the face of problems, sets up his own game with his wits. Overcoming life’s hardships without letting them trouble him, through his practical intelligence and his own particular approach, Keloğlan becomes a symbol of grasping the world from a different point of view.\n\nThe patches on the sculpture’s costume refer to the character’s poverty, while the crackled grey and white tones on the ceramic surface express his innocence and fairy-tale identity. The texture of the material and the marks on the surface bring the figure’s characteristic features together with its formal expression.\n\nIn this interpretation Keloğlan is not merely a poor tale hero but a character who develops his own solutions to life’s difficulties and approaches events with a playful intelligence. The sculpture revisits the cultural memory carried by the traditional tale in the language of contemporary ceramic sculpture."
+  },
+  {
+   "slug": "sehzade",
+   "year": 2009,
+   "medium_tr": "Serbest şekillendirme, şamotlu çamur ve Raku pişirimi",
+   "medium_en": "Free-formed grogged clay, raku firing",
+   "dimensions": "40 cm",
+   "text_tr": "Türk masallarında şehzade, varlıklı ve yakışıklı bir delikanlıdır. Tüm istekleri hemen yerine getirilir. Halkın gözünde hiç sorunu yoktur.\n\nOysa masalın bu en şanslı görünen karakterinin de en ağır yükü vardır. İleride koca bir toplumu yönetecektir. Henüz gençtir; yeterli birikimi, deneyimi yoktur. Bu nedenle gelecekle ilgili korkularının olmaması mümkün değildir.\n\nBen çalışmamda şehzadeyi bu yüzden düşünen adam duruşuyla biçimlendirdim. Zenginliği, yakışıklılığı ona yeterli gücü vermez, sorunların çözümüne yetmez. Bir eli çenesine dayalı, düşünceli, önüne bakan ve yüzünde umutsuz bir ifade taşıyan bir görünüm sergiler.\n\nÜstünde taşıdığı kostüm onun geçmişten gelen soylu yaşamının simgesidir. Fakat bu soyluluk ona hiçbir zaman güç vermez. O içinde yaşadığı acılarla dolu yaşamın prensidir. Gerçek yaşamdaki acılar onun yakışıklılığını ve delikanlılığını silip süpürmüştür. Figürün büzülmüş duruşu ve yüz ifadesi, çevresindeki sorunların onu ne kadar bunalttığının ifadesidir.",
+   "text_en": "In Turkish tales the prince is a wealthy and handsome young man. All his wishes are granted at once. In the eyes of the people he has no troubles at all.\n\nYet this seemingly luckiest character of the tale carries the heaviest burden. One day he will rule a whole society. He is still young; he lacks enough knowledge and experience. That is why it is impossible for him not to have fears about the future.\n\nThis is why in my work I shaped the prince in the pose of a thinking man. His wealth and good looks do not give him enough strength, nor are they enough to solve his problems. With one hand resting on his chin, he appears thoughtful, looking down, with a hopeless expression on his face.\n\nThe costume he wears is the symbol of the noble life he comes from. But this nobility never gives him strength. He is the prince of a life full of the suffering he lives within. The pains of real life have swept away his good looks and his youth. The figure’s hunched posture and facial expression show how much the problems around him overwhelm him."
+  }
+ ]
+}

@@ -13,21 +13,21 @@
 - [x] Açılış turu tamamlandı: gizli içerik açıldı, EN çeviriler girildi, afişler şeritten çıkarıldı
 - [x] iki-site dalı master'a birleştirildi ve push edildi
 - [x] Animasyon profili iki siteye uygulandı (galeri 296, kurumsal 424 geçişli öge)
-- [~] Yolculuk afişlerindeki Melike ortak sergileri kaydedildi - afiş "Şeref & Melike" diyor, CV "kişisel" diyor; karar Çağrı'da
-- [~] Eksik heykel künyeleri tamamlandı - Şahmaran ve 6 figürün ölçü/teknik/yılı, Anka'nın yılı Drive'da yok; sanatçıdan bilgi gerekli
-- [~] Gerçek alan adına geçildi - alan adı kararı ve DNS onayı Çağrı'da; geçişte SEO-GECIS-KONTROL.md uygulanacak
-- [~] Eski sanat-galeri.vercel.app demosunun akıbeti belirlendi - kapatılsın mı yönlensin mi, karar Çağrı'da
+- [~] Yolculuk afişlerindeki Melike ortak sergilerini kaydet — BEKLİYOR: Çağrı — afiş "Şeref & Melike", CV "kişisel" diyor (12 Eki)
+- [~] Padişah ve Anka V künyesini tamamla — BEKLİYOR: sanatçı — Padişah belgesi ve Anka V belgesi yok ("diğerlerini yazıyorum") (16 Eki)
+- [~] Gerçek alan adına geç — BEKLİYOR: Çağrı — alan adı kararı ve DNS onayı; geçişte SEO-GECIS-KONTROL.md (12 Eki)
+- [~] Eski sanat-galeri.vercel.app demosunun akıbetini belirle — BEKLİYOR: Çağrı — kapatılsın mı yönlensin mi (12 Eki)
 - [x] Sanatçı düzeltme listesi okundu ve maddelere ayrıldı
 - [x] hanna-miadzvedzeva.com fon renkleri ve tipografisi ölçüldü
 - [x] Mevcut sayfa/menü envanteri çıkarıldı (yeni menüye eşleme için)
 - [x] PLAN-DUZELTMELER-2026-10-13.md yazıldı (A/B/C + renkler + Çağrı'ya sorular)
 - [x] Tek site / iki site kararı verildi (13 Eki 10:52: iki site, sanatçı bırakarak kabul etti)
-- [~] Sanatçıya C1–C7 soruları iletildi - soruları Çağrı iletecek
+- [~] Sanatçıya C1–C7 sorularını ilet — BEKLİYOR: Çağrı — soruları o iletecek (13 Eki)
 - [x] PLAN-DUZELTMELER B1 (iki site kalıyor) ve bağlı maddelerle güncellendi
 - [x] Sitedeki satışa dönük öğeler (fiyat, sepet, sipariş çağrısı) tarandı
 - [x] İki kitle için pazarlama stratejisi yazıldı (PAZARLAMA-STRATEJISI-2026-10-13.md)
-- [~] Pazarlama stratejisindeki 13 soru cevaplandı - kanal seçimi ve bütçe Çağrı'nın cevaplarına bağlı
-- [~] Ölçüm altyapısı (analytics, piksel, messages kaynak alanı) kuruldu - kod + veri modeli değişikliği, ayrı onay gerekli
+- [~] Pazarlama stratejisindeki 13 soruyu cevaplat — BEKLİYOR: Çağrı — kanal seçimi ve bütçe (13 Eki)
+- [~] Ölçüm altyapısını kur (analytics, piksel, messages kaynak alanı) — BEKLİYOR: Çağrı — kod + veri modeli değişikliği için onay (13 Eki)
 - [x] A1–A4 için Çağrı onayı alındı (13 Eki, GOREV-A-LISTESI-UYGULA)
 - [x] Menü Türkçe yeni yapıya çevrildi (Galeri/Objeler/Stüdyo/İletişim)
 - [x] Instagram ikonu header sağ üste alındı, ana sayfa ortasındaki bölüm kaldırıldı
@@ -44,7 +44,7 @@
 - [x] Mobil 390 px kontrolü yapıldı
 - [x] Ekran görüntüleri kanıt dosyasına konup Çağrı'ya onaya sunuldu (preview-shots/a-listesi/KANIT.md)
 - [x] Heykel künyelerinde eksik yıl (16/16) ve ölçü (11/16) listesi çıkarıldı
-- [~] Temas tablosundan işaretlenen fotoğraflar sitede gizlendi - sanatçının işaretlemesi bekleniyor; ayrıca product_images'ta is_visible alanı YOK, gizlemek için şema değişikliği (Çağrı onayı) gerekli
+- [~] Temas tablosunda işaretlenen fotoğrafları gizle — BEKLİYOR: sanatçı — işaretleme (is_visible artık var) (16 Eki)
 - [x] Değişiklikler commit edildi (deploy YOK)
 - [x] A listesi uart-galeri ve uart-kurumsal'a deploy edildi
 - [x] vercel-bekle.sh ile iki deploy doğrulandı
@@ -55,7 +55,7 @@
 - [x] Anadolu Ekininde Güzeller: durum raporu + ayırma planı Çağrı'ya sunuldu
 - [x] Anadolu Ekininde Güzeller: ayırma (A) ve fotoğraf güncellemesi canlıda
 - [x] Ara soru: admin dışı düzenleme denetimi yapıldı (salt okuma; iz alanı yok, dış düzenleme belirtisi yok)
-- [~] Anadolu serisinin adı/metni/eser bazında bölünmesi - sanatçıya sorulacak (ad: Ekininde Güzeller mi Anadolu Güzelleri mi)
+- [~] Anadolu Ekininde Güzeller metnini ve eser bazında gösterimi belirle — BEKLİYOR: sanatçı — uzun/kısa metin, eserler tek tek mi; Drive klasörü 13 Eki'den beri değişmedi (16 Eki)
 - [x] product_images.is_visible alanı eklendi (migration + geri alma), sorgular gizlileri dışarıda bırakıyor
 - [x] Kurumsal Heykeller sekmesi ve /galeri seri başlıklarıyla gruplandı (A)
 - [x] Anadolu serisinin 17 yeni fotoğrafı Cloudinary'ye yüklendi
@@ -85,7 +85,16 @@
 - [x] Şahmaran belgesi okundu, açıklamalar hazırlandı
 - [x] Şahmaran güncellemesi (yeni foto ekle / eski gizle / açıklama) SQL + yedek + geri alma hazırlandı
 - [x] Önizleme ekran görüntüleri Çağrı'ya onaya sunuldu
-- [~] Şahmaran III biçim satırı ve V'teki "cansab" teyit edildi - sanatçıya sorulacak
+- [x] Şahmaran V "cansab" teyit edildi: Cemşab (sanatçı, 16 Eki)
+- [~] Şahmaran III biçim, II teknik ve V yılını teyit et — BEKLİYOR: sanatçı — III biçimi hâlâ eski II satırı; II'de iki Teknik; V'te Yıl 2012 ve 2011 birlikte (16 Eki)
 - [x] Banner yazısı + Şahmaran deploy edildi, vercel-bekle.sh ile hash doğrulandı
 - [x] Şahmaran SQL'i uygulandı
 - [x] Canlıda kontrol (banner görseli, yazısı, Şahmaran foto/açıklama) + ekran görüntüleri
+- [x] Sanatçının yeni Masalın Hafızası belgeleri Drive'da bulundu ve okundu (9 yeni belge + güncel Şahmaran.docx)
+- [x] Yeni belgeler veritabanıyla karşılaştırıldı (Anka, Şahmaran, 5 figür; Dev/Şehzade yeni foto)
+- [x] Şahmaran V "cansab" → "Cemşab" düzeltmesi SQL'e girdi (uygulanmadı)
+- [x] Metin + Dev fotoğraf + Şehzade fotoğraf SQL'leri, yedek ve geri alma hazırlandı, transaction'da denendi
+- [x] Önizleme ekran görüntüleri hazırlandı (preview-shots/masal-belgeler)
+- [x] Bekleyen 10 madde gözden geçirildi
+- [~] Masal metin SQL'ini uygula ve yayınla — BEKLİYOR: Çağrı — önizleme onayı (16 Eki)
+- [~] Dev ve Şehzade fotoğraf SQL'lerini uygula — BEKLİYOR: Çağrı — Şehzade kareleri sahnelenmiş/küçük görünüyor, teyit (16 Eki)
