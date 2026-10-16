@@ -106,3 +106,5 @@
 - [x] Ana girişten görünür "Toprağın Hafızası" başlığı kaldırıldı
 - [x] SQL + yedek + geri alma hazırlandı; deploy (0859ac9) ve SQL uygulandı
 - [x] Canlıda doğrulandı, ekran görüntüleri alındı; geri alma uygulanmış veride denendi
+- [x] Ana sayfada "Toprağın Hafızası" başlığı ekranda görünmüyor (tarayıcıda kontrol edildi, 16 Eki)
+- [~] "Toprağın hafızası" ifadesinin kalacağı yerleri belirle — BEKLİYOR: sanatçı — Hikâyemiz cümlesi, Hakkımızda kapanış cümlesi, Antik Dönem sayfasındaki "Toprağın Hafızası: Terra Sigillata" başlığı (16 Eki)
