@@ -108,3 +108,5 @@
 - [x] Canlıda doğrulandı, ekran görüntüleri alındı; geri alma uygulanmış veride denendi
 - [x] Ana sayfada "Toprağın Hafızası" başlığı ekranda görünmüyor (tarayıcıda kontrol edildi, 16 Eki)
 - [~] "Toprağın hafızası" ifadesinin kalacağı yerleri belirle — BEKLİYOR: sanatçı — Hikâyemiz cümlesi, Hakkımızda kapanış cümlesi, Antik Dönem sayfasındaki "Toprağın Hafızası: Terra Sigillata" başlığı (16 Eki)
+- [x] Bireysel siteler planı yazıldı (PLAN-BIREYSEL-SITELER.md)
+- [~] Bireysel siteleri kur — BEKLİYOR: Çağrı — referans siteler, alan adı kararları, içerik eksikleri (16 Eki)
