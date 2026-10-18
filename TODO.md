@@ -117,3 +117,8 @@
 - [x] Vercel preview deploy edildi (6541b3b), link ve mobil AR adımları raporlandı
 - [x] FAZ-B-CEKIM-TALIMATI.md yazıldı
 - [x] 3B pilotu canlıda (22a7630): /tr/3b-pilot 200, model yükleniyor, AR düğmesi sayfada
+- [x] Anka V videosu indirildi (35 sn, 480×856, WhatsApp sıkıştırmalı), ölçek fotoğrafı kontrol edildi
+- [ ] Videodan yerel/ücretsiz yöntemle 3B model (GLB) üret
+- [ ] Modeli çatal (~19 cm) ölçeğiyle gerçek boyuta ayarla
+- [ ] Anka V eser sayfasına model-viewer + AR ekle
+- [ ] Preview'a deploy et (prod değil), URL ve sonucu raporla
