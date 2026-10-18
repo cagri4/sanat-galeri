@@ -116,4 +116,4 @@
 - [x] model-viewer pilot sayfası yapıldı (/tr/3b-pilot: döndür, zoom, AR düğmesi, etiket)
 - [x] Vercel preview deploy edildi (6541b3b), link ve mobil AR adımları raporlandı
 - [x] FAZ-B-CEKIM-TALIMATI.md yazıldı
-- [ ] 3B pilotu canlıya al (uart-galeri prod), 200 ve model-viewer doğrula
+- [x] 3B pilotu canlıda (22a7630): /tr/3b-pilot 200, model yükleniyor, AR düğmesi sayfada
