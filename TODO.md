@@ -110,3 +110,10 @@
 - [~] "Toprağın hafızası" ifadesinin kalacağı yerleri belirle — BEKLİYOR: sanatçı — Hikâyemiz cümlesi, Hakkımızda kapanış cümlesi, Antik Dönem sayfasındaki "Toprağın Hafızası: Terra Sigillata" başlığı (16 Eki)
 - [x] Bireysel siteler planı yazıldı (PLAN-BIREYSEL-SITELER.md)
 - [~] Bireysel siteleri kur — BEKLİYOR: Çağrı — referans siteler, alan adı kararları, içerik eksikleri (16 Eki)
+- [x] 3B/AR pilotu için eser seçildi: Çan Krater (drive-fotolar'da heykel yok; krater gerçek 3B obje)
+- [~] TRELLIS ile yapay zekâ GLB'si üret — BEKLİYOR: Çağrı — hesapsız Hugging Face GPU kotası doldu (TRELLIS.2, TRELLIS, Stable Fast 3D); ücretsiz HF hesabı token'ı (kart yok) ya da 24 saat sonra yeniden deneme (18 Eki)
+- [x] Ara çözüm: fotoğraf siluetinden yapay zekâsız torna modeli (GLB) üretildi, sayfada "yaklaşık demo" olarak etiketlendi
+- [x] model-viewer pilot sayfası yapıldı (/tr/3b-pilot: döndür, zoom, AR düğmesi, etiket)
+- [x] Vercel preview deploy edildi (6541b3b), link ve mobil AR adımları raporlandı
+- [x] FAZ-B-CEKIM-TALIMATI.md yazıldı
+- [ ] 3B pilotu canlıya al (uart-galeri prod), 200 ve model-viewer doğrula
