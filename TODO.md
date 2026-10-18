@@ -122,4 +122,4 @@
 - [x] Model künyedeki 55 cm yüksekliğe ölçeklendi (çatal perspektif yüzünden güvenilmez çıktı)
 - [~] Anka V'in gerçek yüksekliğini (kaide dahil/hariç) teyit et — BEKLİYOR: sanatçı — modelde genişlik 23 cm, künyede 30 cm (19 Eki)
 - [x] Anka V eser sayfasına 3B görünüm + AR eklendi (fotoğrafların altında)
-- [ ] Preview'a deploy et (prod değil), URL ve sonucu raporla
+- [x] Preview deploy edildi (7c4d19e), prod değişmedi
