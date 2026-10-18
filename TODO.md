@@ -118,7 +118,8 @@
 - [x] FAZ-B-CEKIM-TALIMATI.md yazıldı
 - [x] 3B pilotu canlıda (22a7630): /tr/3b-pilot 200, model yükleniyor, AR düğmesi sayfada
 - [x] Anka V videosu indirildi (35 sn, 480×856, WhatsApp sıkıştırmalı), ölçek fotoğrafı kontrol edildi
-- [ ] Videodan yerel/ücretsiz yöntemle 3B model (GLB) üret
-- [ ] Modeli çatal (~19 cm) ölçeğiyle gerçek boyuta ayarla
-- [ ] Anka V eser sayfasına model-viewer + AR ekle
+- [x] Videodan yerel fotogrametriyle 3B model üretildi (COLMAP + OpenMVS, CPU; yapay zekâ yok)
+- [x] Model künyedeki 55 cm yüksekliğe ölçeklendi (çatal perspektif yüzünden güvenilmez çıktı)
+- [~] Anka V'in gerçek yüksekliğini (kaide dahil/hariç) teyit et — BEKLİYOR: sanatçı — modelde genişlik 23 cm, künyede 30 cm (19 Eki)
+- [x] Anka V eser sayfasına 3B görünüm + AR eklendi (fotoğrafların altında)
 - [ ] Preview'a deploy et (prod değil), URL ve sonucu raporla
