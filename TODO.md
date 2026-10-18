@@ -114,5 +114,5 @@
 - [~] TRELLIS ile yapay zekâ GLB'si üret — BEKLİYOR: Çağrı — hesapsız Hugging Face GPU kotası doldu (TRELLIS.2, TRELLIS, Stable Fast 3D); ücretsiz HF hesabı token'ı (kart yok) ya da 24 saat sonra yeniden deneme (18 Eki)
 - [x] Ara çözüm: fotoğraf siluetinden yapay zekâsız torna modeli (GLB) üretildi, sayfada "yaklaşık demo" olarak etiketlendi
 - [x] model-viewer pilot sayfası yapıldı (/tr/3b-pilot: döndür, zoom, AR düğmesi, etiket)
-- [ ] Vercel preview'a deploy et, linki ve mobil AR adımlarını raporla
+- [x] Vercel preview deploy edildi (6541b3b), link ve mobil AR adımları raporlandı
 - [x] FAZ-B-CEKIM-TALIMATI.md yazıldı
