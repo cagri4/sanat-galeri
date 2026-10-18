@@ -19,7 +19,8 @@ tex = np.zeros((TH, TW, 3), np.uint8)
 tt = np.linspace(0, 2 * np.pi, TW, endpoint=False)
 for i, (y, r) in enumerate(zip(ys, rs)):
     xs = np.clip(np.round(CX + r * np.sin(tt)).astype(int), 0, photo.shape[1] - 1)
-    tex[i] = photo[int(y), xs]
+    # kaide altında fotoğraf tuğlaya taşar: 940'tan aşağısı 940 satırından örneklenir
+    tex[i] = photo[int(min(y, 940)), xs]
 Image.fromarray(tex).resize((TW, 1024)).save('doku.jpg', quality=90)
 # dış yüzey
 V, UV, F = [], [], []
@@ -54,7 +55,7 @@ bc = len(V2); V2.append([0, 0, 0]); bb = len(V2); V2 += ring(BOT, rs[-1])   # al
 for j in range(N): F2.append([bc, bb + j, bb + (j + 1) % N])
 inner = trimesh.Trimesh(np.array(V2), np.array(F2), process=False)
 inner.visual = trimesh.visual.TextureVisuals(material=trimesh.visual.material.PBRMaterial(
-    baseColorFactor=[38, 32, 28, 255], metallicFactor=0.0, roughnessFactor=0.7))
+    baseColorFactor=[0.09, 0.075, 0.065, 1.0], metallicFactor=0.0, roughnessFactor=0.8, doubleSided=True))
 sc = trimesh.Scene(); sc.add_geometry(outer, 'dis'); sc.add_geometry(inner, 'ic')
 sc.export('kalyx-krater-torna.glb')
 print('ok', len(V), len(F) + len(F2))

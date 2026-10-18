@@ -40,8 +40,8 @@ export default async function Pilot3BPage({ params }: { params: Promise<{ locale
       <div role="note" className="mt-6 border-l-4 border-[#b45309] bg-[#fef3c7] px-4 py-3 text-[15px] leading-relaxed text-[#422006]">
         <strong>{tr ? 'Yaklaşık demo — gerçek eserin 3B taraması değildir.' : 'Approximate demo — not a 3D scan of the real work.'}</strong>{' '}
         {tr
-          ? 'Model, eserin tek bir fotoğrafındaki siluetten bilgisayarla çıkarıldı: arka yüz ön yüzün aynasıdır, kulplar modelde yoktur, renk ve desenler yaklaşıktır. Gerçek ölçü bilinmediği için odadaki boyut temsilîdir. Eserin kendisi sağdaki fotoğraftadır.'
-          : 'The model was derived by computer from the silhouette in a single photo: the back mirrors the front, the handles are missing, colours and patterns are approximate. The real size is unknown, so the size in your room is only indicative. The work itself is shown in the photo.'}
+          ? 'Model, eserin tek bir fotoğrafındaki siluetten bilgisayarla çıkarıldı: arka yüz ön yüzün aynasıdır, kulplar modelde yoktur, renk ve desenler yaklaşıktır. Gerçek ölçü bilinmediği için odadaki boyut temsilîdir. Eserin kendisi, yanındaki gerçek fotoğrafta görülebilir.'
+          : 'The model was derived by computer from the silhouette in a single photo: the back mirrors the front, the handles are missing, colours and patterns are approximate. The real size is unknown, so the size in your room is only indicative. The work itself is shown in the real photo alongside.'}
       </div>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[3fr_2fr]">
