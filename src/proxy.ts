@@ -51,6 +51,6 @@ export default function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     // robots.txt / sitemap.xml locale'e yönlenmemeli (kökten servis edilir).
-    '/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp|glb|usdz)$).*)',
   ],
 }
