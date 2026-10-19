@@ -3,15 +3,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getArtistBySlug, getArtistExhibitions } from '@/lib/queries/artist'
 import { getProductsByArtist } from '@/lib/queries/gallery'
-import { getExhibitionPhotosBySlugs, type ExhibitionPhoto } from '@/lib/queries/exhibition-photos'
-import { SERGI_AFISI, SERGI_KUNYE } from '@/lib/yeni-icerik'
 import { isOnSite, siteDomains } from '@/lib/site'
 import ContactForm from '@/components/gallery/contact-form'
 
 /**
- * Şeref Doğan — bireysel CV/portfolyo sitesi (tek sayfa, TR/EN).
+ * Şeref Doğan — bireysel portfolyo sitesi (tek sayfa, TR/EN). Dil: galeri minimalizmi
+ * (rc 19 Eki, referans annvanhoey-ceramics.be): tam genişlik sakin hero, saf beyaz, bol boşluk,
+ * eserler SERİ olarak (her eser kendi fotoğraflarıyla, yazısız masonry), menü yalnız gerçek içerik:
+ * Eserler · Hakkında (biyografi, beyan, sergiler, ödüller) · İletişim.
  * İçerik YALNIZ veritabanından: biyografi, sergiler, ödüller, eserler.
- * Portre henüz yok → kimlik görseli olarak sanatçının kendi panosu (Parion Esintisi, kare, adıyla).
+ * Portre henüz yok → hero sanatçının kendi panosu (Bilginin Kaynağı detayı, adıyla).
  * Beyan veritabanında yok → STATEMENT_TASLAK (rc talimatı 20 Eki: sanatçının gerçek işine dayalı,
  * genel metin; tarih/sergi/özel bilgi içermez). DB'ye yazılmadı: galeri sitesindeki sanatçı
  * sayfasına onaysız metin düşmesin. Sanatçı onaylayınca DB'ye taşınır.
@@ -21,29 +22,38 @@ type P = { params: Promise<{ locale: string; artist: string }> }
 
 const T = {
   tr: {
-    role: 'Seramik sanatçısı · Çanakkale', bio: 'Biyografi', statement: 'Sanatçı beyanı', works: 'İşler',
-    exhibitions: 'Kişisel sergiler', awards: 'Ödüller', contact: 'İletişim',
-    statementPending: 'Sanatçı beyanı hazırlanıyor.', detay: 'detay',
+    role: 'Seramik sanatçısı · Çanakkale', bio: 'Biyografi', statement: 'Sanatçı beyanı', works: 'Eserler',
+    about: 'Hakkında', exhibitions: 'Kişisel sergiler', awards: 'Ödüller', contact: 'İletişim',
+    statementPending: 'Sanatçı beyanı hazırlanıyor.', detay: 'detay', cta: 'Eserleri gör',
+    more: (n: number) => `Eser sayfası · ${n} fotoğraf`, open: 'Eser sayfası',
     joint: 'Ortak üretim: form Şeref Doğan, resimleme Melike Doğan.',
     contactLead: 'Sergi, proje ya da iş birliği için yazın; mesajınız Uarttasarım atölyesine ulaşır.',
     studio: 'Uarttasarım atölyesi', other: 'English',
     cats: { 'Mimari Duvar Panoları': 'Mimari seramik panolar', 'Seramik Heykeller': 'Seramik heykeller', 'Antik Dönem Replikaları': 'Antik dönem replikaları' } as Record<string, string>,
   },
   en: {
-    role: 'Ceramic artist · Çanakkale', bio: 'Biography', statement: 'Artist statement', works: 'Works',
-    exhibitions: 'Solo exhibitions', awards: 'Awards', contact: 'Contact',
-    statementPending: 'The artist statement is in preparation.', detay: 'detail',
+    role: 'Ceramic artist · Çanakkale', bio: 'Biography', statement: 'Artist statement', works: 'Work',
+    about: 'About', exhibitions: 'Solo exhibitions', awards: 'Awards', contact: 'Contact',
+    statementPending: 'The artist statement is in preparation.', detay: 'detail', cta: 'View the work',
+    more: (n: number) => `Work page · ${n} photos`, open: 'Work page',
     joint: 'Joint production: form by Şeref Doğan, painting by Melike Doğan.',
     contactLead: 'Write for exhibitions, projects or collaborations; your message reaches the Uarttasarım studio.',
     studio: 'Uarttasarım studio', other: 'Türkçe',
     cats: { 'Mimari Duvar Panoları': 'Architectural ceramic panels', 'Seramik Heykeller': 'Ceramic sculpture', 'Antik Dönem Replikaları': 'Antique replicas' } as Record<string, string>,
   },
 }
-const CAT_ORDER = ['Mimari Duvar Panoları', 'Seramik Heykeller', 'Antik Dönem Replikaları']
 
-/** Kimlik görseli (gerçek portre gelene kadar): sanatçının panosu, KARE (rc 20 Eki).
- *  119 pano karesi arasından seçildi: merkezden yayılan rölyef kare kadraja kendiliğinden oturuyor. */
-const KIMLIK = { slug: 'parion-esintisi', title: 'Parion Esintisi', year: 2014, src: 'https://res.cloudinary.com/df0henatz/image/upload/c_fill,ar_1:1,g_center,w_1200/v1785068731/uarttasarim/mimari/parion-esintisi-10.jpg' }
+/** Hero (gerçek portre gelene kadar): sanatçının panosu, tam genişlik (rc 19 Eki redesign).
+ *  79 yatay kare arasından seçildi: beyaz-yeşil dalga rölyefi, tek yatay eksen — referanstaki
+ *  sakin, nötr hero'ya en yakın kare (2000×1125). Önceki kare hero Parion Esintisi seride duruyor. */
+const HERO = { slug: 'bilginin-kaynagi', title: 'Bilginin Kaynağı', year: 2016, src: 'https://res.cloudinary.com/df0henatz/image/upload/v1791725081/uarttasarim/mimari/bilginin-kaynagi-2.jpg' }
+/** Seri başına gösterilen fotoğraf (tek bant — sayfa sakin kalsın); tamamı eserin galeri/kurumsal sayfasında. */
+const SERI_FOTO = 4
+
+/** Cloudinary dönüşümü (genişlik sınırı + otomatik biçim); masonry'de doğal oran korunur. */
+function cld(url: string, w: number) {
+  return url.includes('/image/upload/') ? url.replace('/image/upload/', `/image/upload/c_limit,w_${w},f_auto,q_auto/`) : url
+}
 
 /** Taslak beyan — sanatçı onayı bekliyor (TODO). */
 const STATEMENT_TASLAK: Record<string, { tr: string; en: string }> = {
@@ -92,6 +102,36 @@ function eserUrl(category: string, slug: string, locale: string) {
 
 const label = 'text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]'
 const pending = 'border border-dashed border-[#b45309] bg-[#fef3c7] text-[#422006]'
+const wrap = 'mx-auto w-full max-w-[1280px] px-5 sm:px-10 lg:px-16'
+
+type Work = Awaited<ReturnType<typeof getProductsByArtist>>[number]
+
+/** Masonry: fotoğraflar doğal oranlarında, yazısız (referanstaki dizilim). */
+function Masonry({ items }: { items: { key: string | number; src: string; alt: string; href: string; caption?: string }[] }) {
+  return (
+    <ul className="columns-2 gap-2.5 sm:gap-3 lg:columns-4">
+      {items.map((it) => (
+        <li key={it.key} className="mb-2.5 break-inside-avoid sm:mb-3">
+          <a href={it.href} className="group block cursor-pointer">
+            <span className="block overflow-hidden bg-[#f3f3f3]">
+              {/* eslint-disable-next-line @next/next/no-img-element -- doğal oran için ölçüsüz img; Cloudinary boyutlar */}
+              <img
+                src={cld(it.src, 800)}
+                srcSet={`${cld(it.src, 480)} 480w, ${cld(it.src, 800)} 800w, ${cld(it.src, 1200)} 1200w`}
+                sizes="(max-width: 1024px) 50vw, 25vw"
+                alt={it.alt}
+                loading="lazy"
+                decoding="async"
+                className="block h-auto w-full transition-opacity duration-300 group-hover:opacity-85"
+              />
+            </span>
+            {it.caption && <span className="mt-2 block text-[length:var(--text-meta)] text-[var(--muted)]">{it.caption}</span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
 
 export default async function BireyselPage({ params }: P) {
   const { locale, artist } = await params
@@ -106,143 +146,157 @@ export default async function BireyselPage({ params }: P) {
   const sergiler = exhibitions.filter((e) => e.type !== 'odul')
   const oduller = exhibitions.filter((e) => e.type === 'odul')
 
-  let photos: ExhibitionPhoto[] = []
-  try {
-    photos = (await getExhibitionPhotosBySlugs(Object.keys(SERGI_KUNYE))).filter((f) => f.titleTr !== SERGI_AFISI)
-  } catch {}
-  const kareFor = (year: number | null, place: string | null) => {
-    const slug = Object.entries(SERGI_KUNYE).find(([, k]) => k.year === year && k.place === place)?.[0]
-    return slug ? photos.find((f) => f.exhibitionSlug === slug) ?? null : null
-  }
-
-  const kimlik = works.find((w) => w.slug === KIMLIK.slug)
-  const gruplar = CAT_ORDER.map((c) => ({ c, items: works.filter((w) => w.category === c) })).filter((g) => g.items.length)
+  const title = (w: Work) => (tr ? w.titleTr : w.titleEn) ?? w.titleTr ?? ''
+  const dims = (w: Work) => (tr ? w.dimensionsTr : w.dimensionsEn) ?? w.dimensionsTr
+  const hero = works.find((w) => w.slug === HERO.slug)
+  const byCat = (c: string) => works.filter((w) => w.category === c && w.images?.length)
+  // Panolar ve heykel: her eser bir seri (yeniden eskiye). Replikalar tek seri: her eserin bir karesi.
+  const gruplar = [
+    { c: 'Mimari Duvar Panoları', items: byCat('Mimari Duvar Panoları').sort((x, y) => (y.year ?? 0) - (x.year ?? 0)) },
+    { c: 'Seramik Heykeller', items: byCat('Seramik Heykeller') },
+  ].filter((g) => g.items.length)
+  const replikalar = byCat('Antik Dönem Replikaları')
   const d = siteDomains()
-  const nav = [['biyografi', t.bio], ['beyan', t.statement], ['isler', t.works], ['sergiler', t.exhibitions], ['oduller', t.awards], ['iletisim', t.contact]]
+  const nav = [['eserler', t.works], ['hakkinda', t.about], ['iletisim', t.contact]]
   const jsonLd = { '@context': 'https://schema.org', '@type': 'Person', name, jobTitle: tr ? 'Seramik sanatçısı' : 'Ceramic artist', worksFor: { '@type': 'Organization', name: 'Uarttasarım', url: d.galeri ? `https://${d.galeri}` : undefined } }
 
   return (
-    <div className="mx-auto w-full min-w-0 max-w-6xl px-6 sm:px-10 lg:px-16">
+    <div className="w-full min-w-0">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <header className="flex items-center justify-between gap-6 border-b border-[var(--rule)] py-6">
-        <a href={`/${locale}`} className="text-lg text-[var(--foreground)]">{name}</a>
-        <nav aria-label={name} className="hidden gap-6 md:flex">
-          {nav.map(([id, l]) => (
-            <a key={id} href={`#${id}`} className="text-[length:var(--text-meta)] uppercase tracking-[0.12em] text-[var(--muted)] hover:text-[var(--foreground)]">{l}</a>
-          ))}
-        </nav>
-        <a href={`/${tr ? 'en' : 'tr'}`} className="text-[length:var(--text-meta)] text-[var(--muted)] hover:text-[var(--foreground)]">{t.other}</a>
+
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm">
+        <div className={`${wrap} flex flex-wrap items-center justify-between gap-x-8 gap-y-2 py-5`}>
+          <a href={`/${locale}`} className="text-xl font-light tracking-[0.02em] text-[var(--foreground)]">{name}</a>
+          <nav aria-label={name} className="flex items-center gap-6 sm:gap-8">
+            {nav.map(([id, l]) => (
+              <a key={id} href={`#${id}`} className="py-2 text-[length:var(--text-meta)] text-[var(--muted)] transition-colors hover:text-[var(--foreground)]">{l}</a>
+            ))}
+            <a href={`/${tr ? 'en' : 'tr'}`} hrefLang={tr ? 'en' : 'tr'} className="py-2 text-[length:var(--text-meta)] text-[var(--faint)] transition-colors hover:text-[var(--foreground)]">{tr ? 'EN' : 'TR'}</a>
+          </nav>
+        </div>
       </header>
 
-      {/* Kimlik: ad, unvan ve sanatçının bir panosu (portre gelince değişir; eser adı alt yazıda). */}
-      <section className="grid items-center gap-10 py-16 sm:py-24 md:grid-cols-[3fr_2fr]">
-        <div>
-          <p className={label}>{t.role}</p>
-          <h1 className="mt-4 text-5xl leading-[1.05] text-[var(--foreground)] sm:text-7xl">{name}</h1>
+      {/* Hero: tam genişlik sakin eser fotoğrafı (üstüne yazı yok, karartma yok — eser olduğu gibi);
+          ad + unvan + ince çerçeveli CTA altındaki beyaz alanda (referansın sade dili). */}
+      <section aria-labelledby="ad">
+        <div className="relative h-[72svh] min-h-[380px] w-full overflow-hidden bg-[#eeeeee]">
+          <Image src={HERO.src} alt={`${HERO.title} (${HERO.year}) — ${name}`} fill priority className="object-cover" sizes="100vw" />
         </div>
-        {kimlik && (
-          <figure className="w-full max-w-md">
-            <a href={eserUrl(kimlik.category, kimlik.slug, locale)} className="relative block aspect-square overflow-hidden bg-[#ece7de]">
-              <Image src={KIMLIK.src} alt={`${KIMLIK.title} (${KIMLIK.year}) — ${name}`} fill priority className="object-cover" sizes="(max-width: 768px) 100vw, 448px" />
+        <div className={`${wrap} flex justify-end pt-3`}>
+          {hero && (
+            <a href={eserUrl(hero.category, hero.slug, locale)} className="text-[12px] text-[var(--faint)] hover:text-[var(--foreground)]">
+              {HERO.title}, {HERO.year} — {t.detay}
             </a>
-            <figcaption className="mt-2 text-[length:var(--text-meta)] text-[var(--muted)]">{KIMLIK.title}, {KIMLIK.year} — {t.detay}</figcaption>
-          </figure>
-        )}
-      </section>
-
-      <section id="biyografi" className="scroll-mt-8 border-t border-[var(--rule)] py-14 md:grid md:grid-cols-[1fr_3fr] md:gap-12">
-        <h2 className={label}>{t.bio}</h2>
-        <div className="mt-6 space-y-5 md:mt-0">
-          {bio
-            ? bio.split('\n\n').filter(Boolean).map((p, i) => (
-                <p key={i} className="max-w-[68ch] text-[length:var(--text-body)] leading-[1.9] text-[#4a4a4a]">{p}</p>
-              ))
-            : null}
+          )}
+        </div>
+        <div className={`${wrap} flex flex-col items-center pb-8 pt-16 text-center sm:pt-24`}>
+          <h1 id="ad" className="text-5xl leading-[1.05] sm:text-7xl">{name}</h1>
+          <p className="mt-5 text-[length:var(--text-lead)] font-light tracking-[0.04em] text-[var(--muted)]">{t.role}</p>
+          <a href="#eserler" className="mt-10 inline-flex min-h-11 items-center border border-[var(--foreground)] px-7 text-[length:var(--text-meta)] uppercase tracking-[0.18em] text-[var(--foreground)] transition-colors hover:bg-[var(--foreground)] hover:text-white">{t.cta}</a>
         </div>
       </section>
 
-      <section id="beyan" className="scroll-mt-8 border-t border-[var(--rule)] py-14 md:grid md:grid-cols-[1fr_3fr] md:gap-12">
-        <h2 className={label}>{t.statement}</h2>
-        {statement ? (
-          <div className="mt-6 max-w-3xl space-y-4 border-l-2 border-[var(--accent)] pl-6 md:mt-0">
-            {statement.split('\n\n').map((p, i) => (
-              <p key={i} className="text-xl italic leading-relaxed text-[var(--foreground)]">{p}</p>
-            ))}
-          </div>
-        ) : (
-          <p role="note" className={`mt-6 max-w-xl px-5 py-4 text-[15px] md:mt-0 ${pending}`}>{t.statementPending}</p>
-        )}
-      </section>
-
-      <section id="isler" className="scroll-mt-8 border-t border-[var(--rule)] py-14">
-        <h2 className={label}>{t.works}</h2>
-        {gruplar.map(({ c, items }) => (
-          <div key={c} className="mt-10">
-            <h3 className="text-2xl text-[var(--foreground)]">{t.cats[c] ?? c}</h3>
-            {c === 'Antik Dönem Replikaları' && <p className="mt-2 text-[length:var(--text-meta)] text-[var(--muted)]">{t.joint}</p>}
-            <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
-              {items.map((w) => (
-                <li key={w.id}>
-                  <a href={eserUrl(w.category, w.slug, locale)} className="group block">
-                    <div className="relative aspect-[4/5] overflow-hidden bg-[#ece7de]">
-                      {w.images?.[0] && (
-                        <Image src={w.images[0].url} alt={(tr ? w.titleTr : w.titleEn) ?? ''} fill className="object-cover transition-transform duration-[var(--dur-image)] group-hover:scale-[1.03]" sizes="(max-width: 640px) 50vw, 25vw" />
-                      )}
-                    </div>
-                    <p className="mt-3 text-[15px] leading-snug text-[var(--foreground)]">{tr ? w.titleTr : w.titleEn}</p>
-                    {w.year && <p className="text-[length:var(--text-meta)] text-[var(--muted)]">{w.year}</p>}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </section>
-
-      <section id="sergiler" className="scroll-mt-8 border-t border-[var(--rule)] py-14 md:grid md:grid-cols-[1fr_3fr] md:gap-12">
-        <h2 className={label}>{t.exhibitions}</h2>
-        <ul className="mt-6 divide-y divide-[var(--rule)] md:mt-0">
-          {sergiler.map((e) => {
-            const kare = kareFor(e.year, e.location)
-            return (
-              <li key={e.id} className="grid grid-cols-[4rem_1fr] gap-4 py-5 sm:grid-cols-[5rem_1fr_8rem]">
-                <span className="text-lg text-[var(--foreground)]">{e.year}</span>
-                <div>
-                  <p className="text-[length:var(--text-body)] text-[var(--foreground)]">{tr ? e.titleTr : e.titleEn}</p>
-                  {e.location && <p className="mt-1 text-[length:var(--text-meta)] text-[var(--muted)]">{e.location}</p>}
+      <main className={wrap}>
+        <section id="eserler" className="pt-24 sm:pt-32">
+          <h2 className="text-4xl sm:text-5xl">{t.works}</h2>
+          <div className="mt-16 space-y-28 sm:mt-20 sm:space-y-36">
+            {gruplar.map(({ c, items }) => (
+              <div key={c}>
+                <h3 className={`${label} border-t border-[var(--rule)] pt-6`}>{t.cats[c] ?? c}</h3>
+                <div className="mt-12 space-y-20 sm:space-y-28">
+                  {items.map((w) => {
+                    const href = eserUrl(w.category, w.slug, locale)
+                    const n = w.images.length
+                    return (
+                      <article key={w.id} aria-labelledby={`seri-${w.slug}`}>
+                        <div className="mb-7 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
+                          <div>
+                            <h4 id={`seri-${w.slug}`} className="text-2xl font-light sm:text-3xl">{title(w)}</h4>
+                            <p className="mt-2 text-[length:var(--text-meta)] text-[var(--muted)]">{[w.year, dims(w)].filter(Boolean).join(' · ')}</p>
+                          </div>
+                          <a href={href} className="inline-flex min-h-11 items-center text-[length:var(--text-meta)] text-[var(--muted)] underline-offset-4 hover:text-[var(--foreground)] hover:underline">
+                            {n > SERI_FOTO ? t.more(n) : t.open} &rarr;
+                          </a>
+                        </div>
+                        <Masonry items={w.images.slice(0, SERI_FOTO).map((im: { id?: number; url: string }, i: number) => ({ key: im.id ?? i, src: im.url, alt: `${title(w)}${w.year ? ` (${w.year})` : ''} — ${i + 1}`, href }))} />
+                      </article>
+                    )
+                  })}
                 </div>
-                {kare && (
-                  <div className="relative col-start-2 aspect-[4/3] w-32 overflow-hidden bg-[#ece7de] sm:col-start-auto">
-                    <Image src={kare.url} alt={`${tr ? e.titleTr : e.titleEn} — ${e.location ?? ''}`} fill className="object-cover" sizes="128px" />
-                  </div>
-                )}
-              </li>
-            )
-          })}
-        </ul>
-      </section>
+              </div>
+            ))}
+            {replikalar.length > 0 && (
+              <article aria-labelledby="seri-replikalar">
+                <h3 id="seri-replikalar" className={`${label} border-t border-[var(--rule)] pt-6`}>{t.cats['Antik Dönem Replikaları']}</h3>
+                <p className="mb-7 mt-12 max-w-[60ch] text-[length:var(--text-meta)] text-[var(--muted)]">{t.joint}</p>
+                <Masonry items={replikalar.map((w) => ({ key: w.id, src: w.images[0].url, alt: title(w), href: eserUrl(w.category, w.slug, locale), caption: title(w) }))} />
+              </article>
+            )}
+          </div>
+        </section>
 
-      <section id="oduller" className="scroll-mt-8 border-t border-[var(--rule)] py-14 md:grid md:grid-cols-[1fr_3fr] md:gap-12">
-        <h2 className={label}>{t.awards}</h2>
-        <ul className="mt-6 divide-y divide-[var(--rule)] md:mt-0">
-          {oduller.map((e) => (
-            <li key={e.id} className="grid grid-cols-[4rem_1fr] gap-4 py-5 sm:grid-cols-[5rem_1fr]">
-              <span className="text-lg text-[var(--foreground)]">{e.year}</span>
-              <p className="text-[length:var(--text-body)] text-[var(--foreground)]">{tr ? e.titleTr : e.titleEn}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
+        <section id="hakkinda" className="pt-28 sm:pt-40">
+          <h2 className="text-4xl sm:text-5xl">{t.about}</h2>
+          <div className="mt-14 grid gap-x-16 gap-y-16 lg:grid-cols-[1fr_2fr]">
+            <h3 className={label}>{t.bio}</h3>
+            <div className="space-y-5">
+              {bio?.split('\n\n').filter(Boolean).map((p, i) => (
+                <p key={i} className="max-w-[66ch] text-[length:var(--text-body)] font-light leading-[1.85] text-[#333]">{p}</p>
+              ))}
+            </div>
 
-      <section id="iletisim" className="scroll-mt-8 border-t border-[var(--rule)] py-14 md:grid md:grid-cols-[1fr_3fr] md:gap-12">
-        <h2 className={label}>{t.contact}</h2>
-        <div className="mt-6 max-w-xl md:mt-0">
-          <p className="mb-6 text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]">{t.contactLead}</p>
-          <ContactForm source={`[${name} — bireysel site]`} />
-        </div>
-      </section>
+            <h3 className={label}>{t.statement}</h3>
+            {statement ? (
+              <div className="max-w-[60ch] space-y-5">
+                {statement.split('\n\n').map((p, i) => (
+                  <p key={i} className="text-xl font-light leading-[1.6] text-[var(--foreground)]">{p}</p>
+                ))}
+              </div>
+            ) : (
+              <p role="note" className={`max-w-xl px-5 py-4 text-[15px] ${pending}`}>{t.statementPending}</p>
+            )}
 
-      <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-[var(--rule)] py-8 text-[length:var(--text-meta)] text-[var(--muted)]">
+            {sergiler.length > 0 && (<>
+              <h3 className={label}>{t.exhibitions}</h3>
+              <ul className="divide-y divide-[var(--rule)] border-y border-[var(--rule)]">
+                {sergiler.map((e) => (
+                  <li key={e.id} className="grid grid-cols-[4rem_1fr] gap-4 py-4 sm:grid-cols-[5rem_1fr]">
+                    <span className="text-[length:var(--text-body)] font-light text-[var(--muted)]">{e.year}</span>
+                    <div>
+                      <p className="text-[length:var(--text-body)] text-[var(--foreground)]">{tr ? e.titleTr : e.titleEn}</p>
+                      {e.location && <p className="mt-1 text-[length:var(--text-meta)] text-[var(--muted)]">{e.location}</p>}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </>)}
+
+            {oduller.length > 0 && (<>
+              <h3 className={label}>{t.awards}</h3>
+              <ul className="divide-y divide-[var(--rule)] border-y border-[var(--rule)]">
+                {oduller.map((e) => (
+                  <li key={e.id} className="grid grid-cols-[4rem_1fr] gap-4 py-4 sm:grid-cols-[5rem_1fr]">
+                    <span className="text-[length:var(--text-body)] font-light text-[var(--muted)]">{e.year}</span>
+                    <p className="text-[length:var(--text-body)] text-[var(--foreground)]">{tr ? e.titleTr : e.titleEn}</p>
+                  </li>
+                ))}
+              </ul>
+            </>)}
+          </div>
+        </section>
+
+        <section id="iletisim" className="pb-24 pt-28 sm:pb-32 sm:pt-40">
+          <h2 className="text-4xl sm:text-5xl">{t.contact}</h2>
+          <div className="mt-14 grid gap-x-16 gap-y-8 lg:grid-cols-[1fr_2fr]">
+            <p className="max-w-[40ch] text-[length:var(--text-body)] font-light leading-[1.8] text-[#333]">{t.contactLead}</p>
+            <div className="max-w-xl">
+              <ContactForm source={`[${name} — bireysel site]`} />
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className={`${wrap} flex flex-wrap items-center justify-between gap-4 border-t border-[var(--rule)] py-8 text-[length:var(--text-meta)] text-[var(--muted)]`}>
         <span>© {new Date().getFullYear()} {name}</span>
         {d.galeri && (
           <Link href={`https://${d.galeri}/${locale}`} className="hover:text-[var(--foreground)]">{t.studio} &rarr;</Link>

@@ -118,6 +118,29 @@ body:has([data-site='kurumsal']) { background: #F5F6F5; }
   letter-spacing: -0.02em;
 }
 
+/* BİREYSEL (sanatçı sitesi) — galeri minimalizmi (referans: Ann Van Hoey).
+   Saf beyaz zemin, nötr griler, tek grotesk aile (Jost), ince ağırlıklı başlıklar.
+   Renk yalnız eser fotoğrafından gelir. Kontrast: foreground 17.4:1, muted 7.0:1. */
+[data-site='bireysel'] {
+  --background: #FFFFFF;
+  --foreground: #111111;
+  --muted: #555555;
+  --faint: #6E6E6E;        /* 5.1:1 */
+  --border: #E6E6E6;
+  --rule: #ECECEC;
+  --accent: #111111;
+  --text-body: 1rem;
+  font-family: var(--font-galeri);
+  color: var(--foreground);
+  background: var(--background);
+}
+body:has([data-site='bireysel']) { background: #FFFFFF; }
+[data-site='bireysel'] :is(h1, h2, h3) {
+  font-family: var(--font-galeri);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
 /* Buzlu yapışkan üst şerit (Spode deseni). backdrop-filter yoksa opak zemin. */
 .site-header {
   position: sticky;

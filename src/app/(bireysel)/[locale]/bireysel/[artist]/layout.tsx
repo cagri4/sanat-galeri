@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/lib/i18n/routing'
 
 /**
- * Bireysel sanatçı sitesi kabuğu (PLAN-BIREYSEL-SITELER). Galeriyle aynı tasarım
- * ailesi (data-site="galeri": EB Garamond + Jost, krem zemin) ama galeri menüsü
- * yok — kişi sayfası kendi başlığını ve gezinmesini taşır (page.tsx).
+ * Bireysel sanatçı sitesi kabuğu (PLAN-BIREYSEL-SITELER). Kendi teması var
+ * (data-site="bireysel": galeri minimalizmi, saf beyaz, Jost — globals.css);
+ * galeri menüsü yok — kişi sayfası kendi başlığını ve gezinmesini taşır (page.tsx).
  */
 export default async function BireyselLayout({
   children,
@@ -21,7 +21,7 @@ export default async function BireyselLayout({
   const messages = await getMessages()
   return (
     <NextIntlClientProvider messages={messages}>
-      <div data-site="galeri" className="w-full min-w-0">{children}</div>
+      <div data-site="bireysel" className="w-full min-w-0">{children}</div>
     </NextIntlClientProvider>
   )
 }

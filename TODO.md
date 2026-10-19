@@ -152,5 +152,8 @@
 - [x] Şeref sitesi https://uart-seref.vercel.app adresinde (200, noindex, alan adı yok)
 - [x] Şeref sitesinde portre yerine Akar’ın Deryası panosu (adıyla, eser sayfasına bağlı)
 - [x] Şeref sitesine taslak sanatçı beyanı (TR + EN) eklendi — yalnız bireysel sitede, DB'ye yazılmadı
-- [ ] Şeref sitesini yeniden deploy et (uart-seref.vercel.app, noindex)
+- [x] Şeref sitesi yeniden deploy edildi (uart-seref.vercel.app, noindex)
 - [x] Şeref sitesinde hero kare (1:1): Parion Esintisi rölyef detayı (119 kare arasından)
+- [x] Ann Van Hoey referans sitesi incelendi (beyaz zemin, tek grotesk, tam genişlik hero, seri + yazısız masonry)
+- [x] Şeref sitesi galeri-minimalist dile çekildi (Bilginin Kaynağı tam genişlik hero, saf beyaz, eser başına seri, menü Eserler · Hakkında · İletişim)
+- [ ] Şeref redesign'ını preview'a deploy et, 200 + noindex doğrula, senaryoyu test et
