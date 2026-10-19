@@ -128,3 +128,4 @@
 - [x] Rodin GLB üretildi (scripts/replicate-3d.py, 4 $ sert sınır; gerçek fatura 0,40 $)
 - [x] Kıyas sayfası preview'da (9a6ef3c, /tr/3b-kiyas), prod değişmedi
 - [~] Replicate bakiyesini panelden doğrula — BEKLİYOR: Çağrı — API 'kredi < 5 $' dedi; başarısız 2 Hunyuan denemesi faturalandı mı API'den görünmüyor (19 Eki)
+- [ ] Anka V fotogrametri 3B'yi canlıya al (Rodin arşivde, canlıda değil), vercel-bekle ile doğrula
