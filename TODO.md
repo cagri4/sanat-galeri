@@ -132,12 +132,12 @@
 - [x] uarttasarim.com → uart-galeri (plan); Deployment Protection özel alan adında kapalı (all_except_custom_domains)
 - [x] uarttasarim.com DNS envanteri çıkarıldı (DNS-GECIS-uarttasarim.md): A ikas, www ikas, GSC TXT; MX yok
 - [x] uarttasarim.com Cloudflare kurulum script'i hazırlandı (scripts/cf-uarttasarim.sh; Vercel değerleri yeniden doğrulandı)
-- [~] uarttasarim.com Cloudflare zone'unu aç — BEKLİYOR: Çağrı — token'da zone.create yetkisi yok, Chrome'da CF oturumu yok; panelden zone açılınca script kayıtları kurar ve NS'leri verir (19 Eki)
-- [~] uarttasarim.com: nameserver'ı Cloudflare'e çevir — BEKLİYOR: Çağrı — rc onayı + GoDaddy'de NS değişimi (19 Eki)
+- [x] uarttasarim.com Cloudflare zone'u açıldı (Çağrı, pending; NS gabriella/wilson)
+- [~] uarttasarim.com: nameserver'ı Cloudflare'e çevir — BEKLİYOR: Çağrı — GoDaddy'de gabriella/wilson.ns.cloudflare.com; whois hâlâ GoDaddy NS gösteriyor (19 Eki)
 - [x] Anka V deploy'u yeniden doğrulandı: ed19199 origin/master'da, sayfa 200, model yükleniyor
 - [ ] Tekrar kullanilabilir domain-baglama yetenegi kur (~/bin): CF zone+kayit tasima + Vercel custom domain tek komut; GoDaddy NS icin API uygunlugunu test et, degilse manuel NS adimi belgele (hesapta uarttasarim.com + serefdoganceramics.com var; 2 yeni gelecek = toplam 4)
-- [ ] uarttasarim.com CF kayıtlarını Vercel'e çevir (A, www CNAME), _domainconnect'i sil, GSC TXT'yi koru
-- [ ] uart-galeri'ye uarttasarim.com + www ekle
-- [ ] İki projede UART_GALERI_DOMAIN, UART_INDEXABLE=true, NEXT_PUBLIC_MAIN_URL ayarla, yeniden deploy et
-- [ ] uart-galeri.vercel.app → uarttasarim.com 301
+- [x] uarttasarim.com CF kayıtları Vercel'e çevrildi (A 76.76.21.21, www CNAME cname.vercel-dns.com, DNS only); _domainconnect silindi; GSC TXT korundu
+- [x] uart-galeri'ye uarttasarim.com + www (308 → apex) eklendi, ikisi verified
+- [x] İki projede UART_GALERI_DOMAIN=uarttasarim.com, UART_INDEXABLE=true (yalnız production), NEXT_PUBLIC_*_URL ayarlandı; 8a9cc83 deploy, READY
+- [ ] uart-galeri.vercel.app → uarttasarim.com 301 (DNS + SSL hazır olunca; izleyici çalışıyor)
 - [ ] Canlıda doğrula: noindex yok, robots, sitemap 200, SSL
