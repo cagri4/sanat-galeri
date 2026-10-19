@@ -135,3 +135,9 @@
 - [~] uarttasarim.com Cloudflare zone'unu aç — BEKLİYOR: Çağrı — token'da zone.create yetkisi yok, Chrome'da CF oturumu yok; panelden zone açılınca script kayıtları kurar ve NS'leri verir (19 Eki)
 - [~] uarttasarim.com: nameserver'ı Cloudflare'e çevir — BEKLİYOR: Çağrı — rc onayı + GoDaddy'de NS değişimi (19 Eki)
 - [x] Anka V deploy'u yeniden doğrulandı: ed19199 origin/master'da, sayfa 200, model yükleniyor
+- [ ] Tekrar kullanilabilir domain-baglama yetenegi kur (~/bin): CF zone+kayit tasima + Vercel custom domain tek komut; GoDaddy NS icin API uygunlugunu test et, degilse manuel NS adimi belgele (hesapta uarttasarim.com + serefdoganceramics.com var; 2 yeni gelecek = toplam 4)
+- [ ] uarttasarim.com CF kayıtlarını Vercel'e çevir (A, www CNAME), _domainconnect'i sil, GSC TXT'yi koru
+- [ ] uart-galeri'ye uarttasarim.com + www ekle
+- [ ] İki projede UART_GALERI_DOMAIN, UART_INDEXABLE=true, NEXT_PUBLIC_MAIN_URL ayarla, yeniden deploy et
+- [ ] uart-galeri.vercel.app → uarttasarim.com 301
+- [ ] Canlıda doğrula: noindex yok, robots, sitemap 200, SSL
