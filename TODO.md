@@ -126,4 +126,5 @@
 - [x] Replicate modeli seçildi: Hunyuan 3.1 iki kez servis hatası verdi → Rodin Gen-2 (0,40 $/çıktı, sayfadan)
 - [x] Videodan 4 net kare seçildi, arka plan yerelde temizlendi (ölçek fotoğrafı beyaz perde yüzünden ayrılamadı)
 - [x] Rodin GLB üretildi (scripts/replicate-3d.py, 4 $ sert sınır; gerçek fatura 0,40 $)
-- [ ] Fotogrametri ile AI modelini yan yana gösteren preview kıyas sayfası yap, deploy et (prod değil)
+- [x] Kıyas sayfası preview'da (9a6ef3c, /tr/3b-kiyas), prod değişmedi
+- [~] Replicate bakiyesini panelden doğrula — BEKLİYOR: Çağrı — API 'kredi < 5 $' dedi; başarısız 2 Hunyuan denemesi faturalandı mı API'den görünmüyor (19 Eki)
