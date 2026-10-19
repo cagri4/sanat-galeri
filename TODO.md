@@ -157,10 +157,11 @@
 - [x] Ann Van Hoey referans sitesi incelendi (beyaz zemin, tek grotesk, tam genişlik hero, seri + yazısız masonry)
 - [x] Şeref sitesi galeri-minimalist dile çekildi (Bilginin Kaynağı tam genişlik hero, saf beyaz, eser başına seri, menü Eserler · Hakkında · İletişim)
 - [x] Şeref redesign'ı uart-seref.vercel.app'te (fa6bd36 READY, /tr /en 200, noindex, masaüstü + mobil kontrol)
-- [ ] Şeref fotoğraflarını seç: seri başına eser-dolu, net kareler (boş/kötü foto yok)
-- [ ] Şeref panolarının arka planını temizle, tek tip nötr zemine oturt (ücretsiz yerel model)
-- [ ] Stüdyo-kalite AI seçeneklerini araştır (relight/restore/upscale), Replicate canlı fiyatla
-- [ ] Şeref sitesinde tüm fotoğrafları eşit kare (1:1) grid yap, masonry'yi kaldır
-- [ ] Şeref sitesi için sakin, güçlü hero seç (ad overlay)
-- [ ] Şeref foto seçimini deploy öncesi rc'ye göster
+- [x] Şeref fotoğrafları seçildi: 50 kare (pano başına tamamı + 3 detay, heykel 4, replika 6), oda/tabela/kablo görünenler elendi
+- [x] Şeref panoları duvardan kesildi, künye oranına düzlendi, tek tip nötr zemine (#F1F0EE) oturtuldu — IS-Net yerel, ücretsiz (scripts/seref-studio.py)
+- [x] Stüdyo-kalite AI araştırıldı (Replicate canlı fiyat 19 Eki: ic-light ~$0.065/run, real-esrgan $0.002/görsel, clarity-upscaler ~$0.018/run) — ücretli run yapılmadı
+- [x] Şeref sitesinde masonry kaldırıldı, tüm fotoğraflar eşit kare (1:1) grid (kod hazır, deploy edilmedi)
+- [x] Şeref hero'su seçildi: Anadolu Ekininde Güzeller (637) stüdyo zemininde, ad solda overlay
+- [~] Şeref foto seçimini onaylat — BEKLİYOR: rc — arsiv/seref-studio/SECIM-seref-studio.jpg (19 Eki)
+- [~] Ücretli AI (relight/upscale) denemesine karar ver — BEKLİYOR: rc — öneri: yapma; istenirse 3 karede ic-light ≈ $0.20 (19 Eki)
 - [ ] Şeref foto düzeltmesini önizlemeye deploy et (noindex, alan adı yok)

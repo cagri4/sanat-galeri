@@ -5,14 +5,17 @@ import { getArtistBySlug, getArtistExhibitions } from '@/lib/queries/artist'
 import { getProductsByArtist } from '@/lib/queries/gallery'
 import { isOnSite, siteDomains } from '@/lib/site'
 import ContactForm from '@/components/gallery/contact-form'
+import { SEREF_HERO, SEREF_STUDIO, studioUrl } from '@/lib/seref-studio'
 
 /**
  * Şeref Doğan — bireysel portfolyo sitesi (tek sayfa, TR/EN). Dil: galeri minimalizmi
  * (rc 19 Eki, referans annvanhoey-ceramics.be): tam genişlik sakin hero, saf beyaz, bol boşluk,
- * eserler SERİ olarak (her eser kendi fotoğraflarıyla, yazısız masonry), menü yalnız gerçek içerik:
+ * eserler SERİ olarak (her eser kendi fotoğraflarıyla), menü yalnız gerçek içerik:
  * Eserler · Hakkında (biyografi, beyan, sergiler, ödüller) · İletişim.
  * İçerik YALNIZ veritabanından: biyografi, sergiler, ödüller, eserler.
- * Portre henüz yok → hero sanatçının kendi panosu (Bilginin Kaynağı detayı, adıyla).
+ * FOTOĞRAF (SEREF-FOTO-BRIEF, Çağrı 19 Eki): tüm kareler EŞİT 1:1 grid (masonry yok), stüdyo zemininde
+ * (lib/seref-studio.ts — gerçek fotoğraflardan arka plan temizliği + düzleme; üretici AI yok).
+ * Hero: Anadolu Ekininde Güzeller heykeli stüdyo zemininde, ad üstünde (masaüstü).
  * Beyan veritabanında yok → STATEMENT_TASLAK (rc talimatı 20 Eki: sanatçının gerçek işine dayalı,
  * genel metin; tarih/sergi/özel bilgi içermez). DB'ye yazılmadı: galeri sitesindeki sanatçı
  * sayfasına onaysız metin düşmesin. Sanatçı onaylayınca DB'ye taşınır.
@@ -41,18 +44,6 @@ const T = {
     studio: 'Uarttasarım studio', other: 'Türkçe',
     cats: { 'Mimari Duvar Panoları': 'Architectural ceramic panels', 'Seramik Heykeller': 'Ceramic sculpture', 'Antik Dönem Replikaları': 'Antique replicas' } as Record<string, string>,
   },
-}
-
-/** Hero (gerçek portre gelene kadar): sanatçının panosu, tam genişlik (rc 19 Eki redesign).
- *  79 yatay kare arasından seçildi: beyaz-yeşil dalga rölyefi, tek yatay eksen — referanstaki
- *  sakin, nötr hero'ya en yakın kare (2000×1125). Önceki kare hero Parion Esintisi seride duruyor. */
-const HERO = { slug: 'bilginin-kaynagi', title: 'Bilginin Kaynağı', year: 2016, src: 'https://res.cloudinary.com/df0henatz/image/upload/v1791725081/uarttasarim/mimari/bilginin-kaynagi-2.jpg' }
-/** Seri başına gösterilen fotoğraf (tek bant — sayfa sakin kalsın); tamamı eserin galeri/kurumsal sayfasında. */
-const SERI_FOTO = 4
-
-/** Cloudinary dönüşümü (genişlik sınırı + otomatik biçim); masonry'de doğal oran korunur. */
-function cld(url: string, w: number) {
-  return url.includes('/image/upload/') ? url.replace('/image/upload/', `/image/upload/c_limit,w_${w},f_auto,q_auto/`) : url
 }
 
 /** Taslak beyan — sanatçı onayı bekliyor (TODO). */
@@ -106,24 +97,15 @@ const wrap = 'mx-auto w-full max-w-[1280px] px-5 sm:px-10 lg:px-16'
 
 type Work = Awaited<ReturnType<typeof getProductsByArtist>>[number]
 
-/** Masonry: fotoğraflar doğal oranlarında, yazısız (referanstaki dizilim). */
-function Masonry({ items }: { items: { key: string | number; src: string; alt: string; href: string; caption?: string }[] }) {
+/** Eşit kare grid (Çağrı: değişken boyut siteyi bozuyor) — her kare 1:1, aynı ölçü, hizalı. */
+function KareGrid({ items }: { items: { key: string | number; src: string; alt: string; href: string; caption?: string }[] }) {
   return (
-    <ul className="columns-2 gap-2.5 sm:gap-3 lg:columns-4">
+    <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
       {items.map((it) => (
-        <li key={it.key} className="mb-2.5 break-inside-avoid sm:mb-3">
+        <li key={it.key}>
           <a href={it.href} className="group block cursor-pointer">
-            <span className="block overflow-hidden bg-[#f3f3f3]">
-              {/* eslint-disable-next-line @next/next/no-img-element -- doğal oran için ölçüsüz img; Cloudinary boyutlar */}
-              <img
-                src={cld(it.src, 800)}
-                srcSet={`${cld(it.src, 480)} 480w, ${cld(it.src, 800)} 800w, ${cld(it.src, 1200)} 1200w`}
-                sizes="(max-width: 1024px) 50vw, 25vw"
-                alt={it.alt}
-                loading="lazy"
-                decoding="async"
-                className="block h-auto w-full transition-opacity duration-300 group-hover:opacity-85"
-              />
+            <span className="relative block aspect-square overflow-hidden bg-[#F1F0EE]">
+              <Image src={it.src} alt={it.alt} fill className="object-cover transition-opacity duration-300 group-hover:opacity-85" sizes="(max-width: 1024px) 50vw, 300px" />
             </span>
             {it.caption && <span className="mt-2 block text-[length:var(--text-meta)] text-[var(--muted)]">{it.caption}</span>}
           </a>
@@ -148,8 +130,9 @@ export default async function BireyselPage({ params }: P) {
 
   const title = (w: Work) => (tr ? w.titleTr : w.titleEn) ?? w.titleTr ?? ''
   const dims = (w: Work) => (tr ? w.dimensionsTr : w.dimensionsEn) ?? w.dimensionsTr
-  const hero = works.find((w) => w.slug === HERO.slug)
-  const byCat = (c: string) => works.filter((w) => w.category === c && w.images?.length)
+  const hero = works.find((w) => w.slug === SEREF_HERO.slug)
+  const kareler = (w: Work) => SEREF_STUDIO[w.slug] ?? []
+  const byCat = (c: string) => works.filter((w) => w.category === c && kareler(w).length)
   // Panolar ve heykel: her eser bir seri (yeniden eskiye). Replikalar tek seri: her eserin bir karesi.
   const gruplar = [
     { c: 'Mimari Duvar Panoları', items: byCat('Mimari Duvar Panoları').sort((x, y) => (y.year ?? 0) - (x.year ?? 0)) },
@@ -176,24 +159,24 @@ export default async function BireyselPage({ params }: P) {
         </div>
       </header>
 
-      {/* Hero: tam genişlik sakin eser fotoğrafı (üstüne yazı yok, karartma yok — eser olduğu gibi);
-          ad + unvan + ince çerçeveli CTA altındaki beyaz alanda (referansın sade dili). */}
-      <section aria-labelledby="ad">
-        <div className="relative h-[72svh] min-h-[380px] w-full overflow-hidden bg-[#eeeeee]">
-          <Image src={HERO.src} alt={`${HERO.title} (${HERO.year}) — ${name}`} fill priority className="object-cover" sizes="100vw" />
+      {/* Hero: stüdyo zemininde tek, sakin eser (heykel sağda); masaüstünde ad + unvan + ince CTA
+          görselin solundaki boş zeminde (referansın hero dili). Mobilde metin görselin altında. */}
+      <section aria-labelledby="ad" className="relative">
+        <div className="relative h-[62svh] min-h-[360px] w-full overflow-hidden bg-[#F1F0EE] md:h-[80svh] md:max-h-[860px]">
+          <Image src={SEREF_HERO.src} alt={`${SEREF_HERO.title} — ${name}`} fill priority className="object-cover object-[66%_50%]" sizes="100vw" />
         </div>
-        <div className={`${wrap} flex justify-end pt-3`}>
-          {hero && (
-            <a href={eserUrl(hero.category, hero.slug, locale)} className="text-[12px] text-[var(--faint)] hover:text-[var(--foreground)]">
-              {HERO.title}, {HERO.year} — {t.detay}
-            </a>
-          )}
+        <div className={`${wrap} pb-6 pt-14 text-center md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:pb-0 md:pt-0 md:text-left`}>
+          <div className="md:max-w-[46%]">
+            <h1 id="ad" className="text-5xl leading-[1.05] sm:text-7xl">{name}</h1>
+            <p className="mt-5 text-[length:var(--text-lead)] font-light tracking-[0.04em] text-[var(--muted)]">{t.role}</p>
+            <a href="#eserler" className="mt-10 inline-flex min-h-11 items-center border border-[var(--foreground)] px-7 text-[length:var(--text-meta)] uppercase tracking-[0.18em] text-[var(--foreground)] transition-colors hover:bg-[var(--foreground)] hover:text-white">{t.cta}</a>
+          </div>
         </div>
-        <div className={`${wrap} flex flex-col items-center pb-8 pt-16 text-center sm:pt-24`}>
-          <h1 id="ad" className="text-5xl leading-[1.05] sm:text-7xl">{name}</h1>
-          <p className="mt-5 text-[length:var(--text-lead)] font-light tracking-[0.04em] text-[var(--muted)]">{t.role}</p>
-          <a href="#eserler" className="mt-10 inline-flex min-h-11 items-center border border-[var(--foreground)] px-7 text-[length:var(--text-meta)] uppercase tracking-[0.18em] text-[var(--foreground)] transition-colors hover:bg-[var(--foreground)] hover:text-white">{t.cta}</a>
-        </div>
+        {hero && (
+          <a href={eserUrl(hero.category, hero.slug, locale)} className="absolute bottom-4 right-10 hidden text-[12px] text-[var(--muted)] hover:text-[var(--foreground)] md:block lg:right-16">
+            {SEREF_HERO.title}
+          </a>
+        )}
       </section>
 
       <main className={wrap}>
@@ -207,6 +190,7 @@ export default async function BireyselPage({ params }: P) {
                   {items.map((w) => {
                     const href = eserUrl(w.category, w.slug, locale)
                     const n = w.images.length
+                    const ks = kareler(w)
                     return (
                       <article key={w.id} aria-labelledby={`seri-${w.slug}`}>
                         <div className="mb-7 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
@@ -215,10 +199,10 @@ export default async function BireyselPage({ params }: P) {
                             <p className="mt-2 text-[length:var(--text-meta)] text-[var(--muted)]">{[w.year, dims(w)].filter(Boolean).join(' · ')}</p>
                           </div>
                           <a href={href} className="inline-flex min-h-11 items-center text-[length:var(--text-meta)] text-[var(--muted)] underline-offset-4 hover:text-[var(--foreground)] hover:underline">
-                            {n > SERI_FOTO ? t.more(n) : t.open} &rarr;
+                            {n > ks.length ? t.more(n) : t.open} &rarr;
                           </a>
                         </div>
-                        <Masonry items={w.images.slice(0, SERI_FOTO).map((im: { id?: number; url: string }, i: number) => ({ key: im.id ?? i, src: im.url, alt: `${title(w)}${w.year ? ` (${w.year})` : ''} — ${i + 1}`, href }))} />
+                        <KareGrid items={ks.map((id, i) => ({ key: id, src: studioUrl(id), alt: `${title(w)}${w.year ? ` (${w.year})` : ''} — ${i === 0 ? (tr ? 'eserin tamamı' : 'whole work') : (tr ? 'detay' : 'detail')}`, href }))} />
                       </article>
                     )
                   })}
@@ -229,7 +213,7 @@ export default async function BireyselPage({ params }: P) {
               <article aria-labelledby="seri-replikalar">
                 <h3 id="seri-replikalar" className={`${label} border-t border-[var(--rule)] pt-6`}>{t.cats['Antik Dönem Replikaları']}</h3>
                 <p className="mb-7 mt-12 max-w-[60ch] text-[length:var(--text-meta)] text-[var(--muted)]">{t.joint}</p>
-                <Masonry items={replikalar.map((w) => ({ key: w.id, src: w.images[0].url, alt: title(w), href: eserUrl(w.category, w.slug, locale), caption: title(w) }))} />
+                <KareGrid items={replikalar.map((w) => ({ key: w.id, src: studioUrl(kareler(w)[0]), alt: title(w), href: eserUrl(w.category, w.slug, locale), caption: title(w) }))} />
               </article>
             )}
           </div>
