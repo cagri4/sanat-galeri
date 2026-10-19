@@ -162,6 +162,6 @@
 - [x] Stüdyo-kalite AI araştırıldı (Replicate canlı fiyat 19 Eki: ic-light ~$0.065/run, real-esrgan $0.002/görsel, clarity-upscaler ~$0.018/run) — ücretli run yapılmadı
 - [x] Şeref sitesinde masonry kaldırıldı, tüm fotoğraflar eşit kare (1:1) grid (kod hazır, deploy edilmedi)
 - [x] Şeref hero'su seçildi: Anadolu Ekininde Güzeller (637) stüdyo zemininde, ad solda overlay
-- [~] Şeref foto seçimini onaylat — BEKLİYOR: rc — arsiv/seref-studio/SECIM-seref-studio.jpg (19 Eki)
-- [~] Ücretli AI (relight/upscale) denemesine karar ver — BEKLİYOR: rc — öneri: yapma; istenirse 3 karede ic-light ≈ $0.20 (19 Eki)
+- [~] Şeref foto seçimini onaylat — BEKLİYOR: Çağrı — arsiv/seref-studio/CONTACT-SHEET-51.jpg (19 Eki)
+- [x] Ücretli AI (relight/upscale) — **yapılmayacak**: rc kararı 19 Eki (relight gerçek sır/dokuyu değiştirir, upscale gereksiz)
 - [ ] Şeref foto düzeltmesini önizlemeye deploy et (noindex, alan adı yok)
