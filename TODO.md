@@ -156,4 +156,4 @@
 - [x] Şeref sitesinde hero kare (1:1): Parion Esintisi rölyef detayı (119 kare arasından)
 - [x] Ann Van Hoey referans sitesi incelendi (beyaz zemin, tek grotesk, tam genişlik hero, seri + yazısız masonry)
 - [x] Şeref sitesi galeri-minimalist dile çekildi (Bilginin Kaynağı tam genişlik hero, saf beyaz, eser başına seri, menü Eserler · Hakkında · İletişim)
-- [ ] Şeref redesign'ını preview'a deploy et, 200 + noindex doğrula, senaryoyu test et
+- [x] Şeref redesign'ı uart-seref.vercel.app'te (fa6bd36 READY, /tr /en 200, noindex, masaüstü + mobil kontrol)
