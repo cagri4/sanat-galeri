@@ -9,6 +9,8 @@ import LightboxViewer from '@/components/gallery/lightbox-viewer'
 import ContactForm from '@/components/gallery/contact-form'
 import Reveal from '@/components/motion/reveal'
 import RichText from '@/components/shared/rich-text'
+import Model3DViewer from '@/components/gallery/model-3d'
+import { MODELS_3D } from '@/lib/models-3d'
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>
@@ -121,6 +123,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
             {eser.collection === 'Anadolu Ekininde Güzeller' && (
               <p className="mt-3 text-[length:var(--text-meta)] text-[var(--muted)]">{t('exhibitionShot')}</p>
             )}
+            {MODELS_3D[slug] && <Model3DViewer model={MODELS_3D[slug]} title={title} poster={slides[0]?.src} isTr={isTr} />}
           </Reveal>
         )}
 
