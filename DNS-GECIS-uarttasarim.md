@@ -1,6 +1,6 @@
 # uarttasarim.com → Vercel (uart-galeri) geçişi · 19 Ekim 2026
 
-> Durum: **hazırlık**. Hiçbir DNS/NS/Vercel ayarı değişmedi. GoDaddy'ye girilmedi.
+> Durum: **CANLI (19 Eki 2026)**. NS → gabriella/wilson.ns.cloudflare.com; uart-galeri'de uarttasarim.com + www (308); vercel.app → 301; SSL Let's Encrypt.
 
 ## 1. Hangi site
 `uarttasarim.com` + `www` → **Uart Galeri** (Vercel projesi `uart-galeri`, prj_k9YoBnIUlgQsmLtP0j0QJpX4pkGs).

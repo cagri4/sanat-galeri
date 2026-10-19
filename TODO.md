@@ -133,11 +133,14 @@
 - [x] uarttasarim.com DNS envanteri çıkarıldı (DNS-GECIS-uarttasarim.md): A ikas, www ikas, GSC TXT; MX yok
 - [x] uarttasarim.com Cloudflare kurulum script'i hazırlandı (scripts/cf-uarttasarim.sh; Vercel değerleri yeniden doğrulandı)
 - [x] uarttasarim.com Cloudflare zone'u açıldı (Çağrı, pending; NS gabriella/wilson)
-- [~] uarttasarim.com: nameserver'ı Cloudflare'e çevir — BEKLİYOR: Çağrı — GoDaddy'de gabriella/wilson.ns.cloudflare.com; whois hâlâ GoDaddy NS gösteriyor (19 Eki)
+- [x] uarttasarim.com nameserver'ı Cloudflare'e çevrildi (Çağrı, 19 Eki)
 - [x] Anka V deploy'u yeniden doğrulandı: ed19199 origin/master'da, sayfa 200, model yükleniyor
 - [ ] Tekrar kullanilabilir domain-baglama yetenegi kur (~/bin): CF zone+kayit tasima + Vercel custom domain tek komut; GoDaddy NS icin API uygunlugunu test et, degilse manuel NS adimi belgele (hesapta uarttasarim.com + serefdoganceramics.com var; 2 yeni gelecek = toplam 4)
 - [x] uarttasarim.com CF kayıtları Vercel'e çevrildi (A 76.76.21.21, www CNAME cname.vercel-dns.com, DNS only); _domainconnect silindi; GSC TXT korundu
 - [x] uart-galeri'ye uarttasarim.com + www (308 → apex) eklendi, ikisi verified
 - [x] İki projede UART_GALERI_DOMAIN=uarttasarim.com, UART_INDEXABLE=true (yalnız production), NEXT_PUBLIC_*_URL ayarlandı; 8a9cc83 deploy, READY
-- [ ] uart-galeri.vercel.app → uarttasarim.com 301 (DNS + SSL hazır olunca; izleyici çalışıyor)
-- [ ] Canlıda doğrula: noindex yok, robots, sitemap 200, SSL
+- [x] uart-galeri.vercel.app → uarttasarim.com 301 açıldı (yol + sorgu korunuyor)
+- [x] uarttasarim.com canlıda doğrulandı: /tr 200, x-robots yok, sitemap 200, robots Allow + Sitemap, www 308 → apex, SSL Let's Encrypt (Oca 2027)
+- [x] Kurumsal yeniden noindex (UART_INDEXABLE=false, deploy 8a9cc83 READY)
+- [ ] uarttasarim.com için Search Console'da sitemap gönder, URL denetimi iste (SEO-GECIS-KONTROL §5)
+- [ ] Sayfalara canonical + metadataBase ekle (SEO-GECIS-KONTROL §7)
