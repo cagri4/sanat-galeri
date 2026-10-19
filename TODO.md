@@ -123,3 +123,7 @@
 - [~] Anka V'in gerçek yüksekliğini (kaide dahil/hariç) teyit et — BEKLİYOR: sanatçı — modelde genişlik 23 cm, künyede 30 cm (19 Eki)
 - [x] Anka V eser sayfasına 3B görünüm + AR eklendi (fotoğrafların altında)
 - [x] Preview deploy edildi (7c4d19e), prod değişmedi
+- [x] Replicate modeli seçildi: Hunyuan 3.1 iki kez servis hatası verdi → Rodin Gen-2 (0,40 $/çıktı, sayfadan)
+- [x] Videodan 4 net kare seçildi, arka plan yerelde temizlendi (ölçek fotoğrafı beyaz perde yüzünden ayrılamadı)
+- [x] Rodin GLB üretildi (scripts/replicate-3d.py, 4 $ sert sınır; gerçek fatura 0,40 $)
+- [ ] Fotogrametri ile AI modelini yan yana gösteren preview kıyas sayfası yap, deploy et (prod değil)
