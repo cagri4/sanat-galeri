@@ -153,3 +153,4 @@
 - [x] Şeref sitesinde portre yerine Akar’ın Deryası panosu (adıyla, eser sayfasına bağlı)
 - [x] Şeref sitesine taslak sanatçı beyanı (TR + EN) eklendi — yalnız bireysel sitede, DB'ye yazılmadı
 - [ ] Şeref sitesini yeniden deploy et (uart-seref.vercel.app, noindex)
+- [x] Şeref sitesinde hero kare (1:1): Parion Esintisi rölyef detayı (119 kare arasından)

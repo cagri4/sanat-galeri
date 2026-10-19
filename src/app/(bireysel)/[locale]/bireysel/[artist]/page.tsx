@@ -11,7 +11,7 @@ import ContactForm from '@/components/gallery/contact-form'
 /**
  * Şeref Doğan — bireysel CV/portfolyo sitesi (tek sayfa, TR/EN).
  * İçerik YALNIZ veritabanından: biyografi, sergiler, ödüller, eserler.
- * Portre henüz yok → kimlik görseli olarak sanatçının kendi panosu (Akar'ın Deryası, adıyla).
+ * Portre henüz yok → kimlik görseli olarak sanatçının kendi panosu (Parion Esintisi, kare, adıyla).
  * Beyan veritabanında yok → STATEMENT_TASLAK (rc talimatı 20 Eki: sanatçının gerçek işine dayalı,
  * genel metin; tarih/sergi/özel bilgi içermez). DB'ye yazılmadı: galeri sitesindeki sanatçı
  * sayfasına onaysız metin düşmesin. Sanatçı onaylayınca DB'ye taşınır.
@@ -41,8 +41,9 @@ const T = {
 }
 const CAT_ORDER = ['Mimari Duvar Panoları', 'Seramik Heykeller', 'Antik Dönem Replikaları']
 
-/** Kimlik görseli (gerçek portre gelene kadar): sanatçının panosu. */
-const KIMLIK = { slug: 'akarin-deryasi', title: 'Akar’ın Deryası', year: 2016 }
+/** Kimlik görseli (gerçek portre gelene kadar): sanatçının panosu, KARE (rc 20 Eki).
+ *  119 pano karesi arasından seçildi: merkezden yayılan rölyef kare kadraja kendiliğinden oturuyor. */
+const KIMLIK = { slug: 'parion-esintisi', title: 'Parion Esintisi', year: 2014, src: 'https://res.cloudinary.com/df0henatz/image/upload/c_fill,ar_1:1,g_center,w_1200/v1785068731/uarttasarim/mimari/parion-esintisi-10.jpg' }
 
 /** Taslak beyan — sanatçı onayı bekliyor (TODO). */
 const STATEMENT_TASLAK: Record<string, { tr: string; en: string }> = {
@@ -139,10 +140,10 @@ export default async function BireyselPage({ params }: P) {
           <p className={label}>{t.role}</p>
           <h1 className="mt-4 text-5xl leading-[1.05] text-[var(--foreground)] sm:text-7xl">{name}</h1>
         </div>
-        {kimlik?.images?.[0] && (
-          <figure className="w-full max-w-sm">
-            <a href={eserUrl(kimlik.category, kimlik.slug, locale)} className="relative block aspect-[4/5] overflow-hidden bg-[#ece7de]">
-              <Image src={kimlik.images[0].url} alt={`${KIMLIK.title} (${KIMLIK.year}) — ${name}`} fill priority className="object-cover" sizes="(max-width: 768px) 100vw, 384px" />
+        {kimlik && (
+          <figure className="w-full max-w-md">
+            <a href={eserUrl(kimlik.category, kimlik.slug, locale)} className="relative block aspect-square overflow-hidden bg-[#ece7de]">
+              <Image src={KIMLIK.src} alt={`${KIMLIK.title} (${KIMLIK.year}) — ${name}`} fill priority className="object-cover" sizes="(max-width: 768px) 100vw, 448px" />
             </a>
             <figcaption className="mt-2 text-[length:var(--text-meta)] text-[var(--muted)]">{KIMLIK.title}, {KIMLIK.year} — {t.detay}</figcaption>
           </figure>
