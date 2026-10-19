@@ -19,4 +19,7 @@ Tümü yerel ve ücretsiz, GPU yok (4 çekirdek CPU). Yapay zekâ kullanılmadı
 ölçmek ~29 cm yükseklik veriyor, ama çatal kameraya heykelden çok daha yakın (perspektif) — güvenilir değil.
 Sanatçıdan gerçek yükseklik (kaide dahil/hariç) teyidi istenmeli.
 
+**Karar (19 Eki 2026, Çağrı onayı):** künyedeki 30 × 55 cm geçerli. Model 55 cm yükseklikte kalır; 23 cm genişlik farkı
+videoda kaybolan ince kanat uçlarından (sayfa notu bunu söylüyor). Genişliğe göre ölçeklemek yüksekliği ~72 cm yapardı → yapılmadı.
+
 Bilinen kusurlar: ahşap kaidenin yan yüzleri az dokulu olduğu için ince/eksik çıktı; birkaç küçük delikte turuncu doku lekesi; video 480×856 olduğundan yüzey yumuşak.

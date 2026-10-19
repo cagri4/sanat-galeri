@@ -120,7 +120,7 @@
 - [x] Anka V videosu indirildi (35 sn, 480×856, WhatsApp sıkıştırmalı), ölçek fotoğrafı kontrol edildi
 - [x] Videodan yerel fotogrametriyle 3B model üretildi (COLMAP + OpenMVS, CPU; yapay zekâ yok)
 - [x] Model künyedeki 55 cm yüksekliğe ölçeklendi (çatal perspektif yüzünden güvenilmez çıktı)
-- [~] Anka V'in gerçek yüksekliğini (kaide dahil/hariç) teyit et — BEKLİYOR: sanatçı — modelde genişlik 23 cm, künyede 30 cm (19 Eki)
+- [x] Anka V ölçüsü kapandı — Çağrı onayladı (19 Eki): künye 30 × 55 cm geçerli; model 55 cm yükseklikte, kanat uçları videoda kaybolduğu için genişlik 23 cm (yeniden ölçek yok)
 - [x] Anka V eser sayfasına 3B görünüm + AR eklendi (fotoğrafların altında)
 - [x] Preview deploy edildi (7c4d19e), prod değişmedi
 - [x] Replicate modeli seçildi: Hunyuan 3.1 iki kez servis hatası verdi → Rodin Gen-2 (0,40 $/çıktı, sayfadan)
@@ -157,3 +157,10 @@
 - [x] Ann Van Hoey referans sitesi incelendi (beyaz zemin, tek grotesk, tam genişlik hero, seri + yazısız masonry)
 - [x] Şeref sitesi galeri-minimalist dile çekildi (Bilginin Kaynağı tam genişlik hero, saf beyaz, eser başına seri, menü Eserler · Hakkında · İletişim)
 - [x] Şeref redesign'ı uart-seref.vercel.app'te (fa6bd36 READY, /tr /en 200, noindex, masaüstü + mobil kontrol)
+- [ ] Şeref fotoğraflarını seç: seri başına eser-dolu, net kareler (boş/kötü foto yok)
+- [ ] Şeref panolarının arka planını temizle, tek tip nötr zemine oturt (ücretsiz yerel model)
+- [ ] Stüdyo-kalite AI seçeneklerini araştır (relight/restore/upscale), Replicate canlı fiyatla
+- [ ] Şeref sitesinde tüm fotoğrafları eşit kare (1:1) grid yap, masonry'yi kaldır
+- [ ] Şeref sitesi için sakin, güçlü hero seç (ad overlay)
+- [ ] Şeref foto seçimini deploy öncesi rc'ye göster
+- [ ] Şeref foto düzeltmesini önizlemeye deploy et (noindex, alan adı yok)
