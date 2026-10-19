@@ -165,3 +165,6 @@
 - [x] Şeref foto seçimi Çağrı tarafından onaylandı (CONTACT-SHEET-53, 19 Eki)
 - [x] Ücretli AI (relight/upscale) — **yapılmayacak**: rc kararı 19 Eki (relight gerçek sır/dokuyu değiştirir, upscale gereksiz)
 - [x] Şeref foto düzeltmesi uart-seref.vercel.app'te (2c698ab READY, /tr /en 200, noindex, 53 görsel yüklü, kırık yok)
+- [x] Anka V image-to-3D canlı fiyatları doğrulandı (19 Eki): TRELLIS ~$0.031, Hunyuan3D-2 ~$0.097, TripoSG ~$0.077 (yalnız şekil), resmi Tripo Replicate'te yok
+- [~] Anka V'i gerçek fotoğraftan image-to-3D ile yeniden üret — BEKLİYOR: rc — TRELLIS + Hunyuan3D-2, en kötü $0.71 onayı (19 Eki)
+- [ ] Anka V eser sayfasında GLB'yi değiştir (55 cm), deploy et, 200 + model yüklenmesini doğrula
