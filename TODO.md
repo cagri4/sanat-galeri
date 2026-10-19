@@ -144,6 +144,8 @@
 - [x] Kurumsal yeniden noindex (UART_INDEXABLE=false, deploy 8a9cc83 READY)
 - [ ] uarttasarim.com için Search Console'da sitemap gönder, URL denetimi iste (SEO-GECIS-KONTROL §5)
 - [x] uarttasarim.com canonical + hreflang + metadataBase canlıda (e1d0f02)
-- [ ] Şeref Doğan bireysel sitesi: mimari (UART_SITE=seref) + sayfalar (bio, beyan, sergiler, ödüller, seriler, iletişim)
-- [ ] Şeref sitesi: eser detayı yok / canonical galeriye
-- [ ] Şeref sitesi: yeni Vercel projesi, PREVIEW deploy (canlı değil)
+- [x] Şeref Doğan bireysel sitesi kuruldu (UART_SITE=seref; tek sayfa CV: biyografi, beyan, işler, 11 sergi, 3 ödül, iletişim)
+- [x] Şeref sitesinde eser detayı yok: eser kartları galeri/kurumsal sayfasına gider, diğer yollar galeriye 301
+- [x] Şeref sitesi Vercel projesi uart-seref açıldı, preview deploy (6e73b95), girişsiz erişim kapalı, noindex
+- [~] Şeref sitesine sanatçı beyanı ve portre fotoğrafı ekle — BEKLİYOR: Çağrı — iki içerik eksik, sitede işaretli yer tutucu duruyor (20 Eki)
+- [~] Şeref sitesini serefdoganceramics.com'da canlıya al — BEKLİYOR: Çağrı — içerik tamamlanınca onay; alan adı DNS + UART_SEREF_DOMAIN + UART_INDEXABLE + galeride /tr/seref 301 (20 Eki)
