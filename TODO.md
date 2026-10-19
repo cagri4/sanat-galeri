@@ -144,3 +144,7 @@
 - [x] Kurumsal yeniden noindex (UART_INDEXABLE=false, deploy 8a9cc83 READY)
 - [ ] uarttasarim.com için Search Console'da sitemap gönder, URL denetimi iste (SEO-GECIS-KONTROL §5)
 - [ ] Sayfalara canonical + metadataBase ekle (SEO-GECIS-KONTROL §7)
+- [ ] uarttasarim.com: canonical + metadataBase ekle, deploy et
+- [ ] Şeref Doğan bireysel sitesi: mimari (UART_SITE=seref) + sayfalar (bio, beyan, sergiler, ödüller, seriler, iletişim)
+- [ ] Şeref sitesi: eser detayı yok / canonical galeriye
+- [ ] Şeref sitesi: yeni Vercel projesi, PREVIEW deploy (canlı değil)

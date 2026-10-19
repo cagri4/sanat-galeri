@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Inter, EB_Garamond, Jost, IBM_Plex_Mono } from 'next/font/google'
-import { isIndexable } from '@/lib/seo'
+import { headers } from 'next/headers'
+import { isIndexable, alternatesFor, PATH_HEADER } from '@/lib/seo'
+import { defaultSite, siteDomains } from '@/lib/site'
 
 // İki site tipografisi — PLAN-TASARIM-2026-10-11.md §1 (ui-ux-pro-max, Çağrı onayı).
 //  - Galeri: başlık EB Garamond 500 (cmap tam + TRK locl), gövde Jost
@@ -43,12 +45,19 @@ export const viewport: Viewport = {
   userScalable: true,
 }
 
-export const metadata: Metadata = {
-  title: 'Uarttasarım',
-  description: 'Sanat galerisi',
-  // Geçici adreste indeksleme yok (lib/seo.ts). Alt segmentler `robots`
-  // tanımlamadığı için bu değer tüm sayfalara geçer.
-  ...(isIndexable() ? {} : { robots: { index: false, follow: false, googleBot: { index: false, follow: false } } }),
+export async function generateMetadata(): Promise<Metadata> {
+  // Kanonik alan adı: projenin kendi sitesi (UART_SITE) ve alan adı değişkeni.
+  const domain = siteDomains()[defaultSite() ?? 'galeri']
+  const alternates = domain ? alternatesFor((await headers()).get(PATH_HEADER)) : null
+  return {
+    title: 'Uarttasarım',
+    description: 'Sanat galerisi',
+    ...(domain ? { metadataBase: new URL(`https://${domain}`) } : {}),
+    ...(alternates ? { alternates } : {}),
+    // Geçici adreste indeksleme yok (lib/seo.ts). Alt segmentler `robots`
+    // tanımlamadığı için bu değer tüm sayfalara geçer.
+    ...(isIndexable() ? {} : { robots: { index: false, follow: false, googleBot: { index: false, follow: false } } }),
+  }
 }
 
 export default function RootLayout({

@@ -1,7 +1,8 @@
 import createIntlMiddleware from 'next-intl/middleware'
-import { NextResponse, type NextRequest } from 'next/server'
+import { NextResponse, NextRequest } from 'next/server'
 import { routing } from '@/lib/i18n/routing'
 import { decideRoute } from '@/lib/site-routing'
+import { PATH_HEADER } from '@/lib/seo'
 
 // Next 16: `middleware` → `proxy` (node runtime). Site/adres kararları
 // src/lib/site-routing.ts'te (saf fonksiyon, testli).
@@ -35,17 +36,22 @@ export default function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL(decision.location, request.url), 301)
   }
 
+  // Ziyaretçinin gördüğü yol (rewrite öncesi) — kök layout canonical/hreflang'i
+  // bundan kurar (SEO-GECIS-KONTROL §7–8). İstemciden gelen değere güvenilmez.
+  const headers = new Headers(request.headers)
+  headers.set(PATH_HEADER, pathname)
+
   if (decision.type === 'rewrite') {
     // next-intl locale'i istek başlığından okur (X-NEXT-INTL-LOCALE); rewrite
     // ederken bu başlığı biz koyuyoruz, yoksa EN sayfalar TR'ye düşer.
-    const headers = new Headers(request.headers)
     headers.set('X-NEXT-INTL-LOCALE', decision.locale)
     const url = request.nextUrl.clone()
     url.pathname = decision.pathname
     return NextResponse.rewrite(url, { request: { headers } })
   }
 
-  return intlMiddleware(request)
+  // next-intl, gelen isteğin başlıklarını rewrite/next ile sayfaya aktarır.
+  return intlMiddleware(new NextRequest(request, { headers }))
 }
 
 export const config = {
