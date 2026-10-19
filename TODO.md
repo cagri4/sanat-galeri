@@ -131,6 +131,7 @@
 - [x] Anka V fotogrametri 3B canlıda (ed19199); Rodin arşivde, canlıda 404
 - [x] uarttasarim.com → uart-galeri (plan); Deployment Protection özel alan adında kapalı (all_except_custom_domains)
 - [x] uarttasarim.com DNS envanteri çıkarıldı (DNS-GECIS-uarttasarim.md): A ikas, www ikas, GSC TXT; MX yok
-- [~] uarttasarim.com Cloudflare zone'unu ekle ve kayıtları taşı — BEKLİYOR: Çağrı — CF token'ında zone.create yetkisi yok; panelden zone açılsın ya da token yetkisi verilsin (19 Eki)
+- [x] uarttasarim.com Cloudflare kurulum script'i hazırlandı (scripts/cf-uarttasarim.sh; Vercel değerleri yeniden doğrulandı)
+- [~] uarttasarim.com Cloudflare zone'unu aç — BEKLİYOR: Çağrı — token'da zone.create yetkisi yok, Chrome'da CF oturumu yok; panelden zone açılınca script kayıtları kurar ve NS'leri verir (19 Eki)
 - [~] uarttasarim.com: nameserver'ı Cloudflare'e çevir — BEKLİYOR: Çağrı — rc onayı + GoDaddy'de NS değişimi (19 Eki)
 - [x] Anka V deploy'u yeniden doğrulandı: ed19199 origin/master'da, sayfa 200, model yükleniyor

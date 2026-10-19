@@ -44,3 +44,9 @@ SEO-GECIS-KONTROL §2–5: noindex kaldırma + sitemap + GSC aynı gün. **Çağ
 CF-api token'ında `zone.create` yetkisi yok ("Requires permission com.cloudflare.api.account.zone.create").
 Çözüm (Çağrı, biri): (a) Cloudflare panel → Add a domain → uarttasarim.com → Free plan → "manually add records" (kayıtları ben eklerim), ya da (b) token'a Account › Zone › Edit (zone oluşturma) yetkisi ver.
 Zone açılınca Cloudflare 2 nameserver atar; GoDaddy'de NS değişimi Çağrı'nın adımı.
+
+## 7. Güncelleme (19 Eki, rc talimatı)
+rc kararı: Aşama A (ikas kopyası) YOK — Cloudflare'e doğrudan Vercel kayıtları + GSC TXT kurulacak.
+Hazır script: `scripts/cf-uarttasarim.sh` (zone'u açmayı dener, 3 kaydı kurar, silmez, NS'leri yazdırır).
+Vercel değerleri 19 Eki'de API'den yeniden doğrulandı: A 76.76.21.21, CNAME cname.vercel-dns.com.
+Engel sürüyor: token'da zone.create yok; Chrome'da Cloudflare oturumu açık değil (giriş yapılmadı).
