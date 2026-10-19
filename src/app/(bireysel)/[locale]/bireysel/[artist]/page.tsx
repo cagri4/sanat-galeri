@@ -11,7 +11,10 @@ import ContactForm from '@/components/gallery/contact-form'
 /**
  * Şeref Doğan — bireysel CV/portfolyo sitesi (tek sayfa, TR/EN).
  * İçerik YALNIZ veritabanından: biyografi, sergiler, ödüller, eserler.
- * EKSİK olan (sanatçı beyanı, portre) UYDURULMAZ; açıkça "bekleniyor" diye işaretlenir.
+ * Portre henüz yok → kimlik görseli olarak sanatçının kendi panosu (Akar'ın Deryası, adıyla).
+ * Beyan veritabanında yok → STATEMENT_TASLAK (rc talimatı 20 Eki: sanatçının gerçek işine dayalı,
+ * genel metin; tarih/sergi/özel bilgi içermez). DB'ye yazılmadı: galeri sitesindeki sanatçı
+ * sayfasına onaysız metin düşmesin. Sanatçı onaylayınca DB'ye taşınır.
  * Eser detay sayfası burada YOK: kartlar eserin galeri/kurumsal sayfasına gider (kopya içerik yok).
  */
 type P = { params: Promise<{ locale: string; artist: string }> }
@@ -20,7 +23,7 @@ const T = {
   tr: {
     role: 'Seramik sanatçısı · Çanakkale', bio: 'Biyografi', statement: 'Sanatçı beyanı', works: 'İşler',
     exhibitions: 'Kişisel sergiler', awards: 'Ödüller', contact: 'İletişim',
-    statementPending: 'Sanatçı beyanı hazırlanıyor.', portraitPending: 'Portre fotoğrafı bekleniyor',
+    statementPending: 'Sanatçı beyanı hazırlanıyor.', detay: 'detay',
     joint: 'Ortak üretim: form Şeref Doğan, resimleme Melike Doğan.',
     contactLead: 'Sergi, proje ya da iş birliği için yazın; mesajınız Uarttasarım atölyesine ulaşır.',
     studio: 'Uarttasarım atölyesi', other: 'English',
@@ -29,7 +32,7 @@ const T = {
   en: {
     role: 'Ceramic artist · Çanakkale', bio: 'Biography', statement: 'Artist statement', works: 'Works',
     exhibitions: 'Solo exhibitions', awards: 'Awards', contact: 'Contact',
-    statementPending: 'The artist statement is in preparation.', portraitPending: 'Portrait photograph to follow',
+    statementPending: 'The artist statement is in preparation.', detay: 'detail',
     joint: 'Joint production: form by Şeref Doğan, painting by Melike Doğan.',
     contactLead: 'Write for exhibitions, projects or collaborations; your message reaches the Uarttasarım studio.',
     studio: 'Uarttasarım studio', other: 'Türkçe',
@@ -37,6 +40,25 @@ const T = {
   },
 }
 const CAT_ORDER = ['Mimari Duvar Panoları', 'Seramik Heykeller', 'Antik Dönem Replikaları']
+
+/** Kimlik görseli (gerçek portre gelene kadar): sanatçının panosu. */
+const KIMLIK = { slug: 'akarin-deryasi', title: 'Akar’ın Deryası', year: 2016 }
+
+/** Taslak beyan — sanatçı onayı bekliyor (TODO). */
+const STATEMENT_TASLAK: Record<string, { tr: string; en: string }> = {
+  seref: {
+    tr: `Seramikle çalışmak benim için toprağın belleğiyle konuşmak demek. Anadolu’nun binlerce yıllık birikimi, geçmiş uygarlıkların bıraktığı izler ve imgeler işlerimin çıkış noktası; ama amacım onları tekrar etmek değil, özlerine inip bugünün diliyle yeniden kurmak.
+
+Mimari seramik panolarda yüzeyi, bulunduğu mekânla birlikte düşünürüm: duvar, ışık ve önünden geçen insanlar işin bir parçasıdır. Antik dönem replikalarında tornada formu kurarken eski ustaların oranlarını ve sabrını yeniden öğrenirim. Heykellerde ise yalınlığın, arınmışlığın ve içten gelen hareketin peşindeyim.
+
+Her işte aynı soruya dönüyorum: Gereksiz olan çıkarıldığında geriye ne kalır? Bence geriye kalan, toprağın, ateşin ve elin birlikte bıraktığı izdir.`,
+    en: `For me, working with clay means talking with the memory of the earth. Anatolia’s thousands of years of heritage, and the traces and images left by past civilisations, are where my work begins; yet my aim is not to repeat them but to reach their essence and rebuild it in today’s language.
+
+In architectural ceramic panels I think of the surface together with the space it lives in: the wall, the light and the people passing by are part of the work. In the antique replicas, shaping the form on the wheel, I relearn the proportions and the patience of the old masters. In sculpture I look for simplicity, purity and a movement that comes from within.
+
+In every piece I return to the same question: what remains when everything unnecessary is taken away? I believe what remains is the trace left together by earth, fire and the hand.`,
+  },
+}
 
 async function load(slug: string) {
   const artist = await getArtistBySlug(slug).catch(() => null)
@@ -77,7 +99,9 @@ export default async function BireyselPage({ params }: P) {
   const { artist: a, works, exhibitions } = await load(artist)
   const name = (tr ? a?.nameTr : a?.nameEn) ?? 'Şeref Doğan'
   const bio: string | null = (tr ? (a?.bioTr ?? a?.bioEn) : (a?.bioEn ?? a?.bioTr)) ?? null
-  const statement: string | null = (tr ? (a?.statementTr ?? a?.statementEn) : (a?.statementEn ?? a?.statementTr)) ?? null
+  const statement: string | null =
+    (tr ? (a?.statementTr ?? a?.statementEn) : (a?.statementEn ?? a?.statementTr)) ??
+    (STATEMENT_TASLAK[artist] ? STATEMENT_TASLAK[artist][tr ? 'tr' : 'en'] : null)
   const sergiler = exhibitions.filter((e) => e.type !== 'odul')
   const oduller = exhibitions.filter((e) => e.type === 'odul')
 
@@ -90,6 +114,7 @@ export default async function BireyselPage({ params }: P) {
     return slug ? photos.find((f) => f.exhibitionSlug === slug) ?? null : null
   }
 
+  const kimlik = works.find((w) => w.slug === KIMLIK.slug)
   const gruplar = CAT_ORDER.map((c) => ({ c, items: works.filter((w) => w.category === c) })).filter((g) => g.items.length)
   const d = siteDomains()
   const nav = [['biyografi', t.bio], ['beyan', t.statement], ['isler', t.works], ['sergiler', t.exhibitions], ['oduller', t.awards], ['iletisim', t.contact]]
@@ -108,15 +133,20 @@ export default async function BireyselPage({ params }: P) {
         <a href={`/${tr ? 'en' : 'tr'}`} className="text-[length:var(--text-meta)] text-[var(--muted)] hover:text-[var(--foreground)]">{t.other}</a>
       </header>
 
-      {/* Kimlik: ad, unvan, portre (portre YOK → işaretli yer tutucu, uydurma görsel konmaz). */}
+      {/* Kimlik: ad, unvan ve sanatçının bir panosu (portre gelince değişir; eser adı alt yazıda). */}
       <section className="grid items-center gap-10 py-16 sm:py-24 md:grid-cols-[3fr_2fr]">
         <div>
           <p className={label}>{t.role}</p>
           <h1 className="mt-4 text-5xl leading-[1.05] text-[var(--foreground)] sm:text-7xl">{name}</h1>
         </div>
-        <div role="note" className={`flex aspect-[4/5] w-full max-w-sm items-center justify-center p-6 text-center text-[15px] ${pending}`}>
-          {t.portraitPending}
-        </div>
+        {kimlik?.images?.[0] && (
+          <figure className="w-full max-w-sm">
+            <a href={eserUrl(kimlik.category, kimlik.slug, locale)} className="relative block aspect-[4/5] overflow-hidden bg-[#ece7de]">
+              <Image src={kimlik.images[0].url} alt={`${KIMLIK.title} (${KIMLIK.year}) — ${name}`} fill priority className="object-cover" sizes="(max-width: 768px) 100vw, 384px" />
+            </a>
+            <figcaption className="mt-2 text-[length:var(--text-meta)] text-[var(--muted)]">{KIMLIK.title}, {KIMLIK.year} — {t.detay}</figcaption>
+          </figure>
+        )}
       </section>
 
       <section id="biyografi" className="scroll-mt-8 border-t border-[var(--rule)] py-14 md:grid md:grid-cols-[1fr_3fr] md:gap-12">
@@ -133,7 +163,11 @@ export default async function BireyselPage({ params }: P) {
       <section id="beyan" className="scroll-mt-8 border-t border-[var(--rule)] py-14 md:grid md:grid-cols-[1fr_3fr] md:gap-12">
         <h2 className={label}>{t.statement}</h2>
         {statement ? (
-          <blockquote className="mt-6 max-w-3xl border-l-2 border-[var(--accent)] pl-6 text-xl italic leading-relaxed text-[var(--foreground)] md:mt-0">{statement}</blockquote>
+          <div className="mt-6 max-w-3xl space-y-4 border-l-2 border-[var(--accent)] pl-6 md:mt-0">
+            {statement.split('\n\n').map((p, i) => (
+              <p key={i} className="text-xl italic leading-relaxed text-[var(--foreground)]">{p}</p>
+            ))}
+          </div>
         ) : (
           <p role="note" className={`mt-6 max-w-xl px-5 py-4 text-[15px] md:mt-0 ${pending}`}>{t.statementPending}</p>
         )}

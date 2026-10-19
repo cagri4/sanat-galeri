@@ -147,6 +147,9 @@
 - [x] Şeref Doğan bireysel sitesi kuruldu (UART_SITE=seref; tek sayfa CV: biyografi, beyan, işler, 11 sergi, 3 ödül, iletişim)
 - [x] Şeref sitesinde eser detayı yok: eser kartları galeri/kurumsal sayfasına gider, diğer yollar galeriye 301
 - [x] Şeref sitesi Vercel projesi uart-seref açıldı, preview deploy (6e73b95), girişsiz erişim kapalı, noindex
-- [~] Şeref sitesine sanatçı beyanı ve portre fotoğrafı ekle — BEKLİYOR: Çağrı — iki içerik eksik, sitede işaretli yer tutucu duruyor (20 Eki)
+- [~] Şeref'in taslak beyanını onaylat, gerçek portreyi al — BEKLİYOR: Çağrı — beyan Claude taslağı, portre yerine pano duruyor (20 Eki)
 - [~] Şeref sitesini serefdoganceramics.com'da canlıya al — BEKLİYOR: Çağrı — içerik tamamlanınca onay; alan adı DNS + UART_SEREF_DOMAIN + UART_INDEXABLE + galeride /tr/seref 301 (20 Eki)
 - [x] Şeref sitesi https://uart-seref.vercel.app adresinde (200, noindex, alan adı yok)
+- [x] Şeref sitesinde portre yerine Akar’ın Deryası panosu (adıyla, eser sayfasına bağlı)
+- [x] Şeref sitesine taslak sanatçı beyanı (TR + EN) eklendi — yalnız bireysel sitede, DB'ye yazılmadı
+- [ ] Şeref sitesini yeniden deploy et (uart-seref.vercel.app, noindex)
