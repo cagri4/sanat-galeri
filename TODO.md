@@ -129,3 +129,8 @@
 - [x] Kıyas sayfası preview'da (9a6ef3c, /tr/3b-kiyas), prod değişmedi
 - [~] Replicate bakiyesini panelden doğrula — BEKLİYOR: Çağrı — API 'kredi < 5 $' dedi; başarısız 2 Hunyuan denemesi faturalandı mı API'den görünmüyor (19 Eki)
 - [x] Anka V fotogrametri 3B canlıda (ed19199); Rodin arşivde, canlıda 404
+- [x] uarttasarim.com → uart-galeri (plan); Deployment Protection özel alan adında kapalı (all_except_custom_domains)
+- [x] uarttasarim.com DNS envanteri çıkarıldı (DNS-GECIS-uarttasarim.md): A ikas, www ikas, GSC TXT; MX yok
+- [~] uarttasarim.com Cloudflare zone'unu ekle ve kayıtları taşı — BEKLİYOR: Çağrı — CF token'ında zone.create yetkisi yok; panelden zone açılsın ya da token yetkisi verilsin (19 Eki)
+- [~] uarttasarim.com: nameserver'ı Cloudflare'e çevir — BEKLİYOR: Çağrı — rc onayı + GoDaddy'de NS değişimi (19 Eki)
+- [x] Anka V deploy'u yeniden doğrulandı: ed19199 origin/master'da, sayfa 200, model yükleniyor
