@@ -149,3 +149,4 @@
 - [x] Şeref sitesi Vercel projesi uart-seref açıldı, preview deploy (6e73b95), girişsiz erişim kapalı, noindex
 - [~] Şeref sitesine sanatçı beyanı ve portre fotoğrafı ekle — BEKLİYOR: Çağrı — iki içerik eksik, sitede işaretli yer tutucu duruyor (20 Eki)
 - [~] Şeref sitesini serefdoganceramics.com'da canlıya al — BEKLİYOR: Çağrı — içerik tamamlanınca onay; alan adı DNS + UART_SEREF_DOMAIN + UART_INDEXABLE + galeride /tr/seref 301 (20 Eki)
+- [x] Şeref sitesi https://uart-seref.vercel.app adresinde (200, noindex, alan adı yok)
