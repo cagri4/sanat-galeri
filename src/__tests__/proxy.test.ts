@@ -247,3 +247,33 @@ describe('13 Eki heykeller iki sayfa — eski tek sayfa 301', () => {
     expect(res.headers.get('location')).toBe('http://galeri.test/tr/koleksiyonlar')
   })
 })
+
+describe('bireysel sanatçı sitesi (UART_SITE=seref)', () => {
+  beforeEach(() => withDomains('uarttasarim.com', 'uart-kurumsal.vercel.app', 'seref'))
+
+  it('kök (/tr, /en) → CV sayfasına rewrite', () => {
+    expect(decideRoute('seref-preview.vercel.app', '/tr')).toEqual({ type: 'rewrite', pathname: '/tr/bireysel/seref', locale: 'tr' })
+    expect(decideRoute('seref-preview.vercel.app', '/en/')).toEqual({ type: 'rewrite', pathname: '/en/bireysel/seref', locale: 'en' })
+  })
+  it('eser detayı ve diğer yollar galeriye 301 (kopya içerik yok)', () => {
+    expect(decideRoute('x.vercel.app', '/tr/urun/yolculuk', '?a=1')).toEqual({ type: 'redirect', location: 'https://uarttasarim.com/tr/urun/yolculuk?a=1' })
+    expect(decideRoute('x.vercel.app', '/en/bireysel/seref')).toEqual({ type: 'redirect', location: 'https://uarttasarim.com/en/bireysel/seref' })
+  })
+  it('locale\'siz kök next-intl\'e bırakılır', () => {
+    expect(decideRoute('x.vercel.app', '/')).toEqual({ type: 'intl' })
+  })
+  it('kendi alan adı UART_SEREF_DOMAIN\'den', () => {
+    process.env.UART_SEREF_DOMAIN = 'https://www.serefdoganceramics.com/'
+    expect(site.ownDomain()).toBe('www.serefdoganceramics.com')
+    delete process.env.UART_SEREF_DOMAIN
+    expect(site.ownDomain()).toBeNull()
+  })
+})
+
+describe('galeride bireysel yol doğrudan açılmaz', () => {
+  beforeEach(() => withDomains('uarttasarim.com', 'uart-kurumsal.vercel.app', 'galeri'))
+  it('/tr/bireysel/seref → /tr/seref (301)', () => {
+    expect(decideRoute('uarttasarim.com', '/tr/bireysel/seref')).toEqual({ type: 'redirect', location: '/tr/seref' })
+    expect(site.ownDomain()).toBe('uarttasarim.com')
+  })
+})

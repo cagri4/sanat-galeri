@@ -4,10 +4,12 @@ import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 
 interface ContactFormProps {
-  productSlug: string
+  productSlug?: string
+  /** Mesajın başına eklenen kaynak etiketi; verilmezse "[Eser: <slug>]". */
+  source?: string
 }
 
-export default function ContactForm({ productSlug }: ContactFormProps) {
+export default function ContactForm({ productSlug, source }: ContactFormProps) {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const t = useTranslations('contact')
 
@@ -23,7 +25,7 @@ export default function ContactForm({ productSlug }: ContactFormProps) {
         body: JSON.stringify({
           name: form.get('senderName'),
           email: form.get('senderEmail'),
-          message: `[Eser: ${productSlug}] ${form.get('body')}`,
+          message: `${source ?? `[Eser: ${productSlug}]`} ${form.get('body')}`,
           website: form.get('website'),
         }),
       })

@@ -1,5 +1,5 @@
 import { routing } from '@/lib/i18n/routing'
-import { KURUMSAL_SEGMENT, LEGACY_ARTIST_HOSTS, siteDomains, siteForHost } from '@/lib/site'
+import { BIREYSEL_SEGMENT, KURUMSAL_SEGMENT, LEGACY_ARTIST_HOSTS, artistSite, siteDomains, siteForHost } from '@/lib/site'
 
 /**
  * Proxy'nin karar mantığı — saf fonksiyon (test edilebilsin diye proxy.ts'ten
@@ -44,6 +44,22 @@ export function decideRoute(host: string, pathname: string, search = ''): RouteD
       location: `https://${domains.galeri}/${loc}/${artist}${rest}${search}`,
     }
   }
+
+  // 1b. Bireysel sanatçı sitesi: kök = CV sayfası; diğer her yol galeriye (301) —
+  //     eser detayları ve koleksiyonlar galeride kalır, kopya içerik oluşmaz.
+  const bireysel = artistSite()
+  if (bireysel) {
+    if (!locale) return { type: 'intl' }
+    if (rest === '' || rest === '/') {
+      return { type: 'rewrite', pathname: `/${loc}/${BIREYSEL_SEGMENT}/${bireysel}`, locale: loc }
+    }
+    if (domains.galeri) return { type: 'redirect', location: `https://${domains.galeri}/${loc}${rest}${search}` }
+    return { type: 'redirect', location: `/${loc}` }
+  }
+
+  // 1c. Galeri/kurumsal sitede bireysel sayfa doğrudan açılmaz → sanatçının galeri sayfası.
+  const bireyselYol = locale ? rest.match(new RegExp(`^/${BIREYSEL_SEGMENT}/(seref|melike)(?=/|$)`)) : null
+  if (bireyselYol) return { type: 'redirect', location: `/${loc}/${bireyselYol[1]}` }
 
   const site = siteForHost(hostname)
 

@@ -116,3 +116,24 @@ export function galeriPath(host: string, locale: string, path = ''): string {
   }
   return `/${locale}${tail}`
 }
+
+/**
+ * Bireysel sanatçı siteleri (PLAN-BIREYSEL-SITELER, 20 Eki 2026). Her biri ayrı
+ * Vercel projesi: `UART_SITE=seref|melike`. Ayrım SANATÇIYA göre (artist_id);
+ * galeri/kurumsal ürüne göre ayrımı (CATEGORY_SITES) bundan etkilenmez.
+ * Eser detayı bireysel sitede YOK — eser bağlantıları galeri/kurumsal sayfasına gider.
+ */
+export type ArtistSite = 'seref' | 'melike'
+export const BIREYSEL_SEGMENT = 'bireysel'
+
+export function artistSite(): ArtistSite | null {
+  const v = process.env.UART_SITE?.trim().toLowerCase()
+  return v === 'seref' || v === 'melike' ? v : null
+}
+
+/** Bu deployment'ın kendi alan adı (kanonik, sitemap, robots için). */
+export function ownDomain(): string | null {
+  const a = artistSite()
+  if (a) return normalizeHost(process.env[`UART_${a.toUpperCase()}_DOMAIN`])
+  return siteDomains()[defaultSite() ?? 'galeri']
+}

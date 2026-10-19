@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getProducts } from '@/lib/queries/gallery'
 import { CATEGORIES } from '@/lib/categories'
-import { categoriesForSite, defaultSite, siteDomains } from '@/lib/site'
+import { artistSite, categoriesForSite, defaultSite, ownDomain, siteDomains } from '@/lib/site'
 import { sitemapEntries } from '@/lib/sitemap'
 
 /**
@@ -13,6 +13,16 @@ import { sitemapEntries } from '@/lib/sitemap'
 export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Bireysel site: tek sayfa (TR/EN). Eserler galerinin sitemap'inde.
+  if (artistSite()) {
+    const base = `https://${ownDomain() ?? 'localhost'}`
+    return (['tr', 'en'] as const).map((l) => ({
+      url: `${base}/${l}`,
+      changeFrequency: 'monthly' as const,
+      priority: l === 'tr' ? 1 : 0.8,
+      alternates: { languages: { tr: `${base}/tr`, en: `${base}/en` } },
+    }))
+  }
   const site = defaultSite() ?? 'galeri'
   const domain = siteDomains()[site]
   const base = domain ? `https://${domain}` : (process.env.NEXT_PUBLIC_MAIN_URL ?? 'https://uarttasarim.com')
