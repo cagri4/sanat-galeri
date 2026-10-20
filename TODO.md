@@ -166,9 +166,11 @@
 - [x] Ücretli AI (relight/upscale) — **yapılmayacak**: rc kararı 19 Eki (relight gerçek sır/dokuyu değiştirir, upscale gereksiz)
 - [x] Şeref foto düzeltmesi uart-seref.vercel.app'te (2c698ab READY, /tr /en 200, noindex, 53 görsel yüklü, kırık yok)
 - [x] Anka V image-to-3D canlı fiyatları doğrulandı (19 Eki): TRELLIS ~$0.031, Hunyuan3D-2 ~$0.097, TripoSG ~$0.077 (yalnız şekil), resmi Tripo Replicate'te yok
-- [~] Anka V'i gerçek fotoğraftan image-to-3D ile yeniden üret — BEKLİYOR: rc — TRELLIS + Hunyuan3D-2, en kötü $0.71 onayı (19 Eki)
+- [x] Anka V TRELLIS + Hunyuan3D-2 çalıştırıldı (gerçek $0.062): ikisi de kusurlu — TRELLIS sol kanat perde artığı, Hunyuan renksiz/baş bozuk
+- [~] Anka V modelini seç — BEKLİYOR: Çağrı — arsiv/anka-3d-kaynak/KARSILASTIRMA-trellis-hunyuan.jpg; öneri: ikisi de yayına uygun değil, kontrast fonlu yeni foto (20 Eki)
 - [ ] Anka V eser sayfasında GLB'yi değiştir (55 cm), deploy et, 200 + model yüklenmesini doğrula
 - [x] Şeref relight testi yapıldı (3 kare, gerçek $0.025): IC-Light sır rengini ve deseni değiştiriyor (ΔE 27–39) — arsiv/seref-studio/RELIGHT-TEST-oncesi-sonrasi.jpg
 - [~] Relight'ın tüm karelere uygulanıp uygulanmayacağına karar ver — BEKLİYOR: Çağrı — öneri: uygulama (20 Eki)
 - [x] Şeref renk-koruyan netlik kıyası yapıldı (5 model × 3 kare, gerçek $0.131): renk hepsinde korunuyor (renk-ΔE 1.2–1.9), öneri GFPGAN — arsiv/seref-studio/NETLIK-KIYAS-oncesi-sonrasi.jpg
 - [~] Netlik iyileştirmesini tüm karelere uygulayıp uygulamamaya karar ver — BEKLİYOR: Çağrı — öneri GFPGAN v1.4 ×2, 52 kare ≈ $0.08 (20 Eki)
+- [x] Şeref 3 panonun tam karesine GFPGAN uygulandı (gerçek $0.023, pano ΔE 2.1–3.3, zemin açılıyor) — arsiv/seref-studio/GFPGAN-TAM-KARE-oncesi-sonrasi.jpg
