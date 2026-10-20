@@ -179,5 +179,5 @@
 - [x] Ana site: studio_url kolonu (0008) eklendi; kod onu yalnız UART_STUDIO_FOTO=1 iken kullanır, bayrak galeri + kurumsal'da yalnız Preview'da
 - [x] Ana site önizleme: galeri + kurumsal preview (743d29e, Preview hedefi), /tr /en 200 noindex, 455 görsel 200, kırık yok — arsiv/ana-studio/ONCE-SONRA-ornek.jpg
 - [x] Ana site kötü kaynak listesi yazıldı: 11 eserde 25 odalı görsel (orijinal kalır), 34 düşük çözünürlük — arsiv/ana-studio/KOTU-KAYNAK-LISTESI.md
-- [~] Ana site stüdyo karelerini production'a al — BEKLİYOR: Çağrı — onaylanırsa UART_STUDIO_FOTO=1 Production'a + redeploy (20 Eki)
+- [x] Ana site stüdyo kareleri canlıda (20 Eki, 1986643): uarttasarim.com + uart-kurumsal, /tr /en 200, eser sayfalarında stüdyo görseli 200, kırık yok — geri alma arsiv/ana-studio/GERI-ALMA.md
 - [x] Şeref sitesinde eser kareleri artık aynı sayfada büyük görünümde açılıyor; galeri/kurumsal sitesine link yok (rc 20 Eki bug)
