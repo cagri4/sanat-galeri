@@ -87,6 +87,8 @@ export const productImages = pgTable('product_images', {
   sortOrder: integer('sort_order').default(0),
   // 0007: gizlenen (silinmeyen) fotoğraf — sitede gösterilmez.
   isVisible: boolean('is_visible').default(true).notNull(),
+  // 0008: temiz zeminli 1:1 stüdyo karesi; yalnız UART_STUDIO_FOTO=1 iken gösterilir (url değişmez).
+  studioUrl: text('studio_url'),
 })
 
 export const portfolioItems = pgTable('portfolio_items', {

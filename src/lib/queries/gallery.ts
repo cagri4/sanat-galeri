@@ -9,6 +9,14 @@ import { isOnSite, type SiteKey } from '@/lib/site'
  * Sitede gösterilecek görseller: gizlenenler (is_visible=false, 0007) dışarıda,
  * sanatçının sırası (sort_order, eşitlikte id). Kolon yoksa (eski DB) hepsi görünür.
  */
+/**
+ * Stüdyo kareleri (ANA-SITE-FOTO-BRIEF, 20 Eki): scripts/ana-site-studio.py'nin ürettiği temiz zeminli
+ * 1:1 kare `studio_url` kolonunda; orijinal `url` hiç değişmez. Yalnız UART_STUDIO_FOTO=1 iken kullanılır —
+ * Vercel'de bu bayrak önce yalnız Preview'da açık, Çağrı onaylayınca Production'a eklenir (paylaşılan DB'ye
+ * yazmak canlıyı değiştirmesin diye). Geri dönüş: bayrağı kaldırıp yeniden deploy.
+ */
+const STUDIO_FOTO = process.env.UART_STUDIO_FOTO === '1'
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function publicImages(images: any[] | null | undefined) {
   return (images ?? [])
@@ -16,6 +24,7 @@ function publicImages(images: any[] | null | undefined) {
     .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0) || a.id - b.id)
     .map((img) => ({
       ...img,
+      url: STUDIO_FOTO && img.studio_url ? img.studio_url : img.url,
       altTr: img.alt_tr,
       altEn: img.alt_en,
       sortOrder: img.sort_order,
