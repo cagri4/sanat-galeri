@@ -175,7 +175,7 @@
 - [~] Netlik iyileştirmesini tüm karelere uygulayıp uygulamamaya karar ver — BEKLİYOR: Çağrı — öneri GFPGAN v1.4 ×2, 52 kare ≈ $0.08 (20 Eki)
 - [x] Şeref 3 panonun tam karesine GFPGAN uygulandı (gerçek $0.023, pano ΔE 2.1–3.3, zemin açılıyor) — arsiv/seref-studio/GFPGAN-TAM-KARE-oncesi-sonrasi.jpg
 - [x] Ana site: product_images yedeklendi (494 satır → scripts/sql/yedek/product_images-2026-10-20-studio-oncesi.json); orijinal url'lere hiç yazılmıyor
-- [ ] Ana site: tüm eser fotoğraflarına yerel arka plan temizliği + eşit kare (ücretsiz, IS-Net), DB'ye studio_url olarak yaz (url'ye dokunma)
+- [x] Ana site: 480 fotoğraf yerelde işlendi (IS-Net, ücretsiz); 86 bozuk kesme kare kırpmaya alındı, 25 odalı kare hariç; 455 studio_url DB'de (url değişmedi, canlı etkilenmedi)
 - [x] Ana site: studio_url kolonu (0008) eklendi; kod onu yalnız UART_STUDIO_FOTO=1 iken kullanır, bayrak galeri + kurumsal'da yalnız Preview'da
 - [ ] Ana site: galeri + kurumsal önizleme deploy, /tr /en 200 + görsel yüklenmesini doğrula, örnek önce/sonra sheet
 - [ ] Ana site: kaynağı kötü kalan eserleri ayrı listele

@@ -26,6 +26,14 @@ N, BG = 1600, (241, 240, 238)
 RAPOR = OUT / 'rapor.json'
 rapor = json.loads(RAPOR.read_text()) if RAPOR.exists() else {}
 
+# 20 Eki görsel inceleme (4 contact-sheet): maske eserin yalnız bir parçasını tuttu (detayda kopuk parçalar) ya da
+# duvardaki panonun zeminini silip yalnız renkli öğeleri bıraktı → kesme eseri yanlış gösterir. Bunlar maskesiz,
+# orijinalden kare kırpılır (detayda doğru sonuç; odalı pano karesinde oda kalır → ayrı "kötü kaynak" listesi).
+ELLE_KIRP = set('''490 604 609 610 619 200 202 621 622 623 624 625 169 173 174 248 249 250 251 183 184 185 186 187
+194 196 197 230 231 233 235 236 238 239 240 242 243 632 213 219 222 372 376 393 308 309 310 318 319 320 327 328
+294 295 331 336 346 475 476 448 450 452 263 264 266 267 348 353 355 356 361 365 430 434 438 439 271 272 282 283
+284 412 418 422 409 537'''.split())
+
 _sess = None
 def maske(im: Image.Image) -> np.ndarray:
     """IS-Net maskesi 1024 px'te hesaplanır (model zaten 1024 çalışır), tam boyuta büyütülür."""
@@ -70,6 +78,9 @@ def isle(i: str):
     if SEREF and (SEREF / f'{i}.jpg').exists():
         Image.open(SEREF / f'{i}.jpg').save(OUT / f'{i}.jpg', quality=90)
         return {'mod': 'seref', 'bayrak': bayrak, 'boyut': [W, H]}
+    if i in ELLE_KIRP:
+        kare_kirp(im).save(OUT / f'{i}.jpg', 'JPEG', quality=90, optimize=True)
+        return {'mod': 'elle-kirp', 'bayrak': bayrak, 'boyut': [W, H]}
     m = maske(im)
     b = m > 128
     f = float(b.mean())
