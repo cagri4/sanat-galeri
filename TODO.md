@@ -168,3 +168,5 @@
 - [x] Anka V image-to-3D canlı fiyatları doğrulandı (19 Eki): TRELLIS ~$0.031, Hunyuan3D-2 ~$0.097, TripoSG ~$0.077 (yalnız şekil), resmi Tripo Replicate'te yok
 - [~] Anka V'i gerçek fotoğraftan image-to-3D ile yeniden üret — BEKLİYOR: rc — TRELLIS + Hunyuan3D-2, en kötü $0.71 onayı (19 Eki)
 - [ ] Anka V eser sayfasında GLB'yi değiştir (55 cm), deploy et, 200 + model yüklenmesini doğrula
+- [x] Şeref relight testi yapıldı (3 kare, gerçek $0.025): IC-Light sır rengini ve deseni değiştiriyor (ΔE 27–39) — arsiv/seref-studio/RELIGHT-TEST-oncesi-sonrasi.jpg
+- [~] Relight'ın tüm karelere uygulanıp uygulanmayacağına karar ver — BEKLİYOR: Çağrı — öneri: uygulama (20 Eki)
