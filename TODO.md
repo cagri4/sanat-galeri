@@ -167,8 +167,8 @@
 - [x] Şeref foto düzeltmesi uart-seref.vercel.app'te (2c698ab READY, /tr /en 200, noindex, 53 görsel yüklü, kırık yok)
 - [x] Anka V image-to-3D canlı fiyatları doğrulandı (19 Eki): TRELLIS ~$0.031, Hunyuan3D-2 ~$0.097, TripoSG ~$0.077 (yalnız şekil), resmi Tripo Replicate'te yok
 - [x] Anka V TRELLIS + Hunyuan3D-2 çalıştırıldı (gerçek $0.062): ikisi de kusurlu — TRELLIS sol kanat perde artığı, Hunyuan renksiz/baş bozuk
-- [~] Anka V modelini seç — BEKLİYOR: Çağrı — arsiv/anka-3d-kaynak/KARSILASTIRMA-trellis-hunyuan.jpg; öneri: ikisi de yayına uygun değil, kontrast fonlu yeni foto (20 Eki)
-- [ ] Anka V eser sayfasında GLB'yi değiştir (55 cm), deploy et, 200 + model yüklenmesini doğrula
+- [x] Anka V image-to-3D yeniden üretimi — **yapılmayacak**: tek fotodan temiz çıkmadı (TRELLIS arka plan karışık, Hunyuan dokusuz); Çağrı kararı 20 Eki, canlıdaki fotogrametri modeli kalıyor, GLB'ler arsiv/anka-3d-kaynak/cikti/'da
+- [ ] Anka V'in tur videosunu çektir, düzgün fotogrametriyle 3B modeli yeniden üret (FAZ-B-CEKIM-TALIMATI.md)
 - [x] Şeref relight testi yapıldı (3 kare, gerçek $0.025): IC-Light sır rengini ve deseni değiştiriyor (ΔE 27–39) — arsiv/seref-studio/RELIGHT-TEST-oncesi-sonrasi.jpg
 - [~] Relight'ın tüm karelere uygulanıp uygulanmayacağına karar ver — BEKLİYOR: Çağrı — öneri: uygulama (20 Eki)
 - [x] Şeref renk-koruyan netlik kıyası yapıldı (5 model × 3 kare, gerçek $0.131): renk hepsinde korunuyor (renk-ΔE 1.2–1.9), öneri GFPGAN — arsiv/seref-studio/NETLIK-KIYAS-oncesi-sonrasi.jpg
