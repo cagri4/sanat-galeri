@@ -180,3 +180,4 @@
 - [x] Ana site önizleme: galeri + kurumsal preview (743d29e, Preview hedefi), /tr /en 200 noindex, 455 görsel 200, kırık yok — arsiv/ana-studio/ONCE-SONRA-ornek.jpg
 - [x] Ana site kötü kaynak listesi yazıldı: 11 eserde 25 odalı görsel (orijinal kalır), 34 düşük çözünürlük — arsiv/ana-studio/KOTU-KAYNAK-LISTESI.md
 - [~] Ana site stüdyo karelerini production'a al — BEKLİYOR: Çağrı — onaylanırsa UART_STUDIO_FOTO=1 Production'a + redeploy (20 Eki)
+- [x] Şeref sitesinde eser kareleri artık aynı sayfada büyük görünümde açılıyor; galeri/kurumsal sitesine link yok (rc 20 Eki bug)

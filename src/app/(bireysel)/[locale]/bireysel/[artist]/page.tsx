@@ -3,9 +3,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getArtistBySlug, getArtistExhibitions } from '@/lib/queries/artist'
 import { getProductsByArtist } from '@/lib/queries/gallery'
-import { isOnSite, siteDomains } from '@/lib/site'
+import { siteDomains } from '@/lib/site'
 import ContactForm from '@/components/gallery/contact-form'
 import { SEREF_HERO, SEREF_STUDIO, studioUrl } from '@/lib/seref-studio'
+import SeriGaleri from '@/components/bireysel/seri-galeri'
 
 /**
  * Şeref Doğan — bireysel portfolyo sitesi (tek sayfa, TR/EN). Dil: galeri minimalizmi
@@ -19,7 +20,8 @@ import { SEREF_HERO, SEREF_STUDIO, studioUrl } from '@/lib/seref-studio'
  * Beyan veritabanında yok → STATEMENT_TASLAK (rc talimatı 20 Eki: sanatçının gerçek işine dayalı,
  * genel metin; tarih/sergi/özel bilgi içermez). DB'ye yazılmadı: galeri sitesindeki sanatçı
  * sayfasına onaysız metin düşmesin. Sanatçı onaylayınca DB'ye taşınır.
- * Eser detay sayfası burada YOK: kartlar eserin galeri/kurumsal sayfasına gider (kopya içerik yok).
+ * Eser detay rotası burada YOK (kopya içerik): eser kareleri AYNI SAYFADA büyük görünümde açılır (SeriGaleri);
+ * ziyaretçi sitenin dışına (galeri/kurumsal) gönderilmez — rc 20 Eki bug düzeltmesi.
  */
 type P = { params: Promise<{ locale: string; artist: string }> }
 
@@ -28,7 +30,7 @@ const T = {
     role: 'Seramik sanatçısı · Çanakkale', bio: 'Biyografi', statement: 'Sanatçı beyanı', works: 'Eserler',
     about: 'Hakkında', exhibitions: 'Kişisel sergiler', awards: 'Ödüller', contact: 'İletişim',
     statementPending: 'Sanatçı beyanı hazırlanıyor.', detay: 'detay', cta: 'Eserleri gör',
-    more: (n: number) => `Eser sayfası · ${n} fotoğraf`, open: 'Eser sayfası',
+    open: 'Büyük görüntüle',
     joint: 'Ortak üretim: form Şeref Doğan, resimleme Melike Doğan.',
     contactLead: 'Sergi, proje ya da iş birliği için yazın; mesajınız Uarttasarım atölyesine ulaşır.',
     studio: 'Uarttasarım atölyesi', other: 'English',
@@ -38,7 +40,7 @@ const T = {
     role: 'Ceramic artist · Çanakkale', bio: 'Biography', statement: 'Artist statement', works: 'Work',
     about: 'About', exhibitions: 'Solo exhibitions', awards: 'Awards', contact: 'Contact',
     statementPending: 'The artist statement is in preparation.', detay: 'detail', cta: 'View the work',
-    more: (n: number) => `Work page · ${n} photos`, open: 'Work page',
+    open: 'View larger',
     joint: 'Joint production: form by Şeref Doğan, painting by Melike Doğan.',
     contactLead: 'Write for exhibitions, projects or collaborations; your message reaches the Uarttasarım studio.',
     studio: 'Uarttasarım studio', other: 'Türkçe',
@@ -84,36 +86,11 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
   }
 }
 
-/** Eserin tek indekslenen sayfası: galeri ya da kurumsal (bireysel sitede detay yok). */
-function eserUrl(category: string, slug: string, locale: string) {
-  const d = siteDomains()
-  if (isOnSite(category, 'galeri')) return d.galeri ? `https://${d.galeri}/${locale}/urun/${slug}` : `/${locale}/urun/${slug}`
-  return d.kurumsal ? `https://${d.kurumsal}/${locale}/projeler/${slug}` : `/${locale}/kurumsal/projeler/${slug}`
-}
-
 const label = 'text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]'
 const pending = 'border border-dashed border-[#b45309] bg-[#fef3c7] text-[#422006]'
 const wrap = 'mx-auto w-full max-w-[1280px] px-5 sm:px-10 lg:px-16'
 
 type Work = Awaited<ReturnType<typeof getProductsByArtist>>[number]
-
-/** Eşit kare grid (Çağrı: değişken boyut siteyi bozuyor) — her kare 1:1, aynı ölçü, hizalı. */
-function KareGrid({ items }: { items: { key: string | number; src: string; alt: string; href: string; caption?: string }[] }) {
-  return (
-    <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-      {items.map((it) => (
-        <li key={it.key}>
-          <a href={it.href} className="group block cursor-pointer">
-            <span className="relative block aspect-square overflow-hidden bg-[#F1F0EE]">
-              <Image src={it.src} alt={it.alt} fill className="object-cover transition-opacity duration-300 group-hover:opacity-85" sizes="(max-width: 1024px) 50vw, 300px" />
-            </span>
-            {it.caption && <span className="mt-2 block text-[length:var(--text-meta)] text-[var(--muted)]">{it.caption}</span>}
-          </a>
-        </li>
-      ))}
-    </ul>
-  )
-}
 
 export default async function BireyselPage({ params }: P) {
   const { locale, artist } = await params
@@ -173,9 +150,7 @@ export default async function BireyselPage({ params }: P) {
           </div>
         </div>
         {hero && (
-          <a href={eserUrl(hero.category, hero.slug, locale)} className="absolute bottom-4 right-10 hidden text-[12px] text-[var(--muted)] hover:text-[var(--foreground)] md:block lg:right-16">
-            {SEREF_HERO.title}
-          </a>
+          <p className="absolute bottom-4 right-10 hidden text-[12px] text-[var(--muted)] md:block lg:right-16">{SEREF_HERO.title}</p>
         )}
       </section>
 
@@ -188,21 +163,21 @@ export default async function BireyselPage({ params }: P) {
                 <h3 className={`${label} border-t border-[var(--rule)] pt-6`}>{t.cats[c] ?? c}</h3>
                 <div className="mt-12 space-y-20 sm:space-y-28">
                   {items.map((w) => {
-                    const href = eserUrl(w.category, w.slug, locale)
-                    const n = w.images.length
-                    const ks = kareler(w)
+                    const kunye = [w.year, dims(w)].filter(Boolean).join(' · ')
                     return (
                       <article key={w.id} aria-labelledby={`seri-${w.slug}`}>
-                        <div className="mb-7 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
-                          <div>
+                        <SeriGaleri
+                          acmaEtiketi={t.open}
+                          header={<>
                             <h4 id={`seri-${w.slug}`} className="text-2xl font-light sm:text-3xl">{title(w)}</h4>
-                            <p className="mt-2 text-[length:var(--text-meta)] text-[var(--muted)]">{[w.year, dims(w)].filter(Boolean).join(' · ')}</p>
-                          </div>
-                          <a href={href} className="inline-flex min-h-11 items-center text-[length:var(--text-meta)] text-[var(--muted)] underline-offset-4 hover:text-[var(--foreground)] hover:underline">
-                            {n > ks.length ? t.more(n) : t.open} &rarr;
-                          </a>
-                        </div>
-                        <KareGrid items={ks.map((id, i) => ({ key: id, src: studioUrl(id), alt: `${title(w)}${w.year ? ` (${w.year})` : ''} — ${i === 0 ? (tr ? 'eserin tamamı' : 'whole work') : (tr ? 'detay' : 'detail')}`, href }))} />
+                            <p className="mt-2 text-[length:var(--text-meta)] text-[var(--muted)]">{kunye}</p>
+                          </>}
+                          items={kareler(w).map((id, i) => ({
+                            src: studioUrl(id), full: studioUrl(id, 1600),
+                            alt: `${title(w)}${w.year ? ` (${w.year})` : ''} — ${i === 0 ? (tr ? 'eserin tamamı' : 'whole work') : (tr ? 'detay' : 'detail')}`,
+                            title: title(w), description: kunye,
+                          }))}
+                        />
                       </article>
                     )
                   })}
@@ -213,7 +188,7 @@ export default async function BireyselPage({ params }: P) {
               <article aria-labelledby="seri-replikalar">
                 <h3 id="seri-replikalar" className={`${label} border-t border-[var(--rule)] pt-6`}>{t.cats['Antik Dönem Replikaları']}</h3>
                 <p className="mb-7 mt-12 max-w-[60ch] text-[length:var(--text-meta)] text-[var(--muted)]">{t.joint}</p>
-                <KareGrid items={replikalar.map((w) => ({ key: w.id, src: studioUrl(kareler(w)[0]), alt: title(w), href: eserUrl(w.category, w.slug, locale), caption: title(w) }))} />
+                <SeriGaleri items={replikalar.map((w) => ({ src: studioUrl(kareler(w)[0]), full: studioUrl(kareler(w)[0], 1600), alt: title(w), caption: title(w), title: title(w), description: t.joint }))} />
               </article>
             )}
           </div>
