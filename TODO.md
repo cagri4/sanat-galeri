@@ -14,7 +14,7 @@
 - [x] iki-site dalı master'a birleştirildi ve push edildi
 - [x] Animasyon profili iki siteye uygulandı (galeri 296, kurumsal 424 geçişli öge)
 - [~] Yolculuk afişlerindeki Melike ortak sergilerini kaydet — BEKLİYOR: Çağrı — afiş "Şeref & Melike", CV "kişisel" diyor (12 Eki)
-- [~] Gerçek alan adına geç — BEKLİYOR: Çağrı — alan adı kararı ve DNS onayı; geçişte SEO-GECIS-KONTROL.md (12 Eki)
+- [x] Gerçek alan adına geçildi — uarttasarim.com canlı (21 Eki kontrol: /tr 200, server Vercel; DNS-GECIS-uarttasarim.md CANLI 19 Eki)
 - [~] Eski sanat-galeri.vercel.app demosunun akıbetini belirle — BEKLİYOR: Çağrı — kapatılsın mı yönlensin mi (12 Eki)
 - [x] Sanatçı düzeltme listesi okundu ve maddelere ayrıldı
 - [x] hanna-miadzvedzeva.com fon renkleri ve tipografisi ölçüldü
@@ -111,7 +111,7 @@
 - [x] Bireysel siteler planı yazıldı (PLAN-BIREYSEL-SITELER.md)
 - [~] Bireysel siteleri kur — BEKLİYOR: Çağrı — referans siteler, alan adı kararları, içerik eksikleri (16 Eki)
 - [x] 3B/AR pilotu için eser seçildi: Çan Krater (drive-fotolar'da heykel yok; krater gerçek 3B obje)
-- [~] TRELLIS ile yapay zekâ GLB'si üret — BEKLİYOR: Çağrı — hesapsız Hugging Face GPU kotası doldu (TRELLIS.2, TRELLIS, Stable Fast 3D); ücretsiz HF hesabı token'ı (kart yok) ya da 24 saat sonra yeniden deneme (18 Eki)
+- [x] TRELLIS ile yapay zekâ GLB'si — **yapılmayacak**: TRELLIS 20 Eki'de Replicate'te çalıştırıldı, Çağrı image-to-3D işini kapattı (yukarıdaki Anka V maddesi), HF yoluna gerek kalmadı
 - [x] Ara çözüm: fotoğraf siluetinden yapay zekâsız torna modeli (GLB) üretildi, sayfada "yaklaşık demo" olarak etiketlendi
 - [x] model-viewer pilot sayfası yapıldı (/tr/3b-pilot: döndür, zoom, AR düğmesi, etiket)
 - [x] Vercel preview deploy edildi (6541b3b), link ve mobil AR adımları raporlandı
@@ -170,7 +170,7 @@
 - [x] Anka V image-to-3D yeniden üretimi — **yapılmayacak**: tek fotodan temiz çıkmadı (TRELLIS arka plan karışık, Hunyuan dokusuz); Çağrı kararı 20 Eki, canlıdaki fotogrametri modeli kalıyor, GLB'ler arsiv/anka-3d-kaynak/cikti/'da
 - [ ] Anka V'in tur videosunu çektir, düzgün fotogrametriyle 3B modeli yeniden üret (FAZ-B-CEKIM-TALIMATI.md)
 - [x] Şeref relight testi yapıldı (3 kare, gerçek $0.025): IC-Light sır rengini ve deseni değiştiriyor (ΔE 27–39) — arsiv/seref-studio/RELIGHT-TEST-oncesi-sonrasi.jpg
-- [~] Relight'ın tüm karelere uygulanıp uygulanmayacağına karar ver — BEKLİYOR: Çağrı — öneri: uygulama (20 Eki)
+- [x] Relight — **yapılmayacak**: Çağrı kararı 20 Eki (netlik kıyası brief'i "RELIGHT YOK"; ücretli AI maddesi de kapalı)
 - [x] Şeref renk-koruyan netlik kıyası yapıldı (5 model × 3 kare, gerçek $0.131): renk hepsinde korunuyor (renk-ΔE 1.2–1.9), öneri GFPGAN — arsiv/seref-studio/NETLIK-KIYAS-oncesi-sonrasi.jpg
 - [~] Netlik iyileştirmesini tüm karelere uygulayıp uygulamamaya karar ver — BEKLİYOR: Çağrı — öneri GFPGAN v1.4 ×2, 52 kare ≈ $0.08 (20 Eki)
 - [x] Şeref 3 panonun tam karesine GFPGAN uygulandı (gerçek $0.023, pano ΔE 2.1–3.3, zemin açılıyor) — arsiv/seref-studio/GFPGAN-TAM-KARE-oncesi-sonrasi.jpg
