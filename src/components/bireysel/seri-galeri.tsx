@@ -47,13 +47,14 @@ export default function SeriGaleri({ items, header, acmaEtiketi }: { items: Seri
         open={index >= 0}
         index={index}
         close={() => setIndex(-1)}
-        slides={items.map((it) => ({ src: it.full, alt: it.alt, width: 1600, height: 1600, title: it.title, description: it.description }))}
+        slides={items.map((it) => ({ src: it.full, alt: it.alt, title: it.title, description: it.description }))}
         plugins={[Zoom, Captions]}
         render={{ slide: NextImageSlide }}
         animation={{ fade: 400, swipe: 400 }}
         styles={{ container: { backgroundColor: '#FAFAFA' }, button: { color: '#111', filter: 'none' }, captionsTitle: { color: '#111', fontSize: '0.875rem' }, captionsDescription: { color: '#555', fontSize: '0.8125rem' }, captionsTitleContainer: { background: 'transparent' }, captionsDescriptionContainer: { background: 'transparent' } }}
-        controller={{ closeOnBackdropClick: true }}
-        carousel={{ finite: items.length <= 1 }}
+        controller={{ closeOnBackdropClick: true, closeOnPullDown: true }}
+        carousel={{ finite: items.length <= 1, padding: '8px', spacing: '10%' }}
+        zoom={{ maxZoomPixelRatio: 3, scrollToZoom: true }}
       />
     </>
   )

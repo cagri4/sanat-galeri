@@ -79,8 +79,11 @@ export default function LightboxViewer({ slides, thumbnails }: LightboxViewerPro
           captionsTitle: { fontSize: '0.875rem', letterSpacing: '0.05em' },
           captionsDescription: { fontSize: '0.8125rem', lineHeight: 1.6, opacity: 0.85 },
         }}
-        controller={{ closeOnBackdropClick: true }}
-        carousel={{ finite: slides.length <= 1 }}
+        /* Büyük görüntü (ABLAM-UART-ISTEK-2 §4): kenar boşluğu dar, fotoğraf ekranı doldurur; arka plana
+           tıklama + mobilde aşağı çekme kapatır; yakınlaştırma 3×'e kadar. */
+        controller={{ closeOnBackdropClick: true, closeOnPullDown: true }}
+        carousel={{ finite: slides.length <= 1, padding: '8px', spacing: '10%' }}
+        zoom={{ maxZoomPixelRatio: 3, scrollToZoom: true }}
       />
     </>
   )

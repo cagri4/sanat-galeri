@@ -187,3 +187,8 @@
 - [x] "Resimli Seramikler" görünen adı "Zamansız Manzaralar" oldu (tr.json/en.json; DB anahtarı ve URL slug'ı aynı)
 - [~] EN çeviriyi teyit et — BEKLİYOR: Çağrı — "Timeless Landscapes" (21 Eki)
 - [x] Zamansız Manzaralar'da 13 eserin her biri en farklı 6 fotoğrafa indirildi (147 kare gizlendi, silinmedi) — arsiv/zamansiz/ORNEK-the-sun-within-me.jpg
+- [x] Zamansız Manzaralar kontrol edildi: 13 eserin hepsi 6, fazlası yok (towards-the-sun da 6)
+- [x] Panolar başlığı "Kamusal alanda büyük ölçekli mimari seramik uygulamalar" oldu (tr/en.json)
+- [~] Panolar EN başlığını teyit et — BEKLİYOR: Çağrı — "Large-scale architectural ceramics in public spaces" (21 Eki)
+- [x] Panolarda 10 eser 6'ya indirildi (54 kare gizlendi, silinmedi; Şeref sitesinin kareleri korundu)
+- [x] Lightbox fotoğrafı gerçek oranında ekranı dolduracak boyutta gösteriyor (sizes 100vw, dar kenar, aşağı çekip kapatma)
