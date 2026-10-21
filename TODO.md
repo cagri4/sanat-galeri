@@ -184,3 +184,6 @@
 - [x] Anka V eser sayfasından 3B + AR kaldırıldı (56bdc13): sayfa 200, model-viewer/GLB yok; GLB arsiv/3d/'de
 - [x] uarttasarim.com + kurumsal orijinal fotoğraflara döndü (UART_STUDIO_FOTO production'dan kaldırıldı, 56bdc13): stüdyo görseli 0, /tr /en 200
 - [x] Şeref sitesi orijinal fotoğraflara döndü (aynı seçim, eski Bilginin Kaynağı hero'su, 56bdc13): /tr /en 200, kırık yok
+- [x] "Resimli Seramikler" görünen adı "Zamansız Manzaralar" oldu (tr.json/en.json; DB anahtarı ve URL slug'ı aynı)
+- [~] EN çeviriyi teyit et — BEKLİYOR: Çağrı — "Timeless Landscapes" (21 Eki)
+- [x] Zamansız Manzaralar'da 13 eserin her biri en farklı 6 fotoğrafa indirildi (147 kare gizlendi, silinmedi) — arsiv/zamansiz/ORNEK-the-sun-within-me.jpg
