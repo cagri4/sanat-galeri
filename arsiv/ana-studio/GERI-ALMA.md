@@ -1,3 +1,7 @@
+> **21 Eki 2026: GERİ ALINDI** (Çağrı: kesik/arka plansız görünüm kabul görmedi). UART_STUDIO_FOTO Production'dan
+> kaldırıldı, deploy 56bdc13; uarttasarim.com + kurumsal + Şeref ORİJİNAL fotoğrafları gösteriyor. studio_url DB'de
+> duruyor (yalnız Preview bayrağı okur); Cloudinary dosyaları silinmedi.
+
 # Ana site stüdyo kareleri — geri alma (canlıya alındı 20 Eki 2026, commit 1986643)
 
 Canlıda: uarttasarim.com (uart-galeri) + uart-kurumsal.vercel.app. Bayrak: UART_STUDIO_FOTO=1 (Preview + Production).

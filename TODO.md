@@ -181,6 +181,6 @@
 - [x] Ana site kötü kaynak listesi yazıldı: 11 eserde 25 odalı görsel (orijinal kalır), 34 düşük çözünürlük — arsiv/ana-studio/KOTU-KAYNAK-LISTESI.md
 - [x] Ana site stüdyo kareleri canlıda (20 Eki, 1986643): uarttasarim.com + uart-kurumsal, /tr /en 200, eser sayfalarında stüdyo görseli 200, kırık yok — geri alma arsiv/ana-studio/GERI-ALMA.md
 - [x] Şeref sitesinde eser kareleri artık aynı sayfada büyük görünümde açılıyor; galeri/kurumsal sitesine link yok (rc 20 Eki bug)
-- [ ] Anka V eser sayfasından 3B + AR'yi kaldır, deploy, 200 doğrula (GERI-ALMA-ISTEGI 21 Eki)
-- [ ] uarttasarim.com + kurumsal fotoğraflarını orijinale döndür: UART_STUDIO_FOTO production'dan kaldır + deploy, doğrula (stüdyo kareleri kabul görmedi)
-- [ ] Şeref sitesini orijinal fotoğraflara döndür (stüdyo kareleri + stüdyo hero kaldır), deploy, doğrula (GERI-ALMA-ISTEGI 21 Eki)
+- [x] Anka V eser sayfasından 3B + AR kaldırıldı (56bdc13): sayfa 200, model-viewer/GLB yok; GLB arsiv/3d/'de
+- [x] uarttasarim.com + kurumsal orijinal fotoğraflara döndü (UART_STUDIO_FOTO production'dan kaldırıldı, 56bdc13): stüdyo görseli 0, /tr /en 200
+- [x] Şeref sitesi orijinal fotoğraflara döndü (aynı seçim, eski Bilginin Kaynağı hero'su, 56bdc13): /tr /en 200, kırık yok
