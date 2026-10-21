@@ -193,9 +193,9 @@
 - [x] Panolarda 10 eser 6'ya indirildi (54 kare gizlendi, silinmedi; Şeref sitesinin kareleri korundu)
 - [x] Lightbox fotoğrafı gerçek oranında ekranı dolduracak boyutta gösteriyor (sizes 100vw, dar kenar, aşağı çekip kapatma)
 - [x] Ablam düzeltmeleri: Drive kaynakları bulundu (Hakkımızda: Melike.jpg + şeref.jpg; Melike Sergiler 15 foto; Projeler/Assos Athena Tapınağı Maketi; Güzel Bakış 6 yeni foto)
-- [ ] Melike + Şeref yuvarlak profil fotolarını Drive'dakilerle değiştir
-- [ ] Sanatçı sayfalarından Portfolyo'yu tamamen kaldır (sekme, sayfa, Son Eserler)
-- [ ] Sanatçı Sergiler sekmesinde isimleri kaldır, yalnız foto (Melike: Drive Melike Sergiler; Şeref: mevcut sergi fotoları, Şeref'e ait olmayan çıkar)
-- [ ] Melike sayfasında "Hakkında" → "Hikayemiz"
-- [ ] Şeref sayfasına Projeler: Assos Athena Tapınağı Maketi
-- [ ] Güzel Bakış panosunun fotolarını Drive'daki yenileriyle değiştir
+- [x] Melike + Şeref yuvarlak profil fotoları Drive'dakilerle değişti (sanatçı sayfaları + Hakkımızda, fffee9e)
+- [x] Portfolyo kaldırıldı: sekme + Son Eserler yok, /portfolyo → 308 sanatçı sayfası
+- [x] Sergiler yalnız foto, isim yok: Melike 14 (Drive), Şeref 48 mevcut (5 Melike karesi çıkarıldı: 132–135, 146); Ödüller korundu
+- [x] Melike sayfasında "Hakkında" → "Hikayemiz" (EN Our Story)
+- [x] Şeref sayfasına Projeler eklendi: Assos Athena Tapınağı Seramik Maketi, 9 foto, metin Drive belgesinden
+- [x] Güzel Bakış'ta 6 yeni foto (eski 6 gizlendi, silinmedi; geri alma SQL hazır)
