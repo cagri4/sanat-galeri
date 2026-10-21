@@ -26,8 +26,8 @@ export default function ArtistNav({ locale, artist }: ArtistNavProps) {
 
   const base = `/${locale}/${artist}`
   const links = [
-    { href: base, label: t('bioTitle') },
-    { href: `${base}/portfolyo`, label: t('portfolioTitle') },
+    // 21 Eki (ablam): Melike'de "Hikayemiz"; Portfolyo sekmesi kaldırıldı (sayfa ana sayfaya yönlenir).
+    { href: base, label: artist === 'melike' ? t('storyTitle') : t('bioTitle') },
     { href: `${base}/sergiler`, label: t('exhibitionsTitle') },
     { href: `${base}/iletisim`, label: t('contactTitle') },
   ]

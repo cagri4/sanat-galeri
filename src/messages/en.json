@@ -85,6 +85,8 @@
     "contactTitle": "Contact | {name}"
   },
   "cv": {
+    "storyTitle": "Our Story",
+    "projectsTitle": "Projects",
     "navLabel": "Artist section navigation",
     "bioTitle": "About",
     "statementTitle": "Artist Statement",

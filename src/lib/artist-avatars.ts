@@ -1,28 +1,21 @@
 /**
- * Sanatci profil gorselleri (atolye calismasindan, GERCEK).
- *
- * ⚠️ KULLANIM SINIRI: kaynak dosyalar kucuk cozunurluklu
- *   - seref-atolye.jpg   660x602
- *   - melike-atolye.jpg  365x430 (yumusak video karesi, olculu keskinlestirildi)
- * Bu yuzden YALNIZCA kucuk / yuvarlak profil gorseli olarak kullanilir.
- * Hero'da veya buyuk bolum gorseli olarak KULLANILMAZ — pikselli gorunur.
- *
- * Yuksek cozunurluklu orijinaller gelince buradaki dosyalar degistirilecek
- * ve boyut siniri kaldirilabilir.
+ * Sanatci profil gorselleri — yuvarlak avatar (sanatci sayfasi basligi + Hakkimizda > Sanatcilar).
+ * 21 Eki 2026: ablamin yeni fotolari (Drive "Hakkimizda/Melike.jpg, şeref.jpg"), kare 640 px
+ * (scripts/ablam-21eki.py). Kaynaklar 1500 ve 2448 px kare — artik yuksek cozunurluklu.
  */
 export const ARTIST_AVATARS: Record<string, { src: string; alt: { tr: string; en: string } }> = {
   seref: {
     src: '/brand/seref-avatar.jpg',
     alt: {
-      tr: 'Şeref Doğan atölyede, tornada kap şekillendirirken',
-      en: 'Şeref Doğan in the studio, shaping a vessel on the wheel',
+      tr: 'Şeref Doğan’ın elleri, çarkta çamuru şekillendirirken',
+      en: 'Şeref Doğan’s hands shaping clay on the wheel',
     },
   },
   melike: {
     src: '/brand/melike-avatar.jpg',
     alt: {
-      tr: 'Melike Doğan atölyede, desenli bir kâseyle çalışırken',
-      en: 'Melike Doğan in the studio, working on a patterned bowl',
+      tr: 'Melike Doğan fırçayla bir seramik formu boyarken',
+      en: 'Melike Doğan painting a ceramic form with a brush',
     },
   },
 }

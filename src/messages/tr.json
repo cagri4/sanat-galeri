@@ -85,6 +85,8 @@
     "contactTitle": "Iletisim | {name}"
   },
   "cv": {
+    "storyTitle": "Hikayemiz",
+    "projectsTitle": "Projeler",
     "navLabel": "Sanatçı bölümü navigasyonu",
     "bioTitle": "Hakkında",
     "statementTitle": "Sanatçı Beyanı",

@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { getArtistBySlug, getArtistExhibitions } from '@/lib/queries/artist'
 import ExhibitionList from '@/components/artist/exhibition-list'
+import LightboxViewer from '@/components/gallery/lightbox-viewer'
+import { sergiFotolari } from '@/lib/sanatci-sayfa'
 import PressList from '@/components/artist/press-list'
 
 export async function generateMetadata({
@@ -29,7 +31,11 @@ export default async function ExhibitionsPage({
   const data = await getArtistBySlug(artist)
   if (!data) notFound()
 
-  const exhibitions = await getArtistExhibitions(data.id)
+  // 21 Eki (ablam): sergi ADLARI yazılmaz — yalnız fotoğraflar. Ödüller listesi sergi değil, korunur.
+  const exhibitions = (await getArtistExhibitions(data.id)).filter((e) => e.type === 'odul')
+  const isTr = locale === 'tr'
+  const ad = (isTr ? (data.nameTr ?? data.nameEn) : (data.nameEn ?? data.nameTr)) ?? artist
+  const fotolar = await sergiFotolari(artist, isTr, ad)
 
   return (
     <main className="py-8 sm:py-12 lg:py-16">
@@ -37,6 +43,7 @@ export default async function ExhibitionsPage({
         {t('exhibitionsTitle')}
       </h1>
       <div className="space-y-12">
+        {fotolar.length > 0 && <LightboxViewer slides={fotolar} thumbnails={fotolar} />}
         <ExhibitionList exhibitions={exhibitions} locale={locale} />
         <PressList artistId={data.id} locale={locale} />
       </div>

@@ -1,0 +1,4 @@
+BEGIN;
+DELETE FROM product_images WHERE url IN ('https://res.cloudinary.com/df0henatz/image/upload/v1792601367/uarttasarim/mimari/guzel-bakis-2026-10-21-1.jpg', 'https://res.cloudinary.com/df0henatz/image/upload/v1792601371/uarttasarim/mimari/guzel-bakis-2026-10-21-2.jpg', 'https://res.cloudinary.com/df0henatz/image/upload/v1792601373/uarttasarim/mimari/guzel-bakis-2026-10-21-3.jpg', 'https://res.cloudinary.com/df0henatz/image/upload/v1792601376/uarttasarim/mimari/guzel-bakis-2026-10-21-4.jpg', 'https://res.cloudinary.com/df0henatz/image/upload/v1792601379/uarttasarim/mimari/guzel-bakis-2026-10-21-5.jpg', 'https://res.cloudinary.com/df0henatz/image/upload/v1792601381/uarttasarim/mimari/guzel-bakis-2026-10-21-6.jpg');
+UPDATE product_images SET is_visible = true WHERE id IN (248,251,244,245,246,247);
+COMMIT;

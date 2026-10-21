@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
-import { getArtistBySlug, getArtistExhibitions } from '@/lib/queries/artist'
-import { getProductsByArtist } from '@/lib/queries/gallery'
+import LightboxViewer from '@/components/gallery/lightbox-viewer'
+import { ASSOS, sergiFotolari } from '@/lib/sanatci-sayfa'
+import { getArtistBySlug } from '@/lib/queries/artist'
 
 // NOT: Baslik bandi (avatar + isim) ve alt navigasyon artik `layout.tsx`
 // icinde. Bu sayfa yalnizca "Hakkinda" sekmesinin icerigidir.
@@ -38,18 +39,12 @@ export default async function ArtistPage({
   const t = await getTranslations({ locale, namespace: 'cv' })
 
   let data: Awaited<ReturnType<typeof getArtistBySlug>> | null = null
-  let works: Awaited<ReturnType<typeof getProductsByArtist>> = []
-  let exhibitions: Awaited<ReturnType<typeof getArtistExhibitions>> = []
-
   try {
     data = await getArtistBySlug(artist)
-    if (data?.id) {
-      ;[works, exhibitions] = await Promise.all([
-        getProductsByArtist(data.id, 4, 'galeri'),
-        getArtistExhibitions(data.id),
-      ])
-    }
   } catch {}
+  const ad = data ? ((isTr ? (data.nameTr ?? data.nameEn) : (data.nameEn ?? data.nameTr)) ?? artist) : artist
+  // Sergiler: yalnız fotoğraf (21 Eki); bölüm, fotoğraf varsa görünür.
+  const sergi = await sergiFotolari(artist, isTr, ad)
 
   const bio = data ? (isTr ? (data.bioTr ?? data.bioEn) : (data.bioEn ?? data.bioTr)) : null
   const statement = data
@@ -66,7 +61,7 @@ export default async function ArtistPage({
           bu blok otomatik olarak asil metne birakir. */}
       <section className="py-14 sm:py-20">
         <h2 className="text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]">
-          {t('bioTitle')}
+          {artist === 'melike' ? t('storyTitle') : t('bioTitle')}
         </h2>
 
         {bio ? (
@@ -101,12 +96,6 @@ export default async function ArtistPage({
           >
             {t('techniqueLink')} &rarr;
           </Link>
-          <Link
-            href={`/${locale}/${artist}/portfolyo`}
-            className="text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[var(--accent)] transition-colors duration-[var(--dur-micro)] hover:text-[#1f1f1f]"
-          >
-            {t('portfolioTitle')} &rarr;
-          </Link>
         </div>
       </section>
 
@@ -121,7 +110,21 @@ export default async function ArtistPage({
         </section>
       )}
 
-      {exhibitions.length > 0 && (
+      {/* PROJELER (yalnız Şeref, 21 Eki): Assos Athena Tapınağı Seramik Maketi — metin Drive belgesinden. */}
+      {artist === 'seref' && ASSOS.fotolar.length > 0 && (
+        <section className="border-t border-[var(--rule)] py-12">
+          <h2 className="text-2xl font-medium text-[#2C2C2C] sm:text-3xl">{t('projectsTitle')}</h2>
+          <h3 className="mt-6 text-xl text-[#2C2C2C]">{isTr ? ASSOS.title.tr : ASSOS.title.en}</h3>
+          <p className="mt-2 text-[length:var(--text-meta)] text-[var(--faint)]">{isTr ? ASSOS.kunye.tr : ASSOS.kunye.en} · {isTr ? ASSOS.tur.tr : ASSOS.tur.en}</p>
+          <p className="mb-8 mt-4 max-w-[68ch] text-[length:var(--text-body)] leading-[1.9] text-[#4a4a4a]">{isTr ? ASSOS.metin.tr : ASSOS.metin.en}</p>
+          <LightboxViewer
+            slides={ASSOS.fotolar.map((src, i) => ({ src, alt: `${isTr ? ASSOS.title.tr : ASSOS.title.en} — ${i + 1}` }))}
+            thumbnails={ASSOS.fotolar.map((src, i) => ({ src, alt: `${isTr ? ASSOS.title.tr : ASSOS.title.en} — ${i + 1}` }))}
+          />
+        </section>
+      )}
+
+      {sergi.length > 0 && (
         <section className="border-t border-[var(--rule)] py-12">
           <div className="flex items-end justify-between gap-6">
             <h2 className="text-2xl font-medium text-[#2C2C2C] sm:text-3xl">
@@ -137,43 +140,6 @@ export default async function ArtistPage({
         </section>
       )}
 
-      {works.length > 0 && (
-        <section className="border-t border-[var(--rule)] py-14">
-          <div className="mb-8 flex items-end justify-between gap-6">
-            <h2 className="text-2xl font-medium text-[#2C2C2C] sm:text-3xl">
-              {t('recentWorks')}
-            </h2>
-            <Link
-              href={`/${locale}/${artist}/portfolyo`}
-              className="shrink-0 text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[var(--accent)] transition-colors duration-[var(--dur-micro)] hover:text-[#1f1f1f]"
-            >
-              {t('viewAll')} &rarr;
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {works.map((work) => (
-              <Link key={work.id} href={`/${locale}/urun/${work.slug}`} className="media-zoom group">
-                <div className="aspect-[3/4] overflow-hidden bg-[#f0efe9]">
-                  {work.images?.[0] && (
-                    <img
-                      src={work.images[0].url}
-                      alt={
-                        isTr
-                          ? (work.images[0].altTr ?? work.titleTr)
-                          : (work.images[0].altEn ?? work.titleEn)
-                      }
-                      className="h-full w-full object-cover transition-transform duration-[var(--dur-image)] group-hover:scale-[1.03]"
-                    />
-                  )}
-                </div>
-                <h3 className="mt-3 text-[length:var(--text-body)] text-[#2C2C2C]">
-                  {isTr ? work.titleTr : work.titleEn}
-                </h3>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
     </main>
   )
 }

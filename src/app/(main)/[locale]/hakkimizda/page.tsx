@@ -118,7 +118,7 @@ export default async function AboutPage({
       )}
 
       {/* Sanatcilar — biyografi metni sanatcidan gelene kadar YAZILMIYOR;
-          yalnizca ad, gercek atolye gorseli ve portfolyo baglantisi. */}
+          yalnizca ad, yuvarlak profil fotosu ve sanatci sayfasi baglantisi (portfolyo 21 Eki'de kaldirildi). */}
       <Reveal as="section" className="mt-24 border-t border-[var(--rule)] pt-16">
         <h2 className="text-3xl font-medium text-[#2C2C2C] sm:text-4xl">
           {isTr ? 'Sanatçılar' : 'Artists'}
@@ -146,7 +146,7 @@ export default async function AboutPage({
                     {a.name}
                   </h3>
                   <span className="mt-2 inline-block text-[length:var(--text-meta)] uppercase tracking-[var(--tracking-label)] text-[#6b6b6b] transition-colors duration-[var(--dur-micro)] group-hover:text-[var(--accent)]">
-                    {isTr ? 'Portfolyoyu Gör' : 'View Portfolio'} &rarr;
+                    {isTr ? 'Sanatçı sayfası' : 'Artist page'} &rarr;
                   </span>
                 </div>
               </a>

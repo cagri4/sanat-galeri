@@ -192,3 +192,10 @@
 - [~] Panolar EN başlığını teyit et — BEKLİYOR: Çağrı — "Large-scale architectural ceramics in public spaces" (21 Eki)
 - [x] Panolarda 10 eser 6'ya indirildi (54 kare gizlendi, silinmedi; Şeref sitesinin kareleri korundu)
 - [x] Lightbox fotoğrafı gerçek oranında ekranı dolduracak boyutta gösteriyor (sizes 100vw, dar kenar, aşağı çekip kapatma)
+- [x] Ablam düzeltmeleri: Drive kaynakları bulundu (Hakkımızda: Melike.jpg + şeref.jpg; Melike Sergiler 15 foto; Projeler/Assos Athena Tapınağı Maketi; Güzel Bakış 6 yeni foto)
+- [ ] Melike + Şeref yuvarlak profil fotolarını Drive'dakilerle değiştir
+- [ ] Sanatçı sayfalarından Portfolyo'yu tamamen kaldır (sekme, sayfa, Son Eserler)
+- [ ] Sanatçı Sergiler sekmesinde isimleri kaldır, yalnız foto (Melike: Drive Melike Sergiler; Şeref: mevcut sergi fotoları, Şeref'e ait olmayan çıkar)
+- [ ] Melike sayfasında "Hakkında" → "Hikayemiz"
+- [ ] Şeref sayfasına Projeler: Assos Athena Tapınağı Maketi
+- [ ] Güzel Bakış panosunun fotolarını Drive'daki yenileriyle değiştir
