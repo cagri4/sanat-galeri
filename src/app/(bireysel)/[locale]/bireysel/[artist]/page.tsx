@@ -5,7 +5,7 @@ import { getArtistBySlug, getArtistExhibitions } from '@/lib/queries/artist'
 import { getProductsByArtist } from '@/lib/queries/gallery'
 import { siteDomains } from '@/lib/site'
 import ContactForm from '@/components/gallery/contact-form'
-import { SEREF_HERO, SEREF_STUDIO, studioUrl } from '@/lib/seref-studio'
+import { SEREF_SECIM } from '@/lib/seref-studio'
 import SeriGaleri from '@/components/bireysel/seri-galeri'
 
 /**
@@ -14,7 +14,8 @@ import SeriGaleri from '@/components/bireysel/seri-galeri'
  * eserler SERİ olarak (her eser kendi fotoğraflarıyla), menü yalnız gerçek içerik:
  * Eserler · Hakkında (biyografi, beyan, sergiler, ödüller) · İletişim.
  * İçerik YALNIZ veritabanından: biyografi, sergiler, ödüller, eserler.
- * FOTOĞRAF (SEREF-FOTO-BRIEF, Çağrı 19 Eki): tüm kareler EŞİT 1:1 grid (masonry yok), stüdyo zemininde
+ * FOTOĞRAF: tüm kareler EŞİT 1:1 grid (masonry yok). 21 Eki GERİ ALMA (Çağrı): stüdyo kesmeleri kabul görmedi →
+ * ORİJİNAL fotoğraflar (veritabanı url); seçim aynı (SEREF_SECIM). Hero: Bilginin Kaynağı orijinal fotoğrafı.
  * (lib/seref-studio.ts — gerçek fotoğraflardan arka plan temizliği + düzleme; üretici AI yok).
  * Hero: Anadolu Ekininde Güzeller heykeli stüdyo zemininde, ad üstünde (masaüstü).
  * Beyan veritabanında yok → STATEMENT_TASLAK (rc talimatı 20 Eki: sanatçının gerçek işine dayalı,
@@ -86,6 +87,14 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
   }
 }
 
+/** Hero: Bilginin Kaynağı (2016) orijinal fotoğrafı (2000×1125) — stüdyo çalışmasından önceki onaylı hero. */
+const HERO = { title: 'Bilginin Kaynağı', year: 2016, src: 'https://res.cloudinary.com/df0henatz/image/upload/v1791725081/uarttasarim/mimari/bilginin-kaynagi-2.jpg' }
+
+/** Cloudinary boyut sınırı (orijinal oran korunur; grid karesi object-cover ile kırpar). */
+function cld(url: string, w: number) {
+  return url.includes('/image/upload/') ? url.replace('/image/upload/', `/image/upload/c_limit,w_${w},f_auto,q_auto/`) : url
+}
+
 const label = 'text-[length:var(--text-label)] uppercase tracking-[var(--tracking-label)] text-[var(--faint)]'
 const pending = 'border border-dashed border-[#b45309] bg-[#fef3c7] text-[#422006]'
 const wrap = 'mx-auto w-full max-w-[1280px] px-5 sm:px-10 lg:px-16'
@@ -107,8 +116,12 @@ export default async function BireyselPage({ params }: P) {
 
   const title = (w: Work) => (tr ? w.titleTr : w.titleEn) ?? w.titleTr ?? ''
   const dims = (w: Work) => (tr ? w.dimensionsTr : w.dimensionsEn) ?? w.dimensionsTr
-  const hero = works.find((w) => w.slug === SEREF_HERO.slug)
-  const kareler = (w: Work) => SEREF_STUDIO[w.slug] ?? []
+  // Seçilen fotoğraflar (id sırasıyla), ORİJİNAL url; seçim yoksa eserin ilk 4 fotoğrafı.
+  const kareler = (w: Work): string[] => {
+    const imgs: { id: number; url: string }[] = w.images ?? []
+    const sec = (SEREF_SECIM[w.slug] ?? []).map((id) => imgs.find((im) => im.id === id)?.url).filter((u): u is string => !!u)
+    return sec.length ? sec : imgs.slice(0, 4).map((im) => im.url)
+  }
   const byCat = (c: string) => works.filter((w) => w.category === c && kareler(w).length)
   // Panolar ve heykel: her eser bir seri (yeniden eskiye). Replikalar tek seri: her eserin bir karesi.
   const gruplar = [
@@ -136,22 +149,20 @@ export default async function BireyselPage({ params }: P) {
         </div>
       </header>
 
-      {/* Hero: stüdyo zemininde tek, sakin eser (heykel sağda); masaüstünde ad + unvan + ince CTA
-          görselin solundaki boş zeminde (referansın hero dili). Mobilde metin görselin altında. */}
-      <section aria-labelledby="ad" className="relative">
-        <div className="relative h-[62svh] min-h-[360px] w-full overflow-hidden bg-[#F1F0EE] md:h-[80svh] md:max-h-[860px]">
-          <Image src={SEREF_HERO.src} alt={`${SEREF_HERO.title} — ${name}`} fill priority className="object-cover object-[66%_50%]" sizes="100vw" />
+      {/* Hero: tam genişlik ORİJİNAL eser fotoğrafı (Bilginin Kaynağı, 2016; üstüne yazı yok);
+          ad + unvan + ince çerçeveli CTA altındaki beyaz alanda. 21 Eki geri alma: stüdyo hero'su kaldırıldı. */}
+      <section aria-labelledby="ad">
+        <div className="relative h-[72svh] min-h-[380px] w-full overflow-hidden bg-[#eeeeee]">
+          <Image src={HERO.src} alt={`${HERO.title} (${HERO.year}) — ${name}`} fill priority className="object-cover" sizes="100vw" />
         </div>
-        <div className={`${wrap} pb-6 pt-14 text-center md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:pb-0 md:pt-0 md:text-left`}>
-          <div className="md:max-w-[46%]">
-            <h1 id="ad" className="text-5xl leading-[1.05] sm:text-7xl">{name}</h1>
-            <p className="mt-5 text-[length:var(--text-lead)] font-light tracking-[0.04em] text-[var(--muted)]">{t.role}</p>
-            <a href="#eserler" className="mt-10 inline-flex min-h-11 items-center border border-[var(--foreground)] px-7 text-[length:var(--text-meta)] uppercase tracking-[0.18em] text-[var(--foreground)] transition-colors hover:bg-[var(--foreground)] hover:text-white">{t.cta}</a>
-          </div>
+        <div className={`${wrap} flex justify-end pt-3`}>
+          <p className="text-[12px] text-[var(--faint)]">{HERO.title}, {HERO.year} — {t.detay}</p>
         </div>
-        {hero && (
-          <p className="absolute bottom-4 right-10 hidden text-[12px] text-[var(--muted)] md:block lg:right-16">{SEREF_HERO.title}</p>
-        )}
+        <div className={`${wrap} flex flex-col items-center pb-8 pt-16 text-center sm:pt-24`}>
+          <h1 id="ad" className="text-5xl leading-[1.05] sm:text-7xl">{name}</h1>
+          <p className="mt-5 text-[length:var(--text-lead)] font-light tracking-[0.04em] text-[var(--muted)]">{t.role}</p>
+          <a href="#eserler" className="mt-10 inline-flex min-h-11 items-center border border-[var(--foreground)] px-7 text-[length:var(--text-meta)] uppercase tracking-[0.18em] text-[var(--foreground)] transition-colors hover:bg-[var(--foreground)] hover:text-white">{t.cta}</a>
+        </div>
       </section>
 
       <main className={wrap}>
@@ -172,8 +183,8 @@ export default async function BireyselPage({ params }: P) {
                             <h4 id={`seri-${w.slug}`} className="text-2xl font-light sm:text-3xl">{title(w)}</h4>
                             <p className="mt-2 text-[length:var(--text-meta)] text-[var(--muted)]">{kunye}</p>
                           </>}
-                          items={kareler(w).map((id, i) => ({
-                            src: studioUrl(id), full: studioUrl(id, 1600),
+                          items={kareler(w).map((url, i) => ({
+                            src: cld(url, 800), full: cld(url, 1600),
                             alt: `${title(w)}${w.year ? ` (${w.year})` : ''} — ${i === 0 ? (tr ? 'eserin tamamı' : 'whole work') : (tr ? 'detay' : 'detail')}`,
                             title: title(w), description: kunye,
                           }))}
@@ -188,7 +199,7 @@ export default async function BireyselPage({ params }: P) {
               <article aria-labelledby="seri-replikalar">
                 <h3 id="seri-replikalar" className={`${label} border-t border-[var(--rule)] pt-6`}>{t.cats['Antik Dönem Replikaları']}</h3>
                 <p className="mb-7 mt-12 max-w-[60ch] text-[length:var(--text-meta)] text-[var(--muted)]">{t.joint}</p>
-                <SeriGaleri items={replikalar.map((w) => ({ src: studioUrl(kareler(w)[0]), full: studioUrl(kareler(w)[0], 1600), alt: title(w), caption: title(w), title: title(w), description: t.joint }))} />
+                <SeriGaleri items={replikalar.map((w) => ({ src: cld(kareler(w)[0], 800), full: cld(kareler(w)[0], 1600), alt: title(w), caption: title(w), title: title(w), description: t.joint }))} />
               </article>
             )}
           </div>
