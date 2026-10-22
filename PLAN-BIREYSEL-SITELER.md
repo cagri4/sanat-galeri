@@ -1,5 +1,19 @@
 # PLAN — Bireysel sanatçı siteleri (Melike Doğan, Şeref Doğan) · 16 Ekim 2026
 
+> ## ⚑ GÜNCEL YAPI — 22 Eki 2026 (Çağrı↔ablam WhatsApp, UART-YAPI-NETLESME-22EKI.md) — BU GEÇERLİDİR
+> Aşağıdaki 16 Eki planının site listesi bununla değişti. **4 ayrı site:**
+> 1. **uarttasarim.com** — ana/galeri sitesi (Vercel `uart-galeri`). **CANLI, hazır**; ablam beğendi, IG bio'da.
+> 2. **Uart Kurumsal** — kamusal/büyük ölçekli mimari seramik (Vercel `uart-kurumsal`, şimdilik `uart-kurumsal.vercel.app`, noindex).
+>    Neredeyse bitti. Eksik: düzeltmeler (ana sayfa başlığı → "Kamusal alanda büyük ölçekli mimari seramik uygulamalar", 22 Eki yapıldı)
+>    + **domain yok** (GoDaddy'de kurumsal domain alınacak).
+> 3. **Şeref Doğan Seramikleri** — Vercel `uart-seref` (`uart-seref.vercel.app`, noindex). **Domain `serefdoganceramics.com` VAR**
+>    (GoDaddy, NS domaincontrol, bitiş 17 Eki 2027 — whois 22 Eki). Ablam içeriği hazırlıyor; Çağrı'dan düzeltme listesi gelince
+>    hemen yayına alınır. Ana sayfa banner'ı seçiliyor (kıyı + heykel fotoları).
+> 4. **Melike Doğan bireysel sitesi** — **henüz yok**; Şeref'inki gibi (`UART_SITE` ile) yapılacak, **domain alınınca** açılır.
+>
+> **Domainler (GoDaddy):** uarttasarim.com ✓ (canlı) · serefdoganceramics.com ✓ (var, bağlanmadı) · kurumsal ✗ · Melike ✗.
+> Galerideki `/tr/melike`, `/tr/seref` sanatçı sayfaları uarttasarim.com'da kalıyor (bireysel siteler ayrı).
+
 > **Kaynak:** Çağrı ile sanatçının 16 Eki görüşmesi. Sanatçı "hem kurumsal hem bireysel" dedi ve onayladı. Çağrı referans siteleri bugün gönderecek; ardından hepsi asıl alan adlarında yayına alınacak.
 > **Durum:** Yalnız plan. Kod, deploy ve alan adı alımı yok. Rakamlar 16 Eki'de veritabanından, canlı siteden ve `whois`/`dig` ile ölçüldü.
 

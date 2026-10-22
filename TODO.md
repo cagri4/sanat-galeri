@@ -109,7 +109,9 @@
 - [x] Ana sayfada "Toprağın Hafızası" başlığı ekranda görünmüyor (tarayıcıda kontrol edildi, 16 Eki)
 - [~] "Toprağın hafızası" ifadesinin kalacağı yerleri belirle — BEKLİYOR: sanatçı — Hikâyemiz cümlesi, Hakkımızda kapanış cümlesi, Antik Dönem sayfasındaki "Toprağın Hafızası: Terra Sigillata" başlığı (16 Eki)
 - [x] Bireysel siteler planı yazıldı (PLAN-BIREYSEL-SITELER.md)
-- [~] Bireysel siteleri kur — BEKLİYOR: Çağrı — referans siteler, alan adı kararları, içerik eksikleri (16 Eki)
+- [x] Bireysel site yapısı netleşti (22 Eki, UART-YAPI-NETLESME-22EKI): 4 site — uarttasarim.com canlı, Kurumsal, Şeref (uart-seref kurulu, serefdoganceramics.com GoDaddy'de var), Melike (henüz yok); PLAN-BIREYSEL-SITELER.md başına işlendi
+- [~] Uart Kurumsal'ı kendi alan adında yayına al — BEKLİYOR: Çağrı — GoDaddy'de kurumsal domain yok, alınacak (22 Eki)
+- [~] Melike bireysel sitesini kur (Şeref sitesi gibi, UART_SITE) — BEKLİYOR: Çağrı — domain alınınca (22 Eki)
 - [x] 3B/AR pilotu için eser seçildi: Çan Krater (drive-fotolar'da heykel yok; krater gerçek 3B obje)
 - [x] TRELLIS ile yapay zekâ GLB'si — **yapılmayacak**: TRELLIS 20 Eki'de Replicate'te çalıştırıldı, Çağrı image-to-3D işini kapattı (yukarıdaki Anka V maddesi), HF yoluna gerek kalmadı
 - [x] Ara çözüm: fotoğraf siluetinden yapay zekâsız torna modeli (GLB) üretildi, sayfada "yaklaşık demo" olarak etiketlendi
@@ -148,7 +150,7 @@
 - [x] Şeref sitesinde eser detayı yok: eser kartları galeri/kurumsal sayfasına gider, diğer yollar galeriye 301
 - [x] Şeref sitesi Vercel projesi uart-seref açıldı, preview deploy (6e73b95), girişsiz erişim kapalı, noindex
 - [~] Şeref'in taslak beyanını onaylat, gerçek portreyi al — BEKLİYOR: Çağrı — beyan Claude taslağı, portre yerine pano duruyor (20 Eki)
-- [~] Şeref sitesini serefdoganceramics.com'da canlıya al — BEKLİYOR: Çağrı — içerik tamamlanınca onay; alan adı DNS + UART_SEREF_DOMAIN + UART_INDEXABLE + galeride /tr/seref 301 (20 Eki)
+- [~] Şeref sitesini serefdoganceramics.com'da canlıya al — BEKLİYOR: Çağrı — ablam içerik + ana sayfa banner'ı (kıyı + heykel) hazırlıyor, Çağrı'nın düzeltme listesi gelince yayın; domain GoDaddy'de var (whois 22 Eki); alan adı DNS + UART_SEREF_DOMAIN + UART_INDEXABLE + galeride /tr/seref 301 (20 Eki)
 - [x] Şeref sitesi https://uart-seref.vercel.app adresinde (200, noindex, alan adı yok)
 - [x] Şeref sitesinde portre yerine Akar’ın Deryası panosu (adıyla, eser sayfasına bağlı)
 - [x] Şeref sitesine taslak sanatçı beyanı (TR + EN) eklendi — yalnız bireysel sitede, DB'ye yazılmadı
@@ -199,3 +201,4 @@
 - [x] Melike sayfasında "Hakkında" → "Hikayemiz" (EN Our Story)
 - [x] Şeref sayfasına Projeler eklendi: Assos Athena Tapınağı Seramik Maketi, 9 foto, metin Drive belgesinden
 - [x] Güzel Bakış'ta 6 yeni foto (eski 6 gizlendi, silinmedi; geri alma SQL hazır)
+- [x] Kurumsal ana sayfa başlığı "Kamusal alanda büyük ölçekli mimari seramik uygulamalar" oldu (EN "Large-scale architectural ceramics in public spaces")
