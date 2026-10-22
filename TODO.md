@@ -21,7 +21,7 @@
 - [x] Mevcut sayfa/menü envanteri çıkarıldı (yeni menüye eşleme için)
 - [x] PLAN-DUZELTMELER-2026-10-13.md yazıldı (A/B/C + renkler + Çağrı'ya sorular)
 - [x] Tek site / iki site kararı verildi (13 Eki 10:52: iki site, sanatçı bırakarak kabul etti)
-- [~] Sanatçıya C1–C7 sorularını ilet — BEKLİYOR: Çağrı — soruları o iletecek (13 Eki)
+- [x] Sanatçıya C soruları — **yapılmayacak**: hepsi çözüldü/düştü (22 Eki); C2 fon rengi Çağrı kararıyla düştü, krem #F7F4EF kalıyor
 - [x] PLAN-DUZELTMELER B1 (iki site kalıyor) ve bağlı maddelerle güncellendi
 - [x] Sitedeki satışa dönük öğeler (fiyat, sepet, sipariş çağrısı) tarandı
 - [x] İki kitle için pazarlama stratejisi yazıldı (PAZARLAMA-STRATEJISI-2026-10-13.md)

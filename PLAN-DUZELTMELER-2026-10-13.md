@@ -273,7 +273,7 @@
 - İki site kararı soruyu gereksiz kıldı.
 - Not: Hangi anlamın kastedildiği hâlâ bilinmiyor; bunu "çözüldü" diye değil, "gereksizleşti" diye kaydediyorum.
 
-**C2. Fon rengi ne kadar koyu? — DURUYOR** (B3 ile birlikte)
+**~~C2. Fon rengi ne kadar koyu?~~ → DÜŞTÜ (22 Eki, Çağrı kararı: koyu fon isteği düştü, krem #F7F4EF kalıyor).** (B3 ile birlikte)
 > "Örnek sitedeki koyu gri fonu galeri sitesinin **tamamında** mı istiyorsunuz, yoksa giriş/üst kısımda mı? Mimar/kurum sitesinde de olsun mu? Önce bir ekran görüntüsüyle gösterelim mi?"
 
 **C3. Fotoğraf azaltma — DURUYOR**
