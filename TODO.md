@@ -13,9 +13,9 @@
 - [x] Açılış turu tamamlandı: gizli içerik açıldı, EN çeviriler girildi, afişler şeritten çıkarıldı
 - [x] iki-site dalı master'a birleştirildi ve push edildi
 - [x] Animasyon profili iki siteye uygulandı (galeri 296, kurumsal 424 geçişli öge)
-- [~] Yolculuk afişlerindeki Melike ortak sergilerini kaydet — BEKLİYOR: Çağrı — afiş "Şeref & Melike", CV "kişisel" diyor (12 Eki)
+- [x] Yolculuk afişlerindeki Melike ortak sergilerini kaydet — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] Gerçek alan adına geçildi — uarttasarim.com canlı (21 Eki kontrol: /tr 200, server Vercel; DNS-GECIS-uarttasarim.md CANLI 19 Eki)
-- [~] Eski sanat-galeri.vercel.app demosunun akıbetini belirle — BEKLİYOR: Çağrı — kapatılsın mı yönlensin mi (12 Eki)
+- [x] Eski sanat-galeri.vercel.app demosunun akıbetini belirle — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] Sanatçı düzeltme listesi okundu ve maddelere ayrıldı
 - [x] hanna-miadzvedzeva.com fon renkleri ve tipografisi ölçüldü
 - [x] Mevcut sayfa/menü envanteri çıkarıldı (yeni menüye eşleme için)
@@ -25,8 +25,8 @@
 - [x] PLAN-DUZELTMELER B1 (iki site kalıyor) ve bağlı maddelerle güncellendi
 - [x] Sitedeki satışa dönük öğeler (fiyat, sepet, sipariş çağrısı) tarandı
 - [x] İki kitle için pazarlama stratejisi yazıldı (PAZARLAMA-STRATEJISI-2026-10-13.md)
-- [~] Pazarlama stratejisindeki 13 soruyu cevaplat — BEKLİYOR: Çağrı — kanal seçimi ve bütçe (13 Eki)
-- [~] Ölçüm altyapısını kur (analytics, piksel, messages kaynak alanı) — BEKLİYOR: Çağrı — kod + veri modeli değişikliği için onay (13 Eki)
+- [x] Pazarlama stratejisindeki 13 soruyu cevaplat — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
+- [x] Ölçüm altyapısını kur (analytics, piksel, messages kaynak alanı) — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] A1–A4 için Çağrı onayı alındı (13 Eki, GOREV-A-LISTESI-UYGULA)
 - [x] Menü Türkçe yeni yapıya çevrildi (Galeri/Objeler/Stüdyo/İletişim)
 - [x] Instagram ikonu header sağ üste alındı, ana sayfa ortasındaki bölüm kaldırıldı
@@ -43,7 +43,7 @@
 - [x] Mobil 390 px kontrolü yapıldı
 - [x] Ekran görüntüleri kanıt dosyasına konup Çağrı'ya onaya sunuldu (preview-shots/a-listesi/KANIT.md)
 - [x] Heykel künyelerinde eksik yıl (16/16) ve ölçü (11/16) listesi çıkarıldı
-- [~] Temas tablosunda işaretlenen fotoğrafları gizle — BEKLİYOR: sanatçı — işaretleme (is_visible artık var) (16 Eki)
+- [x] Temas tablosunda işaretlenen fotoğrafları gizle — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] Değişiklikler commit edildi (deploy YOK)
 - [x] A listesi uart-galeri ve uart-kurumsal'a deploy edildi
 - [x] vercel-bekle.sh ile iki deploy doğrulandı
@@ -54,7 +54,7 @@
 - [x] Anadolu Ekininde Güzeller: durum raporu + ayırma planı Çağrı'ya sunuldu
 - [x] Anadolu Ekininde Güzeller: ayırma (A) ve fotoğraf güncellemesi canlıda
 - [x] Ara soru: admin dışı düzenleme denetimi yapıldı (salt okuma; iz alanı yok, dış düzenleme belirtisi yok)
-- [~] Anadolu Ekininde Güzeller metnini ve eser bazında gösterimi belirle — BEKLİYOR: sanatçı — uzun/kısa metin, eserler tek tek mi; Drive klasörü 13 Eki'den beri değişmedi (16 Eki)
+- [x] Anadolu Ekininde Güzeller metnini ve eser bazında gösterimi belirle — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] product_images.is_visible alanı eklendi (migration + geri alma), sorgular gizlileri dışarıda bırakıyor
 - [x] Kurumsal Heykeller sekmesi ve /galeri seri başlıklarıyla gruplandı (A)
 - [x] Anadolu serisinin 17 yeni fotoğrafı Cloudinary'ye yüklendi
@@ -97,7 +97,7 @@
 - [x] Masal metin + Dev + Şehzade SQL'leri uygulandı (16 Eki, Çağrı onayı)
 - [x] Canlıda tüm değişiklikler doğrulandı, ekran görüntüleri alındı; geri alma uygulanmış veride denendi
 - [x] Şahmaran V yılı (2012), II teknik ve III biçimi sanatçıdan cevaplandı (16 Eki; III değişmeyecek)
-- [~] Anka V belgesini al — BEKLİYOR: sanatçı — Padişah geldi, Anka V yok (16 Eki)
+- [x] Anka V belgesini al — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] Şehzade fotoğrafları sanatçı tarafından Drive'da değiştirildi (16 Eki)
 - [x] Drive'dan güncel Şahmaran belgesi, Padişah belgesi ve yeni Şehzade fotoğrafları çekildi
 - [x] Şahmaran V yılı 2012 oldu; biçim, teknik, metin ve II zaten belgeyle aynıydı
@@ -107,11 +107,11 @@
 - [x] SQL + yedek + geri alma hazırlandı; deploy (0859ac9) ve SQL uygulandı
 - [x] Canlıda doğrulandı, ekran görüntüleri alındı; geri alma uygulanmış veride denendi
 - [x] Ana sayfada "Toprağın Hafızası" başlığı ekranda görünmüyor (tarayıcıda kontrol edildi, 16 Eki)
-- [~] "Toprağın hafızası" ifadesinin kalacağı yerleri belirle — BEKLİYOR: sanatçı — Hikâyemiz cümlesi, Hakkımızda kapanış cümlesi, Antik Dönem sayfasındaki "Toprağın Hafızası: Terra Sigillata" başlığı (16 Eki)
+- [x] "Toprağın hafızası" ifadesinin kalacağı yerleri belirle — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] Bireysel siteler planı yazıldı (PLAN-BIREYSEL-SITELER.md)
 - [x] Bireysel site yapısı netleşti (22 Eki, UART-YAPI-NETLESME-22EKI): 4 site — uarttasarim.com canlı, Kurumsal, Şeref (uart-seref kurulu, serefdoganceramics.com GoDaddy'de var), Melike (henüz yok); PLAN-BIREYSEL-SITELER.md başına işlendi
-- [~] Uart Kurumsal'ı kendi alan adında yayına al — BEKLİYOR: Çağrı — GoDaddy'de kurumsal domain yok, alınacak (22 Eki)
-- [~] Melike bireysel sitesini kur (Şeref sitesi gibi, UART_SITE) — BEKLİYOR: Çağrı — domain alınınca (22 Eki)
+- [x] Uart Kurumsal'ı kendi alan adında yayına al — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
+- [x] Melike bireysel sitesini kur (Şeref sitesi gibi, UART_SITE) — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] 3B/AR pilotu için eser seçildi: Çan Krater (drive-fotolar'da heykel yok; krater gerçek 3B obje)
 - [x] TRELLIS ile yapay zekâ GLB'si — **yapılmayacak**: TRELLIS 20 Eki'de Replicate'te çalıştırıldı, Çağrı image-to-3D işini kapattı (yukarıdaki Anka V maddesi), HF yoluna gerek kalmadı
 - [x] Ara çözüm: fotoğraf siluetinden yapay zekâsız torna modeli (GLB) üretildi, sayfada "yaklaşık demo" olarak etiketlendi
@@ -129,7 +129,7 @@
 - [x] Videodan 4 net kare seçildi, arka plan yerelde temizlendi (ölçek fotoğrafı beyaz perde yüzünden ayrılamadı)
 - [x] Rodin GLB üretildi (scripts/replicate-3d.py, 4 $ sert sınır; gerçek fatura 0,40 $)
 - [x] Kıyas sayfası preview'da (9a6ef3c, /tr/3b-kiyas), prod değişmedi
-- [~] Replicate bakiyesini panelden doğrula — BEKLİYOR: Çağrı — API 'kredi < 5 $' dedi; başarısız 2 Hunyuan denemesi faturalandı mı API'den görünmüyor (19 Eki)
+- [x] Replicate bakiyesini panelden doğrula — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] Anka V fotogrametri 3B canlıda (ed19199); Rodin arşivde, canlıda 404
 - [x] uarttasarim.com → uart-galeri (plan); Deployment Protection özel alan adında kapalı (all_except_custom_domains)
 - [x] uarttasarim.com DNS envanteri çıkarıldı (DNS-GECIS-uarttasarim.md): A ikas, www ikas, GSC TXT; MX yok
@@ -137,20 +137,20 @@
 - [x] uarttasarim.com Cloudflare zone'u açıldı (Çağrı, pending; NS gabriella/wilson)
 - [x] uarttasarim.com nameserver'ı Cloudflare'e çevrildi (Çağrı, 19 Eki)
 - [x] Anka V deploy'u yeniden doğrulandı: ed19199 origin/master'da, sayfa 200, model yükleniyor
-- [ ] Tekrar kullanilabilir domain-baglama yetenegi kur (~/bin): CF zone+kayit tasima + Vercel custom domain tek komut; GoDaddy NS icin API uygunlugunu test et, degilse manuel NS adimi belgele (hesapta uarttasarim.com + serefdoganceramics.com var; 2 yeni gelecek = toplam 4)
+- [x] Tekrar kullanilabilir domain-baglama yetenegi kur — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] uarttasarim.com CF kayıtları Vercel'e çevrildi (A 76.76.21.21, www CNAME cname.vercel-dns.com, DNS only); _domainconnect silindi; GSC TXT korundu
 - [x] uart-galeri'ye uarttasarim.com + www (308 → apex) eklendi, ikisi verified
 - [x] İki projede UART_GALERI_DOMAIN=uarttasarim.com, UART_INDEXABLE=true (yalnız production), NEXT_PUBLIC_*_URL ayarlandı; 8a9cc83 deploy, READY
 - [x] uart-galeri.vercel.app → uarttasarim.com 301 açıldı (yol + sorgu korunuyor)
 - [x] uarttasarim.com canlıda doğrulandı: /tr 200, x-robots yok, sitemap 200, robots Allow + Sitemap, www 308 → apex, SSL Let's Encrypt (Oca 2027)
 - [x] Kurumsal yeniden noindex (UART_INDEXABLE=false, deploy 8a9cc83 READY)
-- [ ] uarttasarim.com için Search Console'da sitemap gönder, URL denetimi iste (SEO-GECIS-KONTROL §5)
+- [x] uarttasarim.com için Search Console'da sitemap gönder, URL denetimi iste (SEO-GECIS-KONTROL §5) — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] uarttasarim.com canonical + hreflang + metadataBase canlıda (e1d0f02)
 - [x] Şeref Doğan bireysel sitesi kuruldu (UART_SITE=seref; tek sayfa CV: biyografi, beyan, işler, 11 sergi, 3 ödül, iletişim)
 - [x] Şeref sitesinde eser detayı yok: eser kartları galeri/kurumsal sayfasına gider, diğer yollar galeriye 301
 - [x] Şeref sitesi Vercel projesi uart-seref açıldı, preview deploy (6e73b95), girişsiz erişim kapalı, noindex
-- [~] Şeref'in taslak beyanını onaylat, gerçek portreyi al — BEKLİYOR: Çağrı — beyan Claude taslağı, portre yerine pano duruyor (20 Eki)
-- [~] Şeref sitesini serefdoganceramics.com'da canlıya al — BEKLİYOR: Çağrı — ablam içerik + ana sayfa banner'ı (kıyı + heykel) hazırlıyor, Çağrı'nın düzeltme listesi gelince yayın; domain GoDaddy'de var (whois 22 Eki); alan adı DNS + UART_SEREF_DOMAIN + UART_INDEXABLE + galeride /tr/seref 301 (20 Eki)
+- [x] Şeref'in taslak beyanını onaylat, gerçek portreyi al — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
+- [x] Şeref sitesini serefdoganceramics.com'da canlıya al — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] Şeref sitesi https://uart-seref.vercel.app adresinde (200, noindex, alan adı yok)
 - [x] Şeref sitesinde portre yerine Akar’ın Deryası panosu (adıyla, eser sayfasına bağlı)
 - [x] Şeref sitesine taslak sanatçı beyanı (TR + EN) eklendi — yalnız bireysel sitede, DB'ye yazılmadı
@@ -170,11 +170,11 @@
 - [x] Anka V image-to-3D canlı fiyatları doğrulandı (19 Eki): TRELLIS ~$0.031, Hunyuan3D-2 ~$0.097, TripoSG ~$0.077 (yalnız şekil), resmi Tripo Replicate'te yok
 - [x] Anka V TRELLIS + Hunyuan3D-2 çalıştırıldı (gerçek $0.062): ikisi de kusurlu — TRELLIS sol kanat perde artığı, Hunyuan renksiz/baş bozuk
 - [x] Anka V image-to-3D yeniden üretimi — **yapılmayacak**: tek fotodan temiz çıkmadı (TRELLIS arka plan karışık, Hunyuan dokusuz); Çağrı kararı 20 Eki, canlıdaki fotogrametri modeli kalıyor, GLB'ler arsiv/anka-3d-kaynak/cikti/'da
-- [ ] Anka V'in tur videosunu çektir, düzgün fotogrametriyle 3B modeli yeniden üret (FAZ-B-CEKIM-TALIMATI.md)
+- [x] Anka V'in tur videosunu çektir, düzgün fotogrametriyle 3B modeli yeniden üret (FAZ-B-CEKIM-TALIMATI.md) — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] Şeref relight testi yapıldı (3 kare, gerçek $0.025): IC-Light sır rengini ve deseni değiştiriyor (ΔE 27–39) — arsiv/seref-studio/RELIGHT-TEST-oncesi-sonrasi.jpg
 - [x] Relight — **yapılmayacak**: Çağrı kararı 20 Eki (netlik kıyası brief'i "RELIGHT YOK"; ücretli AI maddesi de kapalı)
 - [x] Şeref renk-koruyan netlik kıyası yapıldı (5 model × 3 kare, gerçek $0.131): renk hepsinde korunuyor (renk-ΔE 1.2–1.9), öneri GFPGAN — arsiv/seref-studio/NETLIK-KIYAS-oncesi-sonrasi.jpg
-- [~] Netlik iyileştirmesini tüm karelere uygulayıp uygulamamaya karar ver — BEKLİYOR: Çağrı — öneri GFPGAN v1.4 ×2, 52 kare ≈ $0.08 (20 Eki)
+- [x] Netlik iyileştirmesini tüm karelere uygulayıp uygulamamaya karar ver — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] Şeref 3 panonun tam karesine GFPGAN uygulandı (gerçek $0.023, pano ΔE 2.1–3.3, zemin açılıyor) — arsiv/seref-studio/GFPGAN-TAM-KARE-oncesi-sonrasi.jpg
 - [x] Ana site: product_images yedeklendi (494 satır → scripts/sql/yedek/product_images-2026-10-20-studio-oncesi.json); orijinal url'lere hiç yazılmıyor
 - [x] Ana site: 480 fotoğraf yerelde işlendi (IS-Net, ücretsiz); 86 bozuk kesme kare kırpmaya alındı, 25 odalı kare hariç; 455 studio_url DB'de (url değişmedi, canlı etkilenmedi)
@@ -187,11 +187,11 @@
 - [x] uarttasarim.com + kurumsal orijinal fotoğraflara döndü (UART_STUDIO_FOTO production'dan kaldırıldı, 56bdc13): stüdyo görseli 0, /tr /en 200
 - [x] Şeref sitesi orijinal fotoğraflara döndü (aynı seçim, eski Bilginin Kaynağı hero'su, 56bdc13): /tr /en 200, kırık yok
 - [x] "Resimli Seramikler" görünen adı "Zamansız Manzaralar" oldu (tr.json/en.json; DB anahtarı ve URL slug'ı aynı)
-- [~] EN çeviriyi teyit et — BEKLİYOR: Çağrı — "Timeless Landscapes" (21 Eki)
+- [x] EN çeviriyi teyit et — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] Zamansız Manzaralar'da 13 eserin her biri en farklı 6 fotoğrafa indirildi (147 kare gizlendi, silinmedi) — arsiv/zamansiz/ORNEK-the-sun-within-me.jpg
 - [x] Zamansız Manzaralar kontrol edildi: 13 eserin hepsi 6, fazlası yok (towards-the-sun da 6)
 - [x] Panolar başlığı "Kamusal alanda büyük ölçekli mimari seramik uygulamalar" oldu (tr/en.json)
-- [~] Panolar EN başlığını teyit et — BEKLİYOR: Çağrı — "Large-scale architectural ceramics in public spaces" (21 Eki)
+- [x] Panolar EN başlığını teyit et — **kapandı 22 Eki**: sanat konusu ablamdan yeni talep gelene kadar kapalı (Çağrı)
 - [x] Panolarda 10 eser 6'ya indirildi (54 kare gizlendi, silinmedi; Şeref sitesinin kareleri korundu)
 - [x] Lightbox fotoğrafı gerçek oranında ekranı dolduracak boyutta gösteriyor (sizes 100vw, dar kenar, aşağı çekip kapatma)
 - [x] Ablam düzeltmeleri: Drive kaynakları bulundu (Hakkımızda: Melike.jpg + şeref.jpg; Melike Sergiler 15 foto; Projeler/Assos Athena Tapınağı Maketi; Güzel Bakış 6 yeni foto)
@@ -202,3 +202,4 @@
 - [x] Şeref sayfasına Projeler eklendi: Assos Athena Tapınağı Seramik Maketi, 9 foto, metin Drive belgesinden
 - [x] Güzel Bakış'ta 6 yeni foto (eski 6 gizlendi, silinmedi; geri alma SQL hazır)
 - [x] Kurumsal ana sayfa başlığı "Kamusal alanda büyük ölçekli mimari seramik uygulamalar" oldu (EN "Large-scale architectural ceramics in public spaces")
+- [~] Ablanın WA işlerini anla ve raporla (foto yeniden yükleme + ablanın kişisel sayfası + panel eğitimi) — BEKLİYOR: Çağrı — anlama onayı (10 Kas)
