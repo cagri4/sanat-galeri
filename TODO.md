@@ -202,4 +202,10 @@
 - [x] Şeref sayfasına Projeler eklendi: Assos Athena Tapınağı Seramik Maketi, 9 foto, metin Drive belgesinden
 - [x] Güzel Bakış'ta 6 yeni foto (eski 6 gizlendi, silinmedi; geri alma SQL hazır)
 - [x] Kurumsal ana sayfa başlığı "Kamusal alanda büyük ölçekli mimari seramik uygulamalar" oldu (EN "Large-scale architectural ceramics in public spaces")
-- [~] Ablanın WA işlerini anla ve raporla (foto yeniden yükleme + ablanın kişisel sayfası + panel eğitimi) — BEKLİYOR: Çağrı — anlama onayı (10 Kas)
+- [x] Ablanın WA işleri anlaşıldı ve raporlandı; Çağrı/ablam cevapladı (GOREV-A-FOTO-YENILEME-10-11)
+- [x] Görev A: 279 görünür eser fotosu + 144 sergi fotosu SEO adlı Cloudinary kopyalarına geçti, alt-text eser adıyla yenilendi (yedek + GERI-AL scripts/sql/2026-11-10-seo-foto-adlari*; görünürlük/sıra 0 ihlal)
+- [~] Ablanın 3 yeni karesini görünür yap — BEKLİYOR: Çağrı — gizli eklendi (690–692: Troia duvar görünümü, Günün Eşiği tabak, Derin Suyun Uykusu kase); üç eserde de 6 dolu, hangi karenin yerine? (10 Kas)
+- [~] Atölye fotoları + Assos + Melike sergi fotolarını SEO adlarına geçir — BEKLİYOR: Çağrı — kodda dosya adıyla bağlı, deploy gerekir (10 Kas)
+- [~] Drive seti ile sitedeki seçimi eşitleyip eşitlememeye karar ver — BEKLİYOR: Çağrı — 44 görünür fotonun Drive'da karşılığı yok, Drive'daki 59 kare sitede gizli (10 Kas)
+- [x] Antik Dönem'de Volütlü Krater, Aulos Çalan Mainad — Kylix ve Afrodit ve Kaz (form: Kylix) başa alındı (canlıda sıra doğrulandı)
+- [x] Admin panel durumu kesinleşti: uarttasarim.com/admin/login çalışıyor (tek ortak hesap); eser/foto/biyografi/mesaj yönetiyor, ana sayfa ve 18/19 sergi grubu yönetilemiyor
