@@ -214,4 +214,5 @@
 - [x] Yandex eski görsel kaynağı bulundu (2017–22 ASP sitesi, şimdi 404) + Webmaster kaldırma yöntemi çıkarıldı (12 Kas)
 - [x] 3 madde bulgu+aksiyonu rc-inbox'a raporlandı (12 Kas)
 - [~] Marka adı SEO düzeltmesini uygula (WebSite/Organization JSON-LD, title, gerçek açıklama, og:site_name) — BEKLİYOR: Çağrı — kod+prod deploy onayı (12 Kas)
-- [~] Yandex Webmaster'da eski adresleri kaldır — BEKLİYOR: Çağrı — hangi Yandex hesabı + doğrulama yolu (meta=deploy / DNS=GoDaddy); abladan örnek sonuç (12 Kas)
+- [~] Yandex Webmaster'da eski adresleri kaldır — BEKLİYOR: Çağrı — hangi Yandex hesabı (doğrulama Cloudflare DNS TXT ile deploysuz yapılır); abladan örnek sonuç (12 Kas)
+- [x] Ablam'a WA mesaj taslağı hazırlandı (ABLAM-WA-TASLAK-13KAS.md, 5 madde), rc-inbox'a yazıldı — gönderim Çağrı'da
