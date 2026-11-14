@@ -14,6 +14,8 @@ import SeriesTabs from '@/components/shared/series-tabs'
 import CardRail from '@/components/shared/card-rail'
 import Reveal from '@/components/motion/reveal'
 import { galleryCollections, itemsFor } from '@/lib/series'
+import { siteDomains } from '@/lib/site'
+import { SOCIAL } from '@/lib/social'
 import { staggerDelay } from '@/lib/motion'
 
 export async function generateMetadata({
@@ -23,7 +25,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'meta' })
-  return { title: t('homeTitle'), description: t('homeDesc') }
+  // Marka adı sinyali (14 Kas, Çağrı onayı): Google "uarttasarım"ı "uart tasarım"
+  // diye bölmeyi öneriyordu. Site adı = og:site_name + WebSite JSON-LD (aşağıda).
+  return {
+    title: { absolute: t('homeTitle') },
+    description: t('homeDesc'),
+    openGraph: { siteName: 'Uarttasarım', title: t('homeTitle'), description: t('homeDesc'), type: 'website', locale: locale === 'tr' ? 'tr_TR' : 'en_US' },
+  }
 }
 
 export default async function HomePage({
@@ -38,6 +46,15 @@ export default async function HomePage({
   const th = await getTranslations({ locale, namespace: 'home' })
   const ta = await getTranslations({ locale, namespace: 'about' })
   const isTr = locale === 'tr'
+
+  // Google site adı: WebSite.name + alternateName yalnız ana sayfada (Google dokümanı).
+  const galeriDomain = siteDomains().galeri
+  const siteUrl = galeriDomain ? `https://${galeriDomain}/` : undefined
+  const jsonLd = [
+    { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Uarttasarım', alternateName: ['UARTTASARIM', 'Uart Tasarım', 'U-Art Tasarım', 'uarttasarim'], url: siteUrl },
+    { '@context': 'https://schema.org', '@type': 'Organization', name: 'Uarttasarım', alternateName: 'UARTTASARIM', url: siteUrl,
+      logo: siteUrl ? `${siteUrl}brand/uart-logo.png` : undefined, description: t('homeDesc'), sameAs: [SOCIAL.instagram.url] },
+  ]
 
   const MAIN_URL = process.env.NEXT_PUBLIC_MAIN_URL ?? ''
   const MELIKE_URL = process.env.NEXT_PUBLIC_MELIKE_URL ?? '#'
@@ -112,6 +129,8 @@ export default async function HomePage({
   })).filter((b) => b.cover) // boş kategori ana sayfada "yakında" kutusu olarak durmaz
 
   return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     <main>
       {/* Hero — atölyeden üç kare (mobilde ilki). Görünür başlık sanatçının isteğiyle
           kaldırıldı (16 Eki); h1 ekran okuyucular için site adı olarak kalır. */}
@@ -384,5 +403,6 @@ export default async function HomePage({
       </Reveal>
 
     </main>
+    </>
   )
 }

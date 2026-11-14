@@ -213,6 +213,10 @@
 - [x] Google "uart tasarım" önerisinin sebebi bulundu, adımlar çıkarıldı (title/açıklama şablon, JSON-LD yok) (12 Kas)
 - [x] Yandex eski görsel kaynağı bulundu (2017–22 ASP sitesi, şimdi 404) + Webmaster kaldırma yöntemi çıkarıldı (12 Kas)
 - [x] 3 madde bulgu+aksiyonu rc-inbox'a raporlandı (12 Kas)
-- [~] Marka adı SEO düzeltmesini uygula (WebSite/Organization JSON-LD, title, gerçek açıklama, og:site_name) — BEKLİYOR: Çağrı — kod+prod deploy onayı (12 Kas)
-- [~] Yandex Webmaster'da eski adresleri kaldır — BEKLİYOR: Çağrı — hangi Yandex hesabı (doğrulama Cloudflare DNS TXT ile deploysuz yapılır); abladan örnek sonuç (12 Kas)
+- [x] Marka adı SEO düzeltmesi onaylandı (Çağrı 14 Kas) — uygulama aşağıda
+- [~] Yandex Webmaster'da eski adresleri kaldır — BEKLİYOR: Ablam — Yandex'te gördüğü eski görsellerin ekran görüntüsü (14 Kas)
 - [x] Ablam'a WA mesaj taslağı hazırlandı (ABLAM-WA-TASLAK-13KAS.md, 5 madde), rc-inbox'a yazıldı — gönderim Çağrı'da
+- [ ] Marka adı SEO sinyallerini ekle (WebSite/Organization JSON-LD, başlık, gerçek açıklama, og:site_name) ve galeri prod'a al — Çağrı onayladı (14 Kas)
+- [ ] Drive'ı baştan indir, siteyle karşılaştır: yeni fotolar, adı değişen eserler (dosya adı / eser adı), Drive'da olup sitede olmayan ve tersi (14 Kas)
+- [ ] Çan Krater / Kalyx Krater adının Drive'daki yeni adla çözülüp çözülmediğine bak (14 Kas)
+- [ ] Eser bazında önce/sonra değişiklik listesi + önizleme hazırla (prod'a alma — Çağrı onayı) (14 Kas)
