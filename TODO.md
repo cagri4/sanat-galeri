@@ -204,9 +204,9 @@
 - [x] Kurumsal ana sayfa başlığı "Kamusal alanda büyük ölçekli mimari seramik uygulamalar" oldu (EN "Large-scale architectural ceramics in public spaces")
 - [x] Ablanın WA işleri anlaşıldı ve raporlandı; Çağrı/ablam cevapladı (GOREV-A-FOTO-YENILEME-10-11)
 - [x] Görev A: 279 görünür eser fotosu + 144 sergi fotosu SEO adlı Cloudinary kopyalarına geçti, alt-text eser adıyla yenilendi (yedek + GERI-AL scripts/sql/2026-11-10-seo-foto-adlari*; görünürlük/sıra 0 ihlal)
-- [~] Ablanın 3 yeni karesini görünür yap — BEKLİYOR: Çağrı — abla 12 Kas numaralı kontaktla tekrar soruluyor; gizli eklendi (690–692: Troia duvar görünümü, Günün Eşiği tabak, Derin Suyun Uykusu kase); üç eserde de 6 dolu, hangi karenin yerine? (10 Kas)
+- [~] Ablanın 3 yeni karesini görünür yap — BEKLİYOR: Çağrı — Drive senkronunun içinde (690–692 öncelikli giriyor), senkron onayına bağlı; gizli eklendi (690–692: Troia duvar görünümü, Günün Eşiği tabak, Derin Suyun Uykusu kase); üç eserde de 6 dolu, hangi karenin yerine? (10 Kas)
 - [~] Atölye fotoları + Assos + Melike sergi fotolarını SEO adlarına geçir — BEKLİYOR: Çağrı — kodda dosya adıyla bağlı, deploy gerekir (10 Kas)
-- [~] Drive seti ile sitedeki seçimi eşitleyip eşitlememeye karar ver — BEKLİYOR: Çağrı — 44 görünür fotonun Drive'da karşılığı yok, Drive'daki 59 kare sitede gizli (10 Kas)
+- [x] Drive seti ↔ site seçimi kararı verildi: eşitlenecek (Abla 13 Kas: 'yeni fotoğrafları koy') — uygulama aşağıdaki onaya bağlı
 - [x] Antik Dönem'de Volütlü Krater, Aulos Çalan Mainad — Kylix ve Afrodit ve Kaz (form: Kylix) başa alındı (canlıda sıra doğrulandı)
 - [x] Admin panel durumu kesinleşti: uarttasarim.com/admin/login çalışıyor (tek ortak hesap); eser/foto/biyografi/mesaj yönetiyor, ana sayfa ve 18/19 sergi grubu yönetilemiyor
 - [x] Ablanın "hangi fotonun yerine?" sorusu netleştirildi — arsiv/ablam-soru-12kas/ numaralı kontakt + tek soru; 3 eserin mevcut 6'sı + yeni kare numaralı kontakt sayfası, tek sade soru (12 Kas)
@@ -216,7 +216,11 @@
 - [x] Marka adı SEO düzeltmesi onaylandı (Çağrı 14 Kas) — uygulama aşağıda
 - [~] Yandex Webmaster'da eski adresleri kaldır — BEKLİYOR: Ablam — Yandex'te gördüğü eski görsellerin ekran görüntüsü (14 Kas)
 - [x] Ablam'a WA mesaj taslağı hazırlandı (ABLAM-WA-TASLAK-13KAS.md, 5 madde), rc-inbox'a yazıldı — gönderim Çağrı'da
-- [ ] Marka adı SEO sinyallerini ekle (WebSite/Organization JSON-LD, başlık, gerçek açıklama, og:site_name) ve galeri prod'a al — Çağrı onayladı (14 Kas)
-- [ ] Drive'ı baştan indir, siteyle karşılaştır: yeni fotolar, adı değişen eserler (dosya adı / eser adı), Drive'da olup sitede olmayan ve tersi (14 Kas)
-- [ ] Çan Krater / Kalyx Krater adının Drive'daki yeni adla çözülüp çözülmediğine bak (14 Kas)
-- [ ] Eser bazında önce/sonra değişiklik listesi + önizleme hazırla (prod'a alma — Çağrı onayı) (14 Kas)
+- [x] Marka adı SEO sinyalleri canlıda (e154d5c): WebSite+Organization JSON-LD, og:site_name, başlık 'Uarttasarım — Seramik Atölyesi ve Sanat Galerisi', gerçek açıklama; /tr /en doğrulandı (14 Kas)
+- [x] Drive baştan okundu ve siteyle karşılaştırıldı: Drive 6 Kas'tan beri değişmemiş; 34 takas / 15 eser, eser adında 3 fark (scripts/gorevB-karsilastir.py, gorevB-plan.py) (14 Kas)
+- [x] Çan/Kalyx Krater çözüldü: Drive'ın tamamı 'Kalyx Krater' diyor, form da kalyx; ad değişikliği SQL'i hazır (uygulanmadı) (14 Kas)
+- [x] Önce/sonra önizlemesi yayınlandı (https://claude.ai/artifact/9QGVTX5QepcissZGa7dKtj); SQL + GERI-AL hazır, uygulanmadı (14 Kas)
+- [~] Drive senkronunu canlıya al (scripts/sql/2026-11-14-drive-senkron.sql, 34 takas) — BEKLİYOR: Çağrı — önizleme onayı; Troya'da yüz detayı, imza ve kalkan karesi çıkıyor (14 Kas)
+- [~] Çan Krater adını Kalyx Krater / Calyx Krater yap (scripts/sql/2026-11-14-kalyx-krater.sql) — BEKLİYOR: Çağrı — onay; 3b-pilot sayfa metnindeki 'Çan Krater' de güncellenmeli (14 Kas)
+- [~] Aulos kylix eserinin adını netleştir (site 'Mainad', Drive 'müzisyen') — BEKLİYOR: Ablam — hangisi doğru (14 Kas)
+- [~] 'Dönen Gökyüzü' adını ayır (the-rotating-sky ve the-turning-sky aynı TR adı taşıyor) — BEKLİYOR: Ablam — ikinci eserin Türkçe adı (14 Kas)
