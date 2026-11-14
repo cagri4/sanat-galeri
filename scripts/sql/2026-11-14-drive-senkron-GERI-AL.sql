@@ -1,5 +1,4 @@
--- Görev B (14 Kas): Drive senkronu — sitede görünen ama Drive'da olmayan kare, aynı eserin Drive'da olup gizli duran karesiyle yer değiştirir.
--- UYGULANMADI: Çağrı onayı bekliyor. Önizleme: rc-inbox raporundaki link. Silme yok, yalnız is_visible/sort_order.
+-- Görev B (14 Kas): Drive senkronu — Çağrı onayı 14 Kas, TROYA HARİÇ (14 eser, 29 takas). Yedek: scripts/sql/yedek/product_images-2026-11-14-senkron-oncesi.json
 BEGIN;
 UPDATE product_images SET is_visible=true WHERE id=187;
 UPDATE product_images SET is_visible=false, sort_order=6 WHERE id=185;
@@ -7,16 +6,6 @@ UPDATE product_images SET is_visible=true WHERE id=195;
 UPDATE product_images SET is_visible=false, sort_order=5 WHERE id=196;
 UPDATE product_images SET is_visible=true WHERE id=217;
 UPDATE product_images SET is_visible=false, sort_order=1 WHERE id=209;
-UPDATE product_images SET is_visible=true WHERE id=226;
-UPDATE product_images SET is_visible=false, sort_order=100 WHERE id=690;
-UPDATE product_images SET is_visible=true WHERE id=229;
-UPDATE product_images SET is_visible=false, sort_order=1 WHERE id=227;
-UPDATE product_images SET is_visible=true WHERE id=231;
-UPDATE product_images SET is_visible=false, sort_order=2 WHERE id=228;
-UPDATE product_images SET is_visible=true WHERE id=232;
-UPDATE product_images SET is_visible=false, sort_order=4 WHERE id=230;
-UPDATE product_images SET is_visible=true WHERE id=241;
-UPDATE product_images SET is_visible=false, sort_order=17 WHERE id=243;
 UPDATE product_images SET is_visible=true WHERE id=262;
 UPDATE product_images SET is_visible=false, sort_order=6 WHERE id=258;
 UPDATE product_images SET is_visible=true WHERE id=264;

@@ -204,7 +204,7 @@
 - [x] Kurumsal ana sayfa başlığı "Kamusal alanda büyük ölçekli mimari seramik uygulamalar" oldu (EN "Large-scale architectural ceramics in public spaces")
 - [x] Ablanın WA işleri anlaşıldı ve raporlandı; Çağrı/ablam cevapladı (GOREV-A-FOTO-YENILEME-10-11)
 - [x] Görev A: 279 görünür eser fotosu + 144 sergi fotosu SEO adlı Cloudinary kopyalarına geçti, alt-text eser adıyla yenilendi (yedek + GERI-AL scripts/sql/2026-11-10-seo-foto-adlari*; görünürlük/sıra 0 ihlal)
-- [~] Ablanın 3 yeni karesini görünür yap — BEKLİYOR: Çağrı — Drive senkronunun içinde (690–692 öncelikli giriyor), senkron onayına bağlı; gizli eklendi (690–692: Troia duvar görünümü, Günün Eşiği tabak, Derin Suyun Uykusu kase); üç eserde de 6 dolu, hangi karenin yerine? (10 Kas)
+- [x] Ablanın yeni kareleri görünür yapıldı: Günün Eşiği (691) ve Derin Suyun Uykusu (692) canlıda; Troya karesi (690) Troya kararına bağlı, gizli (14 Kas)
 - [~] Atölye fotoları + Assos + Melike sergi fotolarını SEO adlarına geçir — BEKLİYOR: Çağrı — kodda dosya adıyla bağlı, deploy gerekir (10 Kas)
 - [x] Drive seti ↔ site seçimi kararı verildi: eşitlenecek (Abla 13 Kas: 'yeni fotoğrafları koy') — uygulama aşağıdaki onaya bağlı
 - [x] Antik Dönem'de Volütlü Krater, Aulos Çalan Mainad — Kylix ve Afrodit ve Kaz (form: Kylix) başa alındı (canlıda sıra doğrulandı)
@@ -214,13 +214,14 @@
 - [x] Yandex eski görsel kaynağı bulundu (2017–22 ASP sitesi, şimdi 404) + Webmaster kaldırma yöntemi çıkarıldı (12 Kas)
 - [x] 3 madde bulgu+aksiyonu rc-inbox'a raporlandı (12 Kas)
 - [x] Marka adı SEO düzeltmesi onaylandı (Çağrı 14 Kas) — uygulama aşağıda
-- [~] Yandex Webmaster'da eski adresleri kaldır — BEKLİYOR: Ablam — Yandex'te gördüğü eski görsellerin ekran görüntüsü (14 Kas)
+- [~] Yandex Webmaster'da eski adresleri kaldır — BEKLİYOR: Ablam — eski foto ekran görüntüsü (14 Kas)
 - [x] Ablam'a WA mesaj taslağı hazırlandı (ABLAM-WA-TASLAK-13KAS.md, 5 madde), rc-inbox'a yazıldı — gönderim Çağrı'da
 - [x] Marka adı SEO sinyalleri canlıda (e154d5c): WebSite+Organization JSON-LD, og:site_name, başlık 'Uarttasarım — Seramik Atölyesi ve Sanat Galerisi', gerçek açıklama; /tr /en doğrulandı (14 Kas)
 - [x] Drive baştan okundu ve siteyle karşılaştırıldı: Drive 6 Kas'tan beri değişmemiş; 34 takas / 15 eser, eser adında 3 fark (scripts/gorevB-karsilastir.py, gorevB-plan.py) (14 Kas)
 - [x] Çan/Kalyx Krater çözüldü: Drive'ın tamamı 'Kalyx Krater' diyor, form da kalyx; ad değişikliği SQL'i hazır (uygulanmadı) (14 Kas)
 - [x] Önce/sonra önizlemesi yayınlandı (https://claude.ai/artifact/9QGVTX5QepcissZGa7dKtj); SQL + GERI-AL hazır, uygulanmadı (14 Kas)
-- [~] Drive senkronunu canlıya al (scripts/sql/2026-11-14-drive-senkron.sql, 34 takas) — BEKLİYOR: Çağrı — önizleme onayı; Troya'da yüz detayı, imza ve kalkan karesi çıkıyor (14 Kas)
-- [~] Çan Krater adını Kalyx Krater / Calyx Krater yap (scripts/sql/2026-11-14-kalyx-krater.sql) — BEKLİYOR: Çağrı — onay; 3b-pilot sayfa metnindeki 'Çan Krater' de güncellenmeli (14 Kas)
-- [~] Aulos kylix eserinin adını netleştir (site 'Mainad', Drive 'müzisyen') — BEKLİYOR: Ablam — hangisi doğru (14 Kas)
-- [~] 'Dönen Gökyüzü' adını ayır (the-rotating-sky ve the-turning-sky aynı TR adı taşıyor) — BEKLİYOR: Ablam — ikinci eserin Türkçe adı (14 Kas)
+- [x] Drive senkronu canlıda (Çağrı onayı 14 Kas, Troya hariç): 14 eserde 29 takas, 58 UPDATE; yedek + GERI-AL SQL saklandı; DB↔plan 0 fark, görünür 279→279, 9 eser canlı sayfada doğrulandı (14 Kas)
+- [~] Çan Krater adını Kalyx Krater yap ve 3B pilot metnini güncelle (SQL hazır: scripts/sql/2026-11-14-kalyx-krater.sql) — BEKLİYOR: Ablam — ad onayı (14 Kas)
+- [~] Aulos kylix eserinin adını netleştir — BEKLİYOR: Ablam — Mainad mı Müzisyen mi (14 Kas)
+- [~] İkinci 'Dönen Gökyüzü' eserine ayrı Türkçe ad ver (the-rotating-sky / the-turning-sky) — BEKLİYOR: Ablam — Türkçe adı (14 Kas)
+- [~] Troya Yılı Anısına 1915 fotolarını netleştir (Drive'daki 6 mı, yoksa imza/yüz/kalkan kalsın mı; 690 dahil) — BEKLİYOR: Ablam — tercih (14 Kas)

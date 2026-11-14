@@ -1,5 +1,4 @@
--- Görev B (14 Kas): Drive senkronu — sitede görünen ama Drive'da olmayan kare, aynı eserin Drive'da olup gizli duran karesiyle yer değiştirir.
--- UYGULANMADI: Çağrı onayı bekliyor. Önizleme: rc-inbox raporundaki link. Silme yok, yalnız is_visible/sort_order.
+-- Görev B (14 Kas): Drive senkronu — Çağrı onayı 14 Kas, TROYA HARİÇ (14 eser, 29 takas). Yedek: scripts/sql/yedek/product_images-2026-11-14-senkron-oncesi.json
 BEGIN;
 UPDATE product_images SET is_visible=false WHERE id=187 AND is_visible=true;  -- parion-esintisi çıkan
 UPDATE product_images SET is_visible=true, sort_order=8 WHERE id=185 AND is_visible=false;  -- parion-esintisi giren
@@ -7,16 +6,6 @@ UPDATE product_images SET is_visible=false WHERE id=195 AND is_visible=true;  --
 UPDATE product_images SET is_visible=true, sort_order=4 WHERE id=196 AND is_visible=false;  -- sifanin-isigi giren
 UPDATE product_images SET is_visible=false WHERE id=217 AND is_visible=true;  -- yurekli-yigitlerin-anisina-1915 çıkan
 UPDATE product_images SET is_visible=true, sort_order=9 WHERE id=209 AND is_visible=false;  -- yurekli-yigitlerin-anisina-1915 giren
-UPDATE product_images SET is_visible=false WHERE id=226 AND is_visible=true;  -- troia-yili-anisina-1915 çıkan
-UPDATE product_images SET is_visible=true, sort_order=0 WHERE id=690 AND is_visible=false;  -- troia-yili-anisina-1915 giren
-UPDATE product_images SET is_visible=false WHERE id=229 AND is_visible=true;  -- troia-yili-anisina-1915 çıkan
-UPDATE product_images SET is_visible=true, sort_order=3 WHERE id=227 AND is_visible=false;  -- troia-yili-anisina-1915 giren
-UPDATE product_images SET is_visible=false WHERE id=231 AND is_visible=true;  -- troia-yili-anisina-1915 çıkan
-UPDATE product_images SET is_visible=true, sort_order=5 WHERE id=228 AND is_visible=false;  -- troia-yili-anisina-1915 giren
-UPDATE product_images SET is_visible=false WHERE id=232 AND is_visible=true;  -- troia-yili-anisina-1915 çıkan
-UPDATE product_images SET is_visible=true, sort_order=6 WHERE id=230 AND is_visible=false;  -- troia-yili-anisina-1915 giren
-UPDATE product_images SET is_visible=false WHERE id=241 AND is_visible=true;  -- troia-yili-anisina-1915 çıkan
-UPDATE product_images SET is_visible=true, sort_order=15 WHERE id=243 AND is_visible=false;  -- troia-yili-anisina-1915 giren
 UPDATE product_images SET is_visible=false WHERE id=262 AND is_visible=true;  -- the-sun-within-me çıkan
 UPDATE product_images SET is_visible=true, sort_order=10 WHERE id=258 AND is_visible=false;  -- the-sun-within-me giren
 UPDATE product_images SET is_visible=false WHERE id=264 AND is_visible=true;  -- the-sun-within-me çıkan
