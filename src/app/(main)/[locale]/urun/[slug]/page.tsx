@@ -11,7 +11,8 @@ import Reveal from '@/components/motion/reveal'
 import RichText from '@/components/shared/rich-text'
 import Model3DViewer from '@/components/gallery/model-3d'
 import { MODELS_3D } from '@/lib/models-3d'
-import { collectionLabel } from '@/lib/categories'
+import { collectionAbout, collectionLabel } from '@/lib/categories'
+import SeriesAbout from '@/components/gallery/series-about'
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>
@@ -70,6 +71,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
   // "Replika Hakkında" bloğu yalnızca replikalarda (ya da esere özel metin
   // girilmişse) gösterilir; panolarda/resimli seramiklerde replika metni basılmaz.
   const aboutText = ownAbout || (isReplica ? t('aboutText') : '')
+  const seriesAbout = isMimari ? null : collectionAbout(eser.collection, locale)
 
   // Katalog satırları — sanatçının istediği sıra. Değeri olmayan alan gizlenir.
   // Mimari panolarda `collection` alanı eserin kurulduğu KONUMU tutar (bu
@@ -182,6 +184,9 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
               paragraphClassName="max-w-[68ch] whitespace-pre-line text-[length:var(--text-body)] leading-[1.8] text-[#4a4a4a]"
             />
           )}
+
+          {/* Seri hakkında — sanatçının seri açıklaması, şiirden ayrı (18 Kas). */}
+          {seriesAbout && <SeriesAbout text={seriesAbout} locale={locale} />}
 
           {/* Replika Hakkında — yalnızca replikalarda ya da esere özel metin
               girildiğinde gösterilir (aboutText boşsa hiç basılmaz). */}

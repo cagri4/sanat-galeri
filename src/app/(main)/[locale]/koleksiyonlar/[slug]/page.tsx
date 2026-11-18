@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { getProducts } from '@/lib/queries/gallery'
-import { categoryBySlug } from '@/lib/categories'
+import { COLLECTIONS, categoryBySlug } from '@/lib/categories'
+import SeriesAbout from '@/components/gallery/series-about'
 import { isOnSite } from '@/lib/site'
 import ArtworkGrid from '@/components/gallery/artwork-grid'
 import PageBanner, { bannerFromProducts } from '@/components/shared/page-banner'
@@ -98,6 +99,10 @@ export default async function KoleksiyonPage({ params }: PageProps) {
   }
 
   const isAntik = category === ANTIK
+  // Bu sayfadaki eserlerin koleksiyonlarından seri açıklaması olanlar (ör. Zamansız Manzaralar).
+  const seriesAbouts = (COLLECTIONS[category] ?? []).filter(
+    (c) => c.about && products.some((p) => p.collection === c.tr),
+  )
   // Seri = koleksiyonun ana adı ("Masalın Hafızası — Anka Serisi" → "Masalın Hafızası").
   const seriMap = new Map<string, typeof products>()
   for (const p of products) {
@@ -137,6 +142,10 @@ export default async function KoleksiyonPage({ params }: PageProps) {
           </p>
         </div>
       )}
+
+      {seriesAbouts.map((c) => (
+        <SeriesAbout key={c.tr} text={c.about![locale === 'tr' ? 'tr' : 'en']} locale={locale} className="mt-8" />
+      ))}
 
       {/* Birden çok seri varsa seri başlıklarıyla; tek seride düz ızgara.
           (Heykeller artık seri başına ayrı sayfa — burada tek seri kalır.) */}

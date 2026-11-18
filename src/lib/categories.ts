@@ -20,8 +20,32 @@ export type Category = (typeof CATEGORIES)[number]
  * Kategori altındaki koleksiyonlar (alt-seri).
  * Fotoğraflar geldikçe eserler bu koleksiyonlara bağlanacak.
  */
-export const COLLECTIONS: Record<string, { tr: string; en: string }[]> = {
-  'Resimli Seramikler': [{ tr: 'Zamansız Manzaralar', en: 'Timeless Landscapes' }],
+export type CollectionInfo = { tr: string; en: string; about?: { tr: string; en: string } }
+
+/**
+ * Seri açıklaması TEK yerde (`about`): eser sayfalarında ve koleksiyon sayfasında
+ * buradan basılır. Metin sanatçının kendisinin — kelimesine dokunulmaz; yalnız
+ * satır sonu (\n) ve paragraf (\n\n) eklendi. Zamansız Manzaralar: Melike,
+ * Çağrı onayı 18 Kas 2026 ("yok" satırları alt alta).
+ */
+export const COLLECTIONS: Record<string, CollectionInfo[]> = {
+  'Resimli Seramikler': [
+    {
+      tr: 'Zamansız Manzaralar',
+      en: 'Timeless Landscapes',
+      about: {
+        tr: 'Doğayı temsil etmekten çok, doğanın maddesel hafızasını ve insanda bıraktığı şiirsel etkileri araştırıyorum.\n\nPerspektif yok,\nsabit zaman yok,\ntek bakış noktası yok,\nnet sınırlar yok.\n\nBu yüzden bir zamana ait değiller; gelip geçen bir an, hafızanın izleri.',
+        en: 'Rather than representing nature, I explore its material memory and the poetic traces it leaves in us.\n\nNo perspective,\nno fixed time,\nno single point of view,\nno clear borders.\n\nThat is why they belong to no time: a passing moment, traces of memory.',
+      },
+    },
+  ],
+}
+
+/** Eserin koleksiyonunun seri açıklaması (o dilde); yoksa null. */
+export function collectionAbout(collection: string | null | undefined, locale: string): string | null {
+  if (!collection) return null
+  const hit = Object.values(COLLECTIONS).flat().find((c) => c.tr === collection)
+  return hit?.about ? hit.about[locale === 'tr' ? 'tr' : 'en'] : null
 }
 
 /**
