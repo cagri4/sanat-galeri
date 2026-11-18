@@ -20,8 +20,15 @@ export const SEREF_KART_ATOLYE = { slug: ATOLYE_SLUG, file: 'atolye-2026-10-7' }
 /** Hakkımızda başlık bandı: geniş atölye karesi. */
 export const HAKKIMIZDA_BANNER_ATOLYE = { slug: ATOLYE_SLUG, file: 'atolye-2026-10-11' }
 
+/** 18 Kas: atölye kareleri SEO adlı kopyalara geçti (atolye-2026-10-N → uarttasarim-seramik-atolyesi-N,
+ *  scripts/seo-ad-kalan.py). Geçiş/geri alma sırasında kırılmasın diye iki ad da tanınır. */
+function adlar(file: string): string[] {
+  const m = file.match(/^atolye-2026-10-(\d+)$/)
+  return m ? [file, `uarttasarim-seramik-atolyesi-${m[1]}`] : [file]
+}
+
 function matches(p: { exhibitionSlug: string; url: string }, h: { slug: string; file: string }) {
-  return p.exhibitionSlug === h.slug && new RegExp(`/${h.file}\\.[a-z]+$`).test(p.url)
+  return p.exhibitionSlug === h.slug && adlar(h.file).some((f) => new RegExp(`/${f}\\.[a-z]+$`).test(p.url))
 }
 
 /** Tek kare bul (yoksa null). */

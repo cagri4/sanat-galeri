@@ -13,3 +13,14 @@ describe('atölye kareleri', () => {
     expect(pickAtolye(photos).map((p) => p.id)).toEqual([1, 3])
   })
 })
+
+describe('SEO adlı atölye kareleri (18 Kas)', () => {
+  const yeni = (n: number, id: number) => ({ id, exhibitionSlug: ATOLYE_SLUG, url: `https://res.cloudinary.com/x/image/upload/v1/uarttasarim/sergi-seo/uarttasarim-seramik-atolyesi-${n}.jpg` })
+  it('yeni adı da eşler', () => {
+    expect(pickOne([yeni(6, 1), yeni(7, 2)], SEREF_KART_ATOLYE)?.id).toBe(2)
+    expect(pickAtolye([yeni(2, 1), yeni(6, 2), yeni(8, 3)]).map((x) => x.id)).toEqual([3, 1, 2])
+  })
+  it('benzer numarayı karıştırmaz', () => {
+    expect(pickOne([yeni(17, 1)], SEREF_KART_ATOLYE)).toBeNull()
+  })
+})

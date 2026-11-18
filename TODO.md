@@ -205,7 +205,7 @@
 - [x] Ablanın WA işleri anlaşıldı ve raporlandı; Çağrı/ablam cevapladı (GOREV-A-FOTO-YENILEME-10-11)
 - [x] Görev A: 279 görünür eser fotosu + 144 sergi fotosu SEO adlı Cloudinary kopyalarına geçti, alt-text eser adıyla yenilendi (yedek + GERI-AL scripts/sql/2026-11-10-seo-foto-adlari*; görünürlük/sıra 0 ihlal)
 - [x] Ablanın yeni kareleri görünür yapıldı: Günün Eşiği (691) ve Derin Suyun Uykusu (692) canlıda; Troya karesi (690) Troya kararına bağlı, gizli (14 Kas)
-- [~] Atölye fotoları + Assos + Melike sergi fotolarını SEO adlarına geçir — BEKLİYOR: Çağrı — kodda dosya adıyla bağlı, deploy gerekir (10 Kas)
+- [ ] Atölye fotoları + Assos + Melike sergi fotolarını SEO adlarına geçir — Çağrı onayladı (18 Kas)
 - [x] Drive seti ↔ site seçimi kararı verildi: eşitlenecek (Abla 13 Kas: 'yeni fotoğrafları koy') — uygulama aşağıdaki onaya bağlı
 - [x] Antik Dönem'de Volütlü Krater, Aulos Çalan Mainad — Kylix ve Afrodit ve Kaz (form: Kylix) başa alındı (canlıda sıra doğrulandı)
 - [x] Admin panel durumu kesinleşti: uarttasarim.com/admin/login çalışıyor (tek ortak hesap); eser/foto/biyografi/mesaj yönetiyor, ana sayfa ve 18/19 sergi grubu yönetilemiyor
@@ -214,7 +214,7 @@
 - [x] Yandex eski görsel kaynağı bulundu (2017–22 ASP sitesi, şimdi 404) + Webmaster kaldırma yöntemi çıkarıldı (12 Kas)
 - [x] 3 madde bulgu+aksiyonu rc-inbox'a raporlandı (12 Kas)
 - [x] Marka adı SEO düzeltmesi onaylandı (Çağrı 14 Kas) — uygulama aşağıda
-- [~] Yandex Webmaster'da eski adresleri kaldır — BEKLİYOR: Ablam — eski foto ekran görüntüsü (14 Kas)
+- [x] Yandex Webmaster'da eski adresleri kaldırma — **takipten çıkarıldı**: ablam eski foto ekran görüntüsünü gönderirse yapılacak, hatırlatma yok (Çağrı 18 Kas)
 - [x] Ablam'a WA mesaj taslağı hazırlandı (ABLAM-WA-TASLAK-13KAS.md, 5 madde), rc-inbox'a yazıldı — gönderim Çağrı'da
 - [x] Marka adı SEO sinyalleri canlıda (e154d5c): WebSite+Organization JSON-LD, og:site_name, başlık 'Uarttasarım — Seramik Atölyesi ve Sanat Galerisi', gerçek açıklama; /tr /en doğrulandı (14 Kas)
 - [x] Drive baştan okundu ve siteyle karşılaştırıldı: Drive 6 Kas'tan beri değişmemiş; 34 takas / 15 eser, eser adında 3 fark (scripts/gorevB-karsilastir.py, gorevB-plan.py) (14 Kas)
