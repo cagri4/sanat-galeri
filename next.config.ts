@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
     return [{ source: '/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] }]
   },
   images: {
+    // Boyutlandırma Cloudinary'de (Vercel kotası 402, 18 Kas): src/lib/cloudinary-loader.ts
+    loader: 'custom',
+    loaderFile: './src/lib/cloudinary-loader.ts',
     remotePatterns: [
       {
         // Eser görselleri Supabase Storage'da (public "eserler" bucket'ı).
