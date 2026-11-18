@@ -233,3 +233,5 @@
 - [x] Volütlü Krater adı 'Volütlü Krater (Fransua Vazosu) / Volute Krater (François Vase)' oldu (18 Kas)
 - [x] Şeref şablon sitesinin (uart-seref.vercel.app) kırık görsellerini düzelt — **yapılmayacak**: Çağrı 10 Kas kararı — Şeref sitesini biz yapmıyoruz, örnek/şablon olarak kalıyor (18 Kas teyit)
 - [x] Opuscar stil girdisi çıkarıldı: 12 HEX (fotoğraftan örnek), motif/form/doku/çizgi, 10 referans eser — OPUSCAR-STIL-GIRDI-18KAS.md (18 Kas)
+- [x] uarttasarim.com vercel.app taraması yapıldı: 106 sayfada 4 Kurumsal menü linki; canonical/og/hreflang/sitemap/JSON-LD/DB temiz (18 Kas)
+- [~] Kurumsal linklerini vercel.app'ten çıkar — BEKLİYOR: Çağrı — Kurumsal'ın alan adı yok: kurumsal.uarttasarim.com (DNS) mi, uarttasarim.com/tr/kurumsal (DNS'siz) mi? (18 Kas)
