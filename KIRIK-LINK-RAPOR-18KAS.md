@@ -61,3 +61,27 @@ Bunlar Vercel panelinde (Usage → Image Optimization) görünür; CLI'dan bakam
 ## Sıra önerisi
 1. Seçenek A: kod, preview, Çağrı onayı, iki projeye prod deploy. Ardından tarayıcıyı yeniden çalıştırıp 402 = 0 doğrulanır.
 2. Sonra Ablam'ın foto planı: `scripts/g18-yukle.py`, ardından SQL. Önizleme: https://claude.ai/artifact/PNsH7ycKiZbJK6X9nP1iDu
+
+## UYGULANDI — 18 Kas (Çağrı onayı)
+
+**1) Görsel düzeltmesi (Seçenek A)** — commit `27177f3`. `src/lib/cloudinary-loader.ts` (`f_auto,q_auto,c_limit,w_<genişlik>`) + `next.config.ts` loader satırları.
+- galeri ve kurumsal projelerine prod deploy; ikisi de `vercel-bekle.sh` ile READY, commit eşleşti.
+- Yeniden tarama (tarayıcının srcset ayrıştırıcısı da düzeltildi: Cloudinary adresindeki virgül URL'ye ait):
+
+| Site | Önce kırık görsel adresi | Sonra | Foto |
+|---|---|---|---|
+| uarttasarim.com | 28 (4 foto) | **0** / 3.054 | 308 foto, hepsi 200; eski 4 kırık (mainad ×3, trees-first-home-4) 200 |
+| uart-kurumsal | 2.341 (234 foto) | **0** / 2.342 | 235 foto (logo dahil), hepsi 200 |
+
+- Sayfalarda artık `/_next/image` yok; Vercel görsel kotası kullanılmıyor.
+- **Geri alma:** `git revert 27177f3` → iki projeye `vercel deploy --prod` (scratch worktree + `.vercel/project.json`). DB'ye dokunmaz.
+- **Kapsam dışı, açık:** `uart-seref.vercel.app` (Şeref şablonu, ayrı proje) aynı 402 ile kırık (52/52 görsel). "Şeref'e dokunma" gereği deploy edilmedi. Çağrı kararı.
+
+**2) Ablam foto planı + başlıklar** — `scripts/sql/2026-11-18-ablam-drive.sql` uygulandı.
+- Yedek: `arsiv/yedek-2026-11-18/` (product_images 503, products 51 satır, CSV).
+- 27 kare Cloudinary'ye yüklendi (`g18-yukle.py`, 27/27 → 200). SQL: 27 INSERT + 62 UPDATE, hepsi 1 satır.
+- DB↔plan: 12 eserde görünür sıra planla **0 fark**.
+- Başlıklar: the-turning-sky → **Dünya Dönerken / As the World Turns**; volutlu-krater → **Volütlü Krater (Fransua Vazosu) / Volute Krater (François Vase)**.
+- Canlı: 10 antik eser TR+EN sayfasında yeni karelerin hepsi var, görseller 200; Troya sayfasında (Kurumsal) Drive'daki 5 kare var, gizlenen 6 yok.
+- **Not:** Şeref sayfasının seçimindeki (`seref-studio.ts`) Troya 229/232/237/241, Çan Krater 483 ve Tören Kabı 518 artık gizli. Sayfa kodu bu durumda eserin ilk görünür karelerine düşüyor; kod değiştirilmedi.
+- **Geri alma:** `psql "$DB" -f scripts/sql/2026-11-18-ablam-drive-GERI-AL.sql` (başlıklar dahil; yeni 27 satırı siler, eski görünürlük/sıra döner). Cloudinary'deki 27 dosya referanssız kalır, silinmesi gerekmez.

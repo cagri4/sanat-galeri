@@ -1,4 +1,4 @@
--- 18 Kas: Ablam'ın 13–14 Kas Drive güncellemesi (antik replikalar fotoları, Troya = Drive'daki 5, Dünya Dönerken). UYGULANMADI — Çağrı onayı.
+-- 18 Kas: Ablam'ın 13–14 Kas Drive güncellemesi (antik replikalar fotoları, Troya = Drive'daki 5, Dünya Dönerken). Çağrı onayladı (18 Kas).
 -- ÖNKOŞUL: yukle.json'daki kareler Cloudinary'ye yüklenmiş ve URL'ler 200 dönmeli (scripts/g18-yukle.py). Görsel kota sorunu (KIRIK-LINK-RAPOR-18KAS.md) önce çözülmeli.
 BEGIN;
 INSERT INTO product_images (product_id, url, alt_tr, alt_en, sort_order, is_visible) SELECT 9, 'https://res.cloudinary.com/df0henatz/image/upload/uarttasarim/eser/uarttasarim-afrodit-ve-kaz-drive-2026-11-1.jpg', 'Afrodit ve Kaz · Uarttasarım seramik', 'Aphrodite and the Goose · Uarttasarım ceramics', 0, true WHERE NOT EXISTS (SELECT 1 FROM product_images WHERE url='https://res.cloudinary.com/df0henatz/image/upload/uarttasarim/eser/uarttasarim-afrodit-ve-kaz-drive-2026-11-1.jpg');
@@ -89,4 +89,6 @@ UPDATE product_images SET is_visible=true, sort_order=5 WHERE id=276 AND is_visi
 UPDATE product_images SET is_visible=false WHERE id=274 AND is_visible=true;
 UPDATE product_images SET is_visible=false WHERE id=272 AND is_visible=true;
 UPDATE products SET title_tr='Dünya Dönerken', title_en='As the World Turns' WHERE slug='the-turning-sky' AND title_tr='Dönen Gökyüzü' AND title_en='The Turning Sky';
+-- Çağrı 18 Kas: Ablam'ın belge başlığındaki ek. François Vazosu bir volütlü kraterdir.
+UPDATE products SET title_tr='Volütlü Krater (Fransua Vazosu)', title_en='Volute Krater (François Vase)' WHERE slug='volutlu-krater' AND title_tr='Volütlü Krater' AND title_en='Volute Krater';
 COMMIT;

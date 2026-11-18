@@ -1,6 +1,7 @@
 -- 18 Kas: Ablam'ın 13–14 Kas Drive güncellemesi (antik replikalar fotoları, Troya = Drive'daki 5, Dünya Dönerken). GERİ ALMA — Çağrı onayı.
 -- ÖNKOŞUL: yukle.json'daki kareler Cloudinary'ye yüklenmiş ve URL'ler 200 dönmeli (scripts/g18-yukle.py). Görsel kota sorunu (KIRIK-LINK-RAPOR-18KAS.md) önce çözülmeli.
 BEGIN;
+UPDATE products SET title_tr='Volütlü Krater', title_en='Volute Krater' WHERE slug='volutlu-krater';
 UPDATE products SET title_tr='Dönen Gökyüzü', title_en='The Turning Sky' WHERE slug='the-turning-sky';
 UPDATE product_images SET is_visible=true, sort_order=4 WHERE id=272;
 UPDATE product_images SET is_visible=true, sort_order=1 WHERE id=274;

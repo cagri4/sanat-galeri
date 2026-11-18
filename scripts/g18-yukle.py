@@ -22,6 +22,9 @@ for y in json.load(open(S / 'yukle.json')):
     p['api_key'] = ENV['CLOUDINARY_API_KEY']
     r = requests.post(f"https://api.cloudinary.com/v1_1/{ENV['CLOUDINARY_CLOUD_NAME']}/image/upload", data=p, files={'file': open(f, 'rb')}, timeout=180)
     r.raise_for_status()
-    assert requests.head(y['url'], timeout=60).status_code == 200, y['url']
+    for _ in range(12):  # CDN yeni dosyayı birkaç saniye geç yansıtabiliyor
+        if requests.head(y['url'], timeout=60).status_code == 200: break
+        time.sleep(5)
+    else: raise AssertionError(y['url'])
     print('yüklendi', y['url'])
 print('tamam — şimdi SQL uygulanabilir')

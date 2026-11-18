@@ -11,6 +11,15 @@ HOST = sys.argv[2] if len(sys.argv) > 2 else 'uarttasarim.com'
 BASE = f'https://{HOST}'
 UA = 'Mozilla/5.0 (X11; Linux x86_64) kirik-link-tara/1.0'
 
+def srcset_urls(v):
+    """srcset'i tarayıcı gibi ayrıştır: URL boşluğa kadar okunur, içindeki virgül
+    (ör. Cloudinary f_auto,q_auto) URL'ye aittir; yalnız sondaki virgül ayırıcıdır."""
+    out = []
+    for m in re.finditer(r'\s*(\S+)(?:\s+[^,]*)?(?:,|$)', v):
+        u = m.group(1).rstrip(',')
+        if u: out.append(u)
+    return out
+
 class NoRedir(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, *a, **k): return None
 opener_noredir = urllib.request.build_opener(NoRedir)
@@ -42,17 +51,13 @@ class P(HTMLParser):
             if a.get('src'): s.imgs.append(a['src'])
             for k in ('srcset', 'imagesrcset'):
                 if a.get(k):
-                    for part in a[k].split(','):
-                        u = part.strip().split(' ')[0]
-                        if u: s.imgs.append(u)
+                    s.imgs.extend(srcset_urls(a[k]))
         if tag == 'meta' and a.get('property') in ('og:image',) or (tag=='meta' and a.get('name')=='twitter:image'):
             if a.get('content'): s.imgs.append(a['content'])
         if tag == 'link' and a.get('as') == 'image':
             if a.get('href'): s.imgs.append(a['href'])
             if a.get('imagesrcset'):
-                for part in a['imagesrcset'].split(','):
-                    u = part.strip().split(' ')[0]
-                    if u: s.imgs.append(u)
+                s.imgs.extend(srcset_urls(a['imagesrcset']))
         if a.get('style'):
             for u in re.findall(r'url\(["\']?([^"\')]+)', a['style']): s.imgs.append(u)
 
