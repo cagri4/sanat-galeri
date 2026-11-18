@@ -237,3 +237,4 @@
 - [~] Kurumsal linklerini vercel.app'ten çıkar — BEKLİYOR: Çağrı — Kurumsal'ın alan adı yok: kurumsal.uarttasarim.com (DNS) mi, uarttasarim.com/tr/kurumsal (DNS'siz) mi? (18 Kas)
 - [x] EN eser sayfalarında koleksiyon adı EN oldu: Timeless Landscapes, '… Series'; seri adları özel ad (191a838, canlı doğrulandı, 18 Kas)
 - [x] Eksik künye raporu + ablam soru şablonu yazıldı: 13 eser yalnız şiir (Zamansız Manzaralar) — EKSIK-KUNYE-RAPOR-18KAS.md (18 Kas)
+- [x] Zamansız Manzaralar seri açıklaması canlıda: 13 eser + koleksiyon sayfası, TR/EN 'Seri hakkında' bloğu, teknik/ölçü/yıl boş (0bfcc8b, 18 Kas)
