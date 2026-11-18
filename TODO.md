@@ -231,4 +231,5 @@
 - [x] Görsel 402 düzeltildi: Cloudinary loader, galeri+kurumsal deploy (27177f3); kırık görsel 28→0 ve 2.341→0 (18 Kas)
 - [x] Antik replika fotoları Drive'a göre güncellendi: 27 yeni kare, 43 gizleme; yedek + GERI-AL, DB↔plan 0 fark (18 Kas)
 - [x] Volütlü Krater adı 'Volütlü Krater (Fransua Vazosu) / Volute Krater (François Vase)' oldu (18 Kas)
-- [~] Şeref şablon sitesinin (uart-seref.vercel.app) kırık görsellerini düzelt (aynı 402; loader commit'i bu projeye deploy) — BEKLİYOR: Çağrı — Şeref'e dokunma kuralı, deploy onayı (18 Kas)
+- [x] Şeref şablon sitesinin (uart-seref.vercel.app) kırık görsellerini düzelt — **yapılmayacak**: Çağrı 10 Kas kararı — Şeref sitesini biz yapmıyoruz, örnek/şablon olarak kalıyor (18 Kas teyit)
+- [x] Opuscar stil girdisi çıkarıldı: 12 HEX (fotoğraftan örnek), motif/form/doku/çizgi, 10 referans eser — OPUSCAR-STIL-GIRDI-18KAS.md (18 Kas)
