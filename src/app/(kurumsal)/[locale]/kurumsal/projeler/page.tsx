@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import { getTranslations } from 'next-intl/server'
 import { getProducts } from '@/lib/queries/gallery'
-import { CATEGORIES, CATEGORY_SLUGS, categoryBySlug } from '@/lib/categories'
+import { CATEGORIES, CATEGORY_SLUGS, categoryBySlug, collectionLabel } from '@/lib/categories'
 import { categoriesForSite, kurumsalPath } from '@/lib/site'
 import { projectNo } from '@/lib/kurumsal'
 import ProjectCard from '@/components/kurumsal/project-card'
@@ -113,7 +113,7 @@ export default async function ProjelerPage({ params, searchParams }: PageProps) 
                       no={projectNo(i)}
                       title={isTr ? p.titleTr : p.titleEn}
                       image={p.images[0]?.url ?? null}
-                      meta={[p.year ? String(p.year) : null, p.collection, isTr ? p.dimensionsTr : p.dimensionsEn]}
+                      meta={[p.year ? String(p.year) : null, p.category === 'Mimari Duvar Panoları' ? p.collection : collectionLabel(p.collection, locale), isTr ? p.dimensionsTr : p.dimensionsEn]}
                     />
                     </Reveal>
                   ))}

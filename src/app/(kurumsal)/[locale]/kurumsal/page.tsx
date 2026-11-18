@@ -3,7 +3,7 @@ import { headers } from 'next/headers'
 import { getTranslations } from 'next-intl/server'
 import { getProducts } from '@/lib/queries/gallery'
 import { getExhibitionPhotosBySlugs } from '@/lib/queries/exhibition-photos'
-import { CATEGORIES } from '@/lib/categories'
+import { CATEGORIES, collectionLabel } from '@/lib/categories'
 import { categoriesForSite, kurumsalPath } from '@/lib/site'
 import { projectNo, projectStats } from '@/lib/kurumsal'
 import { yeniIcerikAcik } from '@/lib/yeni-icerik'
@@ -139,7 +139,7 @@ export default async function KurumsalHome({ params }: { params: Promise<{ local
                     no={projectNo(i)}
                     title={isTr ? p.titleTr : p.titleEn}
                     image={p.images[0]?.url ?? null}
-                    meta={[p.year ? String(p.year) : null, p.collection, isTr ? p.dimensionsTr : p.dimensionsEn]}
+                    meta={[p.year ? String(p.year) : null, p.category === 'Mimari Duvar Panoları' ? p.collection : collectionLabel(p.collection, locale), isTr ? p.dimensionsTr : p.dimensionsEn]}
                   />
                   </Reveal>
                 ))}

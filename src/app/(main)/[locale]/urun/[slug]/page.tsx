@@ -11,6 +11,7 @@ import Reveal from '@/components/motion/reveal'
 import RichText from '@/components/shared/rich-text'
 import Model3DViewer from '@/components/gallery/model-3d'
 import { MODELS_3D } from '@/lib/models-3d'
+import { collectionLabel } from '@/lib/categories'
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>
@@ -76,7 +77,7 @@ export default async function ArtworkDetailPage({ params }: PageProps) {
   const catalogRows = [
     {
       label: isMimari ? t('location') : t('collection'),
-      value: eser.collection,
+      value: isMimari ? eser.collection : collectionLabel(eser.collection, locale),
     },
     { label: isReplica ? t('form') : t('formType'), value: form },
     { label: t('period'), value: period },
