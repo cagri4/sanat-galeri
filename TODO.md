@@ -205,7 +205,7 @@
 - [x] Ablanın WA işleri anlaşıldı ve raporlandı; Çağrı/ablam cevapladı (GOREV-A-FOTO-YENILEME-10-11)
 - [x] Görev A: 279 görünür eser fotosu + 144 sergi fotosu SEO adlı Cloudinary kopyalarına geçti, alt-text eser adıyla yenilendi (yedek + GERI-AL scripts/sql/2026-11-10-seo-foto-adlari*; görünürlük/sıra 0 ihlal)
 - [x] Ablanın yeni kareleri görünür yapıldı: Günün Eşiği (691) ve Derin Suyun Uykusu (692) canlıda; Troya karesi (690) Troya kararına bağlı, gizli (14 Kas)
-- [ ] Atölye fotoları + Assos + Melike sergi fotolarını SEO adlarına geçir — Çağrı onayladı (18 Kas)
+- [x] Atölye (14), Assos (9) ve Melike sergi (14) fotoları SEO adlarına geçti: kopyalar + kod + SQL, deploy bff2278, iki sitede kırık 0; yedek + GERI-AL (18 Kas)
 - [x] Drive seti ↔ site seçimi kararı verildi: eşitlenecek (Abla 13 Kas: 'yeni fotoğrafları koy') — uygulama aşağıdaki onaya bağlı
 - [x] Antik Dönem'de Volütlü Krater, Aulos Çalan Mainad — Kylix ve Afrodit ve Kaz (form: Kylix) başa alındı (canlıda sıra doğrulandı)
 - [x] Admin panel durumu kesinleşti: uarttasarim.com/admin/login çalışıyor (tek ortak hesap); eser/foto/biyografi/mesaj yönetiyor, ana sayfa ve 18/19 sergi grubu yönetilemiyor
